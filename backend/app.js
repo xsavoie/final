@@ -1,3 +1,5 @@
+const PORT = 3001
+
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
@@ -18,5 +20,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+app.listen(PORT, () => {
+  console.log(`App listening on port ${PORT}`)
+})
 
 module.exports = app;
