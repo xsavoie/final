@@ -1,8 +1,19 @@
+DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS confessions CASCADE;
+DROP TABLE IF EXISTS likes CASCADE;
+DROP TABLE IF EXISTS comments CASCADE;
+DROP TABLE IF EXISTS categories CASCADE;
+
 CREATE TABLE "users" (
   "id" SERIAL PRIMARY KEY,
   "email" varchar,
   "username" varchar,
   "password" varchar
+);
+
+CREATE TABLE "categories" (
+  "id" SERIAL PRIMARY KEY,
+  "name" varchar
 );
 
 CREATE TABLE "confessions" (
@@ -27,10 +38,7 @@ CREATE TABLE "comments" (
   "created_at" timestamp
 );
 
-CREATE TABLE "categories" (
-  "id" SERIAL PRIMARY KEY,
-  "name" varchar
-);
+
 
 ALTER TABLE "confessions" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 
