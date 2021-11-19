@@ -1,9 +1,9 @@
 -- seeds for users
 INSERT INTO users (email, username, password) VALUES ('alice@gmail.com', 'asdbri1', 'password');
-INSERT INTO users (email, username, password) VALUES ('bob@gmail.com', 'asggb343', 'password');
-INSERT INTO users (email, username, password) VALUES ('lydia@gmail.com', 'a34rfsd', 'password');
-INSERT INTO users (email, username, password) VALUES ('evan@gmail.com', 'a345sdf', 'password');
-INSERT INTO users (email, username, password) VALUES ('david@gmail.com', 'ahtsd34', 'password');
+INSERT INTO users (email, username, password) VALUES ('bob@gmail.com', 'bsggb343', 'password');
+INSERT INTO users (email, username, password) VALUES ('lydia@gmail.com', 'c34rfsd', 'password');
+INSERT INTO users (email, username, password) VALUES ('evan@gmail.com', 'd345sdf', 'password');
+INSERT INTO users (email, username, password) VALUES ('david@gmail.com', 'ehtsd34', 'password');
 
 -- seeds for categories
 
@@ -13,11 +13,11 @@ INSERT INTO categories (name) VALUES ('Question');
 
 -- seeds for confessions
 
-INSERT INTO confessions (user_id, category_id, content, created_at) VALUES (1, 1, 'something something content', '2018-02-12T08:00:00.000Z');
-INSERT INTO confessions (user_id, category_id, content, created_at) VALUES (2, 2, 'something something content', '2018-02-12T08:00:00.000Z');
-INSERT INTO confessions (user_id, category_id, content, created_at) VALUES (3, 3, 'something something content', '2018-02-12T08:00:00.000Z');
-INSERT INTO confessions (user_id, category_id, content, created_at) VALUES (4, 1, 'something something content', '2018-02-12T08:00:00.000Z');
-INSERT INTO confessions (user_id, category_id, content, created_at) VALUES (5, 2, 'something something content', '2018-02-12T08:00:00.000Z');
+INSERT INTO confessions (user_id, category_id, content, created_at) VALUES (1, 1, 'I must confess content', '2018-02-12T08:00:00.000Z');
+INSERT INTO confessions (user_id, category_id, content, created_at) VALUES (2, 2, 'Nothing meaningful content', '2018-02-12T08:00:00.000Z');
+INSERT INTO confessions (user_id, category_id, content, created_at) VALUES (3, 3, 'Potatoes content', '2018-02-12T08:00:00.000Z');
+INSERT INTO confessions (user_id, category_id, content, created_at) VALUES (4, 1, 'Apple something content', '2018-02-12T08:00:00.000Z');
+INSERT INTO confessions (user_id, category_id, content, created_at) VALUES (5, 2, 'Whatever something content', '2018-02-12T08:00:00.000Z');
 
 -- seeds for likes table 
 
