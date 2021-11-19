@@ -11,6 +11,11 @@ CREATE TABLE "users" (
   "password" varchar
 );
 
+CREATE TABLE "categories" (
+  "id" SERIAL PRIMARY KEY,
+  "name" varchar
+);
+
 CREATE TABLE "confessions" (
   "id" SERIAL PRIMARY KEY,
   "user_id" int,
@@ -33,10 +38,7 @@ CREATE TABLE "comments" (
   "created_at" timestamp
 );
 
-CREATE TABLE "categories" (
-  "id" SERIAL PRIMARY KEY,
-  "name" varchar
-);
+
 
 ALTER TABLE "confessions" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 
