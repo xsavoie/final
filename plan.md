@@ -1,9 +1,13 @@
+Setup propper backend
+ - setting up all routes
+ - create db helpers --> write down querie
+
+ - login logic
+
+Creating react component (slowly)
+
+
 To do planning:
-- Git repo setup
-- Wireframes --> start planning components ~
-- ERD ~
-- Data structure ~
-- Seeds file
 - Define MVP
 - API routes ~
 
@@ -101,6 +105,10 @@ to avoid negative content/interactions
 
 https://www.figma.com/file/NzqPzfsCAQcTYrocChJ0CM/Confessions-App-Wireframe?node-id=0%3A1
 
+## ERD
+
+https://dbdiagram.io/d/6196c0aa02cf5d186b5db14c
+
 ## Stack choice
 - Express
 - React
@@ -133,26 +141,120 @@ app.post("/api/register");
 
 # confession
 - GET /api/confessions
+  --> query all confession
 - GET /api/confessions/:category_id
+  --> query all confession for :category_id
 - POST /api/confessions
+  --> create new confession
+
 - PUT /api/confessions/:confession_id
+  --> update specific confession
 - DELETE /api/confessions/:confession_id
+  --> delete specific confession
 
 # likes and comments
 - GET /api/comments/:confession_id
+  --> query all comments for a specific confession
 - POST /api/comments/:confession_id
+  --> create comment for a specific confession
+
 - PUT /api/comments/:comment_id
+  --> update specific comment
 - DELETE /api/comments/:comment_id
+  --> delete specific comment
 
 - GET /api/likes/:confession_id
+  --> get count of likes for specific confession
 - POST /api/likes/:confession_id
+  --> create like for specific confession
 - DELETE /api/likes/:like_id
 
 
 QUESTION- Best way to query likes and comments
   specific routes? Or query them inside /confessions
+  How to link confession to a user?
   
   /api/confessions/:confession_id/likes ?
 
 
+# React Component
 
+ ## APP
+  - tracks the user state
+
+ ## Navbar 
+  STATE:
+  PROPS:
+    - sign ing / logout + register
+    - create confession button (if logged in)
+    - select category
+    - app logo
+
+ ## Confession list
+  STATE:
+  PROPS:
+  - container that hold multiple indivual confessions
+
+ ## Confession list item
+  STATE:
+  PROPS:
+  - has confession content
+  - create comment button (note think about how to display)
+  - view comment button (note think about how to display)
+
+ ## Like component
+  STATE:
+  PROPS:
+  - like button + # of likes (merge to confession list item?)
+  
+ ## Confession list item + create comment
+  STATE:
+  PROPS:
+  - holds confession list item 
+  - form to enter a new comment
+  - submit button
+  - back button (?)
+  
+
+ ## Confession list item + view all comments
+  STATE:
+  PROPS:
+  - holds confession list item
+  - container of comments for specific confession
+  - back button (?)
+
+ ## New confession form
+  STATE:
+  PROPS:
+  - form to enter confession content
+  - submit button
+  - choose category button
+  - cancel button (hides form)
+
+ ## Login 
+  STATE:
+  PROPS:
+  - contain form to login
+
+ ## Register
+  STATE:
+  PROPS:
+  - contain form to register
+
+
+# list of queries
+  --> query all confession
+  --> query all confession for :category_id
+  --> create new confession
+  --> update specific confession
+  --> delete specific confession
+
+  --> query all comments for a specific confession
+  --> create comment for a specific confession
+  --> update specific comment
+  --> delete specific comment
+
+  --> get count of likes for specific confession
+  --> create like for specific confession
+
+  --> login query 
