@@ -5,6 +5,18 @@ import Badge from 'react-bootstrap/Badge'
 // import classNames from "classnames";
 
 export default function ConfessionListItem(props) {
+  
+  const categoryParser = (categoryId) =>{
+    if (categoryId === 1) {
+      return ""
+    }
+    if (categoryId === 2) {
+      return ""
+    }
+    if (categoryId === 3) {
+      return ""
+    }
+  }
 
   return (
     <article className="confession__article">
