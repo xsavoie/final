@@ -94,12 +94,13 @@ exports.addConfession = addConfession;
 
 //  delete specific confession
 
-const deleteOneConfession = function(id) {
+const deleteOneConfession = function(confessionId, userId) {
   const queryString = `DELETE FROM confessions
   WHERE confessions.id = $1
+  AND users_id = $2
   RETURNING *;
   `
-  const queryParams = [id];
+  const queryParams = [confessionId, userId];
 
   return db
   .query(queryString, queryParams)
