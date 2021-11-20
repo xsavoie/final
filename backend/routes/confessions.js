@@ -21,7 +21,7 @@ const { getLikes, createLike, deleteLike } = likes(db)
 // Promise.all(array)
 
 confessions.get('/', function (req, res) {
-  let promiseArray = []
+  let confessionsArray = []
 
   for (let i = 1; i < 6; i++) {
     let array = []
@@ -32,7 +32,7 @@ confessions.get('/', function (req, res) {
         return getLikes(id)
       })
       .then(likes => {
-        array.push(likes[0].count)
+        array.push(parseInt(likes[0].count))
         return getComments(id)
       })
       .then(comments => {
@@ -40,12 +40,12 @@ confessions.get('/', function (req, res) {
         return array
       })
       .then(array => {
-        promiseArray.push(confessionParser(array))
+        confessionsArray.push(confessionParser(array))
       })
       .then(test => {
-        if (promiseArray.length >= 5) {
-          console.log("HERE")
-          res.json(promiseArray)
+        if (confessionsArray.length >= 5) {
+          // console.log("HERE")
+          res.json(confessionsArray)
         }
       })
       .catch((err) => {
