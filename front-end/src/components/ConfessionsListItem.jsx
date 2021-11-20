@@ -1,14 +1,19 @@
 import React from "react";
 
-
-
-import classNames from "classnames";
+// import classNames from "classnames";
 
 export default function ConfessionListItem(props) {
 
   return (
-    <li>
-      Hello ConfessionsListItem. How do I get your database now?????
-    </li>
+     <div>
+      <p>ID {props.id}</p>
+      <p>User ID {props.userId}</p>
+      <p>Category ID {props.categoryId}</p>
+      <p>Content {props.content}</p>
+      <p>Created at {props.createdAt}</p>
+      <p>Likes {props.likes}</p>
+      {/* <p>Comments</p> */}
+    </div> 
   );
 }
+
