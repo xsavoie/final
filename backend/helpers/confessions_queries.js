@@ -1,7 +1,7 @@
-
+const db = require('../db');
 //  query all confession
 
-const getAllConfessions = function(limit = 10) {
+const getAllConfessions = function(limit) {
   const queryString = `SELECT confessions.*
   FROM confessions
   ORDER BY confessions.created_at
@@ -9,7 +9,7 @@ const getAllConfessions = function(limit = 10) {
   `
   const queryParams = [limit];
 
-  return pool
+  return db
   .query(queryString, queryParams)
   .then((result) => {
     return result.rows;
@@ -24,18 +24,18 @@ exports.getAllConfessions = getAllConfessions;
 
 //  query all confession for :category_id
 
-const getAllConfessionsForCategory = function(category, limit = 10) {
+const getAllConfessionsForCategory = function(category, limit) {
   const queryString = `SELECT confessions.*
   FROM confessions
   JOIN categories ON categories.id = category_id
-  WHERE categories.name = $1
+  WHERE categories.id = $1
   ORDER BY confessions.created_at
   LIMIT $2;
   `
 
   const queryParams = [category, limit];
 
-  return pool
+  return db
   .query(queryString, queryParams)
   .then((result) => {
     return result.rows;
@@ -49,16 +49,17 @@ exports.getAllConfessionsForCategory = getAllConfessionsForCategory;
 
 //  create new confession
 
-const addConfession = function(confession) {
+const addConfession = function(userId, categoryId, content) {
 
-  const queryString = `INSERT INTO confession (user_id, category_id, content, created_at)
-    VALUES ($1, $2, $3, '2018-02-12T08:00:00.000Z') RETURNING *;`
+  const queryString = `INSERT INTO confessions (user_id, category_id, content, created_at)
+    VALUES ($1, $2, $3, $4) RETURNING *;`
 
-  const queryParams = [confession];
+  const queryParams = [userId, categoryId, content, "2018-02-12T08:00:00.000Z"];
 
-  return pool
+  return db
   .query(queryString, queryParams)
   .then((result) => {
+    console.log("Success")
     return result.rows[0];
   })
   .catch((err) => {
