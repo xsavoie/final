@@ -21,19 +21,18 @@ module.exports = db => {
   };
 
   // Create a new comment for a specific confession and user
-  const createComment = (body) => {
+  const createComment = (userId, confessionId, content) => {
     const queryString = `
     INSERT INTO comments (user_id, confession_id, content, created_at)
     VALUES ($1, $2, $3, '2018-02-12T08:00:00.000Z');
     `;
 
-    const queryParams = [
-      body.user_id,
-      body.confession_id,
-      body.content
-    ];
+    const queryParams = [ userId, confessionId, content ];
 
     return db.query(queryString, queryParams)
+      .then((result) => {
+      return result.rows;
+      })
       .catch((err) => console.log(err.message));
 
   };
@@ -56,19 +55,19 @@ module.exports = db => {
   };
 
   // Delete a comment for specific confession and user
-  const deleteComment = (body) => {
+  const deleteComment = (userId, confessionId) => {
     const queryString = `
     DELETE FROM comments
     WHERE user_id = $1
     AND confession_id = $2;
   `;
 
-    const queryParams = [
-      body.user_id,
-      body.confession_id
-    ];
+    const queryParams = [ userId, confessionId ];
 
     return db.query(queryString, queryParams)
+      .then((result) => {
+      return result.rows;
+      })
       .catch((err) => console.log(err.message));
   };
 
