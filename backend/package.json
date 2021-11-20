@@ -3,14 +3,17 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "./node_modules/.bin/nodemon -L app.js",
     "db:reset": "node ./db/reset.js",
-    "nodemon": "nodemon --exec npm start"
+    "nodemon": "nodemon app.js localhost 3000"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "morgan": "~1.9.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }
