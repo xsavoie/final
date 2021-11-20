@@ -6,36 +6,36 @@ DROP TABLE IF EXISTS categories CASCADE;
 
 CREATE TABLE "users" (
   "id" SERIAL PRIMARY KEY,
-  "email" varchar,
-  "username" varchar,
-  "password" varchar
+  "email" VARCHAR(255) NOT NULL,
+  "username" VARCHAR(255) NOT NULL,
+  "password" VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE "categories" (
   "id" SERIAL PRIMARY KEY,
-  "name" varchar
+  "name" VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE "confessions" (
   "id" SERIAL PRIMARY KEY,
-  "user_id" int,
-  "category_id" int,
-  "content" varchar,
-  "created_at" timestamp
+  "user_id" INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  "category_id" INTEGER NOT NULL REFERENCES categories(id) ON DELETE CASCADE,
+  "content" VARCHAR(255) NOT NULL,
+  "created_at" TIMESTAMP
 );
 
 CREATE TABLE "likes" (
   "id" SERIAL PRIMARY KEY,
-  "user_id" int,
-  "confession_id" int
+  "user_id" INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  "confession_id" INTEGER NOT NULL REFERENCES confessions(id) ON DELETE CASCADE
 );
 
 CREATE TABLE "comments" (
   "id" SERIAL PRIMARY KEY,
-  "user_id" int,
-  "confession_id" int,
-  "content" varchar,
-  "created_at" timestamp
+  "user_id" INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  "confession_id" INTEGER NOT NULL REFERENCES confessions(id) ON DELETE CASCADE,
+  "content" VARCHAR(255) NOT NULL,
+  "created_at" TIMESTAMP
 );
 
 
@@ -51,3 +51,6 @@ ALTER TABLE "likes" ADD FOREIGN KEY ("confession_id") REFERENCES "confessions" (
 ALTER TABLE "comments" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 
 ALTER TABLE "comments" ADD FOREIGN KEY ("confession_id") REFERENCES "confessions" ("id");
+
+
+-- npm run db:reset
