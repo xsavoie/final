@@ -1,0 +1,23 @@
+.confession {
+  &__article {
+    width: 90%;
+    align-self: center;
+    background-color: rgb(71, 71, 75);
+  }
+
+  &__detail {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__content {
+  width: 80%;
+  margin-left: 10%;
+  background-color: white;
+  }
+
+  &__likes {
+    
+  }
+
+}
