@@ -1,5 +1,6 @@
 const db = require('../db');
-//  query all confession
+
+//  query all confessions
 
 const getAllConfessions = function(limit) {
   const queryString = `SELECT confessions.*
@@ -21,8 +22,29 @@ const getAllConfessions = function(limit) {
 }
 exports.getAllConfessions = getAllConfessions;
 
+//  query one confession
 
-//  query all confession for :category_id
+const getOneConfession = function(id) {
+  const queryString = `SELECT confessions.*
+  FROM confessions
+  WHERE confessions.id = $1;
+  `
+  const queryParams = [id];
+
+  return db
+  .query(queryString, queryParams)
+  .then((result) => {
+    return result.rows;
+  })
+  .catch((err) => {
+    console.log("get one confession err");
+    console.log(err.message);
+  });
+}
+exports.getOneConfession = getOneConfession;
+
+
+//  query all confessions for :category_id
 
 const getAllConfessionsForCategory = function(category, limit) {
   const queryString = `SELECT confessions.*
@@ -71,21 +93,35 @@ exports.addConfession = addConfession;
 
 
 //  delete specific confession
-//DELETE FROM confessions
-//WHERE confessions.id = $1;
+
+const deleteOneConfession = function(id) {
+  const queryString = `DELETE FROM confessions
+  WHERE confessions.id = $1
+  RETURNING *;
+  `
+  const queryParams = [id];
+
+  return db
+  .query(queryString, queryParams)
+  .then((result) => {
+    return result.rows;
+  })
+  .catch((err) => {
+    console.log("get one confession err");
+    console.log(err.message);
+  });
+}
+exports.deleteOneConfession = deleteOneConfession;
+
 
 
 //  update specific confession (updating one row)
 
 // UPDATE confessions
 // SET category = $1 
+// SET 
 // WHERE confessions.id = $2
 //RETURNING *;
 
-//can we use if statement?
-// if(category){
-  //UPDATE confessions
-  // SET category = $1 
-  // WHERE confessions.id = $2
-  //RETURNING *;
-//}
+user_id, category_id, content, created_at
+
