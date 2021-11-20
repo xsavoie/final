@@ -22,36 +22,36 @@ module.exports = db => {
   };
 
   // Create a like for a specific confession and user
-  const createLike = (body) => {
+  const createLike = (userId, confessionId) => {
     const queryString = `
     INSERT INTO likes (user_id, confession_id)
     VALUES ($1, $2);
     `;
 
-    const queryParams = [
-      body.user_id,
-      body.confession_id
-    ];
+    const queryParams = [ userId, confessionId ];
 
     return db.query(queryString, queryParams)
+      .then((result) => {
+      return result.rows;
+      })
       .catch((err) => console.log(err.message));
 
   };
 
   // Delete like for specific confession and user
-  const deleteLike = (body) => {
+  const deleteLike = (userId, confessionId ) => {
     const queryString = `
     DELETE FROM likes
     WHERE user_id = $1
     AND confession_id = $2;
   `;
 
-    const queryParams = [
-      body.user_id,
-      body.confession_id
-    ];
+    const queryParams = [ userId, confessionId ];
 
     return db.query(queryString, queryParams)
+      .then((result) => {
+      return result.rows;
+      })
       .catch((err) => console.log(err.message));
 
 

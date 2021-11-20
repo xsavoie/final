@@ -1,9 +1,12 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const db = require('../db');
 
-// const comments = require('../helpers/comments_queries')
-// const { getComments, createComment, editComment, deleteComment } = comments(db)
+
+const comments = require('../helpers/comments_queries')
+
+const { getComments, createComment, editComment, deleteComment } = comments(db)
+
 
 
 router.get('/', function(req, res, next) {
@@ -28,5 +31,32 @@ router.get('/', function(req, res, next) {
       });
 
 });
+
+
+router.post('/:confession_id/comments', (req, res) => {
+  // const userId = req.session.userId;
+  createComment({...req.body})
+    .then(comment => {
+      res.send(comment);
+    })
+    .catch(err => {
+      console.error(err);
+      // res.send(err)
+    });
+});
+
+
+router.delete('/:confession_id/comments', function (req, res) {
+  deleteComment({...req.body})
+  .then(comment => {
+    res.send(comment);
+    res.send('Got a DELETE request')
+  })
+  .catch(err => {
+    console.error(err);
+    // res.send(err)
+  });
+
+})
 
 module.exports = router;
