@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "./node_modules/.bin/nodemon -L app.js",
+    "start": "node ./bin/www",
     "db:reset": "node ./db/reset.js",
-    "nodemon": "nodemon app.js localhost 3000"
+    "nodemon": "./node_modules/.bin/nodemon -L ./bin/www"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
