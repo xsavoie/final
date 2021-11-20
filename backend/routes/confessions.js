@@ -21,72 +21,77 @@ const { getLikes, createLike, deleteLike } = likes(db)
 // Promise.all(array)
 
 confessions.get('/', function (req, res) {
-  let confessionsArray = []
+  let confessionsArray = [];
 
   for (let i = 1; i < 6; i++) {
-    let array = []
-    let id = i
+    let array = [];
+    let id = i;
     getOneConfession(id)
       .then((confessions) => {
-        array.push(confessions)
-        return getLikes(id)
+        array.push(confessions);
+        return getLikes(id);
       })
       .then(likes => {
-        array.push(parseInt(likes[0].count))
-        return getComments(id)
+        array.push(parseInt(likes[0].count));
+        return getComments(id);
       })
       .then(comments => {
-        array.push(comments)
-        return array
+        array.push(comments);
+        return array;
       })
       .then(array => {
-        confessionsArray.push(confessionParser(array))
+        confessionsArray.push(confessionParser(array));
       })
       .then(test => {
         if (confessionsArray.length >= 5) {
-          // console.log("HERE")
-          res.json(confessionsArray)
+          // console.log("HERE");
+          res.json(confessionsArray);
         }
       })
       .catch((err) => {
-        console.log(err.message)
+        console.log(err.message);
       });
   }
 
  });
 
-confessions.get('/:category_id', function (req, res) {
-  let array = []
+confessions.get('/category/:category_id', function (req, res) {
+  let array = [];
   let confessionId = 0;
-  const category = req.params.category_id
-  console.log(category)
+  const category = req.params.category_id;
+  
   getAllConfessionsForCategory(category, 1)
     .then((confessions) => {
-      console.log(confessions)
-      confessionId = Number(confessions[0].id)
-      array.push(confessions)
-      return getLikes(confessionId)
+      console.log(confessions);
+      confessionId = Number(confessions[0].id);
+      array.push(confessions);
+      return getLikes(confessionId);
     })
     .then(likes => {
-      array.push(likes[0].count)
-      return getComments(confessionId)
+      array.push(likes[0].count);
+      return getComments(confessionId);
     })
     .then(comments => {
-      console.log(comments)
-      array.push(comments)
-      return array
+      console.log(comments);
+      array.push(comments);
+      return array;
     })
     .then(array => {
-      res.json(confessionParser(array))
+      res.json(confessionParser(array));
     })
     .catch((err) => {
-      console.log(err.message)
+      console.log(err.message);
     });
 
 });
 
 confessions.get('/:confession_id', function (req, res) {
-
+  console.log(req.params)
+  confessionId = req.params.confession_id
+  getOneConfession(confessionId)
+    .then(confession => {
+      res.json(confession);
+    })
 })
 
 confessions.get('/:confession_id/likes', function (req, res) {
@@ -94,16 +99,15 @@ confessions.get('/:confession_id/likes', function (req, res) {
 })
 
 confessions.post('/new', function (req, res) {
-  let userId = 10;
-  let categoryId = 2;
-  let content = "Created form POST route";
+  const { userId, categoryId, content } = req.body;
+
   addConfession(userId, categoryId, content)
     .then(res => {
-      console.log(res)
-      console.log("entered in db")
+      console.log(res);
+      console.log("entered in db");
     })
     .catch(err => {
-      console.log(err.message)
+      console.log(err.message);
     })
 })
 
