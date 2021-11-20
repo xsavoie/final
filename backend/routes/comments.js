@@ -27,9 +27,6 @@ router.get('/', function(req, res, next) {
           .json({ error: err.message });
       });
 
-
-
-
 });
 
 module.exports = router;
