@@ -123,5 +123,5 @@ exports.deleteOneConfession = deleteOneConfession;
 // WHERE confessions.id = $2
 //RETURNING *;
 
-user_id, category_id, content, created_at
+// user_id, category_id, content, created_at
 
