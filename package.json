@@ -4,6 +4,7 @@
   },
   "dependencies": {
     "axios": "^0.24.0",
+    "classnames": "^2.3.1",
     "node-sass": "^6.0.1",
     "pg": "^8.7.1",
     "pg-native": "^3.0.0"
