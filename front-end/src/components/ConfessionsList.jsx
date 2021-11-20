@@ -6,17 +6,6 @@ import axios from "axios";
 
 export default function ConfessionList(props) {
 
-  // const [confessions, setConfessions] = useState([])
-
-  // useEffect(() => {
-  //   Promise.all([
-  //     axios.get("/api/confessions")
-  //   ]).then((res) => {
-  //     setConfessions(prev => ([...prev, res[0].data]))
-  //   })
-  // }, []);
-
-  // console.log(confession)
 
   const parsedConfessions = props.confessionsToParse.map((confession) => (
     <ConfessionListItem
