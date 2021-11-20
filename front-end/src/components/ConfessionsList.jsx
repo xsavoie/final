@@ -1,6 +1,7 @@
 import { React, useState, useEffect } from "react";
 import ConfessionListItem from "./ConfessionsListItem";
 import axios from "axios";
+import "./ConfessionsList.scss"
 
 
 
@@ -33,8 +34,8 @@ export default function ConfessionList(props) {
 
 
   return (
-    <section>
-      {parsedConfessions}
+    <section className="confessions">
+      <ul className="confessions__list" >{parsedConfessions}</ul>
     </section>
   )
 }

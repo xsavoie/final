@@ -24,7 +24,7 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
+      {/* <header className="App-header"> */}
         
       <h1>Confessions</h1><br/>
       <Login /><br/>
@@ -32,7 +32,6 @@ function App() {
       <ConfessionList
         confessionsToParse={confessions}
       />
-      </header>
     </div>
   );
 }
