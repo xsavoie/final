@@ -6,6 +6,7 @@ import ConfessionList from './components/ConfessionsList';
 import axios from 'axios';
 import Login from './components/login';
 import Register from './components/register';
+import CommentsList from './components/Comments/CommentsList';
 
 
 
@@ -13,12 +14,25 @@ function App() {
 
   const [confessions, setConfessions] = useState([])
 
+  // useEffect(() => {
+  //   Promise.all([
+  //     axios.get("/api/confessions")
+  //   ]).then((res) => {
+  //     console.log(res[0].data)
+  //     setConfessions(res[0].data)
+  //   })
+  // }, []);
+
   useEffect(() => {
     Promise.all([
-      axios.get("/api/confessions")
+      axios.get("/api/confessions/most_recent")
     ]).then((res) => {
-      console.log(res[0].data)
-      setConfessions(res[0].data)
+      const mostRecentId = res[0].data;
+      return axios.get(`/api/confessions/front_page/${mostRecentId}`);
+    })
+    .then((res) => {
+      console.log(res.data)
+      setConfessions(res.data)
     })
   }, []);
 
@@ -27,6 +41,7 @@ function App() {
       {/* <header className="App-header"> */}
         
       <h1>Confessions</h1><br/>
+      {/* <CommentsList/> */}
       {/* <Register /><br/> */}
       <Login /><br/>
       <ConfessionList

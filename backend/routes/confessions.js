@@ -13,13 +13,6 @@ const { getComments, createComment, editComment, deleteComment } = comments(db)
 const { getLikes, createLike, deleteLike } = likes(db)
 
 
-// currentUser == user_id && <edit/>
-// /api/confession/:confessionId
-// 1 - loop through getAllConfessions
-// 2 - use req to create new confession
-// function that loops x times, every time it pushed promise to an array
-// Promise.all(array)
-
 confessions.get('/', function (req, res) {
   let confessionsArray = [];
 
@@ -44,7 +37,6 @@ confessions.get('/', function (req, res) {
       })
       .then(test => {
         if (confessionsArray.length >= 5) {
-          // console.log("HERE");
           res.json(confessionsArray);
         }
       })
@@ -59,10 +51,10 @@ confessions.get('/', function (req, res) {
 confessions.get('/front_page/:recent', function (req, res) {
   console.log(req.params.recent)
   let confessionsArray = [];
-  start = 1;
-  end = start + 5;
+  start = req.params.recent;
+  end = start - 10;
 
-  for (let i = start; i < end; i++) {
+  for (let i = start; i > end; i--) {
     let array = [];
     let id = i;
     getOneConfession(id)
@@ -82,8 +74,7 @@ confessions.get('/front_page/:recent', function (req, res) {
         confessionsArray.push(confessionParser(array));
       })
       .then(test => {
-        if (confessionsArray.length >= 5) {
-          // console.log("HERE");
+        if (confessionsArray.length >= 10) {
           res.json(confessionsArray);
         }
       })
@@ -163,6 +154,3 @@ confessions.post('/new', function (req, res) {
 
 
 module.exports = confessions;
-
-// pull 1 confession
-// pass that confession id to getLikes and getComments
