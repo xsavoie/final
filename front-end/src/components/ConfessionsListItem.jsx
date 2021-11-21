@@ -1,4 +1,4 @@
-import { React, Fragment } from "react";
+import { React, Fragment, useState } from "react";
 import "./ConfessionsListItem.scss"
 import Badge from 'react-bootstrap/Badge'
 import Button from 'react-bootstrap/Button'
@@ -8,7 +8,9 @@ import CommentsList from "./Comments/CommentsList";
 
 export default function ConfessionListItem(props) {
   
-  const selected = false
+  // const selected = false
+  // const [ selectedConfession, setSelectedConfession] = useState(false)
+
 
   const categoryParser = (categoryId) =>{
     if (categoryId === 1) {
@@ -21,8 +23,9 @@ export default function ConfessionListItem(props) {
       return "Question"
     }
   }
+  // const stateTest = props.setSelected;
 
-  // const totalComments = props.comments.length
+  const totalComments = props.comments.length
 
   return (
     <>
@@ -33,25 +36,26 @@ export default function ConfessionListItem(props) {
       </header>
       
       <div className="confession__content">
-       <p>Content {props.content}</p>
+       <p>{props.content}</p>
       </div>
       <footer className="confession__detail-bottom"> 
         <span className="confession__likes">
           <span>Likes {props.likes}</span>
         </span>
         <div>
-        { !selected && <Button variant="primary" size="sm">View Comments</Button> }
-        { selected && <Button variant="primary" size="sm">Hide Comments</Button> }
-        {/* { !selected && <Button variant="primary" size="sm">View Comments {`(${totalComments})`} </Button> } */}
+   
+        { props.selected && <Button variant="primary" size="sm" onClick={props.resetSelected} >Hide Comments</Button> }
+        { !props.selected && <Button variant="primary" size="sm" onClick={props.setSelected}>View Comments {`(${totalComments})`} </Button> }
         {/* <Button variant="primary">Comment</Button> */}
         </div>
       </footer>
-     { selected && <CommentsList/> }
+     { props.selected && <CommentsList comments={props.comments}/> }
     </article> 
      </>
   );
 }
 
+// onClick={setSelected(!selected)
 
 {/* <p>Comments</p> */}
 {/* <p>ID {props.id}</p> */}

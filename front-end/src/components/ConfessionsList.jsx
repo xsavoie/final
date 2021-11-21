@@ -7,6 +7,8 @@ import "./ConfessionsList.scss"
 
 export default function ConfessionList(props) {
 
+  const [ selected, setSelected ] = useState(null)
+
 
   const dateParser = (date) => {
     const parsedDate = date.split("").slice(0, 10).join("")
@@ -23,6 +25,9 @@ export default function ConfessionList(props) {
       createdAt={dateParser(confession.created_at)}
       likes={confession.likes}
       comments={confession.comments}
+      selected={confession.id === selected}
+      setSelected={() => setSelected(confession.id)}
+      resetSelected={() => setSelected(null)}
     />
   ));
 
