@@ -1,0 +1,40 @@
+.comments {
+  &__list {
+    width: 100%;
+    margin-top: 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgb(71, 71, 75);
+    margin-bottom: 10px;
+  //   flex-flow: row wrap;
+  }
+
+  &__content {
+    width: 80%;
+    margin-top: 10px;
+    margin-left: 10%;
+    padding-left: 3px;
+    background-color: rgb(221, 217, 217);
+    text-align: left;
+  }
+}
+
+.comment-form {
+  width: 90%;
+  margin-left: 5%;
+
+  &__label{
+    text-align: left;
+    color: white;
+  }
+
+  &__input {
+    background-color: rgb(221, 217, 217) !important;
+  }
+
+  &__submit {
+    margin-top: 5px;
+  }
+}
+

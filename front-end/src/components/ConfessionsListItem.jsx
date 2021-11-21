@@ -1,12 +1,15 @@
-import React from "react";
+import { React, Fragment } from "react";
 import "./ConfessionsListItem.scss"
 import Badge from 'react-bootstrap/Badge'
 import Button from 'react-bootstrap/Button'
+import CommentsList from "./Comments/CommentsList";
 
 // import classNames from "classnames";
 
 export default function ConfessionListItem(props) {
   
+  const selected = false
+
   const categoryParser = (categoryId) =>{
     if (categoryId === 1) {
       return "Secret"
@@ -19,12 +22,13 @@ export default function ConfessionListItem(props) {
     }
   }
 
-  const totalComments = props.comments.length
+  // const totalComments = props.comments.length
 
   return (
+    <>
     <article className="confession__article">
       <header className="confession__detail-top"> 
-        <Badge bg="primary">{categoryParser(props.categoryId)}</Badge>
+        <Badge bg="danger">{categoryParser(props.categoryId)}</Badge>
         <p>Created at {props.createdAt}</p>
       </header>
       
@@ -36,11 +40,15 @@ export default function ConfessionListItem(props) {
           <span>Likes {props.likes}</span>
         </span>
         <div>
-        <Button variant="primary">View Comments {`(${totalComments})`} </Button>{' '}
+        { !selected && <Button variant="primary" size="sm">View Comments</Button> }
+        { selected && <Button variant="primary" size="sm">Hide Comments</Button> }
+        {/* { !selected && <Button variant="primary" size="sm">View Comments {`(${totalComments})`} </Button> } */}
         {/* <Button variant="primary">Comment</Button> */}
         </div>
       </footer>
+     { selected && <CommentsList/> }
     </article> 
+     </>
   );
 }
 

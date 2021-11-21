@@ -6,6 +6,7 @@ import ConfessionList from './components/ConfessionsList';
 import axios from 'axios';
 import Login from './components/login';
 import Register from './components/register';
+import CommentsList from './components/Comments/CommentsList';
 
 
 
@@ -40,6 +41,7 @@ function App() {
       {/* <header className="App-header"> */}
         
       <h1>Confessions</h1><br/>
+      {/* <CommentsList/> */}
       {/* <Register /><br/> */}
       {/* <Login /><br/> */}
       <ConfessionList

@@ -13,13 +13,6 @@ const { getComments, createComment, editComment, deleteComment } = comments(db)
 const { getLikes, createLike, deleteLike } = likes(db)
 
 
-// currentUser == user_id && <edit/>
-// /api/confession/:confessionId
-// 1 - loop through getAllConfessions
-// 2 - use req to create new confession
-// function that loops x times, every time it pushed promise to an array
-// Promise.all(array)
-
 confessions.get('/', function (req, res) {
   let confessionsArray = [];
 
@@ -44,7 +37,6 @@ confessions.get('/', function (req, res) {
       })
       .then(test => {
         if (confessionsArray.length >= 5) {
-          // console.log("HERE");
           res.json(confessionsArray);
         }
       })
@@ -83,7 +75,6 @@ confessions.get('/front_page/:recent', function (req, res) {
       })
       .then(test => {
         if (confessionsArray.length >= 10) {
-          // console.log("HERE");
           res.json(confessionsArray);
         }
       })
@@ -163,6 +154,3 @@ confessions.post('/new', function (req, res) {
 
 
 module.exports = confessions;
-
-// pull 1 confession
-// pass that confession id to getLikes and getComments
