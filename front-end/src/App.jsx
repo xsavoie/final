@@ -42,7 +42,7 @@ function App() {
         
       <h1>Confessions</h1><br/>
       {/* <CommentsList/> */}
-      {/* <Register /><br/> */}
+      <Register /><br/>
       <Login /><br/>
       <ConfessionList
         confessionsToParse={confessions}
