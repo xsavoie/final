@@ -28,7 +28,7 @@ function App() {
         
       <h1>Confessions</h1><br/>
       {/* <Register /><br/> */}
-      {/* <Login /><br/> */}
+      <Login /><br/>
       <ConfessionList
         confessionsToParse={confessions}
       />
