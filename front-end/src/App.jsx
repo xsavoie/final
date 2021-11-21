@@ -4,6 +4,8 @@ import './App.css';
 import ConfessionList from './components/ConfessionsList';
 // import ConfessionListItem from './components/ConfessionsListItem';
 import axios from 'axios';
+import Login from './components/login';
+import Register from './components/register';
 
 
 
@@ -22,6 +24,11 @@ function App() {
 
   return (
     <div className="App">
+      {/* <header className="App-header"> */}
+        
+      <h1>Confessions</h1><br/>
+      <Register /><br/>
+      <Login /><br/>
       <ConfessionList
         confessionsToParse={confessions}
       />
