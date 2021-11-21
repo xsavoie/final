@@ -27,8 +27,8 @@ function App() {
       {/* <header className="App-header"> */}
         
       <h1>Confessions</h1><br/>
-      <Login /><br/>
       <Register /><br/>
+      <Login /><br/>
       <ConfessionList
         confessionsToParse={confessions}
       />
