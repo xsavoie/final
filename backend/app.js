@@ -24,11 +24,16 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const confessionsRouter = require('./routes/confessions');
 const commentsRouter = require('./routes/comments');
+const registerRouter = require('./routes/register');
+const loginRouter = require('./routes/login');
+
 
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/api/confessions', confessionsRouter);
 app.use('/api/comments', commentsRouter);
+app.use('/register', registerRouter);
+app.use('/login', loginRouter);
 
 module.exports = app;
