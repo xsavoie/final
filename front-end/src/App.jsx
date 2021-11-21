@@ -27,8 +27,8 @@ function App() {
     Promise.all([
       axios.get("/api/confessions/most_recent")
     ]).then((res) => {
-      // const mostRecentId = res[0].data;
-      const mostRecentId = 10;
+      const mostRecentId = res[0].data;
+      // const mostRecentId = 10;
       return axios.get(`/api/confessions/front_page/${mostRecentId}`);
     })
     .then((res) => {
