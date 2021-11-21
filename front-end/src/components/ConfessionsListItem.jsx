@@ -19,10 +19,12 @@ export default function ConfessionListItem(props) {
     }
   }
 
+  const totalComments = props.comments.length
+
   return (
     <article className="confession__article">
       <header className="confession__detail-top"> 
-        <Badge bg="primary">{categoryParser(props.categoryId)}</Badge>{' '}
+        <Badge bg="primary">{categoryParser(props.categoryId)}</Badge>
         <p>Created at {props.createdAt}</p>
       </header>
       
@@ -34,8 +36,8 @@ export default function ConfessionListItem(props) {
           <span>Likes {props.likes}</span>
         </span>
         <div>
-        <Button variant="primary">View Comments</Button>{' '}
-        <Button variant="primary">Comment</Button>{' '}
+        <Button variant="primary">View Comments {`(${totalComments})`} </Button>{' '}
+        <Button variant="primary">Comment</Button>
         </div>
       </footer>
     </article> 
