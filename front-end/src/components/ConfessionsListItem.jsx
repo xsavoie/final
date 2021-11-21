@@ -37,7 +37,7 @@ export default function ConfessionListItem(props) {
         </span>
         <div>
         <Button variant="primary">View Comments {`(${totalComments})`} </Button>{' '}
-        <Button variant="primary">Comment</Button>
+        {/* <Button variant="primary">Comment</Button> */}
         </div>
       </footer>
     </article> 
