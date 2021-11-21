@@ -13,12 +13,25 @@ function App() {
 
   const [confessions, setConfessions] = useState([])
 
+  // useEffect(() => {
+  //   Promise.all([
+  //     axios.get("/api/confessions")
+  //   ]).then((res) => {
+  //     console.log(res[0].data)
+  //     setConfessions(res[0].data)
+  //   })
+  // }, []);
+
   useEffect(() => {
     Promise.all([
-      axios.get("/api/confessions")
+      axios.get("/api/confessions/most_recent")
     ]).then((res) => {
-      console.log(res[0].data)
-      setConfessions(res[0].data)
+      const mostRecentId = res[0].data;
+      return axios.get(`/api/confessions/front_page/${mostRecentId}`);
+    })
+    .then((res) => {
+      console.log(res.data)
+      setConfessions(res.data)
     })
   }, []);
 

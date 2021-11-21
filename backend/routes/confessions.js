@@ -59,10 +59,10 @@ confessions.get('/', function (req, res) {
 confessions.get('/front_page/:recent', function (req, res) {
   console.log(req.params.recent)
   let confessionsArray = [];
-  start = 1;
-  end = start + 5;
+  start = req.params.recent;
+  end = start - 10;
 
-  for (let i = start; i < end; i++) {
+  for (let i = start; i > end; i--) {
     let array = [];
     let id = i;
     getOneConfession(id)
@@ -82,7 +82,7 @@ confessions.get('/front_page/:recent', function (req, res) {
         confessionsArray.push(confessionParser(array));
       })
       .then(test => {
-        if (confessionsArray.length >= 5) {
+        if (confessionsArray.length >= 10) {
           // console.log("HERE");
           res.json(confessionsArray);
         }
