@@ -7,17 +7,6 @@ import "./ConfessionsList.scss"
 
 export default function ConfessionList(props) {
 
-  // const [confessions, setConfessions] = useState([])
-
-  // useEffect(() => {
-  //   Promise.all([
-  //     axios.get("/api/confessions")
-  //   ]).then((res) => {
-  //     setConfessions(prev => ([...prev, res[0].data]))
-  //   })
-  // }, []);
-
-  // console.log(confession)
 
   const dateParser = (date) => {
     const parsedDate = date.split("").slice(0, 10).join("")
@@ -33,6 +22,7 @@ export default function ConfessionList(props) {
       content={confession.content}
       createdAt={dateParser(confession.created_at)}
       likes={confession.likes}
+      comments={confession.comments}
     />
   ));
 
