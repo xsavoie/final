@@ -24,7 +24,7 @@ export default function CommentsList(props) {
   ];
 
 
-  const parsedComments = commentArray.map((comment) => (
+  const parsedComments = props.comments.map((comment) => (
     <CommentsListItem
       content={comment.content}
     />
