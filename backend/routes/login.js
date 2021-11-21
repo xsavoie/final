@@ -6,7 +6,7 @@ const users = require('../helpers/users_queries')
 const { getOneUser } = users(db)
 
 login.get('/', function (req, res, next) {
-  res.send('register');
+  res.send('login');
 });
 
 
