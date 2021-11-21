@@ -1,0 +1,37 @@
+.confession {
+  
+
+  &__article {
+    width: 90%;
+    align-self: center;
+    background-color: rgb(71, 71, 75);
+    margin-top: 10px;
+    border-radius: 4px;
+  }
+
+  &__detail-bottom {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 5px;
+  }
+
+  &__detail-top {
+    display: flex;
+    justify-content: space-between;
+    height: 25px;
+    margin: 5px 5px;
+    color: white
+  }
+
+  &__content {
+  width: 80%;
+  margin-left: 10%;
+  background-color: rgb(221, 217, 217);
+  text-align: left;
+  }
+
+  &__likes {
+    color: white
+  }
+
+}
