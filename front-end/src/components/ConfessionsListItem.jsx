@@ -1,6 +1,7 @@
 import React from "react";
 import "./ConfessionsListItem.scss"
 import Badge from 'react-bootstrap/Badge'
+import Button from 'react-bootstrap/Button'
 
 // import classNames from "classnames";
 
@@ -8,31 +9,35 @@ export default function ConfessionListItem(props) {
   
   const categoryParser = (categoryId) =>{
     if (categoryId === 1) {
-      return ""
+      return "Secret"
     }
     if (categoryId === 2) {
-      return ""
+      return "Story"
     }
     if (categoryId === 3) {
-      return ""
+      return "Question"
     }
   }
 
   return (
     <article className="confession__article">
+      <header className="confession__detail-top"> 
+        <Badge bg="primary">{categoryParser(props.categoryId)}</Badge>{' '}
+        <p>Created at {props.createdAt}</p>
+      </header>
+      
       <div className="confession__content">
        <p>Content {props.content}</p>
       </div>
-      <div className="confession__detail"> 
+      <footer className="confession__detail-bottom"> 
         <span className="confession__likes">
-          <Badge bg="primary">{props.categoryId}</Badge>{' '}
-          {/* <span>Category ID {props.categoryId}</span> */}
           <span>Likes {props.likes}</span>
         </span>
         <div>
-          <p>Created at {props.createdAt}</p>
+        <Button variant="primary">View Comments</Button>{' '}
+        <Button variant="primary">Comment</Button>{' '}
         </div>
-      </div>
+      </footer>
     </article> 
   );
 }
