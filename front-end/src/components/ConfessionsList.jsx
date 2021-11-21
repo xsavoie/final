@@ -19,6 +19,11 @@ export default function ConfessionList(props) {
 
   // console.log(confession)
 
+  const dateParser = (date) => {
+    const parsedDate = date.split("").slice(0, 10).join("")
+    return parsedDate
+  }
+
   const parsedConfessions = props.confessionsToParse.map((confession) => (
     <ConfessionListItem
       key={confession.id}
@@ -26,7 +31,7 @@ export default function ConfessionList(props) {
       userId={confession.user_id}
       categoryId={confession.category_id}
       content={confession.content}
-      createdAt={confession.createdAt}
+      createdAt={dateParser(confession.created_at)}
       likes={confession.likes}
     />
   ));
