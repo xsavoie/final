@@ -27,14 +27,14 @@ module.exports = db => {
   };
 
     // Get one specific user from the users table
-    const getOneUser = (userId) => {
+    const getOneUser = (email) => {
       const queryString = `
-      SELECT email, username, password
+      SELECT *
       FROM users
-      WHERE id = $1;
+      WHERE email = $1;
       `;
   
-      const queryParams = [userId];
+      const queryParams = [email];
   
       return db.query(queryString, queryParams)
         .then((result) => {
@@ -47,14 +47,14 @@ module.exports = db => {
 
 
   // Create a new user to the users table
-  const createUser = (name, password) => {
+  const createUser = (email, password) => {
     const username = (Math.random() + 1).toString(36).substring(7);
     const queryString = `
-    INSERT INTO users (name, username, password)
-    VALUES ($1, $2, $3);
+    INSERT INTO users (email, username, password)
+    VALUES ($1, $2, $3) RETURNING *;
     `;
 
-    const queryParams = [ name, username, password ];
+    const queryParams = [ email, username, password ];
 
     return db.query(queryString, queryParams)
       .then((result) => {
