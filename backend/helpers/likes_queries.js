@@ -25,7 +25,8 @@ module.exports = db => {
   const createLike = (userId, confessionId) => {
     const queryString = `
     INSERT INTO likes (user_id, confession_id)
-    VALUES ($1, $2);
+    VALUES ($1, $2)
+    RETURNING *;
     `;
 
     const queryParams = [ userId, confessionId ];

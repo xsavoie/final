@@ -24,7 +24,8 @@ module.exports = db => {
   const createComment = (userId, confessionId, content) => {
     const queryString = `
     INSERT INTO comments (user_id, confession_id, content, created_at)
-    VALUES ($1, $2, $3, '2018-02-12T08:00:00.000Z');
+    VALUES ($1, $2, $3, '2018-02-12T08:00:00.000Z') 
+    RETURNING *;
     `;
 
     const queryParams = [ userId, confessionId, content ];
