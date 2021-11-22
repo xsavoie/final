@@ -1,4 +1,4 @@
-import { React } from "react";
+import { React, useState } from "react";
 import "./ConfessionsListItem.scss"
 import Badge from 'react-bootstrap/Badge'
 import Button from 'react-bootstrap/Button'
@@ -8,6 +8,8 @@ import axios from "axios";
 // import classNames from "classnames";
 
 export default function ConfessionListItem(props) {
+
+  const [liked, setLiked] = useState(false)
 
   const testUser = 1;
 
@@ -23,6 +25,30 @@ export default function ConfessionListItem(props) {
     };
   };
 
+  let confessionsCopy = [...props.confessionState]
+
+  const increaseLikeState = (confessionId, confessionState) => {
+    // finds confession that needs to be changed
+    const newConfession = confessionState.find((confession) => confession.id === confessionId);
+    // update like count
+    newConfession.likes++;
+    // map through state and modifies right confession
+    const newState = confessionState.map(confession => confession.id === confessionId ? newConfession : confession);
+
+    return newState;
+  }
+
+  const decreaseLikeState = (confessionId, confessionState) => {
+    // finds confession that needs to be changed
+    const newConfession = confessionState.find((confession) => confession.id === confessionId);
+    // update like count
+    newConfession.likes--;
+    // map through state and modifies right confession
+    const newState = confessionState.map(confession => confession.id === confessionId ? newConfession : confession);
+
+    return newState;
+  }
+
   const submitLike = (userId, confessionId) => {
     const newLike = {
       userId,
@@ -32,13 +58,31 @@ export default function ConfessionListItem(props) {
     return axios.post("/api/confessions/likes", { newLike })
       .then(res => {
         // change state
-        console.log(res);
+        console.log(res.data);
+        props.setConfessions(increaseLikeState(confessionId, confessionsCopy))
       })
       .catch(err => {
         console.log(err.message);
       })
   }
 
+  const deleteLike = (userId, confessionId) => {
+    const likeInfo = {
+      userId,
+      confessionId
+    };
+
+    return axios.delete("/api/confessions/likes", { likeInfo })
+      .then(res => {
+        console.log(res.data)
+        props.setConfessions(decreaseLikeState(confessionId, confessionsCopy))
+      })
+      .catch(err => {
+        console.log(err.message)
+      })
+  }
+
+  const likedState = false
   const totalComments = props.comments.length;
 
   return (
@@ -53,7 +97,14 @@ export default function ConfessionListItem(props) {
       </div>
       <footer className="confession__detail-bottom">
         <span className="confession__likes">
-          <span onClick={() => submitLike(testUser, props.id)}>Likes {props.likes}</span>
+          {liked && <span onClick={() => {
+            deleteLike(testUser, props.id);
+            setLiked(false);
+          }}>Likes {props.likes}</span>}
+          {!liked && <span onClick={() => {
+            submitLike(testUser, props.id);
+            setLiked(true);
+          }}>Likes {props.likes}</span>}
         </span>
         <div>
 
