@@ -1,4 +1,5 @@
 import { React, useEffect, useState } from 'react'
+import { BrowserRouter, Routes, Route} from 'react-router-dom';
 
 import './App.css';
 import ConfessionList from './components/ConfessionsList';
@@ -8,6 +9,8 @@ import Login from './components/login';
 import Register from './components/register';
 import CommentsList from './components/Comments/CommentsList';
 import Top from './components/navbar/Top';
+import LoginForm from './components/navbar/LoginForm';
+import RegisterForm from './components/navbar/RegisterForm';
 
 
 function App() {
@@ -38,17 +41,22 @@ function App() {
   }, []);
 
   return (
+    <BrowserRouter>
     <div className="App">
       {/* <header className="App-header"> */}
       <Top />
       <h1>Confessions</h1><br />
-      <Register /><br />
-      <Login /><br />
       <ConfessionList
         confessionsToParse={confessions}
         setConfessions={setConfessions}
       />
-    </div>
+      <Routes>
+          <Route path="/login" element={<LoginForm />}></Route>
+          <Route path="/Register" element={<RegisterForm />}></Route>
+        </Routes>
+      </div>
+      </BrowserRouter>
+   
   );
 }
 
