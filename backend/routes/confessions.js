@@ -10,7 +10,7 @@ const helpers = require('../helpers/dataHelpers')
 
 const { confessionParser } = helpers()
 const { getComments, createComment, editComment, deleteComment } = comments(db)
-const { getLikes, createLike, deleteLike } = likes(db)
+const { getLikes, createLike, deleteLike, checkIfLiked } = likes(db)
 
 
 confessions.get('/', function (req, res) {
@@ -149,9 +149,10 @@ confessions.post('/likes', function (req, res) {
     })
 });
 
-// delete new comment
+// delete new like
 confessions.delete('/likes', function (req, res) {
-  const { userId, confessionId } = req.body
+  const { userId, confessionId } = req.body.likeInfo;
+
   deleteLike(userId, confessionId)
     .then(like => {
       res.json("success")
@@ -162,6 +163,21 @@ confessions.delete('/likes', function (req, res) {
       console.log(err.message);
     })
 });
+
+// check if post was liked
+confessions.get('/likes/verify', function (req, res) {
+  const { userId, confessionId } = req.query
+  console.log("*****", req.query)
+
+  checkIfLiked(userId, confessionId)
+    .then(like => {
+      console.log(like)
+      res.json(parseInt(like[0].count))
+    })
+    .catch(err => {
+      console.log(err.message)
+    })
+})
 
 // post new comment
 confessions.post('/new_comment', function (req, res) {

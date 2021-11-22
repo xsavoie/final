@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import "./ConfessionsListItem.scss"
 import Badge from 'react-bootstrap/Badge'
 import Button from 'react-bootstrap/Button'
@@ -9,9 +9,29 @@ import axios from "axios";
 
 export default function ConfessionListItem(props) {
 
-  const [liked, setLiked] = useState(false)
-
   const testUser = 1;
+  const [liked, setLiked] = useState(false);
+
+
+  // check if user liked current post
+  useEffect(() => {
+    const confessionInfo = {
+      userId: 1,
+      confessionId: props.id
+    }
+    console.log(confessionInfo)
+    return axios.get("/api/confessions/likes/verify", { params: { userId: 1, confessionId: props.id } })
+      .then(res => {
+        console.log("RES", res.data)
+        if (res.data) {
+          setLiked(true)
+        }
+      })
+      .catch(err => {
+        console.log(err.message)
+      })
+  }, [])
+
 
   const categoryParser = (categoryId) => {
     if (categoryId === 1) {
@@ -25,7 +45,7 @@ export default function ConfessionListItem(props) {
     };
   };
 
-  let confessionsCopy = [...props.confessionState]
+  let confessionsCopy = [...props.confessionState];
 
   const increaseLikeState = (confessionId, confessionState) => {
     // finds confession that needs to be changed
@@ -33,8 +53,9 @@ export default function ConfessionListItem(props) {
     // update like count
     newConfession.likes++;
     // map through state and modifies right confession
-    const newState = confessionState.map(confession => confession.id === confessionId ? newConfession : confession);
-
+    const newState = confessionState.map(confession =>
+      confession.id === confessionId ? newConfession : confession
+    );
     return newState;
   }
 
@@ -44,11 +65,13 @@ export default function ConfessionListItem(props) {
     // update like count
     newConfession.likes--;
     // map through state and modifies right confession
-    const newState = confessionState.map(confession => confession.id === confessionId ? newConfession : confession);
-
+    const newState = confessionState.map(confession =>
+      confession.id === confessionId ? newConfession : confession
+    );
     return newState;
   }
 
+  // insert like in db and modifies state
   const submitLike = (userId, confessionId) => {
     const newLike = {
       userId,
@@ -66,13 +89,14 @@ export default function ConfessionListItem(props) {
       })
   }
 
+  // delete like in db and modifies state
   const deleteLike = (userId, confessionId) => {
     const likeInfo = {
       userId,
       confessionId
     };
-
-    return axios.delete("/api/confessions/likes", { likeInfo })
+    // should not use body to delete? --> refactor later?
+    return axios.delete("/api/confessions/likes", { data: { likeInfo } })
       .then(res => {
         console.log(res.data)
         props.setConfessions(decreaseLikeState(confessionId, confessionsCopy))
@@ -82,7 +106,6 @@ export default function ConfessionListItem(props) {
       })
   }
 
-  const likedState = false
   const totalComments = props.comments.length;
 
   return (
@@ -100,11 +123,11 @@ export default function ConfessionListItem(props) {
           {liked && <span onClick={() => {
             deleteLike(testUser, props.id);
             setLiked(false);
-          }}>Likes {props.likes}</span>}
+          }}>Unlike {props.likes}</span>}
           {!liked && <span onClick={() => {
             submitLike(testUser, props.id);
             setLiked(true);
-          }}>Likes {props.likes}</span>}
+          }}>Like {props.likes}</span>}
         </span>
         <div>
 
