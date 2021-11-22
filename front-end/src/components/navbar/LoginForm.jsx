@@ -6,8 +6,6 @@ import Button from 'react-bootstrap/Button'
 
 export default function LoginForm(props) {
 
-  
-
 
   const [email, setEmail] = useState(props.email || "");
   const [password, setPassword] = useState(props.password || "");
@@ -36,6 +34,7 @@ export default function LoginForm(props) {
     console.log("request", request)
     axios.post('http://localhost:3000/login', request)
     .then(res => {
+      props.setUser(res.data[0].id)
       console.log("res: ", res)
       alert("Login successful ");
     })

@@ -1,6 +1,6 @@
 import { React, useEffect, useState, useMemo } from 'react'
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
-import { UserContext } from './components/contexts/UserContext';
+// import { UserContext } from './components/contexts/UserContext';
 
 import './App.css';
 import ConfessionList from './components/ConfessionsList';
@@ -21,7 +21,7 @@ function App() {
 
   const [user, setUser] = useState(null)
 
-  const providerValue = useMemo(() => ({user, setUser}), [user, setUser])
+  // const providerValue = useMemo(() => ({user, setUser}), [user, setUser])
 
   // useEffect(() => {
   //   Promise.all([
@@ -56,15 +56,15 @@ function App() {
         confessionsToParse={confessions}
         setConfessions={setConfessions}
       />
-       <UserContext.Provider value={providerValue}>
+       {/* <UserContext.Provider value={providerValue}> */}
       <Routes>
        
-          <Route path="/login" element={<LoginForm />}></Route>
-          <Route path="/Register" element={<RegisterForm />}></Route>
+          <Route path="/login" element={<LoginForm setUser={setUser}/>}></Route>
+          <Route path="/Register" element={<RegisterForm setUser={setUser}/>}></Route>
           <Route path="/Confess" element={<ConfessForm />}></Route>
        
         </Routes>
-        </UserContext.Provider>
+        {/* </UserContext.Provider> */}
       </div>
       </BrowserRouter>
    
@@ -72,3 +72,4 @@ function App() {
 }
 
 export default App;
+
