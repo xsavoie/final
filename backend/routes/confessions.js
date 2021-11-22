@@ -156,7 +156,7 @@ confessions.post('/new_comment', function (req, res) {
   createComment(userId, confessionId, content)
     .then(comment =>{
       // returns array of object. Can make it return only object if needed
-      res.json(comment) 
+      res.json(comment[0]) 
       console.log(comment);
       console.log("entered in db");
     })

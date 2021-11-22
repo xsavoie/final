@@ -28,6 +28,8 @@ export default function ConfessionList(props) {
       selected={confession.id === selected}
       setSelected={() => setSelected(confession.id)}
       resetSelected={() => setSelected(null)}
+      confessionState={props.confessionsToParse}
+      setConfessions={props.setConfessions}
     />
   ));
 
