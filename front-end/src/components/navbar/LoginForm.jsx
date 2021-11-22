@@ -1,9 +1,13 @@
-import React, {useState} from "react";
+import React, {useState, useContext } from "react";
 import axios from "axios";
+import { UserContext } from "../contexts/UserContext";
 import {Form} from 'react-bootstrap'
 import Button from 'react-bootstrap/Button'
 
 export default function LoginForm(props) {
+
+  
+
 
   const [email, setEmail] = useState(props.email || "");
   const [password, setPassword] = useState(props.password || "");
@@ -44,7 +48,7 @@ export default function LoginForm(props) {
       <div className="base-container" >
         <form autoComplete="off" onSubmit={event => event.preventDefault()}>
         <div className="header">Login</div>
-          
+        
             <div className="form-group">
               <label htmlFor="email">Email </label>
               <input id="email_login" type="text" name="email" placeholder="name@email.com" 

@@ -1,5 +1,6 @@
-import { React, useEffect, useState } from 'react'
+import { React, useEffect, useState, useMemo } from 'react'
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
+import { UserContext } from './components/contexts/UserContext';
 
 import './App.css';
 import ConfessionList from './components/ConfessionsList';
@@ -11,11 +12,16 @@ import CommentsList from './components/Comments/CommentsList';
 import Top from './components/navbar/Top';
 import LoginForm from './components/navbar/LoginForm';
 import RegisterForm from './components/navbar/RegisterForm';
+import ConfessForm from './components/navbar/ConfessForm';
 
 
 function App() {
 
-  const [confessions, setConfessions] = useState([])
+  const [confessions, setConfessions] = useState([]);
+
+  const [user, setUser] = useState(null)
+
+  const providerValue = useMemo(() => ({user, setUser}), [user, setUser])
 
   // useEffect(() => {
   //   Promise.all([
@@ -45,15 +51,20 @@ function App() {
     <div className="App">
       {/* <header className="App-header"> */}
       <Top />
-      <h1>Confessions</h1><br />
+      {/* <h1>Confessions</h1><br />
       <ConfessionList
         confessionsToParse={confessions}
         setConfessions={setConfessions}
-      />
+      /> */}
+       <UserContext.Provider value={providerValue}>
       <Routes>
+       
           <Route path="/login" element={<LoginForm />}></Route>
           <Route path="/Register" element={<RegisterForm />}></Route>
+          <Route path="/Confess" element={<ConfessForm />}></Route>
+       
         </Routes>
+        </UserContext.Provider>
       </div>
       </BrowserRouter>
    
