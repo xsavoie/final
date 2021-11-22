@@ -62,7 +62,7 @@ export default function ConfessionListItem(props) {
           {/* <Button variant="primary">Comment</Button> */}
         </div>
       </footer>
-      {props.selected && <CommentsList confessionId={props.id} comments={props.comments} />}
+      {props.selected && <CommentsList setConfessions={props.setConfessions} confessionState={props.confessionState} confessionId={props.id} comments={props.comments} />}
     </article>
   );
 }

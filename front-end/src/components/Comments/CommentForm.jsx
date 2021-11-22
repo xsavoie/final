@@ -9,6 +9,26 @@ export default function CommentForm(props) {
   const [comment, setComment] = useState("");
   const testUser = 1;
 
+
+  let confessionsCopy = [ ...props.confessionState]
+
+  const updateCommentState = (confessionId, newComment, confessionState) => {
+    const parsedComment = {
+      id: newComment.id,
+      user_id: newComment.user_id,
+      content: newComment.content
+    };
+
+    // finds confession that needs to be changed
+    const newConfession = confessionState.find((confession) => confession.id === confessionId);
+    // pushed parsed comment to confession
+    newConfession.comments.push(parsedComment);
+    // map through state and modifies right confession
+    const newState = confessionState.map(confession => confession.id === confessionId ? newConfession : confession);
+    
+    return newState
+}
+
   const submitComment = (userId, confessionId, content) => {
     const newComment = {
       userId,
@@ -18,8 +38,7 @@ export default function CommentForm(props) {
 
     return axios.post("/api/confessions/new_comment", { newComment })
       .then(res => {
-        // change state
-        console.log(res);
+        props.setConfessions(updateCommentState(confessionId, res.data, confessionsCopy))
       })
       .catch(err => {
         console.log(err.message);
@@ -35,16 +54,16 @@ export default function CommentForm(props) {
           as="textarea"
           rows={2}
           value={comment}
-          onChange={(event) => {
-            setComment(event.target.value)
-            console.log(comment)
-          }}
+          onChange={(event) => setComment(event.target.value)}
         />
         <Button
           className="comment-form__submit"
           variant="primary"
           size="sm"
-          onClick={() => submitComment(testUser, props.confessionId, comment)}
+          onClick={() => {
+            submitComment(testUser, props.confessionId, comment)
+            setComment("")
+          }}
         >
           Submit
         </Button>
