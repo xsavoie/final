@@ -40,7 +40,7 @@ module.exports = db => {
   };
 
   // Delete like for specific confession and user
-  const deleteLike = (userId, confessionId ) => {
+  const deleteLike = (userId, confessionId) => {
     const queryString = `
     DELETE FROM likes
     WHERE user_id = $1
@@ -54,11 +54,26 @@ module.exports = db => {
       return result.rows;
       })
       .catch((err) => console.log(err.message));
-
-
   };
 
-  return { getLikes, createLike, deleteLike }
+  const checkIfLiked = (userId, confessionId) => {
+    const queryString = `
+    SELECT count(*)
+    FROM likes
+    WHERE user_id= $1
+    AND confession_id = $2;
+    `;
+
+    const queryParams = [userId, confessionId];
+
+    return db.query(queryString, queryParams)
+    .then((result) => {
+    return result.rows;
+    })
+    .catch((err) => console.log(err.message));
+  }
+
+  return { getLikes, createLike, deleteLike, checkIfLiked }
 };
 
 

@@ -51,11 +51,11 @@ function App() {
     <div className="App">
       {/* <header className="App-header"> */}
       <Top />
-      {/* <h1>Confessions</h1><br />
+      {/* <h1>Confessions</h1><br /> */}
       <ConfessionList
         confessionsToParse={confessions}
         setConfessions={setConfessions}
-      /> */}
+      />
        <UserContext.Provider value={providerValue}>
       <Routes>
        
