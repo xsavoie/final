@@ -7,7 +7,7 @@ import "./ConfessionsList.scss"
 
 export default function ConfessionList(props) {
 
-  const [ selected, setSelected ] = useState(null)
+  const [selected, setSelected] = useState(null)
 
 
   const dateParser = (date) => {
@@ -36,18 +36,6 @@ export default function ConfessionList(props) {
   return (
     <section className="confessions">
       <ul className="confessions__list" >{parsedConfessions}</ul>
-      {/* <ul className="confessions__list" > 
-      <ConfessionListItem 
-        key={props.id}
-            id={props.id}
-            userId={props.user_id}
-            categoryId={props.category_id}
-            content={props.content}
-            createdAt={props.created_at}
-            likes={props.likes}
-            comments={props.comments} 
-      />
-      </ul> */}
     </section>
   )
 }

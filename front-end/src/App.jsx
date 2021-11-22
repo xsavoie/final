@@ -31,20 +31,19 @@ function App() {
       // const mostRecentId = 10;
       return axios.get(`/api/confessions/front_page/${mostRecentId}`);
     })
-    .then((res) => {
-      console.log(res.data)
-      setConfessions(res.data)
-    })
+      .then((res) => {
+        // console.log(res.data)
+        setConfessions(res.data)
+      })
   }, []);
 
   return (
     <div className="App">
       {/* <header className="App-header"> */}
-      <Top/>
-      <h1>Confessions</h1><br/>
-      {/* <CommentsList/> */}
-      <Register /><br/>
-      <Login /><br/>
+      <Top />
+      <h1>Confessions</h1><br />
+      <Register /><br />
+      <Login /><br />
       <ConfessionList
         confessionsToParse={confessions}
       />
