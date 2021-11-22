@@ -134,10 +134,10 @@ confessions.get('/:confession_id', function (req, res) {
     })
 })
 
-
+// post new like
 confessions.post('/likes', function (req, res) {
-  const { userId, confessionId } = req.body;
-
+  const { userId, confessionId } = req.body.newLike;
+  
   createLike(userId, confessionId)
     .then(like => {
       res.json(like)
@@ -149,8 +149,9 @@ confessions.post('/likes', function (req, res) {
     })
 })
 
+// post new comment
 confessions.post('/new_comment', function (req, res) {
-  const { userId, confessionId, content } = req.body;
+  const { userId, confessionId, content } = req.body.newComment;
 
   createComment(userId, confessionId, content)
     .then(comment =>{

@@ -3,7 +3,7 @@ module.exports = db => {
   // Get all comments for a specific confession
   const getComments = (confessionId) => {
     const queryString = `
-    SELECT content, user_id
+    SELECT id, user_id, content
     FROM comments
     WHERE confession_id = $1;
     `;
