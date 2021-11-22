@@ -45,7 +45,7 @@ confessions.get('/', function (req, res) {
       });
   }
 
- });
+});
 
 
 // To render default confession feed
@@ -83,14 +83,14 @@ confessions.get('/front_page/:recent', function (req, res) {
         console.log(err.message);
       });
   }
-})
+});
 
 
 confessions.get('/category/:category_id', function (req, res) {
   let array = [];
   let confessionId = 0;
   const category = req.params.category_id;
-  
+
   getAllConfessionsForCategory(category, 1)
     .then((confessions) => {
       console.log(confessions);
@@ -122,62 +122,76 @@ confessions.get('/most_recent', function (req, res) {
     .then(confession => {
       res.json(parseInt(confession[0].count))
     })
-})
+});
 
 
 confessions.get('/:confession_id', function (req, res) {
-  console.log(req.params)
-  confessionId = req.params.confession_id
+  console.log(req.params);
+  confessionId = req.params.confession_id;
   getOneConfession(confessionId)
     .then(confession => {
       res.json(confession);
     })
-})
+});
 
 // post new like
 confessions.post('/likes', function (req, res) {
   const { userId, confessionId } = req.body.newLike;
-  
+
   createLike(userId, confessionId)
     .then(like => {
-      res.json(like)
-      console.log(like)
+      res.json(like[0]);
+      console.log(like);
       console.log("entered in db");
     })
-    .catch(err =>{
-      console.log(err.message)
+    .catch(err => {
+      console.log(err.message);
     })
-})
+});
+
+// delete new comment
+confessions.delete('/likes', function (req, res) {
+  const { userId, confessionId } = req.body
+  deleteLike(userId, confessionId)
+    .then(like => {
+      res.json("success")
+      console.log(like);
+      console.log("Deleted from db");
+    })
+    .catch(err => {
+      console.log(err.message);
+    })
+});
 
 // post new comment
 confessions.post('/new_comment', function (req, res) {
   const { userId, confessionId, content } = req.body.newComment;
 
   createComment(userId, confessionId, content)
-    .then(comment =>{
+    .then(comment => {
       // returns array of object. Can make it return only object if needed
-      res.json(comment[0]) 
-      console.log(comment);
+      res.json(comment[0]);
+      console.log(comment[0]);
       console.log("entered in db");
     })
     .catch(err => {
       console.log(err.message);
     })
-})
+});
 
 confessions.post('/new', function (req, res) {
   const { userId, categoryId, content } = req.body;
 
   addConfession(userId, categoryId, content)
     .then(confession => {
-      res.json(confession.id)
+      res.json(confession.id);
       console.log(confession);
       console.log("entered in db");
     })
     .catch(err => {
       console.log(err.message);
     })
-})
+});
 
 
 module.exports = confessions;
