@@ -48,6 +48,7 @@ confessions.get('/', function (req, res) {
  });
 
 
+// To render default confession feed
 confessions.get('/front_page/:recent', function (req, res) {
   console.log(req.params.recent)
   let confessionsArray = [];
@@ -115,12 +116,14 @@ confessions.get('/category/:category_id', function (req, res) {
 
 });
 
+// get most recent confession
 confessions.get('/most_recent', function (req, res) {
   mostRecentConfession()
     .then(confession => {
       res.json(parseInt(confession[0].count))
     })
 })
+
 
 confessions.get('/:confession_id', function (req, res) {
   console.log(req.params)
@@ -132,11 +135,34 @@ confessions.get('/:confession_id', function (req, res) {
 })
 
 
-confessions.get('/:confession_id/likes', function (req, res) {
-  
+confessions.post('/likes', function (req, res) {
+  const { userId, confessionId } = req.body;
+
+  createLike(userId, confessionId)
+    .then(like => {
+      res.json(like)
+      console.log(like)
+      console.log("entered in db");
+    })
+    .catch(err =>{
+      console.log(err.message)
+    })
 })
 
+confessions.post('/new_comment', function (req, res) {
+  const { userId, confessionId, content } = req.body;
 
+  createComment(userId, confessionId, content)
+    .then(comment =>{
+      // returns array of object. Can make it return only object if needed
+      res.json(comment) 
+      console.log(comment);
+      console.log("entered in db");
+    })
+    .catch(err => {
+      console.log(err.message);
+    })
+})
 
 confessions.post('/new', function (req, res) {
   const { userId, categoryId, content } = req.body;
