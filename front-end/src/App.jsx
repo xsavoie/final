@@ -7,7 +7,7 @@ import axios from 'axios';
 import Login from './components/login';
 import Register from './components/register';
 import CommentsList from './components/Comments/CommentsList';
-
+import Top from './components/navbar/Top';
 
 
 function App() {
@@ -40,7 +40,7 @@ function App() {
   return (
     <div className="App">
       {/* <header className="App-header"> */}
-        
+      <Top/>
       <h1>Confessions</h1><br/>
       {/* <CommentsList/> */}
       <Register /><br/>
