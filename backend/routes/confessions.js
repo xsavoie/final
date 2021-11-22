@@ -167,7 +167,6 @@ confessions.delete('/likes', function (req, res) {
 // check if post was liked
 confessions.get('/likes/verify', function (req, res) {
   const { userId, confessionId } = req.query
-  console.log("*****", req.query)
 
   checkIfLiked(userId, confessionId)
     .then(like => {
