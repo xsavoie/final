@@ -46,6 +46,7 @@ function App() {
       <Login /><br />
       <ConfessionList
         confessionsToParse={confessions}
+        setConfessions={setConfessions}
       />
     </div>
   );
