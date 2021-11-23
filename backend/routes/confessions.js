@@ -2,6 +2,9 @@ const express = require('express');
 const confessions = express.Router();
 const db = require('../db');
 
+const moment = require('moment'); // require
+moment().format(); 
+
 
 const { getOneConfession, getAllConfessions, getAllConfessionsForCategory, mostRecentConfession, addConfession } = require('../helpers/confessions_queries');
 const comments = require('../helpers/comments_queries')
@@ -203,8 +206,11 @@ confessions.post('/new_comment', function (req, res) {
 // post new confession
 confessions.post('/new', function (req, res) {
   const { userId, categoryId, content } = req.body.newConfession;
+
+  const time = new Date();
+  const created_at = moment(time).fromNow();
   console.log(req.body)
-  addConfession(userId, categoryId, content)
+  addConfession(userId, categoryId, content, created_at)
     .then(confession => {
       res.json(confession);
       console.log(confession);

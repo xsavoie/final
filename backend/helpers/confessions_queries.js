@@ -71,12 +71,12 @@ exports.getAllConfessionsForCategory = getAllConfessionsForCategory;
 
 //  create new confession
 
-const addConfession = function (userId, categoryId, content) {
+const addConfession = function (userId, categoryId,content, created_at) {
 
   const queryString = `INSERT INTO confessions (user_id, category_id, content, created_at)
     VALUES ($1, $2, $3, $4) RETURNING *;`
 
-  const queryParams = [userId, categoryId, content, "2018-02-12T08:00:00.000Z"];
+  const queryParams = [userId, categoryId, content, created_at];
 
   return db
     .query(queryString, queryParams)
