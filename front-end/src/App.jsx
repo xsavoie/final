@@ -1,29 +1,27 @@
-import { React, useEffect, useState, useMemo } from 'react'
+import { React, useEffect, useState, useMemo, useContext, createContext } from 'react'
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
-// import { UserContext } from './components/contexts/UserContext';
+import { UserContext } from './components/contexts/UserContext';
 
 import './App.css';
-import ConfessionList from './components/ConfessionsList';
-// import ConfessionListItem from './components/ConfessionsListItem';
 import axios from 'axios';
-import Login from './components/login';
-import Register from './components/register';
-import CommentsList from './components/Comments/CommentsList';
+import ConfessionList from './components/ConfessionsList';
 import Top from './components/navbar/Top';
 import LoginForm from './components/navbar/LoginForm';
 import RegisterForm from './components/navbar/RegisterForm';
-import ConfessForm from './components/navbar/ConfessForm';
 import ConfessionForm from './components/ConfessionForm'
+// import ConfessionListItem from './components/ConfessionsListItem';
+// import Login from './components/login';
+// import Register from './components/register';
+// import CommentsList from './components/Comments/CommentsList';
+// import ConfessForm from './components/navbar/ConfessForm';
 
 
 function App() {
-
+  
   const [confessions, setConfessions] = useState([]);
-
   const [user, setUser] = useState(null)
-
   const [showForm, setShowForm] = useState(false)
-
+  
   // const providerValue = useMemo(() => ({user, setUser}), [user, setUser])
 
   // useEffect(() => {

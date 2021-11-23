@@ -37,7 +37,7 @@ export default function LoginForm(props) {
       const user = res.data[0];
       props.setUser(user.id)
       sessionStorage.setItem("user", user.id)
-      console.log("res: ", user)
+      // console.log("res: ", user)
       // alert("Login successful ");
     })
     .catch(err => {
