@@ -22,6 +22,8 @@ function App() {
 
   const [user, setUser] = useState(null)
 
+  const [showForm, setShowForm] = useState(false)
+
   // const providerValue = useMemo(() => ({user, setUser}), [user, setUser])
 
   // useEffect(() => {
@@ -51,17 +53,9 @@ function App() {
     <BrowserRouter>
     <div className="App">
       {/* <header className="App-header"> */}
-      <Top />
+      <Top setShowForm={setShowForm}/>
       {/* <h1>Confessions</h1><br /> */}
-<<<<<<< HEAD
-       <UserContext.Provider value={providerValue}>
-=======
-      <ConfessionList
-        confessionsToParse={confessions}
-        setConfessions={setConfessions}
-      />
        {/* <UserContext.Provider value={providerValue}> */}
->>>>>>> main
       <Routes>
        
           <Route path="/login" element={<LoginForm setUser={setUser}/>}></Route>
@@ -69,13 +63,9 @@ function App() {
           <Route path="/Confess" element={<ConfessForm />}></Route>
        
         </Routes>
-<<<<<<< HEAD
-      <ConfessionForm confessions={confessions} setConfessions={setConfessions}/>
+      {showForm && <ConfessionForm confessions={confessions} setConfessions={setConfessions}/>}
       <ConfessionList confessionsToParse={confessions} setConfessions={setConfessions}/>
-        </UserContext.Provider>
-=======
         {/* </UserContext.Provider> */}
->>>>>>> main
       </div>
       </BrowserRouter>
    
