@@ -1,4 +1,5 @@
-import { React, useEffect, useState, useMemo } from 'react'
+import { React, useEffect, useState, useMemo } from 'react';
+import socketClient from "socket.io-client";
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
 // import { UserContext } from './components/contexts/UserContext';
 
@@ -14,12 +15,35 @@ import LoginForm from './components/navbar/LoginForm';
 import RegisterForm from './components/navbar/RegisterForm';
 import ConfessForm from './components/navbar/ConfessForm';
 
+// const io = require("socket.io-client");
+const SERVER = "http://localhost:3000";
+
 
 function App() {
 
   const [confessions, setConfessions] = useState([]);
 
   const [user, setUser] = useState(null)
+
+  const socket = socketClient("http://localhost:3001", {
+    withCredentials: true,
+    extraHeaders: {
+      "my-custom-header": "abcd"
+    }
+  });
+
+  socket.on('connection', () => {
+    console.log(`I'm connected with the back-end`);
+});
+
+
+  // return(
+  //   <div>Hello Chat</div>
+  // );
+
+
+
+
 
   // const providerValue = useMemo(() => ({user, setUser}), [user, setUser])
 
