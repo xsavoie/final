@@ -1,13 +1,16 @@
-import React from "react"
+import React, { useContext } from "react"
 import { Navbar, Container, NavDropdown, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { UserContext } from "../contexts/UserContext";
 
 
 
 export default function Top(props) {
 
+  const { user, setUser } = useContext(UserContext)
+
   const handleLogout = () => {
-    props.setUser(null);
+    setUser({});
     sessionStorage.clear();
   }
 
@@ -28,16 +31,16 @@ export default function Top(props) {
                 <NavDropdown.Item href="#action/3.2">Story</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.3">Question</NavDropdown.Item>
               </NavDropdown>
-              {props.user && <Nav.Link onClick={() => props.setShowForm(!props.showForm)}>Confess</Nav.Link>}
-              {props.user && <Nav.Link href="/chat"><Link to="/chat">Chat</Link></Nav.Link>}
-              {props.user && <NavDropdown title="Username" id="basic-nav-dropdown">
+              {user.id && <Nav.Link onClick={() => props.setShowForm(!props.showForm)}>Confess</Nav.Link>}
+              {user.id && <Nav.Link href="/chat"><Link to="/chat">Chat</Link></Nav.Link>}
+              {user.id && <NavDropdown title={user.email} id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Go to profile</NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">Logout</NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.4" onClick={() => handleLogout()}>Logout</NavDropdown.Item>
               </NavDropdown>}
-              {!props.user && <Nav.Link href="#link"><Link to="/login">Login</Link></Nav.Link>}
-              {!props.user && <Nav.Link href="#link"><Link to="/register">Register</Link></Nav.Link>}
-              {props.user && <Nav.Link onClick={() => handleLogout()}>Logout</Nav.Link>}
+              {!user.id && <Nav.Link href="#link"><Link to="/login">Login</Link></Nav.Link>}
+              {!user.id && <Nav.Link href="#link"><Link to="/register">Register</Link></Nav.Link>}
+              {/* {user.id && <Nav.Link onClick={() => handleLogout()}>Logout</Nav.Link>} */}
             </Nav>
           </Navbar.Collapse>
 

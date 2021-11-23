@@ -4,6 +4,8 @@ import axios from "axios";
 import {Form} from 'react-bootstrap'
 import Button from 'react-bootstrap/Button'
 import "./LoginForm.scss"
+import { userProvider } from '../contexts/UserProvider'
+import { UserContext } from "../contexts/UserContext";
 
 export default function LoginForm(props) {
 
@@ -13,6 +15,9 @@ export default function LoginForm(props) {
 
   const [error, setError] = useState("");
 
+  const { user, setUser } = useContext(UserContext)
+
+  
 
   // function validate() {
   //   if (email === "") {
@@ -32,12 +37,13 @@ export default function LoginForm(props) {
       email,
       password
     }
-    console.log("request", request)
+    // console.log("request", request)
     axios.post('http://localhost:3000/login', request)
     .then(res => {
-      const user = res.data[0];
-      props.setUser(user.id)
-      sessionStorage.setItem("user", user.id)
+      const user = res.data;
+      setUser(user)
+      sessionStorage.setItem("user", JSON.stringify(user))
+      // sessionStorage.setItem("id", user.id, "email", user.email, "username", user.username)
       // console.log("res: ", user)
       // alert("Login successful ");
     })
@@ -49,6 +55,8 @@ export default function LoginForm(props) {
     
 
   return (
+    <>
+    <h2>Login</h2>
   <Form className="loginfrom_style" autoComplete="off" onSubmit={event => event.preventDefault()}>
     <Form.Group className="mb-3" controlId="formBasicEmail">
       <Form.Label>Email address</Form.Label>
@@ -80,6 +88,7 @@ export default function LoginForm(props) {
       Submit
     </Button>
   </Form>
+  </>
   )
 }
 

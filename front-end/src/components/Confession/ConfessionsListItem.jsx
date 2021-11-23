@@ -1,9 +1,10 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useContext } from "react";
 import "./ConfessionsListItem.scss"
 import Badge from 'react-bootstrap/Badge'
 import Button from 'react-bootstrap/Button'
 import CommentsList from "../Comments/CommentsList";
 import axios from "axios";
+import { UserContext } from '../contexts/UserContext';
 
 // import classNames from "classnames";
 
@@ -11,6 +12,8 @@ export default function ConfessionListItem(props) {
 
   const testUser = 1;
   const [liked, setLiked] = useState(false);
+
+  const { test } = useContext(UserContext)
 
 
   // check if user liked current post

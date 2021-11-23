@@ -3,6 +3,7 @@ import CommentsListItem from "./CommentsListItem"
 import "./CommentsList.scss"
 
 export default function CommentsList(props) {
+  const testUser = 1;
 
   const reversedComments = [ ...props.comments].reverse()
 
@@ -15,7 +16,7 @@ export default function CommentsList(props) {
 
   return (
     <section className="comments__list">
-      <CommentForm setConfessions={props.setConfessions} confessionState={props.confessionState} confessionId={props.confessionId} />
+      {testUser && <CommentForm setConfessions={props.setConfessions} confessionState={props.confessionState} confessionId={props.confessionId} />}
       <ul>{parsedComments}</ul>
     </section>
   )

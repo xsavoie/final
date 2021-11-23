@@ -1,29 +1,63 @@
-import { UserContext, useState } from './UserContext';
+import { UserContext } from './UserContext';
+import { useState } from 'react'
+import axios from 'axios';
 
-const UserProvider = ({ children }) => {
+export const UserProvider = ({ children }) => {
 
   const [user, setUser] = useState({});
 
-  const login = (name) => {
-    setUser((user) => ({
+  // const login = (email, password) => {
+  //   this.event.preventDefault();
+  //   const request = {
+  //     email,
+  //     password
+  //   }
+  //   axios.post('http://localhost:3000/login', request)
+  //     .then(res => {
+  //       setUser(user);
+  //       sessionStorage.setItem(user);
+  //     })
+  //     .catch(err => {
+  //       console.log(err.message);
+  //     })
+  // }
 
-    }));
-    sessionStorage.setItem();
-  };
 
-  const logout = () => {
-    setUser((user) => ({
-      
-    }))
-    sessionStorage.clear()
-  };
+  // const logout = () => {
+  //   setUser((user) => { })
+  //   sessionStorage.clear()
+  // };
+
+
 
   return (
-    <UserContext.Provider value={{ user, login, logout }}>
+    <UserContext.Provider value={{ user, setUser}}>
       {children}
     </UserContext.Provider>
   );
 }
+
+
+
+// function loginCheck(event) {
+//   event.preventDefault();
+//   const request = {
+//     email,
+//     password
+//   }
+//   console.log("request", request)
+//   axios.post('http://localhost:3000/login', request)
+//   .then(res => {
+//     const user = res.data[0];
+//     props.setUser(user.id)
+//     sessionStorage.setItem("user", user.id)
+//     // console.log("res: ", user)
+//     // alert("Login successful ");
+//   })
+//   .catch(err => {
+//     console.log(err.message);
+//   })
+// }
 
 
 // const UserProvider = ({ children }) => {
