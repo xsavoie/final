@@ -64,7 +64,7 @@ function App() {
         <Top showForm={showForm} setShowForm={setShowForm} />
         {/* <Chat/> */}
         {/* <UserContext.Provider value={providerValue}> */}
-        {showForm && <ConfessionForm confessions={confessions} setConfessions={setConfessions} />}
+        {showForm && <ConfessionForm confessions={confessions} setConfessions={setConfessions} setShowForm={setShowForm}/>}
         <Routes>
           <Route path="/chat" element={<Chat />}></Route>
           <Route path="/" element={<ConfessionList confessionsToParse={confessions} setConfessions={setConfessions} />} ></Route>

@@ -1,9 +1,12 @@
 import CommentForm from "./CommentForm"
 import CommentsListItem from "./CommentsListItem"
 import "./CommentsList.scss"
+import { useContext } from "react";
+import { UserContext } from "../contexts/UserContext";
 
 export default function CommentsList(props) {
-  const testUser = 1;
+
+  const { user } = useContext(UserContext)
 
   const reversedComments = [ ...props.comments].reverse()
 
@@ -16,7 +19,8 @@ export default function CommentsList(props) {
 
   return (
     <section className="comments__list">
-      {testUser && <CommentForm setConfessions={props.setConfessions} confessionState={props.confessionState} confessionId={props.confessionId} />}
+      {user.id && <CommentForm setConfessions={props.setConfessions} confessionState={props.confessionState} confessionId={props.confessionId} />}
+      {/* have a box that says login to comment */}
       <ul>{parsedComments}</ul>
     </section>
   )

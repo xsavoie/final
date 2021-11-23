@@ -20,7 +20,7 @@ CREATE TABLE "confessions" (
   "id" SERIAL PRIMARY KEY,
   "user_id" INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
   "category_id" INTEGER NOT NULL REFERENCES categories(id) ON DELETE CASCADE,
-  "content" VARCHAR(255) NOT NULL,
+  "content" TEXT NOT NULL,
   "created_at" TIMESTAMP
 );
 
@@ -34,7 +34,7 @@ CREATE TABLE "comments" (
   "id" SERIAL PRIMARY KEY,
   "user_id" INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
   "confession_id" INTEGER NOT NULL REFERENCES confessions(id) ON DELETE CASCADE,
-  "content" VARCHAR(255) NOT NULL,
+  "content" TEXT NOT NULL,
   "created_at" TIMESTAMP
 );
 

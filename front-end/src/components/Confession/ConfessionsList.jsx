@@ -19,7 +19,7 @@ export default function ConfessionList(props) {
     <ConfessionListItem
       key={confession.id}
       id={confession.id}
-      userId={confession.user_id}
+      // userId={confession.user_id}
       categoryId={confession.category_id}
       content={confession.content}
       createdAt={dateParser(confession.created_at)}
