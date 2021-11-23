@@ -16,10 +16,15 @@ socket.on('connection', () => {
   console.log(`I'm connected with the back-end`);
 });
 
+
+
 export default function Chat(props) {
 
   const [message, setMessage] = useState('');
   const [chat, setChat] = useState([]);
+
+  // pass username from props later
+  const userName = 'User'+parseInt(Math.random()*10);
 
   useEffect(()=> {
     socket.on('message', (payload) => {
@@ -31,7 +36,7 @@ export default function Chat(props) {
 
   const sendMessage = (event) => {
     event.preventDefault();
-    socket.emit('message', {message});
+    socket.emit('message', {userName, message});
     console.log(message);
     setMessage('');
   }
@@ -58,7 +63,7 @@ export default function Chat(props) {
         </form>
         {chat.map((payload, index) => {
           return(
-            <h3>{payload.message}</h3>
+            <h4>{payload.userName} : <span>{payload.message}</span></h4>
           )
         })}
       </div>
