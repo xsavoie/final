@@ -1,6 +1,6 @@
 import React from "react"
 import { Navbar, Container, NavDropdown, Nav } from 'react-bootstrap';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import ConfessForm from "./ConfessForm";
 import LoginForm from "./LoginForm";

@@ -95,6 +95,7 @@ function App() {
 
           <Route path="/login" element={<LoginForm setUser={setUser} />}></Route>
           <Route path="/register" element={<RegisterForm setUser={setUser} />}></Route>
+          
           <Route path="/home" element={<ConfessionList confessionsToParse={confessions} setConfessions={setConfessions} />}></Route>
 
         </Routes>
@@ -108,4 +109,14 @@ function App() {
 }
 
 export default App;
+
+
+
+
+// <Route path='/some-path' render={() =>
+//   <Fragment>
+//     <FirstChild />
+//     <SecondChild />
+//   </Fragment>
+// } />
 
