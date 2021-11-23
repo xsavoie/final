@@ -27,19 +27,21 @@ export default function LoginForm(props) {
 
   function loginCheck(event) {
     event.preventDefault();
-    let request = {
-      email: document.getElementById("email_login").value,
-      password: document.getElementById("password_login").value
+    const request = {
+      email,
+      password
     }
     console.log("request", request)
     axios.post('http://localhost:3000/login', request)
     .then(res => {
-      props.setUser(res.data[0].id)
-      console.log("res: ", res)
-      alert("Login successful ");
+      const user = res.data[0];
+      props.setUser(user.id)
+      sessionStorage.setItem("user", user.id)
+      // console.log("res: ", user)
+      // alert("Login successful ");
     })
     .catch(err => {
-      console.log(err);
+      console.log(err.message);
     })
   }
 

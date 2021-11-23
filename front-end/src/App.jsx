@@ -1,20 +1,20 @@
 import { React, useEffect, useState, useMemo } from 'react';
 import socketClient from "socket.io-client";
-import { BrowserRouter, Routes, Route} from 'react-router-dom';
-// import { UserContext } from './components/contexts/UserContext';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { UserContext } from './components/contexts/UserContext';
 
 import './App.css';
-import ConfessionList from './components/ConfessionsList';
-// import ConfessionListItem from './components/ConfessionsListItem';
 import axios from 'axios';
-import Login from './components/login';
-import Register from './components/register';
-import CommentsList from './components/Comments/CommentsList';
+import ConfessionList from './components/ConfessionsList';
 import Top from './components/navbar/Top';
 import LoginForm from './components/navbar/LoginForm';
 import RegisterForm from './components/navbar/RegisterForm';
-import ConfessForm from './components/navbar/ConfessForm';
 import ConfessionForm from './components/ConfessionForm'
+// import ConfessionListItem from './components/ConfessionsListItem';
+// import Login from './components/login';
+// import Register from './components/register';
+// import CommentsList from './components/Comments/CommentsList';
+// import ConfessForm from './components/navbar/ConfessForm';
 
 // const io = require("socket.io-client");
 const SERVER = "http://localhost:3000";
@@ -23,19 +23,23 @@ const SERVER = "http://localhost:3000";
 function App() {
 
   const [confessions, setConfessions] = useState([]);
-
   const [user, setUser] = useState(null)
+  const [showForm, setShowForm] = useState(false)
 
-  const socket = socketClient("http://localhost:3001", {
-    withCredentials: true,
-    extraHeaders: {
-      "my-custom-header": "abcd"
-    }
-  });
+  useEffect(() => {
+    const socket = socketClient("http://localhost:3001", {
+      withCredentials: true,
+      extraHeaders: {
+        "my-custom-header": "abcd"
+      }
+    });
+  
+    socket.on('connection', () => {
+      console.log(`I'm connected with the back-end`);
+    });
+    
+  }, [])
 
-  socket.on('connection', () => {
-    console.log(`I'm connected with the back-end`);
-});
 
 
   // return(
@@ -45,7 +49,6 @@ function App() {
 
 
 
-  const [showForm, setShowForm] = useState(false)
 
   // const providerValue = useMemo(() => ({user, setUser}), [user, setUser])
 
@@ -57,6 +60,15 @@ function App() {
   //     setConfessions(res[0].data)
   //   })
   // }, []);
+
+  // check if current user is logged in
+  useEffect(() => {
+    const loggedInUser = sessionStorage.getItem("user");
+    if (loggedInUser) {
+      const currentUser = JSON.parse(loggedInUser)
+      setUser(currentUser)
+    }
+  }, [])
 
   useEffect(() => {
     Promise.all([
@@ -74,24 +86,24 @@ function App() {
 
   return (
     <BrowserRouter>
-    <div className="App">
-      {/* <header className="App-header"> */}
-      <Top user={user} showForm={showForm} setShowForm={setShowForm}/>
-      {/* <h1>Confessions</h1><br /> */}
-       {/* <UserContext.Provider value={providerValue}> */}
-      <Routes>
-       
-          <Route path="/login" element={<LoginForm setUser={setUser}/>}></Route>
-          <Route path="/register" element={<RegisterForm setUser={setUser}/>}></Route>
-          <Route path="/home" element={<ConfessionList confessionsToParse={confessions}setConfessions={setConfessions}/>}></Route>
-       
+      <div className="App">
+        {/* <header className="App-header"> */}
+        <Top user={user} setUser={setUser} showForm={showForm} setShowForm={setShowForm} />
+        {/* <h1>Confessions</h1><br /> */}
+        {/* <UserContext.Provider value={providerValue}> */}
+        <Routes>
+
+          <Route path="/login" element={<LoginForm setUser={setUser} />}></Route>
+          <Route path="/register" element={<RegisterForm setUser={setUser} />}></Route>
+          <Route path="/home" element={<ConfessionList confessionsToParse={confessions} setConfessions={setConfessions} />}></Route>
+
         </Routes>
-      {showForm && <ConfessionForm confessions={confessions} setConfessions={setConfessions}/>}
-      <ConfessionList confessionsToParse={confessions} setConfessions={setConfessions}/>
+        {showForm && <ConfessionForm confessions={confessions} setConfessions={setConfessions} />}
+        <ConfessionList confessionsToParse={confessions} setConfessions={setConfessions} />
         {/* </UserContext.Provider> */}
       </div>
-      </BrowserRouter>
-   
+    </BrowserRouter>
+
   );
 }
 
