@@ -2,7 +2,7 @@ import { React, useState, useEffect } from "react";
 import "./ConfessionsListItem.scss"
 import Badge from 'react-bootstrap/Badge'
 import Button from 'react-bootstrap/Button'
-import CommentsList from "./Comments/CommentsList";
+import CommentsList from "../Comments/CommentsList";
 import axios from "axios";
 
 // import classNames from "classnames";
