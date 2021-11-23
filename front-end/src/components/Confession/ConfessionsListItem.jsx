@@ -112,7 +112,7 @@ export default function ConfessionListItem(props) {
     <article className="confession__article">
       <header className="confession__detail-top">
         <Badge bg="danger">{categoryParser(props.categoryId)}</Badge>
-        <p>Created at {props.createdAt}</p>
+        <p> {props.createdAt}</p>
       </header>
 
       <div className="confession__content">
