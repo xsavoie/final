@@ -35,6 +35,15 @@ function App() {
   //   })
   // }, []);
 
+  // check if current user is logged in
+  useEffect(() => {
+    const loggedInUser = sessionStorage.getItem("user");
+    if (loggedInUser) {
+      const currentUser = JSON.parse(loggedInUser)
+      setUser(currentUser)
+    }
+  }, [])
+
   useEffect(() => {
     Promise.all([
       axios.get("/api/confessions/most_recent")
@@ -53,7 +62,7 @@ function App() {
     <BrowserRouter>
     <div className="App">
       {/* <header className="App-header"> */}
-      <Top user={user} showForm={showForm} setShowForm={setShowForm}/>
+      <Top user={user} setUser={setUser} showForm={showForm} setShowForm={setShowForm}/>
       {/* <h1>Confessions</h1><br /> */}
        {/* <UserContext.Provider value={providerValue}> */}
       <Routes>
