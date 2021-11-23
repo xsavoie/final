@@ -13,6 +13,7 @@ import Top from './components/navbar/Top';
 import LoginForm from './components/navbar/LoginForm';
 import RegisterForm from './components/navbar/RegisterForm';
 import ConfessForm from './components/navbar/ConfessForm';
+import ConfessionForm from './components/ConfessionForm'
 
 
 function App() {
@@ -20,6 +21,8 @@ function App() {
   const [confessions, setConfessions] = useState([]);
 
   const [user, setUser] = useState(null)
+
+  const [showForm, setShowForm] = useState(false)
 
   // const providerValue = useMemo(() => ({user, setUser}), [user, setUser])
 
@@ -50,12 +53,8 @@ function App() {
     <BrowserRouter>
     <div className="App">
       {/* <header className="App-header"> */}
-      <Top />
+      <Top user={user} showForm={showForm} setShowForm={setShowForm}/>
       {/* <h1>Confessions</h1><br /> */}
-      {/* <ConfessionList
-        confessionsToParse={confessions}
-        setConfessions={setConfessions}
-      /> */}
        {/* <UserContext.Provider value={providerValue}> */}
       <Routes>
        
@@ -64,6 +63,8 @@ function App() {
           <Route path="/home" element={<ConfessionList confessionsToParse={confessions}setConfessions={setConfessions}/>}></Route>
        
         </Routes>
+      {showForm && <ConfessionForm confessions={confessions} setConfessions={setConfessions}/>}
+      <ConfessionList confessionsToParse={confessions} setConfessions={setConfessions}/>
         {/* </UserContext.Provider> */}
       </div>
       </BrowserRouter>
