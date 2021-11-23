@@ -15,8 +15,21 @@ register.post("/", (req, res) => {
   
   createUser(email, password)
     .then(user => {
-      console.log(user);
-      console.log("entered in db");
+
+      // console.log(user);
+    if (!user) {
+       res.send({error: "error no user"});
+       return;
+    }
+    res.json(user)
+    // req.session.userId = user[0].id;
+    // res.send("Cookie set");
+   //   // console.log(user);
+   //   req.session.userid = user[0].id;
+    // console.log("req.session userid: ",req.session.userid);
+    // console.log("req.session: ", req.session);
+    // console.log("entered in db");
+     
     })
     .catch(err => {
       console.log(err.message);

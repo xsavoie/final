@@ -15,6 +15,9 @@ login.post("/", (req, res) => {
   
   getOneUser(email)
     .then(user => {
+
+      res.json(user)
+     // req.session.userid = user[0].id;
       console.log(user);
       
     })

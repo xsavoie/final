@@ -33,7 +33,9 @@ export default function RegisterForm(props) {
     console.log("request", request)
     axios.post('http://localhost:3000/register', request)
     .then(res => {
-      console.log("res: ", res)
+
+    props.setUser(res.data[0].id)
+    console.log("res: ", res.data[0])
       alert("Login successful ");
     })
     .catch(err => {
