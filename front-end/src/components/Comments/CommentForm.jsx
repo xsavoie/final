@@ -8,6 +8,7 @@ export default function CommentForm(props) {
 
   const [comment, setComment] = useState("");
   const testUser = 1;
+  const [rows, setRows] = useState(1)
 
 
   let confessionsCopy = [ ...props.confessionState]
@@ -52,8 +53,9 @@ export default function CommentForm(props) {
         <Form.Control
           className="comment-form__input"
           as="textarea"
-          rows={2}
+          rows={rows}
           value={comment}
+          onClick={() => setRows(2)}
           onChange={(event) => setComment(event.target.value)}
         />
         <Button

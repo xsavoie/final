@@ -16,13 +16,13 @@ export default function ConfessionListItem(props) {
   // check if user liked current post
   useEffect(() => {
     const confessionInfo = {
-      userId: 1,
+      userId: testUser,
       confessionId: props.id
     }
-    console.log(confessionInfo)
-    return axios.get("/api/confessions/likes/verify", { params: { userId: 1, confessionId: props.id } })
+    // console.log(confessionInfo)
+    return axios.get("/api/confessions/likes/verify", { params: { confessionInfo } })
       .then(res => {
-        console.log("RES", res.data)
+        // console.log("RES", res.data)
         if (res.data) {
           setLiked(true)
         }
@@ -30,7 +30,7 @@ export default function ConfessionListItem(props) {
       .catch(err => {
         console.log(err.message)
       })
-  }, [])
+  }, [props.id])
 
 
   const categoryParser = (categoryId) => {
@@ -120,6 +120,7 @@ export default function ConfessionListItem(props) {
       </div>
       <footer className="confession__detail-bottom">
         <span className="confession__likes">
+          {/* add verification to check user */}
           {liked && <span onClick={() => {
             deleteLike(testUser, props.id);
             setLiked(false);

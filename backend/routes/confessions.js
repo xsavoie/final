@@ -138,44 +138,49 @@ confessions.get('/:confession_id', function (req, res) {
 confessions.post('/likes', function (req, res) {
   const { userId, confessionId } = req.body.newLike;
 
-  createLike(userId, confessionId)
-    .then(like => {
-      res.json(like[0]);
-      console.log(like);
-      console.log("entered in db");
-    })
-    .catch(err => {
-      console.log(err.message);
-    })
+  if (userId && confessionId) {
+    createLike(userId, confessionId)
+      .then(like => {
+        res.json(like[0]);
+        console.log(like);
+        console.log("entered in db");
+      })
+      .catch(err => {
+        console.log(err.message);
+      })
+  }
 });
 
 // delete new like
 confessions.delete('/likes', function (req, res) {
   const { userId, confessionId } = req.body.likeInfo;
-
-  deleteLike(userId, confessionId)
-    .then(like => {
-      res.json("success")
-      console.log(like);
-      console.log("Deleted from db");
-    })
-    .catch(err => {
-      console.log(err.message);
-    })
+  if (userId && confessionId) {
+    deleteLike(userId, confessionId)
+      .then(like => {
+        res.json("success")
+        console.log(like);
+        console.log("Deleted from db");
+      })
+      .catch(err => {
+        console.log(err.message);
+      })
+  }
 });
 
 // check if post was liked
 confessions.get('/likes/verify', function (req, res) {
   const { userId, confessionId } = req.query
 
-  checkIfLiked(userId, confessionId)
-    .then(like => {
-      console.log(like)
-      res.json(parseInt(like[0].count))
-    })
-    .catch(err => {
-      console.log(err.message)
-    })
+  if (userId && confessionId) {
+    checkIfLiked(userId, confessionId)
+      .then(like => {
+        res.json(parseInt(like[0].count))
+      })
+      .catch(err => {
+        console.log(err.message)
+      })
+  } else (res.json(0))
+
 })
 
 // post new comment
@@ -194,12 +199,14 @@ confessions.post('/new_comment', function (req, res) {
     })
 });
 
-confessions.post('/new', function (req, res) {
-  const { userId, categoryId, content } = req.body;
 
+// post new confession
+confessions.post('/new', function (req, res) {
+  const { userId, categoryId, content } = req.body.newConfession;
+  console.log(req.body)
   addConfession(userId, categoryId, content)
     .then(confession => {
-      res.json(confession.id);
+      res.json(confession);
       console.log(confession);
       console.log("entered in db");
     })

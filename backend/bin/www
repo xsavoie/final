@@ -26,7 +26,7 @@ var server = http.createServer(app);
  */
 
 // server-side
-const io = require("socket.io")(httpServer, {
+const io = require("socket.io")(server, {
   cors: {
     origin: "http://localhost:3000/",
     methods: ["GET", "POST"],
