@@ -15,6 +15,7 @@ import LoginForm from './components/navbar/LoginForm';
 import RegisterForm from './components/navbar/RegisterForm';
 import ConfessForm from './components/navbar/ConfessForm';
 import ConfessionForm from './components/ConfessionForm'
+import Chat from './components/Chat/Chat';
 
 // const io = require("socket.io-client");
 const SERVER = "http://localhost:3000";
@@ -26,24 +27,24 @@ function App() {
 
   const [user, setUser] = useState(null)
 
-  const socket = socketClient("http://localhost:3001", {
-    withCredentials: true,
-    extraHeaders: {
-      "my-custom-header": "abcd"
-    }
-  });
+//   const socket = socketClient("http://localhost:3001", {
+//     withCredentials: true,
+//     extraHeaders: {
+//       "my-custom-header": "abcd"
+//     }
+//   });
 
-  socket.on('connection', () => {
-    console.log(`I'm connected with the back-end`);
-});
+//   socket.on('connection', () => {
+//     console.log(`I'm connected with the back-end`);
+// });
 
 
   // return(
-  //   <div>Hello Chat</div>
+  //   <div> <h1>Welcome to the Chat Portal! </h1>
+
+  //     <Chat />
+  //   </div>
   // );
-
-
-
 
   const [showForm, setShowForm] = useState(false)
 
@@ -77,6 +78,7 @@ function App() {
     <div className="App">
       {/* <header className="App-header"> */}
       <Top user={user} showForm={showForm} setShowForm={setShowForm}/>
+      <Chat />
       {/* <h1>Confessions</h1><br /> */}
        {/* <UserContext.Provider value={providerValue}> */}
       <Routes>
@@ -84,7 +86,9 @@ function App() {
           <Route path="/login" element={<LoginForm setUser={setUser}/>}></Route>
           <Route path="/register" element={<RegisterForm setUser={setUser}/>}></Route>
           <Route path="/home" element={<ConfessionList confessionsToParse={confessions}setConfessions={setConfessions}/>}></Route>
-       
+          
+
+
         </Routes>
       {showForm && <ConfessionForm confessions={confessions} setConfessions={setConfessions}/>}
       <ConfessionList confessionsToParse={confessions} setConfessions={setConfessions}/>

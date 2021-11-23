@@ -43,7 +43,11 @@ server.listen(port, () => {
 
 io.on('connection', (socket) => { /* socket object may be used to send specific messages to the new connected client */
   console.log('new client connected');
-  socket.emit('connection', null);
+  socket.on('message', payload => {
+    console.log("Message Received on the Server: ", payload);
+    io.emit('message', payload);
+  })
+  // socket.emit('connection', null);
 });
 
 server.on('error', onError);
