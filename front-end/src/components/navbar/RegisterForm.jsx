@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, Fragment, useContext } from "react";
 import axios from "axios";
 import { Form, Button } from 'react-bootstrap'
 import "./RegisterForm.scss"
+import { userProvider } from '../contexts/UserProvider'
+import { UserContext } from "../contexts/UserContext";
 
 
 export default function RegisterForm(props) {
@@ -10,6 +12,8 @@ export default function RegisterForm(props) {
   const [password, setPassword] = useState(props.password || "");
 
   const [error, setError] = useState("");
+
+  const { user, setUser } = useContext(UserContext)
 
 
   // function validate() {
@@ -34,8 +38,8 @@ export default function RegisterForm(props) {
     axios.post('http://localhost:3000/register', request)
       .then(res => {
         const user = res.data[0]
-        props.setUser(user.id)
-        sessionStorage.setItem("user", user.id)
+        setUser(user)
+        sessionStorage.setItem("user", JSON.stringify(user))
         // console.log("res: ", user)
         // alert("Login successful ");
       })
@@ -45,6 +49,8 @@ export default function RegisterForm(props) {
   }
 
   return (
+    <>
+    <h2>Register</h2>
   <Form className="registerfrom_style" autoComplete="off" onSubmit={event => event.preventDefault()}>
         
     <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -73,6 +79,7 @@ export default function RegisterForm(props) {
       Submit
     </Button>
   </Form>
+  </>
   )
 }
 

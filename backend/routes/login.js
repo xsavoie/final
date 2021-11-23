@@ -12,14 +12,13 @@ login.get('/', function (req, res, next) {
 
 login.post("/", (req, res) => {
   const { email, password } = req.body
-  
+
   getOneUser(email)
     .then(user => {
-
-      res.json(user)
-     // req.session.userid = user[0].id;
-      console.log(user);
-      
+      const userToReturn = { ...user[0], password: undefined }
+      res.json(userToReturn)
+      // req.session.userid = user[0].id;
+      // console.log(user);
     })
     .catch(err => {
       console.log(err.message);

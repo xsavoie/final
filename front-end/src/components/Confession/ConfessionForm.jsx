@@ -1,17 +1,16 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import axios from "axios";
 import "./ConfessionForm.scss"
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Dropdown from "react-bootstrap/Dropdown";
+import { UserContext } from "../contexts/UserContext";
 // import Login from "../login";
 // import { UserContext } from "../contexts/UserContext";
 
 export default function ConfessionForm(props) {
 
-  // const {user, setUser} = useContext(UserContext);
-  const testUser = 1;
-
+  const { user } = useContext(UserContext);
   const [content, setContent] = useState("");
   const [category, setCategory] = useState("")
 
@@ -30,10 +29,10 @@ export default function ConfessionForm(props) {
   const updateConfessionState = (newConfession, confessionState) => {
     newConfession.likes = 0;
     newConfession.comments = [];
-    let stateCopy = [ ...confessionState];
-  
+    let stateCopy = [...confessionState];
+
     stateCopy.unshift(newConfession);
-    const max = stateCopy.length -1;
+    const max = stateCopy.length - 1;
     return stateCopy.slice(0, max);
   };
 
@@ -88,8 +87,10 @@ export default function ConfessionForm(props) {
           variant="primary"
           size="sm"
           onClick={() => {
-            createConfession(testUser, category, content)
+            createConfession(user.id, category, content)
             setContent("")
+            // hides form after submission
+            props.setShowForm(false)
           }}
         >
           Submit

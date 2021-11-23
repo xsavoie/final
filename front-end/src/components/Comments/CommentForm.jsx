@@ -1,13 +1,15 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import { UserContext } from '../contexts/UserContext'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import './CommentsList.scss'
 import axios from 'axios'
+import './CommentsList.scss'
 
 export default function CommentForm(props) {
 
+  const { user } = useContext(UserContext)
+
   const [comment, setComment] = useState("");
-  const testUser = 1;
   const [rows, setRows] = useState(1)
 
 
@@ -63,7 +65,7 @@ export default function CommentForm(props) {
           variant="primary"
           size="sm"
           onClick={() => {
-            submitComment(testUser, props.confessionId, comment)
+            submitComment(user.id, props.confessionId, comment)
             setComment("")
           }}
         >

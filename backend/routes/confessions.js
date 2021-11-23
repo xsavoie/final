@@ -172,17 +172,18 @@ confessions.delete('/likes', function (req, res) {
 
 // check if post was liked
 confessions.get('/likes/verify', function (req, res) {
-  const { userId, confessionId } = req.query
+  const { userId, confessionId } = JSON.parse(req.query.confessionInfo);
 
   if (userId && confessionId) {
     checkIfLiked(userId, confessionId)
       .then(like => {
+        // console.log(like[0])
         res.json(parseInt(like[0].count))
       })
       .catch(err => {
         console.log(err.message)
       })
-  } else (res.json(0))
+  } else (res.json("fail"))
 
 })
 

@@ -1,28 +1,31 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useContext } from "react";
 import "./ConfessionsListItem.scss"
 import Badge from 'react-bootstrap/Badge'
 import Button from 'react-bootstrap/Button'
 import CommentsList from "../Comments/CommentsList";
 import axios from "axios";
+import { UserContext } from '../contexts/UserContext';
 
 // import classNames from "classnames";
 
 export default function ConfessionListItem(props) {
 
-  const testUser = 1;
+  // const REPLACEMEPLEASE = 1;
   const [liked, setLiked] = useState(false);
+
+  const { user } = useContext(UserContext)
 
 
   // check if user liked current post
   useEffect(() => {
     const confessionInfo = {
-      userId: testUser,
+      userId: user.id,
       confessionId: props.id
     }
     // console.log(confessionInfo)
     return axios.get("/api/confessions/likes/verify", { params: { confessionInfo } })
       .then(res => {
-        // console.log("RES", res.data)
+        console.log("RES", res.data)
         if (res.data) {
           setLiked(true)
         }
@@ -30,7 +33,7 @@ export default function ConfessionListItem(props) {
       .catch(err => {
         console.log(err.message)
       })
-  }, [props.id])
+  }, [user.id, props.id])
 
 
   const categoryParser = (categoryId) => {
@@ -122,11 +125,11 @@ export default function ConfessionListItem(props) {
         <span className="confession__likes">
           {/* add verification to check user */}
           {liked && <span onClick={() => {
-            deleteLike(testUser, props.id);
+            deleteLike(user.id, props.id);
             setLiked(false);
           }}>Unlike {props.likes}</span>}
           {!liked && <span onClick={() => {
-            submitLike(testUser, props.id);
+            submitLike(user.id, props.id);
             setLiked(true);
           }}>Like {props.likes}</span>}
         </span>
@@ -141,9 +144,3 @@ export default function ConfessionListItem(props) {
     </article>
   );
 }
-
-// onClick={setSelected(!selected)
-
-{/* <p>Comments</p> */ }
-{/* <p>ID {props.id}</p> */ }
-{/* <p>User ID {props.userId}</p> */ }

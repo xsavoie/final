@@ -1,15 +1,16 @@
-import { React, useEffect, useState, useMemo } from 'react';
+import { React, useEffect, useState, useMemo, useContext } from 'react';
 import socketClient from "socket.io-client";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { UserContext } from './components/contexts/UserContext';
+import { UserProvider } from './components/contexts/UserProvider';
 
 import './App.css';
 import axios from 'axios';
-import ConfessionList from './components/Confession/ConfessionsList'
+import ConfessionList from './components/Confession/ConfessionsList';
 import Top from './components/navbar/Top';
 import LoginForm from './components/navbar/LoginForm';
 import RegisterForm from './components/navbar/RegisterForm';
-import ConfessionForm from './components/Confession/ConfessionForm'
+import ConfessionForm from './components/Confession/ConfessionForm';
 import Chat from './components/Chat/Chat';
 // import ConfessionListItem from './components/ConfessionsListItem';
 // import Login from './components/login';
@@ -24,8 +25,10 @@ const SERVER = "http://localhost:3000";
 function App() {
 
   const [confessions, setConfessions] = useState([]);
-  const [user, setUser] = useState(null)
+  // const [user, setUser] = useState(null)
   const [showForm, setShowForm] = useState(false)
+
+  const { user, setUser } = useContext(UserContext)
 
 
   // const providerValue = useMemo(() => ({user, setUser}), [user, setUser])
@@ -37,7 +40,7 @@ function App() {
       const currentUser = JSON.parse(loggedInUser)
       setUser(currentUser)
     }
-  }, [])
+  }, [setUser])
 
   useEffect(() => {
     Promise.all([
@@ -51,22 +54,26 @@ function App() {
         // console.log(res.data)
         setConfessions(res.data)
       })
+      // missing catch
   }, []);
 
   return (
     <BrowserRouter>
       <div className="App">
-        <Top user={user} setUser={setUser} showForm={showForm} setShowForm={setShowForm} />
+        {/* <Top user={user} setUser={setUser} showForm={showForm} setShowForm={setShowForm} /> */}
+        <Top showForm={showForm} setShowForm={setShowForm} />
         {/* <Chat/> */}
         {/* <UserContext.Provider value={providerValue}> */}
-        {showForm && <ConfessionForm confessions={confessions} setConfessions={setConfessions} />}
+        {showForm && <ConfessionForm confessions={confessions} setConfessions={setConfessions} setShowForm={setShowForm}/>}
         <Routes>
           <Route path="/chat" element={<Chat />}></Route>
           <Route path="/" element={<ConfessionList confessionsToParse={confessions} setConfessions={setConfessions} />} ></Route>
           {/* <Route path="" element={} ></Route> */}
 
-          <Route path="/login" element={<LoginForm setUser={setUser} />}></Route>
-          <Route path="/register" element={<RegisterForm setUser={setUser} />}></Route>
+          {/* <Route path="/login" element={<LoginForm setUser={setUser} />}></Route>
+          <Route path="/register" element={<RegisterForm setUser={setUser} />}></Route> */}
+          <Route path="/login" element={<LoginForm/>}></Route>
+          <Route path="/register" element={<RegisterForm/>}></Route>
         </Routes>
         {/* </UserContext.Provider> */}
       </div>
