@@ -13,6 +13,7 @@ import Top from './components/navbar/Top';
 import LoginForm from './components/navbar/LoginForm';
 import RegisterForm from './components/navbar/RegisterForm';
 import ConfessForm from './components/navbar/ConfessForm';
+import ConfessionForm from './components/ConfessionForm'
 
 
 function App() {
@@ -52,10 +53,6 @@ function App() {
       {/* <header className="App-header"> */}
       <Top />
       {/* <h1>Confessions</h1><br /> */}
-      <ConfessionList
-        confessionsToParse={confessions}
-        setConfessions={setConfessions}
-      />
        <UserContext.Provider value={providerValue}>
       <Routes>
        
@@ -64,6 +61,8 @@ function App() {
           <Route path="/Confess" element={<ConfessForm />}></Route>
        
         </Routes>
+      <ConfessionForm confessions={confessions} setConfessions={setConfessions}/>
+      <ConfessionList confessionsToParse={confessions} setConfessions={setConfessions}/>
         </UserContext.Provider>
       </div>
       </BrowserRouter>
