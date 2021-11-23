@@ -5,11 +5,11 @@ import { UserContext } from './components/contexts/UserContext';
 
 import './App.css';
 import axios from 'axios';
-import ConfessionList from './components/ConfessionsList';
+import ConfessionList from './components/Confession/ConfessionsList'
 import Top from './components/navbar/Top';
 import LoginForm from './components/navbar/LoginForm';
 import RegisterForm from './components/navbar/RegisterForm';
-import ConfessionForm from './components/ConfessionForm'
+import ConfessionForm from './components/Confession/ConfessionForm'
 import Chat from './components/Chat/Chat';
 // import ConfessionListItem from './components/ConfessionsListItem';
 // import Login from './components/login';
@@ -27,36 +27,8 @@ function App() {
   const [user, setUser] = useState(null)
   const [showForm, setShowForm] = useState(false)
 
-//   const socket = socketClient("http://localhost:3001", {
-//     withCredentials: true,
-//     extraHeaders: {
-//       "my-custom-header": "abcd"
-//     }
-//   });
-
-//   socket.on('connection', () => {
-//     console.log(`I'm connected with the back-end`);
-// });
-
-
-  // return(
-  //   <div> <h1>Welcome to the Chat Portal! </h1>
-
-  //     <Chat />
-  //   </div>
-  // );
-
 
   // const providerValue = useMemo(() => ({user, setUser}), [user, setUser])
-
-  // useEffect(() => {
-  //   Promise.all([
-  //     axios.get("/api/confessions")
-  //   ]).then((res) => {
-  //     console.log(res[0].data)
-  //     setConfessions(res[0].data)
-  //   })
-  // }, []);
 
   // check if current user is logged in
   useEffect(() => {
@@ -84,21 +56,18 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        {/* <header className="App-header"> */}
         <Top user={user} setUser={setUser} showForm={showForm} setShowForm={setShowForm} />
-        <Chat/>
-        {/* <h1>Confessions</h1><br /> */}
+        {/* <Chat/> */}
         {/* <UserContext.Provider value={providerValue}> */}
+        {showForm && <ConfessionForm confessions={confessions} setConfessions={setConfessions} />}
         <Routes>
+          <Route path="/chat" element={<Chat />}></Route>
+          <Route path="/" element={<ConfessionList confessionsToParse={confessions} setConfessions={setConfessions} />} ></Route>
+          {/* <Route path="" element={} ></Route> */}
 
           <Route path="/login" element={<LoginForm setUser={setUser} />}></Route>
           <Route path="/register" element={<RegisterForm setUser={setUser} />}></Route>
-          
-          <Route path="/home" element={<ConfessionList confessionsToParse={confessions} setConfessions={setConfessions} />}></Route>
-
         </Routes>
-        {showForm && <ConfessionForm confessions={confessions} setConfessions={setConfessions} />}
-        <ConfessionList confessionsToParse={confessions} setConfessions={setConfessions} />
         {/* </UserContext.Provider> */}
       </div>
     </BrowserRouter>
@@ -107,14 +76,3 @@ function App() {
 }
 
 export default App;
-
-
-
-
-// <Route path='/some-path' render={() =>
-//   <Fragment>
-//     <FirstChild />
-//     <SecondChild />
-//   </Fragment>
-// } />
-
