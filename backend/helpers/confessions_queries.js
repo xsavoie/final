@@ -145,6 +145,29 @@ const mostRecentConfession = function () {
 exports.mostRecentConfession = mostRecentConfession;
 
 
+const confessionsForCategory = function (category_id) {
+  
+  const queryString = `SELECT confessions.id
+  FROM confessions
+  JOIN categories ON categories.id = category_id
+  WHERE categories.id = $1
+  ORDER BY confessions.id DESC
+  LIMIT 10;
+  `;
+  const queryParams = [category_id];
+
+
+  return db
+    .query(queryString, queryParams)
+    .then((result) => {
+      return result.rows;
+    })
+    .catch((err) => {
+      console.log("get one confession err");
+      console.log(err.message);
+    });
+}
+exports.confessionsForCategory = confessionsForCategory;
 
 
 //  update specific confession (updating one row)

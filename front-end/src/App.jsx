@@ -42,20 +42,40 @@ function App() {
     }
   }, [setUser])
 
+  // loads front page by most recent
+  // useEffect(() => {
+  //   Promise.all([
+  //     axios.get("/api/confessions/most_recent")
+  //   ]).then((res) => {
+  //     const mostRecentId = res[0].data;
+  //     // const mostRecentId = 10;
+  //     return axios.get(`/api/confessions/front_page/${mostRecentId}`);
+  //   })
+  //     .then((res) => {
+  //       // console.log(res.data)
+  //       setConfessions(res.data)
+  //     })
+  //     // missing catch
+  // }, []);
+
+  const categoryTest = 2
+  // loads front page by most recent + category id
   useEffect(() => {
+    const categoryId = categoryTest
     Promise.all([
-      axios.get("/api/confessions/most_recent")
+      axios.get("/api/confessions/most_recent/category" , { params: { categoryId } })
     ]).then((res) => {
-      const mostRecentId = res[0].data;
-      // const mostRecentId = 10;
-      return axios.get(`/api/confessions/front_page/${mostRecentId}`);
+      const idArray = res[0].data;
+      console.log(idArray)
+      return axios.get(`/api/confessions/front_page/category_confessions`, { params: { idArray } });
     })
       .then((res) => {
-        // console.log(res.data)
+        console.log(res.data)
         setConfessions(res.data)
       })
-      // missing catch
+    // missing catch
   }, []);
+
 
   return (
     <BrowserRouter>
@@ -64,7 +84,7 @@ function App() {
         <Top showForm={showForm} setShowForm={setShowForm} />
         {/* <Chat/> */}
         {/* <UserContext.Provider value={providerValue}> */}
-        {showForm && <ConfessionForm confessions={confessions} setConfessions={setConfessions} setShowForm={setShowForm}/>}
+        {showForm && <ConfessionForm confessions={confessions} setConfessions={setConfessions} setShowForm={setShowForm} />}
         <Routes>
           <Route path="/chat" element={<Chat />}></Route>
           <Route path="/" element={<ConfessionList confessionsToParse={confessions} setConfessions={setConfessions} />} ></Route>
@@ -72,8 +92,8 @@ function App() {
 
           {/* <Route path="/login" element={<LoginForm setUser={setUser} />}></Route>
           <Route path="/register" element={<RegisterForm setUser={setUser} />}></Route> */}
-          <Route path="/login" element={<LoginForm/>}></Route>
-          <Route path="/register" element={<RegisterForm/>}></Route>
+          <Route path="/login" element={<LoginForm />}></Route>
+          <Route path="/register" element={<RegisterForm />}></Route>
         </Routes>
         {/* </UserContext.Provider> */}
       </div>
