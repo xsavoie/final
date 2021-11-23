@@ -47,7 +47,7 @@ export default function Chat(props) {
     return (
       <div className="chat-container" >
         <form className="chat-form" onSubmit={event => event.preventDefault()}>
-        <div className="header"> Chat</div>
+        <div className="header"><h1> Chat </h1></div>
           
             <div className="form-group">
               <label htmlFor="chat_message">Message</label>
