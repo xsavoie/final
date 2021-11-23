@@ -27,7 +27,7 @@ export default function Top(props) {
             <NavDropdown.Item href="#action/3.2">Story</NavDropdown.Item>
             <NavDropdown.Item href="#action/3.3">Question</NavDropdown.Item>
           </NavDropdown>
-          {props.user &&<Nav.Link href="#link"><Link to="/Confess">Confess</Link></Nav.Link>}
+          {props.user && <Nav.Link onClick={() => props.setShowForm(!props.showForm)}>Confess</Nav.Link>}
           {props.user && <NavDropdown title="Username" id="basic-nav-dropdown">
           <NavDropdown.Item href="#action/3.1">Go to profile</NavDropdown.Item>
             <NavDropdown.Divider />

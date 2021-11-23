@@ -53,7 +53,7 @@ function App() {
     <BrowserRouter>
     <div className="App">
       {/* <header className="App-header"> */}
-      <Top setShowForm={setShowForm}/>
+      <Top user={user} showForm={showForm} setShowForm={setShowForm}/>
       {/* <h1>Confessions</h1><br /> */}
        {/* <UserContext.Provider value={providerValue}> */}
       <Routes>
