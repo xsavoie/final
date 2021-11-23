@@ -52,16 +52,16 @@ function App() {
       {/* <header className="App-header"> */}
       <Top />
       {/* <h1>Confessions</h1><br /> */}
-      <ConfessionList
+      {/* <ConfessionList
         confessionsToParse={confessions}
         setConfessions={setConfessions}
-      />
+      /> */}
        {/* <UserContext.Provider value={providerValue}> */}
       <Routes>
        
           <Route path="/login" element={<LoginForm setUser={setUser}/>}></Route>
-          <Route path="/Register" element={<RegisterForm setUser={setUser}/>}></Route>
-          <Route path="/Confess" element={<ConfessForm />}></Route>
+          <Route path="/register" element={<RegisterForm setUser={setUser}/>}></Route>
+          <Route path="/home" element={<ConfessionList confessionsToParse={confessions}setConfessions={setConfessions}/>}></Route>
        
         </Routes>
         {/* </UserContext.Provider> */}
