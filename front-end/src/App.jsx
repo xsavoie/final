@@ -59,8 +59,8 @@ function App() {
       <Routes>
        
           <Route path="/login" element={<LoginForm setUser={setUser}/>}></Route>
-          <Route path="/Register" element={<RegisterForm setUser={setUser}/>}></Route>
-          <Route path="/Confess" element={<ConfessForm />}></Route>
+          <Route path="/register" element={<RegisterForm setUser={setUser}/>}></Route>
+          <Route path="/home" element={<ConfessionList confessionsToParse={confessions}setConfessions={setConfessions}/>}></Route>
        
         </Routes>
       {showForm && <ConfessionForm confessions={confessions} setConfessions={setConfessions}/>}
