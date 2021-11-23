@@ -10,6 +10,7 @@ import Top from './components/navbar/Top';
 import LoginForm from './components/navbar/LoginForm';
 import RegisterForm from './components/navbar/RegisterForm';
 import ConfessionForm from './components/ConfessionForm'
+import Chat from './components/Chat/Chat';
 // import ConfessionListItem from './components/ConfessionsListItem';
 // import Login from './components/login';
 // import Register from './components/register';
@@ -26,28 +27,24 @@ function App() {
   const [user, setUser] = useState(null)
   const [showForm, setShowForm] = useState(false)
 
-  useEffect(() => {
-    const socket = socketClient("http://localhost:3001", {
-      withCredentials: true,
-      extraHeaders: {
-        "my-custom-header": "abcd"
-      }
-    });
-  
-    socket.on('connection', () => {
-      console.log(`I'm connected with the back-end`);
-    });
-    
-  }, [])
+//   const socket = socketClient("http://localhost:3001", {
+//     withCredentials: true,
+//     extraHeaders: {
+//       "my-custom-header": "abcd"
+//     }
+//   });
 
+//   socket.on('connection', () => {
+//     console.log(`I'm connected with the back-end`);
+// });
 
 
   // return(
-  //   <div>Hello Chat</div>
+  //   <div> <h1>Welcome to the Chat Portal! </h1>
+
+  //     <Chat />
+  //   </div>
   // );
-
-
-
 
 
   // const providerValue = useMemo(() => ({user, setUser}), [user, setUser])
@@ -89,6 +86,7 @@ function App() {
       <div className="App">
         {/* <header className="App-header"> */}
         <Top user={user} setUser={setUser} showForm={showForm} setShowForm={setShowForm} />
+        <Chat/>
         {/* <h1>Confessions</h1><br /> */}
         {/* <UserContext.Provider value={providerValue}> */}
         <Routes>

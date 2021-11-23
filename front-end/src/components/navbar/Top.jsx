@@ -6,6 +6,7 @@ import ConfessForm from "./ConfessForm";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 
+
 export default function Top(props) {
 
   const handleLogout = () => {
