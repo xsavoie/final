@@ -37,16 +37,18 @@ export default function ConfessionForm(props) {
   };
 
   const createConfession = (userId, categoryId, content) => {
+    const created_at = new Date();
     const newConfession = {
       userId,
       categoryId,
-      content
+      content,
+      created_at
     };
 
     return axios.post("/api/confessions/new", { newConfession })
       .then(res => {
         console.log(res.data);
-        props.setConfessions(updateConfessionState(res.data, props.confessions))
+        props.setConfessions(updateConfessionState(res.data, props.confessions));
       })
       .catch(err => {
         console.log(err.message);

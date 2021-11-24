@@ -32,7 +32,7 @@ export default function Chat(props) {
     socket.on('message', (payload) => {
       setChat([...chat, payload])
     })
-  });
+  }, [chat]);
 
   const sendMessage = (event) => {
     event.preventDefault();

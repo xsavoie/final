@@ -1,7 +1,10 @@
 import { React, useState } from "react";
 import ConfessionListItem from "./ConfessionsListItem";
-import "./ConfessionsList.scss"
+import "./ConfessionsList.scss";
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
 
+dayjs.extend(relativeTime)
 
 
 export default function ConfessionList(props) {
@@ -20,7 +23,7 @@ export default function ConfessionList(props) {
       id={confession.id}
       categoryId={confession.category_id}
       content={confession.content}
-      createdAt={confession.created_at}
+      createdAt={dayjs(confession.created_at).fromNow()}
       likes={confession.likes}
       comments={confession.comments}
       selected={confession.id === selected}
