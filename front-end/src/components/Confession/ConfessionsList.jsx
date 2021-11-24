@@ -1,6 +1,5 @@
-import { React, useState, useEffect } from "react";
+import { React, useState } from "react";
 import ConfessionListItem from "./ConfessionsListItem";
-import axios from "axios";
 import "./ConfessionsList.scss"
 
 
@@ -19,15 +18,14 @@ export default function ConfessionList(props) {
     <ConfessionListItem
       key={confession.id}
       id={confession.id}
-      // userId={confession.user_id}
       categoryId={confession.category_id}
       content={confession.content}
       createdAt={confession.created_at}
       likes={confession.likes}
       comments={confession.comments}
       selected={confession.id === selected}
-      setSelected={() => setSelected(confession.id)}
-      resetSelected={() => setSelected(null)}
+      setSelected={setSelected}
+      // resetSelected={() => setSelected(null)}
       confessionState={props.confessionsToParse}
       setConfessions={props.setConfessions}
     />
