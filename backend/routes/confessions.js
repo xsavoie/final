@@ -3,15 +3,21 @@ const confessions = express.Router();
 const db = require('../db');
 
 const moment = require('moment'); // require
-moment().format(); 
+moment().format();
 
 
-const { getOneConfession, getAllConfessions, getAllConfessionsForCategory, mostRecentConfession, addConfession } = require('../helpers/confessions_queries');
+const { getOneConfession,
+  getAllConfessions,
+  getAllConfessionsForCategory,
+  mostRecentConfession,
+  confessionsForCategory,
+  confessionsPopular,
+  addConfession } = require('../helpers/confessions_queries');
 const comments = require('../helpers/comments_queries')
 const likes = require('../helpers/likes_queries')
 const helpers = require('../helpers/dataHelpers')
 
-const { confessionParser } = helpers()
+const { confessionParser, idParser } = helpers()
 const { getComments, createComment, editComment, deleteComment } = comments(db)
 const { getLikes, createLike, deleteLike, checkIfLiked } = likes(db)
 
@@ -50,10 +56,63 @@ confessions.get('/', function (req, res) {
 
 });
 
+// To render post by category
+confessions.get('/most_recent/category', function (req, res) {
+  console.log(req.query.confessionFeed)
+  const categoryId = req.query.confessionFeed;
+  // step 1 - find array of confession id for a category
+  confessionsForCategory(categoryId)
+    .then(id => {
+      const idArray = idParser(id);
+      res.json(idArray);
+    })
+})
+
+confessions.get('/most_recent/popular', function (req, res) {
+  confessionsPopular()
+    .then(id => {
+      const idArray = idParser(id);
+      console.log(idArray);
+      res.json(idArray);
+    })
+});
+
+confessions.get('/front_page/category_confessions', function (req, res) {
+  const idArray = req.query.idArray.map(n => parseInt(n));
+  let confessionsArray = [];
+
+  for (const id of idArray) {
+    let array = [];
+    getOneConfession(id)
+      .then((confessions) => {
+        array.push(confessions);
+        return getLikes(id);
+      })
+      .then(likes => {
+        array.push(parseInt(likes[0].count));
+        return getComments(id);
+      })
+      .then(comments => {
+        array.push(comments);
+        return array;
+      })
+      .then(array => {
+        confessionsArray.push(confessionParser(array));
+      })
+      .then(test => {
+        if (confessionsArray.length >= 10) {
+          res.json(confessionsArray);
+        }
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }
+})
 
 // To render default confession feed
 confessions.get('/front_page/:recent', function (req, res) {
-  console.log(req.params.recent)
+  console.log(req.params.recent);
   let confessionsArray = [];
   start = req.params.recent;
   end = start - 10;
@@ -87,6 +146,8 @@ confessions.get('/front_page/:recent', function (req, res) {
       });
   }
 });
+
+
 
 
 confessions.get('/category/:category_id', function (req, res) {

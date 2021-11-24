@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button'
 import CommentsList from "../Comments/CommentsList";
 import axios from "axios";
 import { UserContext } from '../contexts/UserContext';
+import classNames from "classnames";
 
 // import classNames from "classnames";
 
@@ -25,7 +26,7 @@ export default function ConfessionListItem(props) {
     // console.log(confessionInfo)
     return axios.get("/api/confessions/likes/verify", { params: { confessionInfo } })
       .then(res => {
-        console.log("RES", res.data)
+        // console.log("RES", res.data)
         if (res.data) {
           setLiked(true)
         }
@@ -109,12 +110,20 @@ export default function ConfessionListItem(props) {
       })
   }
 
+  let badgeClass = classNames("badge", {
+    "badge--secret": props.categoryId === 1,
+    "badge--story": props.categoryId === 2,
+    "badge--question": props.categoryId === 3
+  })
+
+  console.log(badgeClass)
+
   const totalComments = props.comments.length;
 
   return (
     <article className="confession__article">
       <header className="confession__detail-top">
-        <Badge bg="danger">{categoryParser(props.categoryId)}</Badge>
+        <Badge className={badgeClass}>{categoryParser(props.categoryId)}</Badge>
         <p> {props.createdAt}</p>
       </header>
 
