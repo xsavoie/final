@@ -32,11 +32,11 @@ export default function Chat(props) {
     socket.on('message', (payload) => {
       setChat([...chat, payload])
     })
-  })
+  });
 
   const sendMessage = (event) => {
     event.preventDefault();
-    socket.emit('message', {userName, message});
+    socket.emit('message', {userName, message, time});
     console.log(message);
     setMessage('');
   }
@@ -48,8 +48,8 @@ export default function Chat(props) {
         <div className="chat_message_container">
           {chat.map((payload, index) => {
             return(
-              <h5><b>{userName}</b> : <span> {payload.message} </span><br/>
-                <span> sent at:{time} </span>
+              <h5><b>{payload.userName}</b> : <span> {payload.message} </span><br/>
+                <span> sent at:{payload.time} </span>
               </h5>
             )
           })}
