@@ -8,5 +8,13 @@ module.exports = () => {
     return parsedData
   }
 
-  return { confessionParser }
+  const idParser = (array) => {
+    let parsedArray = [];
+    for (const object of array) {
+      parsedArray.push(object.id);
+    }
+    return parsedArray;
+  }
+
+  return { confessionParser, idParser }
 }
