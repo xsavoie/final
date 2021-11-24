@@ -19,9 +19,11 @@ const SERVER = "http://localhost:3000";
 function App() {
 
   const [confessions, setConfessions] = useState([]);
-  const [showForm, setShowForm] = useState(false)
-  const [confessionFeed, setConfessionFeed] = useState("recent")
-  const { setUser } = useContext(UserContext)
+  const [showForm, setShowForm] = useState(false);
+  const [showRegister, setShowRegister] = useState(false)
+  const [showLogin, setShowLogin] = useState(false);
+  const [confessionFeed, setConfessionFeed] = useState("recent");
+  const { setUser } = useContext(UserContext);
 
 
   // const providerValue = useMemo(() => ({user, setUser}), [user, setUser])
@@ -86,15 +88,19 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <Top showForm={showForm} setShowForm={setShowForm} setConfessionFeed={setConfessionFeed} />
+        <Top showForm={showForm} setShowForm={setShowForm} setConfessionFeed={setConfessionFeed} setShowLogin={setShowLogin} setShowRegister={setShowRegister}/>
         {showForm && <ConfessionForm confessions={confessions} setConfessions={setConfessions} setShowForm={setShowForm} />}
+        {/* {showLogin && <LoginForm showLogin={showLogin} setShowLogin={setShowLogin}/>} */}
+
         <Routes>
           <Route path="/chat" element={<Chat />}></Route>
-          <Route path="/" element={<ConfessionList confessionsToParse={confessions} setConfessions={setConfessions} />} ></Route>
+          <Route path="/" element={!showLogin && !showRegister && <ConfessionList confessionsToParse={confessions} setConfessions={setConfessions} />} ></Route>
           {/* <Route path="/profile" element={<ConfessionList/>} ></Route> */}
-          <Route path="/login" element={<LoginForm />}></Route>
-          <Route path="/register" element={<RegisterForm />}></Route>
+          {/* <Route path="/login" element={<LoginForm />}></Route> */}
+          {/* <Route path="/register" element={<RegisterForm />}></Route> */}
         </Routes>
+        <LoginForm showLogin={showLogin} setShowLogin={setShowLogin} showRegister={showRegister} setShowRegister={setShowRegister}/>
+        <RegisterForm showRegister={showRegister} setShowRegister={setShowRegister} showLogin={showLogin} setShowLogin={setShowLogin}/>
       </div>
     </BrowserRouter>
 

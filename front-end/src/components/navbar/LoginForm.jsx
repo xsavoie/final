@@ -1,7 +1,7 @@
-import React, {useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 // import { UserContext } from "../contexts/UserContext";
-import {Form} from 'react-bootstrap'
+import { Form } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button'
 import "./LoginForm.scss"
 import { userProvider } from '../contexts/UserProvider'
@@ -17,7 +17,7 @@ export default function LoginForm(props) {
 
   const { user, setUser } = useContext(UserContext)
 
-  
+
 
   // function validate() {
   //   if (email === "") {
@@ -32,63 +32,66 @@ export default function LoginForm(props) {
   // }
 
   function loginCheck(event) {
-    event.preventDefault();
+    // event.preventDefault();
     const request = {
       email,
       password
     }
     // console.log("request", request)
     axios.post('http://localhost:3000/login', request)
-    .then(res => {
-      const user = res.data;
-      setUser(user)
-      sessionStorage.setItem("user", JSON.stringify(user))
-      // sessionStorage.setItem("id", user.id, "email", user.email, "username", user.username)
-      // console.log("res: ", user)
-      // alert("Login successful ");
-    })
-    .catch(err => {
-      console.log(err.message);
-    })
+      .then(res => {
+        const user = res.data;
+        setUser(user)
+        sessionStorage.setItem("user", JSON.stringify(user))
+        // sessionStorage.setItem("id", user.id, "email", user.email, "username", user.username)
+        // console.log("res: ", user)
+        // alert("Login successful ");
+      })
+      .catch(err => {
+        console.log(err.message);
+      })
   }
 
-    
+  console.log(props)
 
   return (
-    <>
-    <h2>Login</h2>
-  <Form className="loginfrom_style" autoComplete="off" onSubmit={event => event.preventDefault()}>
-    <Form.Group className="mb-3" controlId="formBasicEmail">
-      <Form.Label>Email address</Form.Label>
-      <div>
-       <input id="email_login" type="text" name="email" placeholder="name@email.com" 
-              value = {email}
+    <div className={`${!props.showLogin ? "login-active" : ""} login-show`}>
+      <h2>Login</h2>
+      <Form className="loginfrom_style" autoComplete="off" onSubmit={event => event.preventDefault()}>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Email address</Form.Label>
+          <div>
+            <input id="email_login" type="text" name="email" placeholder="name@email.com"
+              value={email}
               onChange={(event) => setEmail(event.target.value)}
-              />
-               </div>
-              
-     
-      <Form.Text className="text-muted">
-        We'll never share your email with anyone else.
-      </Form.Text>
-    </Form.Group>
-
-    <Form.Group className="mb-3" controlId="formBasicPassword">
-      <Form.Label>Password</Form.Label>
-      <div>
-       <input id="password_login" type="password" name="password" placeholder="password" 
+            />
+          </div>
+          <Form.Text className="text-muted">
+            We'll never share your email with anyone else.
+          </Form.Text>
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <div>
+            <input id="password_login" type="password" name="password" placeholder="password"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
-              /> 
-              </div>
-    
-    </Form.Group>
-
-    <Button type="button" className="btn" onClick={loginCheck}>
-      Submit
-    </Button>
-  </Form>
-  </>
+            />
+          </div>
+        </Form.Group>
+        <Button
+          type="button"
+          className="btn"
+          onClick={() => {
+            // event.preventDefault();
+            loginCheck()
+            props.setShowLogin(false)
+          }}
+        >
+          Submit
+        </Button>
+      </Form>
+    </div>
   )
 }
 
@@ -97,7 +100,7 @@ export default function LoginForm(props) {
     //   <div className="base-container" >
     //     <form autoComplete="off" onSubmit={event => event.preventDefault()}>
     //     <div className="header">Login</div>
-        
+
     //         <div className="form-group">
     //           <label htmlFor="email">Email </label>
     //           <input id="email_login" type="text" name="email" placeholder="name@email.com" 

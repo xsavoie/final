@@ -1,3 +1,16 @@
+.register-show {
+  display: block;
+  position: absolute;
+  margin-left: 35%;
+  transition: 800ms;
+  opacity: 1;
+}
+
+.register-show.register-active {
+  transform: translateY(100px) scale(0) rotateY(180deg);
+  opacity: 0;
+}
+
 .registerfrom_style{
   width: 90%;
   margin-left: 5%;
