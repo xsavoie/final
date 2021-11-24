@@ -25,9 +25,8 @@ const SERVER = "http://localhost:3000";
 function App() {
 
   const [confessions, setConfessions] = useState([]);
-  // const [user, setUser] = useState(null)
   const [showForm, setShowForm] = useState(false)
-
+  const [confessionFeed, setConfessionFeed] = useState("recent")
   const { user, setUser } = useContext(UserContext)
 
 
@@ -42,40 +41,66 @@ function App() {
     }
   }, [setUser])
 
+  // load confession feed
   useEffect(() => {
-    Promise.all([
-      axios.get("/api/confessions/most_recent")
-    ]).then((res) => {
-      const mostRecentId = res[0].data;
-      // const mostRecentId = 10;
-      return axios.get(`/api/confessions/front_page/${mostRecentId}`);
-    })
-      .then((res) => {
-        // console.log(res.data)
-        setConfessions(res.data)
+    if (confessionFeed === "recent") {
+      Promise.all([
+        axios.get("/api/confessions/most_recent")
+      ]).then((res) => {
+        const mostRecentId = res[0].data;
+        return axios.get(`/api/confessions/front_page/${mostRecentId}`);
+      }).then((res) => {
+        // console.log(res.data);
+        setConfessions(res.data);
+      }).catch(err => {
+        console.log(err.message);
+      });
+    };
+
+    if (confessionFeed === "popular") {
+      Promise.all([
+        axios.get("/api/confessions/most_recent/popular")
+      ]).then((res) => {
+        const idArray = res[0].data;
+        // console.log(idArray);
+        return axios.get(`/api/confessions/front_page/category_confessions`, { params: { idArray } });
+      }).then((res) => {
+        // console.log(res.data);
+        setConfessions(res.data);
+      }).catch(err => {
+        console.log(err.message);
       })
-      // missing catch
-  }, []);
+    };
+
+    if (typeof confessionFeed === "number") {
+      Promise.all([
+        axios.get("/api/confessions/most_recent/category", { params: { confessionFeed } })
+      ]).then((res) => {
+        const idArray = res[0].data;
+        // console.log(idArray)
+        return axios.get(`/api/confessions/front_page/category_confessions`, { params: { idArray } });
+      }).then((res) => {
+        // console.log(res.data);
+        setConfessions(res.data);
+      }).catch(err => {
+        console.log(err.message);
+      });
+    };
+  }, [confessionFeed])
+
 
   return (
     <BrowserRouter>
       <div className="App">
-        {/* <Top user={user} setUser={setUser} showForm={showForm} setShowForm={setShowForm} /> */}
-        <Top showForm={showForm} setShowForm={setShowForm} />
-        {/* <Chat/> */}
-        {/* <UserContext.Provider value={providerValue}> */}
-        {showForm && <ConfessionForm confessions={confessions} setConfessions={setConfessions} setShowForm={setShowForm}/>}
+        <Top showForm={showForm} setShowForm={setShowForm} setConfessionFeed={setConfessionFeed} />
+        {showForm && <ConfessionForm confessions={confessions} setConfessions={setConfessions} setShowForm={setShowForm} />}
         <Routes>
           <Route path="/chat" element={<Chat />}></Route>
           <Route path="/" element={<ConfessionList confessionsToParse={confessions} setConfessions={setConfessions} />} ></Route>
-          {/* <Route path="" element={} ></Route> */}
-
-          {/* <Route path="/login" element={<LoginForm setUser={setUser} />}></Route>
-          <Route path="/register" element={<RegisterForm setUser={setUser} />}></Route> */}
-          <Route path="/login" element={<LoginForm/>}></Route>
-          <Route path="/register" element={<RegisterForm/>}></Route>
+          {/* <Route path="/profile" element={<ConfessionList/>} ></Route> */}
+          <Route path="/login" element={<LoginForm />}></Route>
+          <Route path="/register" element={<RegisterForm />}></Route>
         </Routes>
-        {/* </UserContext.Provider> */}
       </div>
     </BrowserRouter>
 
@@ -83,3 +108,37 @@ function App() {
 }
 
 export default App;
+
+  // loads front page by most recent
+  // useEffect(() => {
+  //   Promise.all([
+  //     axios.get("/api/confessions/most_recent")
+  //   ]).then((res) => {
+  //     const mostRecentId = res[0].data;
+  //     // const mostRecentId = 10;
+  //     return axios.get(`/api/confessions/front_page/${mostRecentId}`);
+  //   })
+  //     .then((res) => {
+  //       // console.log(res.data)
+  //       setConfessions(res.data)
+  //     })
+  //     // missing catch
+  // }, []);
+
+  // const categoryTest = 2
+  // // loads front page by most recent + category id
+  // useEffect(() => {
+  //   const categoryId = categoryTest
+  //   Promise.all([
+  //     axios.get("/api/confessions/most_recent/category", { params: { categoryId } })
+  //   ]).then((res) => {
+  //     const idArray = res[0].data;
+  //     console.log(idArray)
+  //     return axios.get(`/api/confessions/front_page/category_confessions`, { params: { idArray } });
+  //   })
+  //     .then((res) => {
+  //       console.log(res.data)
+  //       setConfessions(res.data)
+  //     })
+  //   // missing catch
+  // }, []);
