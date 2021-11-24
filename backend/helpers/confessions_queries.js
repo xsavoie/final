@@ -169,6 +169,28 @@ const confessionsForCategory = function (category_id) {
 }
 exports.confessionsForCategory = confessionsForCategory;
 
+const confessionsPopular = function () {
+  
+  const queryString = `SELECT confessions.id, count(likes)
+  FROM confessions
+  JOIN likes ON confession_id = confessions.id
+  GROUP BY confessions.id
+  ORDER BY count DESC
+  LIMIT 10;
+  `;
+
+  return db
+    .query(queryString)
+    .then((result) => {
+      return result.rows;
+    })
+    .catch((err) => {
+      console.log("get one confession err");
+      console.log(err.message);
+    });
+}
+exports.confessionsPopular = confessionsPopular;
+
 
 //  update specific confession (updating one row)
 

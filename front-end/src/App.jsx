@@ -41,39 +41,52 @@ function App() {
     }
   }, [setUser])
 
-  // loads front page by most recent
-  // useEffect(() => {
-  //   Promise.all([
-  //     axios.get("/api/confessions/most_recent")
-  //   ]).then((res) => {
-  //     const mostRecentId = res[0].data;
-  //     // const mostRecentId = 10;
-  //     return axios.get(`/api/confessions/front_page/${mostRecentId}`);
-  //   })
-  //     .then((res) => {
-  //       // console.log(res.data)
-  //       setConfessions(res.data)
-  //     })
-  //     // missing catch
-  // }, []);
-
-  const categoryTest = 2
-  // loads front page by most recent + category id
+  // load confession feed
   useEffect(() => {
-    const categoryId = categoryTest
-    Promise.all([
-      axios.get("/api/confessions/most_recent/category", { params: { categoryId } })
-    ]).then((res) => {
-      const idArray = res[0].data;
-      console.log(idArray)
-      return axios.get(`/api/confessions/front_page/category_confessions`, { params: { idArray } });
-    })
-      .then((res) => {
-        console.log(res.data)
-        setConfessions(res.data)
+    if (confessionFeed === "recent") {
+      Promise.all([
+        axios.get("/api/confessions/most_recent")
+      ]).then((res) => {
+        const mostRecentId = res[0].data;
+        return axios.get(`/api/confessions/front_page/${mostRecentId}`);
+      }).then((res) => {
+        // console.log(res.data);
+        setConfessions(res.data);
+      }).catch(err => {
+        console.log(err.message);
+      });
+    };
+
+    if (confessionFeed === "popular") {
+      Promise.all([
+        axios.get("/api/confessions/most_recent/popular")
+      ]).then((res) => {
+        const idArray = res[0].data;
+        // console.log(idArray);
+        return axios.get(`/api/confessions/front_page/category_confessions`, { params: { idArray } });
+      }).then((res) => {
+        // console.log(res.data);
+        setConfessions(res.data);
+      }).catch(err => {
+        console.log(err.message);
       })
-    // missing catch
-  }, []);
+    };
+
+    if (typeof confessionFeed === "number") {
+      Promise.all([
+        axios.get("/api/confessions/most_recent/category", { params: { confessionFeed } })
+      ]).then((res) => {
+        const idArray = res[0].data;
+        // console.log(idArray)
+        return axios.get(`/api/confessions/front_page/category_confessions`, { params: { idArray } });
+      }).then((res) => {
+        // console.log(res.data);
+        setConfessions(res.data);
+      }).catch(err => {
+        console.log(err.message);
+      });
+    };
+  }, [confessionFeed])
 
 
   return (
@@ -95,3 +108,37 @@ function App() {
 }
 
 export default App;
+
+  // loads front page by most recent
+  // useEffect(() => {
+  //   Promise.all([
+  //     axios.get("/api/confessions/most_recent")
+  //   ]).then((res) => {
+  //     const mostRecentId = res[0].data;
+  //     // const mostRecentId = 10;
+  //     return axios.get(`/api/confessions/front_page/${mostRecentId}`);
+  //   })
+  //     .then((res) => {
+  //       // console.log(res.data)
+  //       setConfessions(res.data)
+  //     })
+  //     // missing catch
+  // }, []);
+
+  // const categoryTest = 2
+  // // loads front page by most recent + category id
+  // useEffect(() => {
+  //   const categoryId = categoryTest
+  //   Promise.all([
+  //     axios.get("/api/confessions/most_recent/category", { params: { categoryId } })
+  //   ]).then((res) => {
+  //     const idArray = res[0].data;
+  //     console.log(idArray)
+  //     return axios.get(`/api/confessions/front_page/category_confessions`, { params: { idArray } });
+  //   })
+  //     .then((res) => {
+  //       console.log(res.data)
+  //       setConfessions(res.data)
+  //     })
+  //   // missing catch
+  // }, []);
