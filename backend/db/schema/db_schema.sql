@@ -23,7 +23,7 @@ CREATE TABLE "confessions" (
   "user_id" INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
   "category_id" INTEGER NOT NULL REFERENCES categories(id) ON DELETE CASCADE,
   "content" TEXT NOT NULL,
-  "created_at" TIMESTAMP NOT NULL
+  "created_at" VARCHAR(255)
 );
 
 CREATE TABLE "likes" (

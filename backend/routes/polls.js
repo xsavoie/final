@@ -16,23 +16,59 @@ const {getAllPolls, getOnePoll, addPoll, deleteOnePoll} = polls(db)
 
 const {addOptions} = options(db)
 
-// post new confession
-polls.post('/polls/new', function (req, res) {
-  const { userId, content, } = req.body.newConfession;
 
-  const time = new Date();
-  const created_at = moment(time).fromNow();
-  console.log(req.body)
-  addConfession(userId, categoryId, content, created_at)
-    .then(confession => {
-      res.json(confession);
-      console.log(confession);
-      console.log("entered in db");
-    })
-    .catch(err => {
-      console.log(err.message);
-    })
+polls.get('/', function (req, res) {
+  let pollsArray = [];
+
+  for (let i = 1; i < 6; i++) {
+    let array = [];
+    let id = i;
+    getOnePoll(id)
+      .then((poll) => {
+        array.push(poll);
+        return getLikes(id);
+      })
+      .then(likes => {
+        array.push(parseInt(likes[0].count));
+        return getComments(id);
+      })
+      .then(comments => {
+        array.push(comments);
+        return array;
+      })
+      .then(array => {
+        confessionsArray.push(confessionParser(array));
+      })
+      .then(test => {
+        if (confessionsArray.length >= 5) {
+          res.json(confessionsArray);
+        }
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }
+
 });
 
 
-module.exports = confessions;
+// // post new confession
+// polls.post('/new', function (req, res) {
+//   const { userId, categoryId, content } = req.body.newConfession;
+
+//   const time = new Date();
+//   const created_at = moment(time).fromNow();
+//   console.log(req.body)
+//   addConfession(userId, categoryId, content, created_at)
+//     .then(confession => {
+//       res.json(confession);
+//       console.log(confession);
+//       console.log("entered in db");
+//     })
+//     .catch(err => {
+//       console.log(err.message);
+//     })
+// });
+
+
+module.exports = polls;

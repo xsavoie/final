@@ -252,11 +252,13 @@ confessions.get('/likes/verify', function (req, res) {
 confessions.post('/new_comment', function (req, res) {
   const { userId, confessionId, content, created_at } = req.body.newComment;
 
+  console.log("comment - req.body", req.body)
   createComment(userId, confessionId, content, created_at)
     .then(comment => {
       // returns array of object. Can make it return only object if needed
+      console.log("coments****", comment[0]);
       res.json(comment[0]);
-      console.log(comment[0]);
+      
       console.log("entered in db");
     })
     .catch(err => {
@@ -273,11 +275,11 @@ confessions.post('/new', function (req, res) {
   // const created_at = moment(time).fromNow();
   // const created_at = new Date();
   // console.log("**&*&*&*&*", created_at)
-  console.log(req.body)
+  console.log("req.body", req.body)
   addConfession(userId, categoryId, content, created_at)
     .then(confession => {
       res.json(confession);
-      console.log(confession);
+      console.log("*********", confession);
       console.log("entered in db");
     })
     .catch(err => {
