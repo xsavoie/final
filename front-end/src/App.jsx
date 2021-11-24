@@ -2,7 +2,6 @@ import { React, useEffect, useState, useMemo, useContext } from 'react';
 import socketClient from "socket.io-client";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { UserContext } from './components/contexts/UserContext';
-import { UserProvider } from './components/contexts/UserProvider';
 
 import './App.css';
 import axios from 'axios';
@@ -12,11 +11,6 @@ import LoginForm from './components/navbar/LoginForm';
 import RegisterForm from './components/navbar/RegisterForm';
 import ConfessionForm from './components/Confession/ConfessionForm';
 import Chat from './components/Chat/Chat';
-// import ConfessionListItem from './components/ConfessionsListItem';
-// import Login from './components/login';
-// import Register from './components/register';
-// import CommentsList from './components/Comments/CommentsList';
-// import ConfessForm from './components/navbar/ConfessForm';
 
 // const io = require("socket.io-client");
 const SERVER = "http://localhost:3000";
@@ -27,7 +21,7 @@ function App() {
   const [confessions, setConfessions] = useState([]);
   const [showForm, setShowForm] = useState(false)
   const [confessionFeed, setConfessionFeed] = useState("recent")
-  const { user, setUser } = useContext(UserContext)
+  const { setUser } = useContext(UserContext)
 
 
   // const providerValue = useMemo(() => ({user, setUser}), [user, setUser])
@@ -39,7 +33,7 @@ function App() {
       const currentUser = JSON.parse(loggedInUser)
       setUser(currentUser)
     }
-  }, [setUser])
+  }, [setUser]);
 
   // load confession feed
   useEffect(() => {
@@ -69,7 +63,7 @@ function App() {
         setConfessions(res.data);
       }).catch(err => {
         console.log(err.message);
-      })
+      });
     };
 
     if (typeof confessionFeed === "number") {
@@ -86,7 +80,7 @@ function App() {
         console.log(err.message);
       });
     };
-  }, [confessionFeed])
+  }, [confessionFeed]);
 
 
   return (
@@ -108,37 +102,3 @@ function App() {
 }
 
 export default App;
-
-  // loads front page by most recent
-  // useEffect(() => {
-  //   Promise.all([
-  //     axios.get("/api/confessions/most_recent")
-  //   ]).then((res) => {
-  //     const mostRecentId = res[0].data;
-  //     // const mostRecentId = 10;
-  //     return axios.get(`/api/confessions/front_page/${mostRecentId}`);
-  //   })
-  //     .then((res) => {
-  //       // console.log(res.data)
-  //       setConfessions(res.data)
-  //     })
-  //     // missing catch
-  // }, []);
-
-  // const categoryTest = 2
-  // // loads front page by most recent + category id
-  // useEffect(() => {
-  //   const categoryId = categoryTest
-  //   Promise.all([
-  //     axios.get("/api/confessions/most_recent/category", { params: { categoryId } })
-  //   ]).then((res) => {
-  //     const idArray = res[0].data;
-  //     console.log(idArray)
-  //     return axios.get(`/api/confessions/front_page/category_confessions`, { params: { idArray } });
-  //   })
-  //     .then((res) => {
-  //       console.log(res.data)
-  //       setConfessions(res.data)
-  //     })
-  //   // missing catch
-  // }, []);
