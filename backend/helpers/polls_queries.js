@@ -73,7 +73,7 @@ exports.addPoll = addPoll;
 
 const addOptions = function (poll_id, content, votes) {
 
-  const queryString = `INSERT INTO polls (poll_id, content, votes)
+  const queryString = `INSERT INTO options (poll_id, content, votes)
     VALUES ($1, $2, $3) RETURNING *;`
 
   const queryParams = [poll_id, content, votes];
