@@ -4,18 +4,23 @@ import axios from "axios";
 import { Form } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button'
 import "./LoginForm.scss"
-import { userProvider } from '../contexts/UserProvider'
 import { UserContext } from "../contexts/UserContext";
+import { useFormFields } from "../hooks/useFormFields";
 
 export default function LoginForm(props) {
 
 
-  const [email, setEmail] = useState(props.email || "");
-  const [password, setPassword] = useState(props.password || "");
+  // const [email, setEmail] = useState(props.email || "");
+  // const [password, setPassword] = useState(props.password || "");
 
-  const [error, setError] = useState("");
+  const [fields, handleFieldChange] = useFormFields({
+    loginEmail: "",
+    loginPassword: ""
+  })
 
-  const { user, setUser } = useContext(UserContext)
+  // const [error, setError] = useState("");
+
+  const { setUser } = useContext(UserContext)
 
 
 
@@ -33,6 +38,8 @@ export default function LoginForm(props) {
 
   function loginCheck(event) {
     // event.preventDefault();
+    const email = fields.loginEmail;
+    const password = fields.loginPassword
     const request = {
       email,
       password
@@ -43,7 +50,6 @@ export default function LoginForm(props) {
         const user = res.data;
         setUser(user)
         sessionStorage.setItem("user", JSON.stringify(user))
-        // sessionStorage.setItem("id", user.id, "email", user.email, "username", user.username)
         // console.log("res: ", user)
         // alert("Login successful ");
       })
@@ -52,8 +58,6 @@ export default function LoginForm(props) {
       })
   }
 
-  console.log(props)
-
   return (
     <div className={`${!props.showLogin ? "login-active" : ""} login-show`}>
       <h2>Login</h2>
@@ -61,21 +65,19 @@ export default function LoginForm(props) {
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <div>
-            <input id="email_login" type="text" name="email" placeholder="name@email.com"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
+            <input id="loginEmail" type="text" name="email" placeholder="name@email.com"
+              value={fields.loginEmail}
+              onChange={handleFieldChange}
             />
           </div>
-          <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
-          </Form.Text>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <div>
-            <input id="password_login" type="password" name="password" placeholder="password"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
+            <input id="loginPassword" type="password" name="password" placeholder="password"
+              autoComplete="off"
+              value={fields.loginPassword}
+              onChange={handleFieldChange}
             />
           </div>
         </Form.Group>
@@ -94,34 +96,3 @@ export default function LoginForm(props) {
     </div>
   )
 }
-
-
-// return (
-    //   <div className="base-container" >
-    //     <form autoComplete="off" onSubmit={event => event.preventDefault()}>
-    //     <div className="header">Login</div>
-
-    //         <div className="form-group">
-    //           <label htmlFor="email">Email </label>
-    //           <input id="email_login" type="text" name="email" placeholder="name@email.com" 
-    //           value = {email}
-    //           onChange={(event) => setEmail(event.target.value)}
-    //           />
-    //         </div>
-    //         <div className="form-group">
-    //           <label htmlFor="password">Password </label>
-    //           <input id="password_login" type="password" name="password" placeholder="password" 
-    //           value={password}
-    //           onChange={(event) => setPassword(event.target.value)}
-    //           />
-    //         </div>
-
-    //     <div className="footer">
-    //       <button type="button" className="btn" onClick={loginCheck}>
-    //         Login
-    //       </button>
-    //     </div>
-    //     <section className="error_display">{error}</section>
-    //     </form>
-    //   </div>
-    // );
