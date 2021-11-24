@@ -1,4 +1,6 @@
 
+const { uniqueNamesGenerator, adjectives, colors, animals } = require('unique-names-generator');
+
 // CREATE TABLE "users" (
 //   "id" SERIAL PRIMARY KEY,
 //   "email" VARCHAR(255) NOT NULL,
@@ -48,7 +50,8 @@ module.exports = db => {
 
   // Create a new user to the users table
   const createUser = (email, password) => {
-    const username = (Math.random() + 1).toString(36).substring(7);
+    // const username = (Math.random() + 1).toString(36).substring(7);
+    const username = uniqueNamesGenerator({ dictionaries: [adjectives, colors, animals] }); // big_red_donkey
     const queryString = `
     INSERT INTO users (email, username, password)
     VALUES ($1, $2, $3) RETURNING *;
