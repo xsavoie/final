@@ -90,14 +90,11 @@ function App() {
       <div className="App">
         <Top showForm={showForm} setShowForm={setShowForm} setConfessionFeed={setConfessionFeed} setShowLogin={setShowLogin} setShowRegister={setShowRegister}/>
         {showForm && <ConfessionForm confessions={confessions} setConfessions={setConfessions} setShowForm={setShowForm} />}
-        {/* {showLogin && <LoginForm showLogin={showLogin} setShowLogin={setShowLogin}/>} */}
 
         <Routes>
           <Route path="/chat" element={<Chat />}></Route>
           <Route path="/" element={!showLogin && !showRegister && <ConfessionList confessionsToParse={confessions} setConfessions={setConfessions} />} ></Route>
           {/* <Route path="/profile" element={<ConfessionList/>} ></Route> */}
-          {/* <Route path="/login" element={<LoginForm />}></Route> */}
-          {/* <Route path="/register" element={<RegisterForm />}></Route> */}
         </Routes>
         <LoginForm showLogin={showLogin} setShowLogin={setShowLogin} showRegister={showRegister} setShowRegister={setShowRegister}/>
         <RegisterForm showRegister={showRegister} setShowRegister={setShowRegister} showLogin={showLogin} setShowLogin={setShowLogin}/>
