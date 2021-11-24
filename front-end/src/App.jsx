@@ -25,9 +25,8 @@ const SERVER = "http://localhost:3000";
 function App() {
 
   const [confessions, setConfessions] = useState([]);
-  // const [user, setUser] = useState(null)
   const [showForm, setShowForm] = useState(false)
-
+  const [confessionFeed, setConfessionFeed] = useState("recent")
   const { user, setUser } = useContext(UserContext)
 
 
@@ -63,7 +62,7 @@ function App() {
   useEffect(() => {
     const categoryId = categoryTest
     Promise.all([
-      axios.get("/api/confessions/most_recent/category" , { params: { categoryId } })
+      axios.get("/api/confessions/most_recent/category", { params: { categoryId } })
     ]).then((res) => {
       const idArray = res[0].data;
       console.log(idArray)
@@ -80,22 +79,15 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        {/* <Top user={user} setUser={setUser} showForm={showForm} setShowForm={setShowForm} /> */}
-        <Top showForm={showForm} setShowForm={setShowForm} />
-        {/* <Chat/> */}
-        {/* <UserContext.Provider value={providerValue}> */}
+        <Top showForm={showForm} setShowForm={setShowForm} setConfessionFeed={setConfessionFeed} />
         {showForm && <ConfessionForm confessions={confessions} setConfessions={setConfessions} setShowForm={setShowForm} />}
         <Routes>
           <Route path="/chat" element={<Chat />}></Route>
           <Route path="/" element={<ConfessionList confessionsToParse={confessions} setConfessions={setConfessions} />} ></Route>
-          {/* <Route path="" element={} ></Route> */}
-
-          {/* <Route path="/login" element={<LoginForm setUser={setUser} />}></Route>
-          <Route path="/register" element={<RegisterForm setUser={setUser} />}></Route> */}
+          {/* <Route path="/profile" element={<ConfessionList/>} ></Route> */}
           <Route path="/login" element={<LoginForm />}></Route>
           <Route path="/register" element={<RegisterForm />}></Route>
         </Routes>
-        {/* </UserContext.Provider> */}
       </div>
     </BrowserRouter>
 
