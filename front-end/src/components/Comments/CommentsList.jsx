@@ -13,6 +13,7 @@ export default function CommentsList(props) {
   const parsedComments = reversedComments.map((comment) => (
     <CommentsListItem
       key={comment.id}
+      createdAt={comment.created_at}
       content={comment.content}
     />
   ));

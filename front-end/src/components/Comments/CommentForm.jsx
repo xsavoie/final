@@ -7,13 +7,13 @@ import './CommentsList.scss'
 
 export default function CommentForm(props) {
 
-  const { user } = useContext(UserContext)
+  const { user } = useContext(UserContext);
 
   const [comment, setComment] = useState("");
-  const [rows, setRows] = useState(1)
+  const [rows, setRows] = useState(1);
 
 
-  let confessionsCopy = [ ...props.confessionState]
+  let confessionsCopy = [ ...props.confessionState];
 
   const updateCommentState = (confessionId, newComment, confessionState) => {
     const parsedComment = {
@@ -29,19 +29,21 @@ export default function CommentForm(props) {
     // map through state and modifies right confession
     const newState = confessionState.map(confession => confession.id === confessionId ? newConfession : confession);
     
-    return newState
+    return newState;
 }
 
   const submitComment = (userId, confessionId, content) => {
+    const created_at = new Date();
     const newComment = {
       userId,
       confessionId,
-      content
+      content,
+      created_at
     };
 
     return axios.post("/api/confessions/new_comment", { newComment })
       .then(res => {
-        props.setConfessions(updateCommentState(confessionId, res.data, confessionsCopy))
+        props.setConfessions(updateCommentState(confessionId, res.data, confessionsCopy));
       })
       .catch(err => {
         console.log(err.message);
