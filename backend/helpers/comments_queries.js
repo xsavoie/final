@@ -3,7 +3,7 @@ module.exports = db => {
   // Get all comments for a specific confession
   const getComments = (confessionId) => {
     const queryString = `
-    SELECT id, user_id, content
+    SELECT id, user_id, content, created_at
     FROM comments
     WHERE confession_id = $1;
     `;
@@ -21,14 +21,14 @@ module.exports = db => {
   };
 
   // Create a new comment for a specific confession and user
-  const createComment = (userId, confessionId, content) => {
+  const createComment = (userId, confessionId, content, created_at) => {
     const queryString = `
     INSERT INTO comments (user_id, confession_id, content, created_at)
-    VALUES ($1, $2, $3, '2018-02-12T08:00:00.000Z') 
+    VALUES ($1, $2, $3, $4) 
     RETURNING *;
     `;
 
-    const queryParams = [ userId, confessionId, content ];
+    const queryParams = [ userId, confessionId, content, created_at ];
 
     return db.query(queryString, queryParams)
       .then((result) => {
