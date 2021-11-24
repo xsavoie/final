@@ -1,13 +1,13 @@
-INSERT INTO options (poll_id, content, votes)
+INSERT INTO options (poll_id, content)
 VALUES 
-(3, 'yes', 7),
-(3, 'maybe', 8 ),
-(3, 'no', 8 ),
-(4, 'never', 10 ),
-(4, 'once', 11 ),
-(2, 'monday', 7 ),
-(2, 'friday', 15 ),
-(1, 'coffe', 5 ),
-(1, 'tea', 6),
-(1, 'something', 9);
+(1, 'yes'),
+(1, 'maybe'),
+(1, 'no'),
+(2, 'never'),
+(2, 'once'),
+(3, 'monday'),
+(3, 'friday'),
+(4, 'coffe'),
+(4, 'tea'),
+(4, 'something');
 

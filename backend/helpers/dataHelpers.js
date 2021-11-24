@@ -16,5 +16,13 @@ module.exports = () => {
     return parsedArray;
   }
 
-  return { confessionParser, idParser }
+  const pollsParser = (array) =>{
+    let parsedData = array[0][0]
+    parsedData["options"] = array[1]
+    // parsedData["comments"] = array[2]
+  
+    return parsedData
+  }
+
+  return { confessionParser, idParser, pollsParser }
 }
