@@ -4,9 +4,8 @@ import './Chat.scss'
 import socketClient from "socket.io-client";
 import { UserContext } from "../contexts/UserContext";
 
-
-
 const socket = socketClient("http://localhost:3001", {
+  
   withCredentials: true,
   extraHeaders: {
     "my-custom-header": "abcd"
@@ -17,16 +16,16 @@ socket.on('connection', () => {
   console.log(`I'm connected with the back-end`);
 });
 
-
-
 export default function Chat(props) {
 
   const [message, setMessage] = useState('');
   const [chat, setChat] = useState([]);
   const { user } = useContext(UserContext);
 
-  // pass username from props later
-  // const userName = 'User'+parseInt(Math.random()*10);
+  // const {time, setTime} = useContext();
+
+  const time = new Date().toLocaleString();
+
   const userName = user.username;
 
   useEffect(()=> {
@@ -34,8 +33,6 @@ export default function Chat(props) {
       setChat([...chat, payload])
     })
   })
-
-  
 
   const sendMessage = (event) => {
     event.preventDefault();
@@ -45,33 +42,43 @@ export default function Chat(props) {
   }
 
     return (
+      <body>
       <div className="chat-container" >
+
+        <div className="chat_message_container">
+          {chat.map((payload, index) => {
+            return(
+              <h5><b>{userName}</b> : <span> {payload.message} </span><br/>
+                <span> sent at:{time} </span>
+              </h5>
+            )
+          })}
+        </div>
+
         <form className="chat-form" onSubmit={event => event.preventDefault()}>
-        <div className="header"><h1> Chat </h1></div>
+        <div className="header">
+          
+            <h3> Hi {userName}! </h3></div>
           
             <div className="form-group">
-              <label htmlFor="chat_message">Message</label>
+              {/* <label htmlFor="chat_message"> Message </label> <br/> */}
               <input id="chat_message" type="text" name="chat_message" placeholder="What's going on?" 
               value = {message}
               onChange={(event) => {setMessage(event.target.value)}}
               required
+              style={{width: "500px"}}
               />
-            </div>
+            </div> <br/>
         <div className="footer">
-          <button type="submit" className="btn" onClick={sendMessage}>
+          <button className="footer__btn" type="submit" onClick={sendMessage}>
             Send Message
           </button>
         </div>
 
-        </form>
-        <div>
-        {chat.map((payload, index) => {
-          return(
-            <h4>{payload.userName} : <span>{payload.message}</span></h4>
-          )
-        })}
-        </div>
+        </form> <br/><br/><br/>
+
       </div>
+      </body>
     );
 
 }
