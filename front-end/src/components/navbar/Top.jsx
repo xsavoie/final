@@ -17,7 +17,15 @@ export default function Top(props) {
   return (
     <Navbar bg="light" expand="lg">
       <Container>
-        <Navbar.Brand href="#home"><Link to="/">classified</Link></Navbar.Brand>
+        <Navbar.Brand
+          href="#home"
+          onClick={() => {
+            props.setShowLogin(false);
+            props.setShowRegister(false);
+          }}
+        >
+          <Link to="/" >classified</Link>
+        </Navbar.Brand>
         {/* <Nav className="me-auto">
       <Nav.Link href="#home">Home</Nav.Link>
       </Nav> */}
@@ -41,9 +49,20 @@ export default function Top(props) {
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="#action/3.4" onClick={() => handleLogout()}>Logout</NavDropdown.Item>
               </NavDropdown>}
-              {!user.id && <Nav.Link href="#link"><Link to="/login">Login</Link></Nav.Link>}
-              {!user.id && <Nav.Link href="#link"><Link to="/register">Register</Link></Nav.Link>}
-              {/* {user.id && <Nav.Link onClick={() => handleLogout()}>Logout</Nav.Link>} */}
+              {!user.id &&
+                <Nav.Link
+                  onClick={() => {
+                    props.setShowRegister(false)
+                    props.setShowLogin(true)
+                  }}>Login
+                </Nav.Link>}
+              {!user.id &&
+                <Nav.Link
+                  onClick={() => {
+                    props.setShowLogin(false)
+                    props.setShowRegister(true)
+                  }}>Register
+                </Nav.Link>}
             </Nav>
           </Navbar.Collapse>
 

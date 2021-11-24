@@ -1,19 +1,25 @@
-import React, { useState, Fragment, useContext } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import { Form, Button } from 'react-bootstrap'
 import "./RegisterForm.scss"
-import { userProvider } from '../contexts/UserProvider'
 import { UserContext } from "../contexts/UserContext";
+import { useFormFields } from "../hooks/useFormFields";
 
 
 export default function RegisterForm(props) {
 
-  const [email, setEmail] = useState(props.email || "");
-  const [password, setPassword] = useState(props.password || "");
+  // const [email, setEmail] = useState(props.email || "");
+  // const [password, setPassword] = useState(props.password || "");
 
-  const [error, setError] = useState("");
+  const [fields, handleFieldChange] = useFormFields({
+    email: "",
+    password: "",
+    confirmPassword: ""
+  })
 
-  const { user, setUser } = useContext(UserContext)
+  // const [error, setError] = useState("");
+
+  const { setUser } = useContext(UserContext)
 
 
   // function validate() {
@@ -29,10 +35,12 @@ export default function RegisterForm(props) {
   // }
 
   function registerCheck(event) {
-    event.preventDefault();
+    // event.preventDefault();
+    const email = fields.email;
+    const password = fields.password;
     let request = {
       email,
-      password,
+      password
     }
     console.log("request", request)
     axios.post('http://localhost:3000/register', request)
@@ -41,7 +49,6 @@ export default function RegisterForm(props) {
         setUser(user)
         sessionStorage.setItem("user", JSON.stringify(user))
         // console.log("res: ", user)
-        // alert("Login successful ");
       })
       .catch(err => {
         console.log(err);
@@ -49,67 +56,54 @@ export default function RegisterForm(props) {
   }
 
   return (
-    <>
-    <h2>Register</h2>
-  <Form className="registerfrom_style" autoComplete="off" onSubmit={event => event.preventDefault()}>
-        
-    <Form.Group className="mb-3" controlId="formBasicEmail">
-      <Form.Label>Email address</Form.Label>
-      <div >
-        <input id="email_register" type="text" name="email" placeholder="name@email.com"
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-        />
-      </div>
-      <Form.Text className="text-muted">
-        We'll never share your email with anyone else.
-      </Form.Text>
-    </Form.Group>
-  
-    <Form.Group className="mb-3" controlId="formBasicPassword">
-      <Form.Label>Password</Form.Label>
-      <div >
-        <input id="password_register" type="password" name="password" placeholder="password"
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-        />
-      </div>
-    </Form.Group>
-    <Button variant="primary" type="submit" onClick={registerCheck}>
-      Submit
-    </Button>
-  </Form>
-  </>
+    <div className={`${!props.showRegister ? "register-active" : ""} register-show`}>
+      <h2>Register</h2>
+      <Form className="registerfrom_style" autoComplete="off" onSubmit={event => event.preventDefault()}>
+
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Email address</Form.Label>
+          <div >
+            <input id="email" type="text" name="email" placeholder="name@email.com"
+              value={fields.email}
+              onChange={handleFieldChange}
+            />
+          </div>
+          <Form.Text className="text-muted">
+            We'll never share your email with anyone else.
+          </Form.Text>
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <div >
+            <input id="password" type="password" name="password" placeholder="password"
+              autoComplete="off"
+              value={fields.password}
+              onChange={handleFieldChange}
+            />
+          </div>
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Confirm your password</Form.Label>
+          <div >
+            <input id="confirmPassword" type="password" name="password" placeholder="password"
+              autoComplete="off"
+              value={fields.confirmPassword}
+              onChange={handleFieldChange}
+            />
+          </div>
+        </Form.Group>
+
+        <Button
+          variant="primary"
+          type="submit"
+          onClick={() => {
+            registerCheck()
+            props.setShowRegister(false)
+          }}>
+          Submit
+        </Button>
+      </Form>
+    </div>
   )
 }
-
-
- // return (
-  //   <div className="base-container" >
-  //     <form autoComplete="off" onSubmit={event => event.preventDefault()}>
-  //       <div className="header">Register</div>
-
-  //       <div className="form-group">
-  //         <label htmlFor="email">Email </label>
-  //         <input id="email_register" type="text" name="email" placeholder="name@email.com"
-  //           value={email}
-  //           onChange={(event) => setEmail(event.target.value)}
-  //         />
-  //       </div>
-  //       <div className="form-group">
-  //         <label htmlFor="password">Password </label>
-  //         <input id="password_register" type="password" name="password" placeholder="password"
-  //           value={password}
-  //           onChange={(event) => setPassword(event.target.value)}
-  //         />
-  //       </div>
-
-  //       <div className="footer">
-  //         <button type="button" className="btn" onClick={registerCheck}>
-  //           Register
-  //         </button>
-  //       </div>
-  //       <section className="error_display">{error}</section>
-  //     </form>
-  //   </div>
-  // );
