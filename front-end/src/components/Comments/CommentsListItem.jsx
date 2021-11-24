@@ -1,5 +1,5 @@
-import { useContext } from 'react'
-import { UserContext } from '../contexts/UserContext'
+// import { useContext } from 'react'
+// import { UserContext } from '../contexts/UserContext'
 import './CommentsList.scss'
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
@@ -7,7 +7,7 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 dayjs.extend(relativeTime)
 
 export default function CommentsListItem(props) {
-  const { user } = useContext(UserContext)
+  // const { user } = useContext(UserContext)
 
   return (
     <article>

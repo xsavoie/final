@@ -1,8 +1,7 @@
-import React, { useState, Fragment, useContext } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import { Form, Button } from 'react-bootstrap'
 import "./RegisterForm.scss"
-import { userProvider } from '../contexts/UserProvider'
 import { UserContext } from "../contexts/UserContext";
 import { useFormFields } from "../hooks/useFormFields";
 
@@ -18,9 +17,9 @@ export default function RegisterForm(props) {
     confirmPassword: ""
   })
 
-  const [error, setError] = useState("");
+  // const [error, setError] = useState("");
 
-  const { user, setUser } = useContext(UserContext)
+  const { setUser } = useContext(UserContext)
 
 
   // function validate() {
@@ -78,6 +77,7 @@ export default function RegisterForm(props) {
           <Form.Label>Password</Form.Label>
           <div >
             <input id="password" type="password" name="password" placeholder="password"
+              autoComplete="off"
               value={fields.password}
               onChange={handleFieldChange}
             />
@@ -87,6 +87,7 @@ export default function RegisterForm(props) {
           <Form.Label>Confirm your password</Form.Label>
           <div >
             <input id="confirmPassword" type="password" name="password" placeholder="password"
+              autoComplete="off"
               value={fields.confirmPassword}
               onChange={handleFieldChange}
             />
