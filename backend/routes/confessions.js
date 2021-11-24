@@ -250,9 +250,9 @@ confessions.get('/likes/verify', function (req, res) {
 
 // post new comment
 confessions.post('/new_comment', function (req, res) {
-  const { userId, confessionId, content } = req.body.newComment;
+  const { userId, confessionId, content, created_at } = req.body.newComment;
 
-  createComment(userId, confessionId, content)
+  createComment(userId, confessionId, content, created_at)
     .then(comment => {
       // returns array of object. Can make it return only object if needed
       res.json(comment[0]);
@@ -267,10 +267,12 @@ confessions.post('/new_comment', function (req, res) {
 
 // post new confession
 confessions.post('/new', function (req, res) {
-  const { userId, categoryId, content } = req.body.newConfession;
+  const { userId, categoryId, content, created_at } = req.body.newConfession;
 
-  const time = new Date();
-  const created_at = moment(time).fromNow();
+  // const time = new Date();
+  // const created_at = moment(time).fromNow();
+  // const created_at = new Date();
+  // console.log("**&*&*&*&*", created_at)
   console.log(req.body)
   addConfession(userId, categoryId, content, created_at)
     .then(confession => {
