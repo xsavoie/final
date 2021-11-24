@@ -3,6 +3,8 @@ DROP TABLE IF EXISTS confessions CASCADE;
 DROP TABLE IF EXISTS likes CASCADE;
 DROP TABLE IF EXISTS comments CASCADE;
 DROP TABLE IF EXISTS categories CASCADE;
+DROP TABLE IF EXISTS polls CASCADE;
+DROP TABLE IF EXISTS options CASCADE;
 
 CREATE TABLE "users" (
   "id" SERIAL PRIMARY KEY,
@@ -36,6 +38,21 @@ CREATE TABLE "comments" (
   "confession_id" INTEGER NOT NULL REFERENCES confessions(id) ON DELETE CASCADE,
   "content" TEXT NOT NULL,
   "created_at" TIMESTAMP
+);
+
+CREATE TABLE "polls" (
+  "id" SERIAL PRIMARY KEY,
+  "user_id" INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  "content" TEXT NOT NULL,
+  "created_at" TIMESTAMP
+);
+
+CREATE TABLE "options" (
+  "id" SERIAL PRIMARY KEY,
+  "poll_id" INTEGER NOT NULL REFERENCES polls(id) ON DELETE CASCADE,
+  "content" TEXT NOT NULL,
+  "votes" INTEGER NOT NULL
+
 );
 
 
