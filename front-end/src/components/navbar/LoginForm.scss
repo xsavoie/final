@@ -1,3 +1,16 @@
+.login-show {
+  display: block;
+  position: absolute;
+  margin-left: 35%;
+  transition: 800ms;
+  opacity: 1;
+}
+
+.login-show.login-active {
+  transform: translateY(100px) scale(0) rotateY(180deg);
+  opacity: 0;
+}
+
 
 .loginfrom_style{
   width: 90%;

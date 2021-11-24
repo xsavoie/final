@@ -41,8 +41,22 @@ export default function Top(props) {
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="#action/3.4" onClick={() => handleLogout()}>Logout</NavDropdown.Item>
               </NavDropdown>}
-              {!user.id && <Nav.Link href="#link"><Link to="/login">Login</Link></Nav.Link>}
-              {!user.id && <Nav.Link href="#link"><Link to="/register">Register</Link></Nav.Link>}
+              {!user.id &&
+                <Nav.Link
+                  onClick={() => {
+                    props.setShowRegister(false)
+                    props.setShowLogin(true)
+                  }}>Login
+                </Nav.Link>}
+              {!user.id &&
+                <Nav.Link
+                  onClick={() => {
+                    props.setShowLogin(false)
+                    props.setShowRegister(true)
+                  }}>Register
+                </Nav.Link>}
+              {/* {!user.id && <Nav.Link href="#link"><Link to="/login">Login</Link></Nav.Link>} */}
+              {/* {!user.id && <Nav.Link href="#link"><Link to="/register">Register</Link></Nav.Link>} */}
               {/* {user.id && <Nav.Link onClick={() => handleLogout()}>Logout</Nav.Link>} */}
             </Nav>
           </Navbar.Collapse>

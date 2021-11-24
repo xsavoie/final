@@ -29,7 +29,7 @@ export default function RegisterForm(props) {
   // }
 
   function registerCheck(event) {
-    event.preventDefault();
+    // event.preventDefault();
     let request = {
       email,
       password,
@@ -47,39 +47,46 @@ export default function RegisterForm(props) {
         console.log(err);
       })
   }
+  console.log(props.showRegister)
 
   return (
-    <>
-    <h2>Register</h2>
-  <Form className="registerfrom_style" autoComplete="off" onSubmit={event => event.preventDefault()}>
-        
-    <Form.Group className="mb-3" controlId="formBasicEmail">
-      <Form.Label>Email address</Form.Label>
-      <div >
-        <input id="email_register" type="text" name="email" placeholder="name@email.com"
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-        />
-      </div>
-      <Form.Text className="text-muted">
-        We'll never share your email with anyone else.
-      </Form.Text>
-    </Form.Group>
-  
-    <Form.Group className="mb-3" controlId="formBasicPassword">
-      <Form.Label>Password</Form.Label>
-      <div >
-        <input id="password_register" type="password" name="password" placeholder="password"
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-        />
-      </div>
-    </Form.Group>
-    <Button variant="primary" type="submit" onClick={registerCheck}>
-      Submit
-    </Button>
-  </Form>
-  </>
+    <div className={`${!props.showRegister ? "register-active" : ""} register-show`}>
+      <h2>Register</h2>
+      <Form className="registerfrom_style" autoComplete="off" onSubmit={event => event.preventDefault()}>
+
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Email address</Form.Label>
+          <div >
+            <input id="email_register" type="text" name="email" placeholder="name@email.com"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+            />
+          </div>
+          <Form.Text className="text-muted">
+            We'll never share your email with anyone else.
+          </Form.Text>
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <div >
+            <input id="password_register" type="password" name="password" placeholder="password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+            />
+          </div>
+        </Form.Group>
+        <Button 
+        variant="primary" 
+        type="submit" 
+        onClick={() => {
+          registerCheck()
+          props.setShowRegister(false)
+          }}>
+          Submit
+        </Button>
+      </Form>
+    </div>
   )
 }
 
