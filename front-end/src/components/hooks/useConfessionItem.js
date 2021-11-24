@@ -23,8 +23,7 @@ export default function useConfessionItem(props) {
         if (res.data) {
           setLiked(true)
         }
-      })
-      .catch(err => {
+      }).catch(err => {
         console.log(err.message)
       })
   }, [user.id, props.id])
