@@ -78,6 +78,7 @@ const addConfession = function (userId, categoryId,content, created_at) {
 
 
   const queryParams = [userId, categoryId, content, created_at];
+  console.log("query params", queryParams)
 
   return db
     .query(queryString, queryParams)
