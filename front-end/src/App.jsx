@@ -14,6 +14,7 @@ import Button from 'react-bootstrap/Button'
 import Chat from './components/Chat/Chat';
 import Profile from './components/Profile/Profile';
 import PollsList from './components/polls/PollsList';
+import ConfessionListItem from './components/Confession/ConfessionsListItem';
 
 // const io = require("socket.io-client");
 const SERVER = "http://localhost:3000";
@@ -28,12 +29,17 @@ function App() {
   const [showRegister, setShowRegister] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [confessionFeed, setConfessionFeed] = useState("recent");
-  const [clicker, setClicker] = useState(0);
-  
+  // const [clicker, setClicker] = useState(0);
+
+  const [buttonTest, setButtonTest] = useState({
+    type: "next",
+    counter: 0
+  })
+
   const [idHistory, setIdHistory] = useState([]);
 
   // const providerValue = useMemo(() => ({user, setUser}), [user, setUser])
-  
+
   const filterHistory = (history, current) => {
     let filteredArray = [];
 
@@ -69,7 +75,38 @@ function App() {
     setIdHistory(prev => handleHistory(history, idToDisplay));
     return idToDisplay;
   };
-  
+
+  const handleButtonNext = () => {
+    console.log("BEFORE", buttonTest)
+    setButtonTest((prevState) => ({
+      type: "next",
+      counter: prevState.counter + 1
+    }));
+    console.log("FROM INSIDE BUTTON NEXT", buttonTest)
+    return;
+  }
+
+  const handleButtonBack = () => {
+    console.log("BEFORE", buttonTest)
+    setButtonTest((prevState) => ({
+      type: "back",
+      counter: prevState.counter + 1
+    }));
+    console.log("FROM INSIDE BUTTON BACK", buttonTest)
+    return;
+  }
+
+  const queryHandler = (idArray) => {
+    console.log("inside query handler", buttonTest.type)
+    if (buttonTest.type === "next") {
+      console.log("!!!!next!!!!")
+      return handleConfessionNext(idHistory, idArray);
+    } else if (buttonTest.type === "back") {
+      console.log("!!!!back!!!!")
+      return handleConfessionBack(idHistory);
+    }
+  }
+
   const validateQuery = (idToDisplay) => {
     if (idToDisplay.length < 10) {
       console.log("idToDisplay length", idToDisplay.length);
@@ -89,7 +126,7 @@ function App() {
     };
   }, [setUser]);
 
-  
+
   // load confession feed
   useEffect(() => {
     if (confessionFeed === "recent") {
@@ -97,8 +134,8 @@ function App() {
         axios.get("/api/confessions/most_recent")
       ]).then((res) => {
         const idArray = res[0].data;
-        const idToDisplay = handleConfessionNext(idHistory, idArray);
-        
+        const idToDisplay = queryHandler(idArray)
+       
         return validateQuery(idToDisplay);
       }).then((res) => {
         setConfessions(res.data);
@@ -136,7 +173,7 @@ function App() {
         console.log(err.message);
       });
     };
-  }, [confessionFeed, clicker]);
+  }, [confessionFeed, buttonTest]);
 
   useEffect(() => {
 
@@ -148,10 +185,11 @@ function App() {
     Promise.all([
       axios.get("/api/polls/polls")
     ]).then((res) => {
-      console.log("*******", res[0].data)
+      // console.log("*******", res[0].data)
       setPolls(res[0].data)
     })
   }, []);
+
 
 
 
@@ -167,22 +205,27 @@ function App() {
           setIdHistory={setIdHistory}
         />
         <span className="feed-btn">
-          <Button
+          {(idHistory.length > 10) && <Button
             variant="primary"
             size="sm"
             className="back"
             onClick={() => {
-              setClicker(clicker + 1)
-              console.log(clicker)
+              handleButtonBack()
+              console.log("after button click", buttonTest)
+              // setClicker(clicker + 1)
+              // console.log(clicker)
             }}>back
-          </Button>
+          </Button>}
           <Button
             variant="primary"
             size="sm"
             className="next"
             onClick={() => {
-              setClicker(clicker + 1)
-              console.log(clicker)
+              handleButtonNext()
+              console.log("after button click", buttonTest)
+
+              // setClicker(clicker + 1)
+              // console.log(clicker)
             }}>load more
           </Button>
         </span>
@@ -192,7 +235,7 @@ function App() {
           <Route path="/chat" element={<Chat />}></Route>
           <Route path="/Profile" element={<Profile />}></Route>
           <Route path="/" element={!showLogin && !showRegister && <ConfessionList confessionsToParse={confessions} setConfessions={setConfessions} />} ></Route>
-          <Route path="polls" element={<PollsList polls={polls}/>} ></Route>
+          <Route path="polls" element={<PollsList polls={polls} />} ></Route>
           {/* <Route path="/profile" element={<ConfessionList/>} ></Route> */}
         </Routes>
         <LoginForm showLogin={showLogin} setShowLogin={setShowLogin} showRegister={showRegister} setShowRegister={setShowRegister} />
@@ -204,3 +247,14 @@ function App() {
 }
 
 export default App;
+
+
+ // let idToDisplay = [];
+        // if (buttonTest.type === "next") {
+        //   console.log("!!!!next!!!!")
+        //   idToDisplay = handleConfessionNext(idHistory, idArray);
+        // }
+        // if (buttonTest.type === "back") {
+        //   console.log("!!!!back!!!!")
+        //   idToDisplay = handleConfessionBack(idHistory);
+        // }
