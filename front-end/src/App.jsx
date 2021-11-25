@@ -10,6 +10,7 @@ import Top from './components/navbar/Top';
 import LoginForm from './components/navbar/LoginForm';
 import RegisterForm from './components/navbar/RegisterForm';
 import ConfessionForm from './components/Confession/ConfessionForm';
+import Button from 'react-bootstrap/Button'
 import Chat from './components/Chat/Chat';
 
 // const io = require("socket.io-client");
@@ -18,13 +19,35 @@ const SERVER = "http://localhost:3000";
 
 function App() {
 
+  const { setUser } = useContext(UserContext);
   const [confessions, setConfessions] = useState([]);
+  // refactor to use mode instead of multiple state to display component
   const [showForm, setShowForm] = useState(false);
   const [showRegister, setShowRegister] = useState(false)
   const [showLogin, setShowLogin] = useState(false);
   const [confessionFeed, setConfessionFeed] = useState("recent");
-  const { setUser } = useContext(UserContext);
+  const [clicker, setClicker] = useState(0)
 
+  const [idHistory, setIdHistory] = useState([])
+
+  const filterHistory = (history, current) => {
+    let filteredArray = []
+  
+    for (const id of current) {
+      if (!history.includes(id)){
+        filteredArray.push(id)
+      }
+    }
+    return filteredArray
+  }
+
+  const handleHistory = (prev, current) => {
+    const prevCopy = [ ...prev]
+    for (const id of current) {
+      prevCopy.push(id)
+    }
+    return prevCopy;
+  }
 
   // const providerValue = useMemo(() => ({user, setUser}), [user, setUser])
 
@@ -37,14 +60,19 @@ function App() {
     }
   }, [setUser]);
 
+
   // load confession feed
   useEffect(() => {
     if (confessionFeed === "recent") {
       Promise.all([
         axios.get("/api/confessions/most_recent")
       ]).then((res) => {
-        const mostRecentId = res[0].data;
-        return axios.get(`/api/confessions/front_page/${mostRecentId}`);
+        const idArray = res[0].data;
+        const filteredId = filterHistory(idHistory, idArray)
+        const idToDisplay = filteredId.splice(0, 10)
+        setIdHistory(prev => handleHistory(prev, idToDisplay))
+
+        return axios.get(`/api/confessions/front_page`, { params: { idArray: idToDisplay } });
       }).then((res) => {
         // console.log(res.data);
         setConfessions(res.data);
@@ -59,7 +87,7 @@ function App() {
       ]).then((res) => {
         const idArray = res[0].data;
         // console.log(idArray);
-        return axios.get(`/api/confessions/front_page/category_confessions`, { params: { idArray } });
+        return axios.get(`/api/confessions/front_page`, { params: { idArray } });
       }).then((res) => {
         // console.log(res.data);
         setConfessions(res.data);
@@ -74,7 +102,7 @@ function App() {
       ]).then((res) => {
         const idArray = res[0].data;
         // console.log(idArray)
-        return axios.get(`/api/confessions/front_page/category_confessions`, { params: { idArray } });
+        return axios.get(`/api/confessions/front_page`, { params: { idArray } });
       }).then((res) => {
         // console.log(res.data);
         setConfessions(res.data);
@@ -82,13 +110,17 @@ function App() {
         console.log(err.message);
       });
     };
-  }, [confessionFeed]);
+  }, [confessionFeed, clicker]);
 
+  useEffect(() => {
+
+  }, [])
+  
 
   return (
     <BrowserRouter>
       <div className="App">
-        <Top showForm={showForm} setShowForm={setShowForm} setConfessionFeed={setConfessionFeed} setShowLogin={setShowLogin} setShowRegister={setShowRegister}/>
+        <Top showForm={showForm} setShowForm={setShowForm} setConfessionFeed={setConfessionFeed} setShowLogin={setShowLogin} setShowRegister={setShowRegister} />
         {showForm && <ConfessionForm confessions={confessions} setConfessions={setConfessions} setShowForm={setShowForm} />}
 
         <Routes>
@@ -96,8 +128,12 @@ function App() {
           <Route path="/" element={!showLogin && !showRegister && <ConfessionList confessionsToParse={confessions} setConfessions={setConfessions} />} ></Route>
           {/* <Route path="/profile" element={<ConfessionList/>} ></Route> */}
         </Routes>
-        <LoginForm showLogin={showLogin} setShowLogin={setShowLogin} showRegister={showRegister} setShowRegister={setShowRegister}/>
-        <RegisterForm showRegister={showRegister} setShowRegister={setShowRegister} showLogin={showLogin} setShowLogin={setShowLogin}/>
+        <LoginForm showLogin={showLogin} setShowLogin={setShowLogin} showRegister={showRegister} setShowRegister={setShowRegister} />
+        <RegisterForm showRegister={showRegister} setShowRegister={setShowRegister} showLogin={showLogin} setShowLogin={setShowLogin} />
+        <Button variant="primary" size="sm" className="test" onClick={() => {
+          setClicker(clicker + 1)
+          console.log(clicker)
+          }}>load more</Button>
       </div>
     </BrowserRouter>
 

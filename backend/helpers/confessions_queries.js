@@ -71,7 +71,7 @@ exports.getAllConfessionsForCategory = getAllConfessionsForCategory;
 
 //  create new confession
 
-const addConfession = function (userId, categoryId,content, created_at) {
+const addConfession = function (userId, categoryId, content, created_at) {
 
   const queryString = `INSERT INTO confessions (user_id, category_id, content, created_at)
     VALUES ($1, $2, $3, $4) RETURNING *;`
@@ -119,11 +119,18 @@ exports.deleteOneConfession = deleteOneConfession;
 
 
 const mostRecentConfession = function () {
-  
+
   const queryString = `
-    SELECT count(id)
-    FROM confessions;
+    SELECT id
+    FROM confessions
+    ORDER BY created_at DESC;
   `;
+  // const queryString = `
+  //   SELECT id
+  //   FROM confessions
+  //   ORDER BY created_at DESC
+  //   LIMIT 10;
+  // `;
 
   // returns most recent confession
   // currently doesnt work because all confessions have same created at
@@ -148,14 +155,20 @@ exports.mostRecentConfession = mostRecentConfession;
 
 
 const confessionsForCategory = function (category_id) {
-  
+
   const queryString = `SELECT confessions.id
   FROM confessions
   JOIN categories ON categories.id = category_id
   WHERE categories.id = $1
-  ORDER BY confessions.id DESC
-  LIMIT 10;
+  ORDER BY confessions.id DESC;
   `;
+  // const queryString = `SELECT confessions.id
+  // FROM confessions
+  // JOIN categories ON categories.id = category_id
+  // WHERE categories.id = $1
+  // ORDER BY confessions.id DESC
+  // LIMIT 10;
+  // `;
   const queryParams = [category_id];
 
 
@@ -172,14 +185,20 @@ const confessionsForCategory = function (category_id) {
 exports.confessionsForCategory = confessionsForCategory;
 
 const confessionsPopular = function () {
-  
+
   const queryString = `SELECT confessions.id, count(likes)
   FROM confessions
   JOIN likes ON confession_id = confessions.id
   GROUP BY confessions.id
-  ORDER BY count DESC
-  LIMIT 10;
+  ORDER BY count DESC;
   `;
+  // const queryString = `SELECT confessions.id, count(likes)
+  // FROM confessions
+  // JOIN likes ON confession_id = confessions.id
+  // GROUP BY confessions.id
+  // ORDER BY count DESC
+  // LIMIT 10;
+  // `;
 
   return db
     .query(queryString)
