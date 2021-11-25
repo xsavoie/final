@@ -13,6 +13,7 @@ import ConfessionForm from './components/Confession/ConfessionForm';
 import Button from 'react-bootstrap/Button'
 import Chat from './components/Chat/Chat';
 import Profile from './components/Profile/Profile';
+import PollsList from './components/polls/PollsList';
 
 // const io = require("socket.io-client");
 const SERVER = "http://localhost:3000";
@@ -141,6 +142,18 @@ function App() {
 
   }, [])
 
+  const [polls, setPolls] = useState([])
+
+  useEffect(() => {
+    Promise.all([
+      axios.get("/api/polls/polls")
+    ]).then((res) => {
+      console.log("*******", res[0].data)
+      setPolls(res[0].data)
+    })
+  }, []);
+
+
 
   return (
     <BrowserRouter>
@@ -179,6 +192,7 @@ function App() {
           <Route path="/chat" element={<Chat />}></Route>
           <Route path="/Profile" element={<Profile />}></Route>
           <Route path="/" element={!showLogin && !showRegister && <ConfessionList confessionsToParse={confessions} setConfessions={setConfessions} />} ></Route>
+          <Route path="polls" element={<PollsList polls={polls}/>} ></Route>
           {/* <Route path="/profile" element={<ConfessionList/>} ></Route> */}
         </Routes>
         <LoginForm showLogin={showLogin} setShowLogin={setShowLogin} showRegister={showRegister} setShowRegister={setShowRegister} />
