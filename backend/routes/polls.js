@@ -17,43 +17,73 @@ const { confessionParser, idParser, pollsParser } = helpers()
 const {getAllPolls, getOnePoll, getOptionsForPoll, getResultsForPoll, addPoll, addOptions, addResults } = require('../helpers/polls_queries');
 
 
-
-
 polls.get('/polls', function (req, res) {
   
-  let confessionsArray = [];
-  let array = [];
-    let id = 11;
+    let pollArray = []
+    let array = [];
+    let id = 1;
     getOnePoll(id)
       .then((polls) => {
-        // res.json(polls);
         array.push(polls)
         return getOptionsForPoll(id);
       })
       .then((options) => {
-        // res.json(polls);
         array.push(options)
-        return array;
+        return array
       })
       .then(array => {
-        
-        confessionsArray.push(pollsParser(array));
-        // res.json(confessionsArray);
-        // res.json(array);
-        return getResultsForPoll(id)
+        pollArray.push(pollsParser(array))
+        res.json(pollArray);
       })
-      .then(results => {
-        confessionsArray.push(results);
-         res.json(confessionsArray);
-      })
-   
-      
       .catch((err) => {
         console.log(err.message);
       });
   
 
 });
+
+[
+  [
+    {
+      "id": 1,
+      "user_id": 3,
+      "content": "something new",
+      "created_at": "2018-02-12T13:00:00.000Z"
+    }
+  ],
+  [
+    {
+      "id": 1,
+      "poll_id": 1,
+      "content": "yes"
+
+    },
+    {
+      "id": 2,
+      "poll_id": 1,
+      "content": "maybe"
+    },
+    {
+      "id": 3,
+      "poll_id": 1,
+      "content": "no"
+    }
+  ],
+  [
+    {
+      "votes": 3,
+      "option_id": 1
+    },
+    {
+      "votes": 5,
+      "option_id": 2
+    },
+    {
+      "votes": 1,
+      "option_id": 3
+    }
+  ]
+]
 
 
 // post new poll
@@ -89,7 +119,7 @@ polls.post('/new_options', function (req, res) {
     })
 });
 
-// post new option
+// post new results
 polls.post('/new_options_results', function (req, res) {
   const { option_id, votes } = req.body
 

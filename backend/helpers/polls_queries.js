@@ -47,9 +47,11 @@ exports.getOnePoll = getOnePoll;
 //  query options for one poll
 
 const getOptionsForPoll = function (pollId) {
-  const queryString = `SELECT options.*
+  const queryString = `SELECT options.*, count(results)
   FROM options
-  WHERE options.poll_id = $1;
+  JOIN results ON options.id = option_id
+  WHERE options.poll_id = $1
+  GROUP BY options.id;
   `
   const queryParams = [pollId];
 
@@ -66,7 +68,7 @@ const getOptionsForPoll = function (pollId) {
 exports.getOptionsForPoll = getOptionsForPoll;
 
 const getResultsForPoll = function (pollId) {
-  const queryString = `SELECT results.votes
+  const queryString = `SELECT results.votes, option_id
   FROM results
   JOIN options ON options.id = option_id
   WHERE options.poll_id = $1;
