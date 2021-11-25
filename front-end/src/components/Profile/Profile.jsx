@@ -1,12 +1,13 @@
 
 
-import React, { Component, useEffect, useState, useContext } from "react";
+import React, { useRef, useEffect, useState, useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 import './profile.scss';
 import axios from "axios";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import ConfessionForm from "../Confession/ConfessionForm";
+import './profile.scss';
 
 
 
@@ -14,10 +15,13 @@ export default function Profile(props) {
 
   const { user } = useContext(UserContext);
 
-  const [about, setAbout] = useState("");
+  const [about, setAbout] = useState();
+  const [avatar, setAvatar] = useState();
 
-  function editAvatar(event) {
-    // event.preventDefault();
+  const inputFile = useRef(null)
+
+  function editAvatar() {
+  
     const avatar = '🤬';
     const id = user.id 
     const request = {
@@ -25,9 +29,12 @@ export default function Profile(props) {
       id
     }
     // console.log("request", request)
-    axios.post('http://localhost:3000/:id', request)
+    console.log("edit avatar request object: ", request)
+    axios.put('http://localhost:3000/users', request)
       .then(res => {
-
+        console.log("res.data.data from editAvatar function :", res.data.data)
+        const newAvatar = res.data.data;
+        setAvatar = newAvatar;
         alert("Avatar updated in database");
       })
       .catch(err => {
@@ -37,17 +44,15 @@ export default function Profile(props) {
 
 
   function editAbout(event) {
-    // event.preventDefault();
-    const about = 'hello about updated with hardcoded value';
+    // const about = event.target.value
     const id = user.id 
     const request = {
       about,
       id
     }
-    // console.log("request", request)
-    axios.post('http://localhost:3000/:id', request)
+    console.log("edit about", request)
+    axios.put('http://localhost:3000/users', request)
       .then(res => {
-
         alert("About updated in database");
       })
       .catch(err => {
@@ -61,15 +66,17 @@ export default function Profile(props) {
     return (
       <div>
         <h1>Hi {user.username}!</h1>
-
-
-        <form>
-          <div className="avatar">{user.avatar} </div>
+        <form className="avatar-block">
+          <div className="avatar-pic">
+            <img src = "https://avatars.dicebear.com/api/bottts/your-custom-seed.svg" ></img>
+          </div>
+          {/* <input type="text" ref={inputFile} placeholder="Enter the link to your pic"></input> */}
+          
           <button
             type="button"
             className="btn-edit"
             onClick={(event) => {
-              event.preventDefault();
+              event.preventDefault()
               editAvatar()
             }} > 
             Add new Emoji! 
@@ -82,16 +89,15 @@ export default function Profile(props) {
             placeholder="Tell us something about yourself!"
             rows={3}
             value={about}
-            onChange={(event) => setAbout(event.target.value)}
+            onChange={(e) => setAbout(e.target.value)}
           />
           <Button
             variant="primary"
             size="sm"
-            onClick={() => {
+            onClick={(event) => {
+              event.preventDefault()
               editAbout(user.id, about)
-              setAbout("")
-              // hides form after submission
-              // props.setShowForm(false)
+              // has to hide the form after submission 
             }} >
             Edit
         </Button>
@@ -100,7 +106,7 @@ export default function Profile(props) {
         </Form.Group>
 
         </form>
-        <p><ConfessionForm /></p> 
+        <ConfessionForm />
       </div>
     );
   
