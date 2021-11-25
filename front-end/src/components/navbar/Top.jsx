@@ -34,12 +34,32 @@ export default function Top(props) {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <NavDropdown title="Category" id="basic-nav-dropdown">
-                <NavDropdown.Item onClick={() => props.setConfessionFeed(1)}>Secret</NavDropdown.Item>
-                <NavDropdown.Item onClick={() => props.setConfessionFeed(2)}>Story</NavDropdown.Item>
-                <NavDropdown.Item onClick={() => props.setConfessionFeed(3)}>Question</NavDropdown.Item>
+                <NavDropdown.Item onClick={() => {
+                  props.setConfessionFeed(1);
+                  props.setIdHistory([]);
+                }}>Secret
+                </NavDropdown.Item>
+                <NavDropdown.Item onClick={() => {
+                  props.setConfessionFeed(2);
+                  props.setIdHistory([]);
+                }}>Story
+                </NavDropdown.Item>
+                <NavDropdown.Item onClick={() => {
+                  props.setConfessionFeed(3);
+                  props.setIdHistory([]);
+                }}>Question
+                </NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item onClick={() => props.setConfessionFeed("recent")}>Most recent</NavDropdown.Item>
-                <NavDropdown.Item onClick={() => props.setConfessionFeed("popular")}>Most popular</NavDropdown.Item>
+                <NavDropdown.Item onClick={() => {
+                  props.setConfessionFeed("recent");
+                  props.setIdHistory([]);
+                }}>Most recent
+                </NavDropdown.Item>
+                <NavDropdown.Item onClick={() => {
+                  props.setConfessionFeed("popular");
+                  props.setIdHistory([]);
+                }}>Most popular
+                </NavDropdown.Item>
               </NavDropdown>
               {user.id && <Nav.Link onClick={() => props.setShowForm(!props.showForm)}>Confess</Nav.Link>}
               {user.id && <Nav.Link href="/chat"><Link to="/chat">Chat</Link></Nav.Link>}

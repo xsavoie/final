@@ -1,4 +1,5 @@
 import { React, useState } from "react";
+import Button from 'react-bootstrap/Button'
 import ConfessionListItem from "./ConfessionsListItem";
 import "./ConfessionsList.scss";
 import dayjs from 'dayjs';
@@ -12,10 +13,7 @@ export default function ConfessionList(props) {
   const [selected, setSelected] = useState(null)
 
 
-  // const dateParser = (date) => {
-  //   const parsedDate = date.split("").slice(0, 10).join("")
-  //   return parsedDate
-  // }
+
 
   const parsedConfessions = props.confessionsToParse.map((confession) => (
     <ConfessionListItem
@@ -28,7 +26,6 @@ export default function ConfessionList(props) {
       comments={confession.comments}
       selected={confession.id === selected}
       setSelected={setSelected}
-      // resetSelected={() => setSelected(null)}
       confessionState={props.confessionsToParse}
       setConfessions={props.setConfessions}
     />
@@ -39,6 +36,7 @@ export default function ConfessionList(props) {
   return (
     <section className="confessions">
       <ul className="confessions__list" >{parsedConfessions}</ul>
+      {/* <Button variant="primary" size="sm" className="test">load more</Button> */}
     </section>
   )
 }
