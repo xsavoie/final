@@ -11,8 +11,19 @@ CREATE TABLE "users" (
   "id" SERIAL PRIMARY KEY,
   "email" VARCHAR(255) NOT NULL,
   "username" VARCHAR(255) NOT NULL,
-  "password" VARCHAR(255) NOT NULL
+  "password" VARCHAR(255) NOT NULL,
+  "avatar" TEXT,
+  "about" TEXT
 );
+
+-- CREATE TABLE "profile" (
+--   "id" SERIAL PRIMARY KEY,
+--   "avatar" TEXT NOT NULL,
+--   "about" TEXT,
+--   "user_id" INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+--   "confession_id" INTEGER NOT NULL REFERENCES confessions(id) ON DELETE CASCADE,
+--   "comment_id" INTEGER NOT NULL REFERENCES comments(id) ON DELETE CASCADE
+-- );
 
 CREATE TABLE "categories" (
   "id" SERIAL PRIMARY KEY,

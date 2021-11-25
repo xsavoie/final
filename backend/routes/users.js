@@ -18,4 +18,24 @@ router.get('/', function(req, res, next) {
 
 });
 
+
+router.post("/:id", (req, res) => {
+  const { avatar, id } = req.body
+  
+  editAvatar(avatar, id)
+    .then(user => {
+
+      // console.log(user);
+    if (!user) {
+       res.send({error: "error no user"});
+       return;
+    }
+    res.send(avatar);
+     
+    })
+    .catch(err => {
+      console.log(err.message);
+    })
+});
+
 module.exports = router;
