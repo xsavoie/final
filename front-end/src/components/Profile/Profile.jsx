@@ -61,6 +61,8 @@ export default function Profile(props) {
     return (
       <div>
         <h1>Hi {user.username}!</h1>
+
+
         <form>
           <div className="avatar">{user.avatar} </div>
           <button
