@@ -123,7 +123,8 @@ const mostRecentConfession = function () {
   const queryString = `
     SELECT id
     FROM confessions
-    ORDER BY created_at DESC;
+    ORDER BY created_at DESC
+    LIMIT 100;
   `;
   // const queryString = `
   //   SELECT id
@@ -160,7 +161,8 @@ const confessionsForCategory = function (category_id) {
   FROM confessions
   JOIN categories ON categories.id = category_id
   WHERE categories.id = $1
-  ORDER BY confessions.id DESC;
+  ORDER BY created_at DESC
+  LIMIT 100;
   `;
   // const queryString = `SELECT confessions.id
   // FROM confessions
@@ -190,7 +192,8 @@ const confessionsPopular = function () {
   FROM confessions
   JOIN likes ON confession_id = confessions.id
   GROUP BY confessions.id
-  ORDER BY count DESC;
+  ORDER BY count DESC
+  LIMIT 100;
   `;
   // const queryString = `SELECT confessions.id, count(likes)
   // FROM confessions

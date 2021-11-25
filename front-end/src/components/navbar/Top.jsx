@@ -21,6 +21,8 @@ export default function Top(props) {
           onClick={() => {
             props.setShowLogin(false);
             props.setShowRegister(false);
+            props.setPageToDisplay(1)
+            props.setConfessionFeed("recent")
           }}
         >
           <Link to="/" >classified</Link>
@@ -36,29 +38,34 @@ export default function Top(props) {
               <NavDropdown title="Category" id="basic-nav-dropdown">
                 <NavDropdown.Item onClick={() => {
                   props.setConfessionFeed(1);
-                  props.setIdHistory([]);
-                }}>Secret
+                  props.setPageToDisplay(1)
+                }}
+                >Secret
                 </NavDropdown.Item>
                 <NavDropdown.Item onClick={() => {
                   props.setConfessionFeed(2);
-                  props.setIdHistory([]);
-                }}>Story
+                  props.setPageToDisplay(1)
+                }}
+                >Story
                 </NavDropdown.Item>
                 <NavDropdown.Item onClick={() => {
                   props.setConfessionFeed(3);
-                  props.setIdHistory([]);
-                }}>Question
+                  props.setPageToDisplay(1)
+                }}
+                >Question
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item onClick={() => {
                   props.setConfessionFeed("recent");
-                  props.setIdHistory([]);
-                }}>Most recent
+                  props.setPageToDisplay(1)
+                }}
+                >Most recent
                 </NavDropdown.Item>
                 <NavDropdown.Item onClick={() => {
                   props.setConfessionFeed("popular");
-                  props.setIdHistory([]);
-                }}>Most popular
+                  props.setPageToDisplay(1)
+                }}
+                >Most popular
                 </NavDropdown.Item>
               </NavDropdown>
               {user.id && <Nav.Link onClick={() => props.setShowForm(!props.showForm)}>Confess</Nav.Link>}

@@ -6,15 +6,17 @@ import { UserContext } from './components/contexts/UserContext';
 
 import './App.css';
 import axios from 'axios';
-import ConfessionList from './components/Confession/ConfessionsList';
+// import ConfessionList from './components/Confession/ConfessionsList';
 import Top from './components/navbar/Top';
 import LoginForm from './components/navbar/LoginForm';
 import RegisterForm from './components/navbar/RegisterForm';
 import ConfessionForm from './components/Confession/ConfessionForm';
-import Button from 'react-bootstrap/Button'
+// import Button from 'react-bootstrap/Button'
 import Chat from './components/Chat/Chat';
 import Profile from './components/Profile/Profile';
 import PollsList from './components/polls/PollsList';
+// import ConfessionListItem from './components/Confession/ConfessionsListItem';
+import ConfessionDisplay from './components/Confession/ConfessionDisplay';
 
 // const io = require("socket.io-client");
 const SERVER = "http://localhost:3000";
@@ -29,52 +31,17 @@ function App() {
   const [showRegister, setShowRegister] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [confessionFeed, setConfessionFeed] = useState("recent");
-  const [clicker, setClicker] = useState(0);
-  
-  const [idHistory, setIdHistory] = useState([]);
+  const [pageToDisplay, setPageToDisplay] = useState(1);
+
 
   // const providerValue = useMemo(() => ({user, setUser}), [user, setUser])
-  
-  const filterHistory = (history, current) => {
-    let filteredArray = [];
 
-    for (const id of current) {
-      if (!history.includes(id)) {
-        filteredArray.push(id);
-      };
-    };
-    return filteredArray;
-  };
+ 
 
-  const handleHistory = (prev, current) => {
-    const prevCopy = [...prev];
-    for (const id of current) {
-      prevCopy.push(id);
-    }
-    return prevCopy;
-  };
-
-  // goes back to past confessions
-  const handleConfessionBack = (history) => {
-    const historyToReturn = [...history];
-    const historyLength = historyToReturn.length;
-    let idToDisplay = historyToReturn.splice((historyLength - 10), historyLength);
-    setIdHistory(historyToReturn);
-    return idToDisplay;
-  };
-
-  // Loads more confessions
-  const handleConfessionNext = (history, current) => {
-    const filteredId = filterHistory(history, current);
-    const idToDisplay = filteredId.splice(0, 10);
-    setIdHistory(prev => handleHistory(history, idToDisplay));
-    return idToDisplay;
-  };
-  
   const validateQuery = (idToDisplay) => {
     if (idToDisplay.length < 10) {
       console.log("idToDisplay length", idToDisplay.length);
-      console.log("not enough confessions to render");
+      console.log("***not enough confessions to render");
       return;
     }
     return axios.get(`/api/confessions/front_page`, { params: { idArray: idToDisplay } });
@@ -90,16 +57,16 @@ function App() {
     };
   }, [setUser]);
 
-  
-  // load confession feed
+
+  // load confession feed with next
   useEffect(() => {
     if (confessionFeed === "recent") {
       Promise.all([
         axios.get("/api/confessions/most_recent")
       ]).then((res) => {
         const idArray = res[0].data;
-        const idToDisplay = handleConfessionNext(idHistory, idArray);
-        
+        const idToDisplay = idArray
+
         return validateQuery(idToDisplay);
       }).then((res) => {
         setConfessions(res.data);
@@ -113,7 +80,7 @@ function App() {
         axios.get("/api/confessions/most_recent/popular")
       ]).then((res) => {
         const idArray = res[0].data;
-        const idToDisplay = handleConfessionNext(idHistory, idArray);
+        const idToDisplay = idArray
 
         return validateQuery(idToDisplay);
       }).then((res) => {
@@ -128,7 +95,7 @@ function App() {
         axios.get("/api/confessions/most_recent/category", { params: { confessionFeed } })
       ]).then((res) => {
         const idArray = res[0].data;
-        const idToDisplay = handleConfessionNext(idHistory, idArray);
+        const idToDisplay = idArray
 
         return validateQuery(idToDisplay);
       }).then((res) => {
@@ -137,11 +104,8 @@ function App() {
         console.log(err.message);
       });
     };
-  }, [confessionFeed, clicker]);
+  }, [confessionFeed]);
 
-  useEffect(() => {
-
-  }, [])
 
   const [polls, setPolls] = useState([])
 
@@ -149,12 +113,10 @@ function App() {
     Promise.all([
       axios.get("/api/polls/polls")
     ]).then((res) => {
-      console.log("*******", res[0].data)
+      // console.log("*******", res[0].data)
       setPolls(res[0].data)
     })
   }, []);
-
-  
 
   return (
     <BrowserRouter>
@@ -166,36 +128,15 @@ function App() {
           setConfessionFeed={setConfessionFeed}
           setShowLogin={setShowLogin}
           setShowRegister={setShowRegister}
-          setIdHistory={setIdHistory}
+          setPageToDisplay={setPageToDisplay}
         />
-        <span className="feed-btn">
-          <Button
-            variant="primary"
-            size="sm"
-            className="back"
-            onClick={() => {
-              setClicker(clicker + 1)
-              console.log(clicker)
-            }}>back
-          </Button>
-          <Button
-            variant="primary"
-            size="sm"
-            className="next"
-            onClick={() => {
-              setClicker(clicker + 1)
-              console.log(clicker)
-            }}>load more
-          </Button>
-        </span>
         {showForm && <ConfessionForm confessions={confessions} setConfessions={setConfessions} setShowForm={setShowForm} />}
 
         <Routes>
           <Route path="/chat" element={<Chat />}></Route>
           <Route path="/Profile" element={<Profile />}></Route>
-          <Route path="/" element={!showLogin && !showRegister && <ConfessionList confessionsToParse={confessions} setConfessions={setConfessions} />} ></Route>
-          <Route path="polls" element={<PollsList polls={polls}/>} ></Route>
-          {/* <Route path="/profile" element={<ConfessionList/>} ></Route> */}
+          <Route path="/" element={!showLogin && !showRegister && <ConfessionDisplay confessions={confessions} setConfessions={setConfessions} pageToDisplay={pageToDisplay} setPageToDisplay={setPageToDisplay}/>} ></Route>
+          <Route path="polls" element={<PollsList polls={polls} />} ></Route>
         </Routes>
         <LoginForm showLogin={showLogin} setShowLogin={setShowLogin} showRegister={showRegister} setShowRegister={setShowRegister} />
         <RegisterForm showRegister={showRegister} setShowRegister={setShowRegister} showLogin={showLogin} setShowLogin={setShowLogin} />
