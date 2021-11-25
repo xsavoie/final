@@ -29,14 +29,18 @@ function App() {
   const [showRegister, setShowRegister] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [confessionFeed, setConfessionFeed] = useState("recent");
-  // const [clicker, setClicker] = useState(0);
 
+
+  // const [clicker, setClicker] = useState(0);
   const [buttonTest, setButtonTest] = useState({
     type: "next",
-    counter: 0
+    clicker: 0
   })
 
   const [idHistory, setIdHistory] = useState([]);
+
+  // let buttonType = "";
+  // console.log(buttonType)
 
   // const providerValue = useMemo(() => ({user, setUser}), [user, setUser])
 
@@ -65,6 +69,7 @@ function App() {
     const historyLength = historyToReturn.length;
     let idToDisplay = historyToReturn.splice((historyLength - 10), historyLength);
     setIdHistory(historyToReturn);
+    // console.log("to display", idToDisplay)
     return idToDisplay;
   };
 
@@ -73,35 +78,47 @@ function App() {
     const filteredId = filterHistory(history, current);
     const idToDisplay = filteredId.splice(0, 10);
     setIdHistory(prev => handleHistory(history, idToDisplay));
+    // console.log("to display", idToDisplay)
     return idToDisplay;
   };
 
-  const handleButtonNext = () => {
-    console.log("BEFORE", buttonTest)
+
+  // const handleButtonNext = () => {
+  //   setButtonTest((prevState) => ({
+  //     type: "next",
+  //     clicker: prevState.clicker +1
+  //   }))
+  // }
+
+  async function handleButtonNext() {
     setButtonTest((prevState) => ({
       type: "next",
-      counter: prevState.counter + 1
-    }));
-    console.log("FROM INSIDE BUTTON NEXT", buttonTest)
-    return;
+      clicker: prevState.clicker + 1
+    }))
   }
-
-  const handleButtonBack = () => {
-    console.log("BEFORE", buttonTest)
+  async function handleButtonBack() {
     setButtonTest((prevState) => ({
       type: "back",
-      counter: prevState.counter + 1
-    }));
-    console.log("FROM INSIDE BUTTON BACK", buttonTest)
-    return;
+      clicker: prevState.clicker + 1
+    }))
   }
 
-  const queryHandler = (idArray) => {
-    console.log("inside query handler", buttonTest.type)
-    if (buttonTest.type === "next") {
+  // const handleButtonBack = () => {
+  //   setButtonTest((prevState) => ({
+  //     type: "back",
+  //     clicker: prevState.clicker +1
+  //   }))
+  // }
+
+
+  const queryHandler = (idArray, buttonType) => {
+    if (buttonType === "next") {
+      console.log("after if statement", buttonType)
       console.log("!!!!next!!!!")
       return handleConfessionNext(idHistory, idArray);
-    } else if (buttonTest.type === "back") {
+    }
+    if (buttonType === "back") {
+      console.log("after if statement", buttonType)
       console.log("!!!!back!!!!")
       return handleConfessionBack(idHistory);
     }
@@ -110,7 +127,7 @@ function App() {
   const validateQuery = (idToDisplay) => {
     if (idToDisplay.length < 10) {
       console.log("idToDisplay length", idToDisplay.length);
-      console.log("not enough confessions to render");
+      console.log("***not enough confessions to render");
       return;
     }
     return axios.get(`/api/confessions/front_page`, { params: { idArray: idToDisplay } });
@@ -127,15 +144,16 @@ function App() {
   }, [setUser]);
 
 
-  // load confession feed
+  // load confession feed with next
   useEffect(() => {
     if (confessionFeed === "recent") {
       Promise.all([
         axios.get("/api/confessions/most_recent")
       ]).then((res) => {
         const idArray = res[0].data;
-        const idToDisplay = queryHandler(idArray)
-       
+        const idToDisplay = queryHandler(idArray, buttonTest.type)
+        // const idToDisplay = handleConfessionNext(idHistory, idArray);
+
         return validateQuery(idToDisplay);
       }).then((res) => {
         setConfessions(res.data);
@@ -173,7 +191,7 @@ function App() {
         console.log(err.message);
       });
     };
-  }, [confessionFeed, buttonTest]);
+  }, [confessionFeed, buttonTest.clicker]);
 
   useEffect(() => {
 
@@ -211,7 +229,6 @@ function App() {
             className="back"
             onClick={() => {
               handleButtonBack()
-              console.log("after button click", buttonTest)
               // setClicker(clicker + 1)
               // console.log(clicker)
             }}>back
@@ -222,8 +239,6 @@ function App() {
             className="next"
             onClick={() => {
               handleButtonNext()
-              console.log("after button click", buttonTest)
-
               // setClicker(clicker + 1)
               // console.log(clicker)
             }}>load more
@@ -258,3 +273,18 @@ export default App;
         //   console.log("!!!!back!!!!")
         //   idToDisplay = handleConfessionBack(idHistory);
         // }
+
+        // const handleButtonNext = () => {
+  //   console.log("BEFORE", buttonTest)
+  //   setButtonTest("next", setClicker(clicker + 1));
+  //   console.log(clicker)
+  //   console.log("FROM INSIDE BUTTON NEXT", buttonTest)
+  //   return;
+  // }
+
+  // const handleButtonBack = () => {
+  //   console.log("BEFORE", buttonTest)
+  //   setButtonTest("back");
+  //   console.log("FROM INSIDE BUTTON BACK", buttonTest)
+  //   return;
+  // }
