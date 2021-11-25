@@ -22,45 +22,20 @@ const { getComments, createComment, editComment, deleteComment } = comments(db)
 const { getLikes, createLike, deleteLike, checkIfLiked } = likes(db)
 
 
-confessions.get('/', function (req, res) {
-  let confessionsArray = [];
 
-  for (let i = 1; i < 6; i++) {
-    let array = [];
-    let id = i;
-    getOneConfession(id)
-      .then((confessions) => {
-        array.push(confessions);
-        return getLikes(id);
-      })
-      .then(likes => {
-        array.push(parseInt(likes[0].count));
-        return getComments(id);
-      })
-      .then(comments => {
-        array.push(comments);
-        return array;
-      })
-      .then(array => {
-        confessionsArray.push(confessionParser(array));
-      })
-      .then(test => {
-        if (confessionsArray.length >= 5) {
-          res.json(confessionsArray);
-        }
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  }
-
+// get most recent confession id
+confessions.get('/most_recent', function (req, res) {
+  mostRecentConfession()
+    .then(id => {
+      const idArray = idParser(id);
+      // console.log(idArray)
+      res.json(idArray)
+    })
 });
 
-// To render post by category
+// To most recent confession id by category
 confessions.get('/most_recent/category', function (req, res) {
-  console.log(req.query.confessionFeed)
   const categoryId = req.query.confessionFeed;
-  // step 1 - find array of confession id for a category
   confessionsForCategory(categoryId)
     .then(id => {
       const idArray = idParser(id);
@@ -68,16 +43,18 @@ confessions.get('/most_recent/category', function (req, res) {
     })
 })
 
+// get most recent confession id by popularity
 confessions.get('/most_recent/popular', function (req, res) {
   confessionsPopular()
     .then(id => {
       const idArray = idParser(id);
-      console.log(idArray);
+      // console.log(idArray);
       res.json(idArray);
     })
 });
 
-confessions.get('/front_page/category_confessions', function (req, res) {
+
+confessions.get('/front_page', function (req, res) {
   const idArray = req.query.idArray.map(n => parseInt(n));
   let confessionsArray = [];
 
@@ -110,46 +87,6 @@ confessions.get('/front_page/category_confessions', function (req, res) {
   }
 })
 
-// To render default confession feed
-confessions.get('/front_page/:recent', function (req, res) {
-  console.log(req.params.recent);
-  let confessionsArray = [];
-  start = req.params.recent;
-  end = start - 10;
-
-  for (let i = start; i > end; i--) {
-    let array = [];
-    let id = i;
-    getOneConfession(id)
-      .then((confessions) => {
-        array.push(confessions);
-        return getLikes(id);
-      })
-      .then(likes => {
-        array.push(parseInt(likes[0].count));
-        return getComments(id);
-      })
-      .then(comments => {
-        array.push(comments);
-        return array;
-      })
-      .then(array => {
-        confessionsArray.push(confessionParser(array));
-      })
-      .then(test => {
-        if (confessionsArray.length >= 10) {
-          res.json(confessionsArray);
-        }
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  }
-});
-
-
-
-
 confessions.get('/category/:category_id', function (req, res) {
   let array = [];
   let confessionId = 0;
@@ -180,13 +117,6 @@ confessions.get('/category/:category_id', function (req, res) {
 
 });
 
-// get most recent confession
-confessions.get('/most_recent', function (req, res) {
-  mostRecentConfession()
-    .then(confession => {
-      res.json(parseInt(confession[0].count))
-    })
-});
 
 
 confessions.get('/:confession_id', function (req, res) {
@@ -252,13 +182,12 @@ confessions.get('/likes/verify', function (req, res) {
 confessions.post('/new_comment', function (req, res) {
   const { userId, confessionId, content, created_at } = req.body.newComment;
 
-  console.log("comment - req.body", req.body)
   createComment(userId, confessionId, content, created_at)
     .then(comment => {
       // returns array of object. Can make it return only object if needed
       console.log("coments****", comment[0]);
       res.json(comment[0]);
-      
+
       console.log("entered in db");
     })
     .catch(err => {
@@ -271,11 +200,6 @@ confessions.post('/new_comment', function (req, res) {
 confessions.post('/new', function (req, res) {
   const { userId, categoryId, content, created_at } = req.body.newConfession;
 
-  // const time = new Date();
-  // const created_at = moment(time).fromNow();
-  // const created_at = new Date();
-  // console.log("**&*&*&*&*", created_at)
-  console.log("req.body", req.body)
   addConfession(userId, categoryId, content, created_at)
     .then(confession => {
       res.json(confession);
@@ -289,3 +213,35 @@ confessions.post('/new', function (req, res) {
 
 
 module.exports = confessions;
+  // confessions.get('/', function (req, res) {
+  //   let confessionsArray = [];
+
+  //   for (let i = 1; i < 6; i++) {
+  //     let array = [];
+  //     let id = i;
+  //     getOneConfession(id)
+  //       .then((confessions) => {
+  //         array.push(confessions);
+  //         return getLikes(id);
+  //       })
+  //       .then(likes => {
+  //         array.push(parseInt(likes[0].count));
+  //         return getComments(id);
+  //       })
+  //       .then(comments => {
+  //         array.push(comments);
+  //         return array;
+  //       })
+  //       .then(array => {
+  //         confessionsArray.push(confessionParser(array));
+  //       })
+  //       .then(test => {
+  //         if (confessionsArray.length >= 5) {
+  //           res.json(confessionsArray);
+  //         }
+  //       })
+  //       .catch((err) => {
+  //         console.log(err.message);
+  //       });
+  //   }
+  // });
