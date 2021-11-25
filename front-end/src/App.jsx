@@ -24,44 +24,71 @@ function App() {
   const [confessions, setConfessions] = useState([]);
   // refactor to use mode instead of multiple state to display component
   const [showForm, setShowForm] = useState(false);
-  const [showRegister, setShowRegister] = useState(false)
+  const [showRegister, setShowRegister] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [confessionFeed, setConfessionFeed] = useState("recent");
-  const [clicker, setClicker] = useState(0)
+  const [clicker, setClicker] = useState(0);
+  
+  const [idHistory, setIdHistory] = useState([]);
 
-  const [idHistory, setIdHistory] = useState([])
-
+  // const providerValue = useMemo(() => ({user, setUser}), [user, setUser])
+  
   const filterHistory = (history, current) => {
-    let filteredArray = []
+    let filteredArray = [];
 
     for (const id of current) {
       if (!history.includes(id)) {
-        filteredArray.push(id)
-      }
-    }
-    return filteredArray
-  }
+        filteredArray.push(id);
+      };
+    };
+    return filteredArray;
+  };
 
   const handleHistory = (prev, current) => {
-    const prevCopy = [...prev]
+    const prevCopy = [...prev];
     for (const id of current) {
-      prevCopy.push(id)
+      prevCopy.push(id);
     }
     return prevCopy;
+  };
+
+  // goes back to past confessions
+  const handleConfessionBack = (history) => {
+    const historyToReturn = [...history];
+    const historyLength = historyToReturn.length;
+    let idToDisplay = historyToReturn.splice((historyLength - 10), historyLength);
+    setIdHistory(historyToReturn);
+    return idToDisplay;
+  };
+
+  // Loads more confessions
+  const handleConfessionNext = (history, current) => {
+    const filteredId = filterHistory(history, current);
+    const idToDisplay = filteredId.splice(0, 10);
+    setIdHistory(prev => handleHistory(history, idToDisplay));
+    return idToDisplay;
+  };
+  
+  const validateQuery = (idToDisplay) => {
+    if (idToDisplay.length < 10) {
+      console.log("idToDisplay length", idToDisplay.length);
+      console.log("not enough confessions to render");
+      return;
+    }
+    return axios.get(`/api/confessions/front_page`, { params: { idArray: idToDisplay } });
   }
 
-  // const providerValue = useMemo(() => ({user, setUser}), [user, setUser])
 
   // check if current user is logged in
   useEffect(() => {
     const loggedInUser = sessionStorage.getItem("user");
     if (loggedInUser) {
-      const currentUser = JSON.parse(loggedInUser)
-      setUser(currentUser)
-    }
+      const currentUser = JSON.parse(loggedInUser);
+      setUser(currentUser);
+    };
   }, [setUser]);
 
-  // NEED --> check if there is at least 10 id's left before doing axios
+  
   // load confession feed
   useEffect(() => {
     if (confessionFeed === "recent") {
@@ -69,13 +96,10 @@ function App() {
         axios.get("/api/confessions/most_recent")
       ]).then((res) => {
         const idArray = res[0].data;
-        const filteredId = filterHistory(idHistory, idArray)
-        const idToDisplay = filteredId.splice(0, 10)
-        setIdHistory(prev => handleHistory(prev, idToDisplay))
-
-        return axios.get(`/api/confessions/front_page`, { params: { idArray: idToDisplay } });
+        const idToDisplay = handleConfessionNext(idHistory, idArray);
+        
+        return validateQuery(idToDisplay);
       }).then((res) => {
-        // console.log(res.data);
         setConfessions(res.data);
       }).catch(err => {
         console.log(err.message);
@@ -87,13 +111,10 @@ function App() {
         axios.get("/api/confessions/most_recent/popular")
       ]).then((res) => {
         const idArray = res[0].data;
-        const filteredId = filterHistory(idHistory, idArray)
-        const idToDisplay = filteredId.splice(0, 10)
-        setIdHistory(prev => handleHistory(prev, idToDisplay))
-        // console.log(idArray);
-        return axios.get(`/api/confessions/front_page`, { params: { idArray: idToDisplay } });
+        const idToDisplay = handleConfessionNext(idHistory, idArray);
+
+        return validateQuery(idToDisplay);
       }).then((res) => {
-        // console.log(res.data);
         setConfessions(res.data);
       }).catch(err => {
         console.log(err.message);
@@ -105,13 +126,10 @@ function App() {
         axios.get("/api/confessions/most_recent/category", { params: { confessionFeed } })
       ]).then((res) => {
         const idArray = res[0].data;
-        const filteredId = filterHistory(idHistory, idArray)
-        const idToDisplay = filteredId.splice(0, 10)
-        setIdHistory(prev => handleHistory(prev, idToDisplay))
-        // console.log(idArray)
-        return axios.get(`/api/confessions/front_page`, { params: { idArray: idToDisplay } });
+        const idToDisplay = handleConfessionNext(idHistory, idArray);
+
+        return validateQuery(idToDisplay);
       }).then((res) => {
-        // console.log(res.data);
         setConfessions(res.data);
       }).catch(err => {
         console.log(err.message);
@@ -135,15 +153,26 @@ function App() {
           setShowRegister={setShowRegister}
           setIdHistory={setIdHistory}
         />
-        <Button
-          variant="primary"
-          size="sm"
-          className="test"
-          onClick={() => {
-            setClicker(clicker + 1)
-            console.log(clicker)
-          }}>load more
-        </Button>
+        <span className="feed-btn">
+          <Button
+            variant="primary"
+            size="sm"
+            className="back"
+            onClick={() => {
+              setClicker(clicker + 1)
+              console.log(clicker)
+            }}>back
+          </Button>
+          <Button
+            variant="primary"
+            size="sm"
+            className="next"
+            onClick={() => {
+              setClicker(clicker + 1)
+              console.log(clicker)
+            }}>load more
+          </Button>
+        </span>
         {showForm && <ConfessionForm confessions={confessions} setConfessions={setConfessions} setShowForm={setShowForm} />}
 
         <Routes>
