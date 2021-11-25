@@ -1,74 +1,99 @@
-// const express = require("express");
-// const cors = require("cors");
-// const bodyParser = require("body-parser");
-// const fs = require("fs");
 
 const express = require('express');
+const { options } = require('.');
 const polls = express.Router();
 const db = require('../db');
 
-const moment = require('moment'); // require
-moment().format(); 
+// const moment = require('moment'); // require
+// moment().format(); 
+const helpers = require('../helpers/dataHelpers')
 
-const { getAllPolls, getOnePoll, addPoll, addOptions, deleteOnePoll } = require('../helpers/confessions_queries');
+const { pollsParser } = helpers()
 
-const {getAllPolls, getOnePoll, addPoll, deleteOnePoll} = polls(db)
-
-const {addOptions} = options(db)
+const {getAllPolls, getOnePoll, getOptionsForPoll, getResultsForPoll, addPoll, addOptions, addResults } = require('../helpers/polls_queries');
 
 
-polls.get('/', function (req, res) {
-  let pollsArray = [];
-
-  for (let i = 1; i < 6; i++) {
+polls.get('/polls', function (req, res) {
+  
+  let pollArray = [];
+  for (let i=1; i<5; i++) {
     let array = [];
     let id = i;
     getOnePoll(id)
-      .then((poll) => {
-        array.push(poll);
-        return getLikes(id);
-      })
-      .then(likes => {
-        array.push(parseInt(likes[0].count));
-        return getComments(id);
-      })
-      .then(comments => {
-        array.push(comments);
-        return array;
-      })
-      .then(array => {
-        confessionsArray.push(confessionParser(array));
-      })
-      .then(test => {
-        if (confessionsArray.length >= 5) {
-          res.json(confessionsArray);
-        }
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+    .then((polls) => {
+      array.push(polls)
+      return getOptionsForPoll(id);
+    })
+    .then((options) => {
+      array.push(options)
+      return array
+    })
+    .then(array => {
+      pollArray.push(pollsParser(array))
+     
+    })
+    .then(test => {
+      if (pollArray.length >= 4) {
+        res.json(pollArray);
+      }
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
   }
 
 });
 
 
-// // post new confession
-// polls.post('/new', function (req, res) {
-//   const { userId, categoryId, content } = req.body.newConfession;
+// post new poll
+polls.post('/new', function (req, res) {
+  const { userId, content, created_at } = req.body
 
-//   const time = new Date();
-//   const created_at = moment(time).fromNow();
-//   console.log(req.body)
-//   addConfession(userId, categoryId, content, created_at)
-//     .then(confession => {
-//       res.json(confession);
-//       console.log(confession);
-//       console.log("entered in db");
-//     })
-//     .catch(err => {
-//       console.log(err.message);
-//     })
-// });
+  console.log("req.body", req.body)
+  addPoll(userId, content, created_at)
+    .then(poll => {
+      console.log("*********", poll);
+      res.json(poll);
+      console.log("entered in db");
+    })
+    .catch(err => {
+      console.log(err.message);
+    })
+});
+
+// post new option
+polls.post('/new_options', function (req, res) {
+  const { poll_id, content } = req.body
+
+  console.log("req.body", req.body)
+  addOptions(poll_id, content)
+    .then(option => {
+      console.log("*********", option);
+      res.json(option);
+      console.log("entered in db");
+    })
+    .catch(err => {
+      console.log(err.message);
+    })
+});
+
+// post new results
+polls.post('/new_options_results', function (req, res) {
+  const { option_id, user_id } = req.body
+
+  console.log("req.body", req.body)
+  addResults(option_id, user_id)
+    .then(result => {
+      console.log("*********", result);
+      res.json(result);
+      console.log("entered in db");
+    })
+    .catch(err => {
+      console.log(err.message);
+    })
+});
+
+
 
 
 module.exports = polls;

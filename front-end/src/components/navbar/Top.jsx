@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { UserContext } from "../contexts/UserContext";
 
 
-
 export default function Top(props) {
 
   const { user, setUser } = useContext(UserContext)
@@ -65,7 +64,7 @@ export default function Top(props) {
               {user.id && <Nav.Link onClick={() => props.setShowForm(!props.showForm)}>Confess</Nav.Link>}
               {user.id && <Nav.Link href="/chat"><Link to="/chat">Chat</Link></Nav.Link>}
               {user.id && <NavDropdown title={user.email} id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Go to profile</NavDropdown.Item>
+                <NavDropdown.Item href="/profile">Go to profile</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="#action/3.4" onClick={() => handleLogout()}>Logout</NavDropdown.Item>
               </NavDropdown>}
