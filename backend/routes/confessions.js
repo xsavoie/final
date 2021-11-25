@@ -28,7 +28,7 @@ confessions.get('/most_recent', function (req, res) {
   mostRecentConfession()
     .then(id => {
       const idArray = idParser(id);
-      // console.log(idArray)
+      console.log(idArray.length)
       res.json(idArray)
     })
 });
@@ -77,7 +77,7 @@ confessions.get('/front_page', function (req, res) {
         confessionsArray.push(confessionParser(array));
       })
       .then(test => {
-        if (confessionsArray.length >= 10) {
+        if (confessionsArray.length >= idArray.length) {
           res.json(confessionsArray);
         }
       })
