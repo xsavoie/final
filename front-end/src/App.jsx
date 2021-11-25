@@ -3,6 +3,7 @@ import { React, useEffect, useState, useContext } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { UserContext } from './components/contexts/UserContext';
 
+
 import './App.css';
 import axios from 'axios';
 import ConfessionList from './components/Confession/ConfessionsList';
@@ -153,11 +154,12 @@ function App() {
     })
   }, []);
 
-
+  
 
   return (
     <BrowserRouter>
       <div className="App">
+        
         <Top
           showForm={showForm}
           setShowForm={setShowForm}
