@@ -11,6 +11,7 @@ import LoginForm from './components/navbar/LoginForm';
 import RegisterForm from './components/navbar/RegisterForm';
 import ConfessionForm from './components/Confession/ConfessionForm';
 import Chat from './components/Chat/Chat';
+import Profile from './components/Profile/Profile';
 
 // const io = require("socket.io-client");
 const SERVER = "http://localhost:3000";
@@ -93,6 +94,7 @@ function App() {
 
         <Routes>
           <Route path="/chat" element={<Chat />}></Route>
+          <Route path="/Profile" element={<Profile />}></Route>
           <Route path="/" element={!showLogin && !showRegister && <ConfessionList confessionsToParse={confessions} setConfessions={setConfessions} />} ></Route>
           {/* <Route path="/profile" element={<ConfessionList/>} ></Route> */}
         </Routes>
