@@ -91,7 +91,7 @@ function App() {
         const idToDisplay = filteredId.splice(0, 10)
         setIdHistory(prev => handleHistory(prev, idToDisplay))
         // console.log(idArray);
-        return axios.get(`/api/confessions/front_page`, { params: { idArray } });
+        return axios.get(`/api/confessions/front_page`, { params: { idArray: idToDisplay } });
       }).then((res) => {
         // console.log(res.data);
         setConfessions(res.data);
@@ -109,7 +109,7 @@ function App() {
         const idToDisplay = filteredId.splice(0, 10)
         setIdHistory(prev => handleHistory(prev, idToDisplay))
         // console.log(idArray)
-        return axios.get(`/api/confessions/front_page`, { params: { idArray } });
+        return axios.get(`/api/confessions/front_page`, { params: { idArray: idToDisplay } });
       }).then((res) => {
         // console.log(res.data);
         setConfessions(res.data);
@@ -135,6 +135,15 @@ function App() {
           setShowRegister={setShowRegister}
           setIdHistory={setIdHistory}
         />
+        <Button
+          variant="primary"
+          size="sm"
+          className="test"
+          onClick={() => {
+            setClicker(clicker + 1)
+            console.log(clicker)
+          }}>load more
+        </Button>
         {showForm && <ConfessionForm confessions={confessions} setConfessions={setConfessions} setShowForm={setShowForm} />}
 
         <Routes>
@@ -145,15 +154,6 @@ function App() {
         </Routes>
         <LoginForm showLogin={showLogin} setShowLogin={setShowLogin} showRegister={showRegister} setShowRegister={setShowRegister} />
         <RegisterForm showRegister={showRegister} setShowRegister={setShowRegister} showLogin={showLogin} setShowLogin={setShowLogin} />
-        <Button
-          variant="primary"
-          size="sm"
-          className="test"
-          onClick={() => {
-            setClicker(clicker + 1)
-            console.log(clicker)
-          }}>load more
-        </Button>
       </div>
     </BrowserRouter>
 

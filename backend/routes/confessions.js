@@ -61,7 +61,7 @@ confessions.get('/most_recent', function (req, res) {
   mostRecentConfession()
     .then(id => {
       const idArray = idParser(id);
-      console.log(idArray)
+      // console.log(idArray)
       res.json(idArray)
     })
 });
@@ -81,7 +81,7 @@ confessions.get('/most_recent/popular', function (req, res) {
   confessionsPopular()
   .then(id => {
     const idArray = idParser(id);
-    console.log(idArray);
+    // console.log(idArray);
     res.json(idArray);
   })
 });
