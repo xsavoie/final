@@ -32,9 +32,9 @@ function App() {
 
   const filterHistory = (history, current) => {
     let filteredArray = []
-  
+
     for (const id of current) {
-      if (!history.includes(id)){
+      if (!history.includes(id)) {
         filteredArray.push(id)
       }
     }
@@ -42,7 +42,7 @@ function App() {
   }
 
   const handleHistory = (prev, current) => {
-    const prevCopy = [ ...prev]
+    const prevCopy = [...prev]
     for (const id of current) {
       prevCopy.push(id)
     }
@@ -60,7 +60,7 @@ function App() {
     }
   }, [setUser]);
 
-
+  // NEED --> check if there is at least 10 id's left before doing axios
   // load confession feed
   useEffect(() => {
     if (confessionFeed === "recent") {
@@ -86,6 +86,9 @@ function App() {
         axios.get("/api/confessions/most_recent/popular")
       ]).then((res) => {
         const idArray = res[0].data;
+        const filteredId = filterHistory(idHistory, idArray)
+        const idToDisplay = filteredId.splice(0, 10)
+        setIdHistory(prev => handleHistory(prev, idToDisplay))
         // console.log(idArray);
         return axios.get(`/api/confessions/front_page`, { params: { idArray } });
       }).then((res) => {
@@ -101,6 +104,9 @@ function App() {
         axios.get("/api/confessions/most_recent/category", { params: { confessionFeed } })
       ]).then((res) => {
         const idArray = res[0].data;
+        const filteredId = filterHistory(idHistory, idArray)
+        const idToDisplay = filteredId.splice(0, 10)
+        setIdHistory(prev => handleHistory(prev, idToDisplay))
         // console.log(idArray)
         return axios.get(`/api/confessions/front_page`, { params: { idArray } });
       }).then((res) => {
@@ -115,12 +121,19 @@ function App() {
   useEffect(() => {
 
   }, [])
-  
+
 
   return (
     <BrowserRouter>
       <div className="App">
-        <Top showForm={showForm} setShowForm={setShowForm} setConfessionFeed={setConfessionFeed} setShowLogin={setShowLogin} setShowRegister={setShowRegister} />
+        <Top
+          showForm={showForm}
+          setShowForm={setShowForm}
+          setConfessionFeed={setConfessionFeed}
+          setShowLogin={setShowLogin}
+          setShowRegister={setShowRegister}
+          setIdHistory={setIdHistory}
+        />
         {showForm && <ConfessionForm confessions={confessions} setConfessions={setConfessions} setShowForm={setShowForm} />}
 
         <Routes>
@@ -130,10 +143,15 @@ function App() {
         </Routes>
         <LoginForm showLogin={showLogin} setShowLogin={setShowLogin} showRegister={showRegister} setShowRegister={setShowRegister} />
         <RegisterForm showRegister={showRegister} setShowRegister={setShowRegister} showLogin={showLogin} setShowLogin={setShowLogin} />
-        <Button variant="primary" size="sm" className="test" onClick={() => {
-          setClicker(clicker + 1)
-          console.log(clicker)
-          }}>load more</Button>
+        <Button
+          variant="primary"
+          size="sm"
+          className="test"
+          onClick={() => {
+            setClicker(clicker + 1)
+            console.log(clicker)
+          }}>load more
+        </Button>
       </div>
     </BrowserRouter>
 
