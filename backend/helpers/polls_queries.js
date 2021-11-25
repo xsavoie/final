@@ -67,25 +67,25 @@ const getOptionsForPoll = function (pollId) {
 }
 exports.getOptionsForPoll = getOptionsForPoll;
 
-const getResultsForPoll = function (pollId) {
-  const queryString = `SELECT results.votes, option_id
-  FROM results
-  JOIN options ON options.id = option_id
-  WHERE options.poll_id = $1;
-  `
-  const queryParams = [pollId];
+// const getResultsForPoll = function (pollId) {
+//   const queryString = `SELECT results.votes, option_id
+//   FROM results
+//   JOIN options ON options.id = option_id
+//   WHERE options.poll_id = $1;
+//   `
+//   const queryParams = [pollId];
 
-  return db
-    .query(queryString, queryParams)
-    .then((result) => {
-      return result.rows;
-    })
-    .catch((err) => {
-      console.log("get one poll err");
-      console.log(err.message);
-    });
-}
-exports.getResultsForPoll = getResultsForPoll;
+//   return db
+//     .query(queryString, queryParams)
+//     .then((result) => {
+//       return result.rows;
+//     })
+//     .catch((err) => {
+//       console.log("get one poll err");
+//       console.log(err.message);
+//     });
+// }
+// exports.getResultsForPoll = getResultsForPoll;
 
 
 //  create new poll
@@ -135,12 +135,12 @@ exports.addOptions = addOptions;
 
 
 
-const addResults = function (option_id, votes) {
+const addResults = function (option_id, user_id) {
 
-  const queryString = `INSERT INTO results (option_id, votes)
+  const queryString = `INSERT INTO results (option_id, user_id)
     VALUES ($1, $2) RETURNING *;`
 
-  const queryParams = [option_id, votes];
+  const queryParams = [option_id, user_id];
 
   return db
     .query(queryString, queryParams)

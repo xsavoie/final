@@ -1,7 +1,3 @@
-// const express = require("express");
-// const cors = require("cors");
-// const bodyParser = require("body-parser");
-// const fs = require("fs");
 
 const express = require('express');
 const { options } = require('.');
@@ -12,78 +8,41 @@ const db = require('../db');
 // moment().format(); 
 const helpers = require('../helpers/dataHelpers')
 
-const { confessionParser, idParser, pollsParser } = helpers()
+const { pollsParser } = helpers()
 
 const {getAllPolls, getOnePoll, getOptionsForPoll, getResultsForPoll, addPoll, addOptions, addResults } = require('../helpers/polls_queries');
 
 
 polls.get('/polls', function (req, res) {
   
-    let pollArray = []
+  let pollArray = [];
+  for (let i=1; i<5; i++) {
     let array = [];
-    let id = 1;
+    let id = i;
     getOnePoll(id)
-      .then((polls) => {
-        array.push(polls)
-        return getOptionsForPoll(id);
-      })
-      .then((options) => {
-        array.push(options)
-        return array
-      })
-      .then(array => {
-        pollArray.push(pollsParser(array))
+    .then((polls) => {
+      array.push(polls)
+      return getOptionsForPoll(id);
+    })
+    .then((options) => {
+      array.push(options)
+      return array
+    })
+    .then(array => {
+      pollArray.push(pollsParser(array))
+     
+    })
+    .then(test => {
+      if (pollArray.length >= 4) {
         res.json(pollArray);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  
+      }
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+  }
 
 });
-
-[
-  [
-    {
-      "id": 1,
-      "user_id": 3,
-      "content": "something new",
-      "created_at": "2018-02-12T13:00:00.000Z"
-    }
-  ],
-  [
-    {
-      "id": 1,
-      "poll_id": 1,
-      "content": "yes"
-
-    },
-    {
-      "id": 2,
-      "poll_id": 1,
-      "content": "maybe"
-    },
-    {
-      "id": 3,
-      "poll_id": 1,
-      "content": "no"
-    }
-  ],
-  [
-    {
-      "votes": 3,
-      "option_id": 1
-    },
-    {
-      "votes": 5,
-      "option_id": 2
-    },
-    {
-      "votes": 1,
-      "option_id": 3
-    }
-  ]
-]
 
 
 // post new poll
@@ -95,7 +54,6 @@ polls.post('/new', function (req, res) {
     .then(poll => {
       console.log("*********", poll);
       res.json(poll);
-      // console.log("*********", poll);
       console.log("entered in db");
     })
     .catch(err => {
@@ -121,10 +79,10 @@ polls.post('/new_options', function (req, res) {
 
 // post new results
 polls.post('/new_options_results', function (req, res) {
-  const { option_id, votes } = req.body
+  const { option_id, user_id } = req.body
 
   console.log("req.body", req.body)
-  addResults(option_id, votes)
+  addResults(option_id, user_id)
     .then(result => {
       console.log("*********", result);
       res.json(result);
