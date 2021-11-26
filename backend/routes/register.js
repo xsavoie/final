@@ -34,29 +34,6 @@ register.post("/", (req, res) => {
 });
 
 
-register.get("/validate", (req, res) => {
-  // console.log(req.query.email)
-  const email = req.query.email
-  // const email = "alice@gmail.com"
-
-  getOneUser(email)
-    .then(user => {
-      // console.log("UNIQUE", user[0].email)
-
-      if (!user[0]) {
-        res.json(0)
-      }
-      if (user[0]) {
-        res.json(1)
-      }
-      // res.json(user)
-      // const userToReturn = { ...user[0], password: undefined }
-      // res.json(userToReturn)
-      // console.log(userToReturn)
-    })
-
-})
-
 module.exports = register;
 
 

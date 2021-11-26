@@ -42,9 +42,9 @@ export default function RegisterForm(props) {
     return true;
   }
 
+  
   function registerCheck(event) {
     const valid = validateRegister(fields)
-
 
     if (valid) {
       const email = fields.email;
