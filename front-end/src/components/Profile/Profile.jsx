@@ -19,8 +19,6 @@ export default function Profile(props) {
   // https://i.imgur.com/O1t7wwB.jpeg
   // https://i.imgur.com/5KfNDSg.jpeg
 
-  
-
 
     return (
       
@@ -60,7 +58,7 @@ export default function Profile(props) {
               Edit about me! 
             </button> { showAboutMeForm ? <AboutMe setShowAboutMeForm={setShowAboutMeForm}/> : null }
           </form>
-          
+          </body>
 
     );
   
