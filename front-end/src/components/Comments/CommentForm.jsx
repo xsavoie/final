@@ -13,7 +13,7 @@ export default function CommentForm(props) {
   const [rows, setRows] = useState(1);
 
 
-  let confessionsCopy = [ ...props.confessionState];
+  // let confessionsCopy = [ ...props.confessionState];
 
   const updateCommentState = (confessionId, newComment, confessionState) => {
     const parsedComment = {
@@ -32,7 +32,7 @@ export default function CommentForm(props) {
     return newState;
 }
 
-  const submitComment = (userId, confessionId, content) => {
+  const submitComment = (userId, confessionId, content, confessionsState) => {
     const created_at = new Date();
     const newComment = {
       userId,
@@ -43,7 +43,7 @@ export default function CommentForm(props) {
 
     return axios.post("/api/confessions/new_comment", { newComment })
       .then(res => {
-        props.setConfessions(updateCommentState(confessionId, res.data, confessionsCopy));
+        props.setConfessions(updateCommentState(confessionId, res.data, confessionsState));
       })
       .catch(err => {
         console.log(err.message);
@@ -67,7 +67,7 @@ export default function CommentForm(props) {
           variant="primary"
           size="sm"
           onClick={() => {
-            submitComment(user.id, props.confessionId, comment)
+            submitComment(user.id, props.confessionId, comment, props.confessionsToUpdate)
             setComment("")
           }}
         >

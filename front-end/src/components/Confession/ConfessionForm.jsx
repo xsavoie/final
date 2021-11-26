@@ -47,6 +47,7 @@ export default function ConfessionForm(props) {
       .then(res => {
         console.log(res.data);
         props.setConfessions(updateConfessionState(res.data, props.confessions));
+        props.setPageToDisplay(1)
       })
       .catch(err => {
         console.log(err.message);
