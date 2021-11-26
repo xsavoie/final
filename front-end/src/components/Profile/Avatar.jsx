@@ -4,6 +4,9 @@ import axios from "axios";
 
 export default function Avatar(props){
 
+    // https://i.imgur.com/O1t7wwB.jpeg
+  // https://i.imgur.com/5KfNDSg.jpeg
+
   const { user, setUser } = useContext(UserContext);
  const [avatar, setAvatar] = useState("");
  const { setShowForm } = props;
