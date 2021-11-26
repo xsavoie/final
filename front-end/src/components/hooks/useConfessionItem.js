@@ -12,12 +12,13 @@ export default function useConfessionItem(props) {
 
   // check if user liked current post
   useEffect(() => {
-    const confessionInfo = {
-      userId: user.id,
-      confessionId: props.id
-    }
-    // console.log(confessionInfo)
-    return axios.get("/api/confessions/likes/verify", { params: { confessionInfo } })
+    if (user.id) {
+      const confessionInfo = {
+        userId: user.id,
+        confessionId: props.id
+      }
+      // console.log(confessionInfo)
+      return axios.get("/api/confessions/likes/verify", { params: { confessionInfo } })
       .then(res => {
         // console.log("RES", res.data)
         if (res.data) {
@@ -26,6 +27,7 @@ export default function useConfessionItem(props) {
       }).catch(err => {
         console.log(err.message)
       })
+    }
   }, [user.id, props.id])
 
 
@@ -41,34 +43,39 @@ export default function useConfessionItem(props) {
     };
   };
 
-  let confessionsCopy = [...props.confessionState];
+  // let confessionsCopy = [...props.confessionState];
 
-  const increaseLikeState = (confessionId, confessionState) => {
-    // finds confession that needs to be changed
-    const newConfession = confessionState.find((confession) => confession.id === confessionId);
-    // update like count
-    newConfession.likes++;
-    // map through state and modifies right confession
-    const newState = confessionState.map(confession =>
-      confession.id === confessionId ? newConfession : confession
-    );
-    return newState;
+
+  const increaseLikeState = (confessionsState, confessionId) => {
+    const confessionsCopy = [ ...confessionsState]
+    
+    let updatedConfession = confessionsCopy.find((confession) => confession.id === confessionId)
+    updatedConfession.likes += 1;
+  
+    const newState = confessionsCopy.map(confession =>
+      confession.id === confessionId ? updatedConfession : confession
+      );
+  
+    // return updatedConfession
+    return newState
   }
 
-  const decreaseLikeState = (confessionId, confessionState) => {
-    // finds confession that needs to be changed
-    const newConfession = confessionState.find((confession) => confession.id === confessionId);
-    // update like count
-    newConfession.likes--;
-    // map through state and modifies right confession
-    const newState = confessionState.map(confession =>
-      confession.id === confessionId ? newConfession : confession
-    );
-    return newState;
+  const decreaseLikeState = (confessionsState, confessionId) => {
+    const confessionsCopy = [ ...confessionsState]
+    
+    let updatedConfession = confessionsCopy.find((confession) => confession.id === confessionId)
+    updatedConfession.likes -= 1;
+  
+    const newState = confessionsCopy.map(confession =>
+      confession.id === confessionId ? updatedConfession : confession
+      );
+  
+    // return updatedConfession
+    return newState
   }
 
   // insert like in db and modifies state
-  const submitLike = (userId, confessionId) => {
+  const submitLike = (userId, confessionId, confessionState) => {
     const newLike = {
       userId,
       confessionId
@@ -77,14 +84,14 @@ export default function useConfessionItem(props) {
     return axios.post("/api/confessions/likes", { newLike })
       .then(res => {
         // console.log(res.data);
-        props.setConfessions(increaseLikeState(confessionId, confessionsCopy));
+        props.setConfessions(increaseLikeState(confessionState, confessionId));
       }).catch(err => {
         console.log(err.message);
       })
   }
 
   // delete like in db and modifies state
-  const deleteLike = (userId, confessionId) => {
+  const deleteLike = (userId, confessionId, confessionState) => {
     const likeInfo = {
       userId,
       confessionId
@@ -93,7 +100,7 @@ export default function useConfessionItem(props) {
     return axios.delete("/api/confessions/likes", { data: { likeInfo } })
       .then(res => {
         // console.log(res.data);
-        props.setConfessions(decreaseLikeState(confessionId, confessionsCopy))
+        props.setConfessions(decreaseLikeState(confessionState, confessionId))
       }).catch(err => {
         console.log(err.message);
       })
@@ -107,5 +114,5 @@ export default function useConfessionItem(props) {
 
 
 
-  return { user, liked, setLiked, categoryParser, increaseLikeState, decreaseLikeState, submitLike, deleteLike, badgeClass, confessionsCopy }
+  return { user, liked, setLiked, categoryParser, increaseLikeState, decreaseLikeState, submitLike, deleteLike, badgeClass }
 }

@@ -8,6 +8,7 @@ import useConfessionItem from "../hooks/useConfessionItem";
 
 
 export default function ConfessionListItem(props) {
+  console.log(props)
 
   const {
     user,
@@ -17,7 +18,7 @@ export default function ConfessionListItem(props) {
     submitLike,
     deleteLike,
     badgeClass,
-    confessionsCopy
+    // confessionsCopy
   } = useConfessionItem(props);
 
 
@@ -34,11 +35,11 @@ export default function ConfessionListItem(props) {
       <footer className="confession__detail-bottom">
         <span className="confession__likes">
           {liked && <span onClick={() => {
-            deleteLike(user.id, props.id);
+            deleteLike(user.id, props.id, props.confessionsToUpdate);
             setLiked(false);
           }}>Liked! {props.likes}</span>}
           {!liked && <span onClick={() => {
-            submitLike(user.id, props.id);
+            submitLike(user.id, props.id, props.confessionsToUpdate);
             setLiked(true);
           }}>Like {props.likes}</span>}
         </span>
@@ -55,6 +56,7 @@ export default function ConfessionListItem(props) {
           confessionState={props.confessionState}
           confessionId={props.id}
           comments={props.comments}
+          confessionsToUpdate={props.confessionsToUpdate}
         />}
     </article>
   );
