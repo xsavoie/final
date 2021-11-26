@@ -51,10 +51,18 @@ function App() {
 
   // check if current user is logged in
   useEffect(() => {
-    const loggedInUser = sessionStorage.getItem("user");
+    const loggedInUser = sessionStorage.getItem("user")
     if (loggedInUser) {
-      const currentUser = JSON.parse(loggedInUser);
-      setUser(currentUser);
+      const user = JSON.parse(loggedInUser);
+      // console.log("********", user.id)
+      axios.get(`/users/validate/${user.id}`)
+        .then(user => {
+          const loggedUser = user.data[0];
+          console.log(user.data[0])
+          setUser(loggedUser)
+        })
+      // const currentUser = JSON.parse(loggedInUser);
+      // setUser(currentUser);
     };
   }, [setUser]);
 
