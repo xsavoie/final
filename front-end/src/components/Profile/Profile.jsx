@@ -12,8 +12,9 @@ import AboutMe from "./AboutMe";
 export default function Profile(props) {
 
   const { user, setUser } = useContext(UserContext);
-  const [showForm, setShowForm] = useState(false)
-  const [about, setAbout] = useState("");
+  const [showAvatarForm, setShowAvatarForm] = useState(false)
+  const [showAboutMeForm, setShowAboutMeForm] = useState(false)
+ 
  
   // https://i.imgur.com/O1t7wwB.jpeg
   // https://i.imgur.com/5KfNDSg.jpeg
@@ -37,11 +38,11 @@ export default function Profile(props) {
               className="btn-edit"
               onClick={(event) => {
                 event.preventDefault()
-                setShowForm(true);
+                setShowAvatarForm(true);
               }}
             > 
               Upload a new picture! 
-            </button> { showForm ? <Avatar setShowForm={setShowForm}/> : null }
+            </button> { showAvatarForm ? <Avatar setShowAvatarForm={setShowAvatarForm}/> : null }
           </form>
 
 
@@ -52,12 +53,12 @@ export default function Profile(props) {
               className="btn-edit"
               onClick={(event) => {
                 event.preventDefault()
-                setShowForm(true);
+                setShowAboutMeForm(true);
               }}
             > 
             
               Edit about me! 
-            </button> { showForm ? <AboutMe setShowForm={setShowForm}/> : null }
+            </button> { showAboutMeForm ? <AboutMe setShowAboutMeForm={setShowAboutMeForm}/> : null }
           </form>
           
           

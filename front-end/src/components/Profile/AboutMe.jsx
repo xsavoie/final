@@ -2,13 +2,12 @@ import React, { useState, useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 import axios from "axios";
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
 
 export default function AboutMe(props) {
 
   const { user, setUser } = useContext(UserContext);
   const [about, setAbout] = useState("");
-  const { setShowForm } = props;
+  const { setShowAboutMeForm } = props;
 
 
   function editAbout(about) {
@@ -50,7 +49,7 @@ export default function AboutMe(props) {
             onClick={(event) => {
               event.preventDefault();
               editAbout(about);
-              setShowForm(false);
+              setShowAboutMeForm(false);
             }} >
             Edit
         </button>

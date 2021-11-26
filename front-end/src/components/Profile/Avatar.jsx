@@ -9,7 +9,7 @@ export default function Avatar(props){
 
   const { user, setUser } = useContext(UserContext);
  const [avatar, setAvatar] = useState("");
- const { setShowForm } = props;
+ const { setShowAvatarForm } = props;
 
   function editAvatar(avatar) {
     
@@ -49,7 +49,7 @@ export default function Avatar(props){
         onClick={(event) => {
           event.preventDefault();
           editAvatar(avatar);
-          setShowForm(false);
+          setShowAvatarForm(false);
         }} > 
         Upload 
       </button> 
