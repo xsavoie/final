@@ -26,12 +26,12 @@ export default function Avatar(props){
         // const newAvatar = res.data.data;
         // setAvatar = newAvatar;
         setAvatar("");
-        sessionStorage.removeItem("user")
+        // sessionStorage.removeItem("user")
         return setUser(prev => ({ ...prev, avatar: res.data.data}))
         // alert("Avatar updated in database");
       }).then(user => {
         console.log("*****", user)
-        sessionStorage.setItem("user", JSON.stringify(user))
+        // sessionStorage.setItem("user", JSON.stringify(user))
       })
       .catch(err => {
         console.log(err.message);

@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState, useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
-import './Profile.scss';
+import './profile.scss';
 import axios from "axios";
 
 import ConfessionForm from "../Confession/ConfessionForm";
@@ -60,7 +60,7 @@ export default function Profile(props) {
               Edit about me! 
             </button> { showAboutMeForm ? <AboutMe setShowAboutMeForm={setShowAboutMeForm}/> : null }
           </form>
-          
+        </body>
 
     );
   
