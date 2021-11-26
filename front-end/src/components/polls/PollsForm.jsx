@@ -64,7 +64,7 @@ export default function PollsForm(props) {
         >
           Add options
         </Button>}
-        {form && <OptionsForm pollId={pollId}/>}
+        {form && <OptionsForm pollId={pollId} />}
     
 
       </Form>
