@@ -50,6 +50,24 @@ module.exports = db => {
         });
     };
 
+    const getUserById = (id) => {
+      const queryString = `
+      SELECT *
+      FROM users
+      WHERE id = $1;
+      `;
+  
+      const queryParams = [id];
+  
+      return db.query(queryString, queryParams)
+        .then((result) => {
+          return result.rows;
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+    };
+
 
     function makeAvatar() {
       var emojis = [
@@ -125,6 +143,6 @@ module.exports = db => {
 
 
 
-  return { getAllUsers, getOneUser, createUser, editAvatar, editAbout }
+  return { getAllUsers, getOneUser, createUser, editAvatar, editAbout, getUserById }
 };
 
