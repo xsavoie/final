@@ -17,6 +17,7 @@ import Profile from './components/Profile/Profile';
 import PollsList from './components/polls/PollsList';
 // import ConfessionListItem from './components/Confession/ConfessionsListItem';
 import ConfessionDisplay from './components/Confession/ConfessionDisplay';
+import PollsForm from './components/polls/PollsForm'
 
 // const io = require("socket.io-client");
 const SERVER = "http://localhost:3000";
