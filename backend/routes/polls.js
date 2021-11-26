@@ -61,12 +61,17 @@ polls.post('/new', function (req, res) {
     })
 });
 
+
 // post new option
 polls.post('/new_options', function (req, res) {
-  const { poll_id, content } = req.body
 
-  console.log("req.body", req.body)
-  addOptions(poll_id, content)
+  const arr = req.body
+  
+  for(let option of arr) {
+
+    const { poll_id, content } = option
+     console.log("req.body", option)
+    addOptions(poll_id, content)
     .then(option => {
       console.log("*********", option);
       res.json(option);
@@ -75,6 +80,11 @@ polls.post('/new_options', function (req, res) {
     .catch(err => {
       console.log(err.message);
     })
+  }
+
+  // console.log("req.body", req.body)
+  // console.log("req.body second option", req.body[1])
+ 
 });
 
 // post new results

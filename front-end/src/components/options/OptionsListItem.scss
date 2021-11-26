@@ -1,0 +1,24 @@
+.options {
+
+  &__content {
+  width: 95%;
+  margin-top: 10px;
+  // margin-left: 10%;
+  padding-left: 3px;
+  background-color: rgb(209, 208, 146);
+  text-align: left;
+  border-radius: .25rem;
+  }
+  
+  &__votes {
+    width: 5%;
+    margin-top: 10px;
+    // margin-left: 10%;
+    padding-left: 3px;
+    background-color: rgb(209, 208, 146);
+    text-align: left;
+    border-radius: .25rem;
+    }
+
+
+}

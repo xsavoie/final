@@ -22,11 +22,14 @@ export default function PollsList(props) {
     />
   ));
 
-
-
+ 
   return (
-    <section className="polls">
-      <ul className="polls__list" >{parsedPolls}</ul>
-    </section>
-  )
+    <div>
+      <h1>Wellcome to Polls</h1>
+      <div>{parsedPolls}</div>
+    </div>
+   )
 }
+
+
+  
