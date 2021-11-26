@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState, useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
-import './Profile.scss';
+import './profile.scss';
 import axios from "axios";
 
 import ConfessionForm from "../Confession/ConfessionForm";
