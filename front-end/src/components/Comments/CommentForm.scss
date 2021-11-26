@@ -1,0 +1,22 @@
+.comment-form {
+  width: 90%;
+  margin-left: 5%;
+
+  &__label{
+    text-align: left;
+    color: white;
+  }
+
+  &__input {
+    background-color: rgb(221, 217, 217) !important;
+  }
+
+  &__submit {
+    margin-top: 5px;
+  }
+}
+
+.comment-form--error {
+  color: rgba(253, 0, 0, 0.932);
+  margin-left: 35%;
+}

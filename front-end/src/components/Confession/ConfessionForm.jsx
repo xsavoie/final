@@ -5,12 +5,14 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Dropdown from "react-bootstrap/Dropdown";
 import { UserContext } from "../contexts/UserContext";
+import classNames from "classnames";
 
 export default function ConfessionForm(props) {
 
   const { user } = useContext(UserContext);
   const [content, setContent] = useState("");
-  const [category, setCategory] = useState("")
+  const [category, setCategory] = useState("");
+  const [error, setError] = useState("");
 
   const categoryParser = (categoryId) => {
     if (categoryId === 1) {
@@ -24,6 +26,13 @@ export default function ConfessionForm(props) {
     };
   };
 
+  let confessionClass = classNames("category", {
+    "category--secret": category === 1,
+    "category--story": category === 2,
+    "category--question": category === 3
+  });
+ 
+
   const updateConfessionState = (newConfession, confessionState) => {
     newConfession.likes = 0;
     newConfession.comments = [];
@@ -32,6 +41,18 @@ export default function ConfessionForm(props) {
     stateCopy.unshift(newConfession);
     const max = stateCopy.length - 1;
     return stateCopy.slice(0, max);
+  };
+
+  const validateConfession = (content, categoryId) => {
+    if (content.length < 10) {
+      setError("Too Short");
+      return false;
+    };
+    if (!categoryId){
+      setError("Select a category");
+      return false;
+    };
+    return true;
   };
 
   const createConfession = (userId, categoryId, content) => {
@@ -43,15 +64,21 @@ export default function ConfessionForm(props) {
       created_at
     };
 
-    return axios.post("/api/confessions/new", { newConfession })
+    const valid = validateConfession(content, categoryId);
+
+    if (valid) {
+      return axios.post("/api/confessions/new", { newConfession })
       .then(res => {
-        console.log(res.data);
+        // console.log(res.data);
         props.setConfessions(updateConfessionState(res.data, props.confessions));
         props.setPageToDisplay(1)
+        props.setShowForm(false)
+        setContent("");
       })
       .catch(err => {
         console.log(err.message);
       })
+    }
   };
 
 
@@ -73,12 +100,13 @@ export default function ConfessionForm(props) {
             onChange={(event) => setContent(event.target.value)}
           />
         </Form.Group>
+        <div className="form--buttons">
         <Dropdown>
-          <Dropdown.Toggle variant="primary" id="dropdown-basic" size="sm">
+          <Dropdown.Toggle variant="primary" className={confessionClass} id="dropdown-basic" size="sm">
             {category ? categoryParser(category) : "Category"}
           </Dropdown.Toggle>
 
-          <Dropdown.Menu>
+          <Dropdown.Menu >
             <Dropdown.Item onClick={() => setCategory(1)}>Secret</Dropdown.Item>
             <Dropdown.Item onClick={() => setCategory(2)}>Story</Dropdown.Item>
             <Dropdown.Item onClick={() => setCategory(3)}>Question</Dropdown.Item>
@@ -89,13 +117,12 @@ export default function ConfessionForm(props) {
           size="sm"
           onClick={() => {
             createConfession(user.id, category, content);
-            setContent("");
-            // hides form after submission
-            props.setShowForm(false);
           }}
         >
           Submit
         </Button>
+        </div>
+        <span className="form--error">{error}</span>
       </Form>
     </div>
   )
