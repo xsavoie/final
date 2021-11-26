@@ -3,6 +3,7 @@
 import './CommentsList.scss'
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import "./CommentsListItem.scss"
 
 dayjs.extend(relativeTime)
 
