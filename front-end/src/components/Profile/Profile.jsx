@@ -58,7 +58,11 @@ export default function Profile(props) {
               Edit about me! 
             </button> { showAboutMeForm ? <AboutMe setShowAboutMeForm={setShowAboutMeForm}/> : null }
           </form>
+
         </body>
+
+
+
 
     );
   
