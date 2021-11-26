@@ -24,16 +24,20 @@ export default function PollsForm(props) {
       content,
       created_at
     };
-
-    return axios.post("http://localhost:3000/api/polls/new", { newPoll })
+    console.log("new poll", newPoll)
+    return axios.post("http://localhost:3000/api/polls/new", newPoll)
       .then(res => {
-        console.log(res.data);
+        console.log("respons from frontend", res);
+        setContent("")
   
       })
+    
       .catch(err => {
-        console.log(err.message);
+        console.log("error fro frontend", err);
       })
   };
+
+  //insted of for loop
 
 
   // to have state with number of options by default(2)
@@ -50,7 +54,7 @@ export default function PollsForm(props) {
 
   return (
     <div className="polls_form">
-      <Form className="polls__input">
+      <Form onSubmit={(e)=> e.preventDefault()} className="polls__input">
         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
           <Form.Label>Create a poll</Form.Label>
           <Form.Control
@@ -91,8 +95,7 @@ export default function PollsForm(props) {
         <Button
           variant="primary"
           size="sm"
-          onClick={() => {  createPoll(user.id, content)
-            setContent("")}}
+          onClick={() => { createPoll(user.id, content)}}
         >
           Submit
         </Button>

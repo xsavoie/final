@@ -45,6 +45,19 @@ polls.get('/polls', function (req, res) {
 });
 
 
+// polls.get('/:id', (req, res) => {
+//   const poll_id = req.params.id;
+//   console.log('response made', poll_id);
+//   getOnePoll(id)
+//   .then((polls) => {
+    
+//   })
+//   .catch((err) => {
+//     console.log(err.message);
+//   });
+// });
+
+
 // post new poll
 polls.post('/new', function (req, res) {
   const { userId, content, created_at } = req.body
@@ -54,10 +67,10 @@ polls.post('/new', function (req, res) {
     .then(poll => {
       console.log("*********", poll);
       res.json(poll);
-      console.log("entered in db");
+      // console.log("entered in db");
     })
     .catch(err => {
-      console.log(err.message);
+      console.log("error from the backend", err);
     })
 });
 
