@@ -69,7 +69,7 @@ CREATE TABLE "options" (
 CREATE TABLE "results" (
   "id" SERIAL PRIMARY KEY,
   "option_id" INTEGER NOT NULL REFERENCES options(id) ON DELETE CASCADE,
-  "user_id" INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE
+  "user_id" INTEGER REFERENCES users(id) ON DELETE CASCADE
 
 );
 

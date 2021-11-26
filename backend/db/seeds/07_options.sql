@@ -6,8 +6,11 @@ VALUES
 (2, 'never'),
 (2, 'once'),
 (3, 'monday'),
+(3, 'tuesday'),
+(3, 'wednesday'),
+(3, 'thursday'),
 (3, 'friday'),
 (4, 'coffe'),
 (4, 'tea'),
-(4, 'something');
+(4, 'something else');
 

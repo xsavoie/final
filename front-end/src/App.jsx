@@ -118,7 +118,7 @@ function App() {
     })
   }, []);
 
-  
+  console.log("***", confessions)
 
   return (
     <BrowserRouter>
@@ -132,7 +132,7 @@ function App() {
           setShowRegister={setShowRegister}
           setPageToDisplay={setPageToDisplay}
         />
-        {showForm && <ConfessionForm confessions={confessions} setConfessions={setConfessions} setShowForm={setShowForm} />}
+        {showForm && <ConfessionForm confessions={confessions} setConfessions={setConfessions} setShowForm={setShowForm} setPageToDisplay={setPageToDisplay}/>}
 
         <Routes>
           <Route path="/chat" element={<Chat />}></Route>
