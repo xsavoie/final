@@ -3,7 +3,7 @@ const register = express.Router();
 const db = require('../db');
 
 const users = require('../helpers/users_queries')
-const { createUser } = users(db)
+const { createUser, getOneUser } = users(db)
 
 register.get('/', function (req, res, next) {
   res.send('register');
@@ -12,30 +12,50 @@ register.get('/', function (req, res, next) {
 
 register.post("/", (req, res) => {
   const { email, password } = req.body
-  
-  createUser(email, password)
-    .then(user => {
 
-      // console.log(user);
-    if (!user) {
-       res.send({error: "error no user"});
-       return;
-    }
-    res.json(user)
-    // req.session.userId = user[0].id;
-    // res.send("Cookie set");
-   //   // console.log(user);
-   //   req.session.userid = user[0].id;
-    // console.log("req.session userid: ",req.session.userid);
-    // console.log("req.session: ", req.session);
-    // console.log("entered in db");
-     
+  getOneUser(email)
+    .then(user => {
+      if (!user[0]) {
+        createUser(email, password)
+          .then(user => {
+            // const userToReturn = { ...user[0], password: undefined }
+            // res.json(userToReturn)
+            // console.log(userToReturn)
+            res.json(user)
+          })
+      }
+      if (user[0]) {
+        res.json("Email already in use")
+      }
     })
     .catch(err => {
       console.log(err.message);
     })
 });
 
+
+register.get("/validate", (req, res) => {
+  // console.log(req.query.email)
+  const email = req.query.email
+  // const email = "alice@gmail.com"
+
+  getOneUser(email)
+    .then(user => {
+      // console.log("UNIQUE", user[0].email)
+
+      if (!user[0]) {
+        res.json(0)
+      }
+      if (user[0]) {
+        res.json(1)
+      }
+      // res.json(user)
+      // const userToReturn = { ...user[0], password: undefined }
+      // res.json(userToReturn)
+      // console.log(userToReturn)
+    })
+
+})
 
 module.exports = register;
 

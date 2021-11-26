@@ -22,7 +22,6 @@ export default function ConfessionDisplay(props) {
 
 
   const arrayOfConfessions = arrayParser(props.confessions);
-  console.log("***", arrayOfConfessions)
 
   const parsedLists = arrayOfConfessions.map((confessions, index) => (
     <ConfessionList
@@ -39,7 +38,7 @@ export default function ConfessionDisplay(props) {
       const listId = list["props"].id;
       // console.log("******", listId)
       if (listId === props.pageToDisplay) {
-        console.log(`displaying page #${listId}`)
+        // console.log(`displaying page #${listId}`)
         return list;
       };
     };

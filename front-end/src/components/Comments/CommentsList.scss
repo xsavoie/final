@@ -9,37 +9,4 @@
     margin-bottom: 10px;
   //   flex-flow: row wrap;
   }
-
-  &__content {
-    width: 95%;
-    margin-top: 10px;
-    // margin-left: 10%;
-    padding-left: 3px;
-    background-color: rgb(221, 217, 217);
-    text-align: left;
-    border-radius: .25rem;
-  }
 }
-
-.test {
-  color: white;
-}
-
-.comment-form {
-  width: 90%;
-  margin-left: 5%;
-
-  &__label{
-    text-align: left;
-    color: white;
-  }
-
-  &__input {
-    background-color: rgb(221, 217, 217) !important;
-  }
-
-  &__submit {
-    margin-top: 5px;
-  }
-}
-
