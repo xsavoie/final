@@ -12,6 +12,8 @@ export default function OptionsForm(props) {
 
   const [content, setContent] = useState("");
 
+
+
   const poll_id = 4
   const createOptions = (poll_id, content) => {
     
@@ -38,17 +40,17 @@ export default function OptionsForm(props) {
       <Form.Control type="text" placeholder="Option 1" value1={content} onChange={(event) => setContent(event.target.value)}/>
       <br />
       <Form.Label>Option 2</Form.Label>
-      <Form.Control type="text" placeholder="Option 2" value2={content} onChange={(event) => setContent(event.target.value)}/>
+      <Form.Control type="text" placeholder="Option 2" value2={content} onChange={(event) => setContent( event.target.value)}/>
       <br />
-      <Button
+      {/* <Button
           variant="primary"
           size="sm"
           onClick={() => {createOptions(poll_id, content)
             setContent("")}}
-        > 
+        >  */}
         {/* it will automatically add two text box for options by default after add it will disappear and we will have + button */}
-          Add options
-        </Button>
+          {/* Add options
+        </Button> */}
     </Form>
   )
 

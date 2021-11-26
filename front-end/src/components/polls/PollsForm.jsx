@@ -60,6 +60,15 @@ export default function PollsForm(props) {
             onChange={(event) => setContent(event.target.value)}
           />
         </Form.Group>
+        {/* <Button
+          variant="primary"
+          size="sm"
+          onClick={() => {createPoll(userId, content)
+            setContent("")}} */}
+        {/* >  */}
+        {/* it will automatically add two text box for options by default after add it will disappear and we will have + button */}
+          {/* Add options
+        </Button> */}
         <OptionsForm/>
     
     

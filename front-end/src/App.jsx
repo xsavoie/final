@@ -17,6 +17,7 @@ import Profile from './components/Profile/Profile';
 import PollsList from './components/polls/PollsList';
 // import ConfessionListItem from './components/Confession/ConfessionsListItem';
 import ConfessionDisplay from './components/Confession/ConfessionDisplay';
+import PollsForm from './components/polls/PollsForm'
 
 // const io = require("socket.io-client");
 const SERVER = "http://localhost:3000";
@@ -131,7 +132,7 @@ function App() {
           setPageToDisplay={setPageToDisplay}
         />
         {showForm && <ConfessionForm confessions={confessions} setConfessions={setConfessions} setShowForm={setShowForm} />}
-
+        <div><PollsForm/></div>
         <Routes>
           <Route path="/chat" element={<Chat />}></Route>
           <Route path="/Profile" element={<Profile />}></Route>
