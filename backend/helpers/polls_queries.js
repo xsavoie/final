@@ -117,8 +117,9 @@ const addOptions = function (poll_id, content) {
 
   const queryString = `INSERT INTO options (poll_id, content)
     VALUES ($1, $2) RETURNING *;`
-
+ 
   const queryParams = [poll_id, content];
+
 
   return db
     .query(queryString, queryParams)
