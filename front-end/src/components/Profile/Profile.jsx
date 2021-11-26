@@ -33,7 +33,7 @@ export default function Profile(props) {
             </div>
             <button
               type="button"
-              className="btn-edit"
+              className="btn-avatar"
               onClick={(event) => {
                 event.preventDefault()
                 setShowAvatarForm(true);
@@ -59,8 +59,9 @@ export default function Profile(props) {
             </button> { showAboutMeForm ? <AboutMe setShowAboutMeForm={setShowAboutMeForm}/> : null }
           </form>
 
-
         </body>
+
+
 
 
     );
