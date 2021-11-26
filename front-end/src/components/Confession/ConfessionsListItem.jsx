@@ -36,7 +36,7 @@ export default function ConfessionListItem(props) {
           {liked && <span onClick={() => {
             deleteLike(user.id, props.id);
             setLiked(false);
-          }}>Unlike {props.likes}</span>}
+          }}>Liked! {props.likes}</span>}
           {!liked && <span onClick={() => {
             submitLike(user.id, props.id);
             setLiked(true);

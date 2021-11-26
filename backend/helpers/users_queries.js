@@ -82,36 +82,41 @@ module.exports = db => {
 
 
     // Edit/Update an emoji for a specific user
-    const editAvatar = (body) => {
+    const editAvatar = (avatar, id) => {
       const queryString = `
-      UPDATE users SET avatar = $1 WHERE id = $2
+      UPDATE users SET avatar = $1 WHERE id = $2 RETURNING *
       `;
   
       const queryParams = [
-        body.avatar,
-        body.id,
+        avatar,
+        id,
       ];
+      console.log("queryParams from editAvatar: ", queryParams)
   
       return db.query(queryString, queryParams)
       .then((result) => {
-        return result.rows;
+        console.log("result.rows from editAvatar",result.rows);
+        return result.rows[0].avatar;
         })
       .catch((err) => console.log(err.message));
     };
 
     // Edit/Update About me for a specific user
-    const editAbout = (body) => {
+    const editAbout = (about, id) => {
+      console.log("incoming about: ", about);
       const queryString = `
-      UPDATE users SET about = $1 WHERE id = $2
+      UPDATE users SET about = $1 WHERE id = $2 RETURNING *
       `;
   
       const queryParams = [
-        body.about,
-        body.id,
+        about,
+        id,
       ];
+      console.log("queryParams from editAbout: ", queryParams)
   
       return db.query(queryString, queryParams)
       .then((result) => {
+        console.log("result.rows from editAbout",result.rows)
         return result.rows;
         })
       .catch((err) => console.log(err.message));
@@ -120,6 +125,6 @@ module.exports = db => {
 
 
 
-  return { getAllUsers, getOneUser, createUser, editAvatar }
+  return { getAllUsers, getOneUser, createUser, editAvatar, editAbout }
 };
 

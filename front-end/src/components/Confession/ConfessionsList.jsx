@@ -5,17 +5,14 @@ import "./ConfessionsList.scss";
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 
-dayjs.extend(relativeTime)
+dayjs.extend(relativeTime);
 
 
 export default function ConfessionList(props) {
 
-  const [selected, setSelected] = useState(null)
+  const [selected, setSelected] = useState(null);
 
-
-
-
-  const parsedConfessions = props.confessionsToParse.map((confession) => (
+  const parsedConfessions = props.confessions.map((confession) => (
     <ConfessionListItem
       key={confession.id}
       id={confession.id}
@@ -26,17 +23,14 @@ export default function ConfessionList(props) {
       comments={confession.comments}
       selected={confession.id === selected}
       setSelected={setSelected}
-      confessionState={props.confessionsToParse}
+      confessionState={props.confessions}
       setConfessions={props.setConfessions}
     />
   ));
 
-
-
   return (
     <section className="confessions">
       <ul className="confessions__list" >{parsedConfessions}</ul>
-      {/* <Button variant="primary" size="sm" className="test">load more</Button> */}
     </section>
   )
 }
