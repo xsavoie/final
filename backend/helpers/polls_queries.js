@@ -96,6 +96,7 @@ const addPoll = function (userId, content, created_at) {
     VALUES ($1, $2, $3) RETURNING *;`
 
   const queryParams = [userId, content, created_at];
+  console.log("queryParams", queryParams)
 
   return db
     .query(queryString, queryParams)
