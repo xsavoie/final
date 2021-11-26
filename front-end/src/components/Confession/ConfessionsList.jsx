@@ -25,6 +25,7 @@ export default function ConfessionList(props) {
       setSelected={setSelected}
       confessionState={props.confessions}
       setConfessions={props.setConfessions}
+      confessionsToUpdate={props.confessionsToUpdate}
     />
   ));
 
