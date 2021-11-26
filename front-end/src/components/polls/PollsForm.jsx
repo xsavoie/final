@@ -17,6 +17,14 @@ export default function PollsForm(props) {
 
   const [content, setContent] = useState("");
 
+  const [form, setForm] = useState(false)
+  const [pollId, setPollId] = useState(null)
+
+  const showOptions = () => {
+    setForm(true)
+   
+  };
+
   const createPoll = (userId, content) => {
     const created_at = new Date();
     const newPoll = {
@@ -24,33 +32,22 @@ export default function PollsForm(props) {
       content,
       created_at
     };
-
-    return axios.post("http://localhost:3000/api/polls/new", { newPoll })
+   
+    return axios.post("http://localhost:3000/api/polls/new", newPoll)
       .then(res => {
-        console.log(res.data);
-  
+        console.log("respons from frontend", res.data.id);
+        setPollId(res.data.id)
       })
+    
       .catch(err => {
-        console.log(err.message);
+        console.log("error fro frontend", err);
       })
   };
 
-
-  // to have state with number of options by default(2)
-  //function for the number of options returns increase number by one, the state is chang, return an array of options and apen. to my form 
-
-
-  // onClick={() => {
-    
-  //   setClicker(clicker + 1)
-    
-  // }}
-
-  // setPageToDisplay((prevState) => (prevState - 1))
-
+ 
   return (
     <div className="polls_form">
-      <Form className="polls__input">
+      <Form onSubmit={(e)=> e.preventDefault()} className="polls__input">
         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
           <Form.Label>Create a poll</Form.Label>
           <Form.Control
@@ -60,33 +57,16 @@ export default function PollsForm(props) {
             onChange={(event) => setContent(event.target.value)}
           />
         </Form.Group>
-        <OptionsForm/>
+          {!form && <Button
+          variant="primary"
+          size="sm"
+          onClick={() => { createPoll(user.id, content); showOptions()}}
+        >
+          Add options
+        </Button>}
+        {form && <OptionsForm pollId={pollId}/>}
     
-    
-        <Button
-          variant="primary"
-          size="sm"
-          onClick={() => {}}
-        >
-          {/* it will add one by one option to the poll */}
-          +
-        </Button>
-        <Button
-          variant="primary"
-          size="sm"
-          onClick={() => {}}
-        >
-          {/* it will remove one by one option to the poll if user change his mind */}
-          -
-        </Button>
-        <Button
-          variant="primary"
-          size="sm"
-          onClick={() => {  createPoll(user.id, content)
-            setContent("")}}
-        >
-          Submit
-        </Button>
+
       </Form>
     </div>
   )

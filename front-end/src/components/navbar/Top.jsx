@@ -3,7 +3,6 @@ import { Navbar, Container, NavDropdown, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { UserContext } from "../contexts/UserContext";
 
-
 export default function Top(props) {
 
   const { user, setUser } = useContext(UserContext)
@@ -13,67 +12,52 @@ export default function Top(props) {
     sessionStorage.clear();
   }
 
+  const handleRouteChange = (category) => {
+    props.setConfessionFeed(category);
+    props.setPageToDisplay(1);
+    props.setShowRegister(false);
+    props.setShowLogin(false);
+    props.setShowForm(false)
+  }
+
   return (
     <Navbar bg="light" expand="lg">
       <Container>
         <Navbar.Brand
           href="#home"
-          onClick={() => {
-            props.setShowLogin(false);
-            props.setShowRegister(false);
-            props.setPageToDisplay(1)
-            props.setConfessionFeed("recent")
-          }}
+          onClick={() => handleRouteChange("recent")}
         >
           <Link to="/" >classified</Link>
         </Navbar.Brand>
-        {/* <Nav className="me-auto">
-      <Nav.Link href="#home">Home</Nav.Link>
-      </Nav> */}
-
         <div className="">
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <NavDropdown title="Category" id="basic-nav-dropdown">
-                <NavDropdown.Item onClick={() => {
-                  props.setConfessionFeed(1);
-                  props.setPageToDisplay(1)
-                }}
-                >Secret
+                <NavDropdown.Item href="/" onClick={() => handleRouteChange(1)}
+                ><Link to="/" >Secret</Link>
                 </NavDropdown.Item>
-                <NavDropdown.Item onClick={() => {
-                  props.setConfessionFeed(2);
-                  props.setPageToDisplay(1)
-                }}
-                >Story
+                <NavDropdown.Item onClick={() => handleRouteChange(2)}
+                ><Link to="/" >Story</Link>
                 </NavDropdown.Item>
-                <NavDropdown.Item onClick={() => {
-                  props.setConfessionFeed(3);
-                  props.setPageToDisplay(1)
-                }}
-                >Question
+                <NavDropdown.Item onClick={() => handleRouteChange(3)}
+                ><Link to="/" >Question</Link>
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item onClick={() => {
-                  props.setConfessionFeed("recent");
-                  props.setPageToDisplay(1)
-                }}
-                >Most recent
+                <NavDropdown.Item onClick={() => handleRouteChange("recent")}
+                ><Link to="/" >Most recent</Link>
                 </NavDropdown.Item>
-                <NavDropdown.Item onClick={() => {
-                  props.setConfessionFeed("popular");
-                  props.setPageToDisplay(1)
-                }}
-                >Most popular
+                <NavDropdown.Item onClick={() => handleRouteChange("popular")}
+                ><Link to="/" >Most popular</Link>
                 </NavDropdown.Item>
               </NavDropdown>
-              {user.id && <Nav.Link onClick={() => props.setShowForm(!props.showForm)}>Confess</Nav.Link>}
+              {user.id && !props.showForm && <Nav.Link onClick={() => props.setShowForm(true)}><Link to="/" >Confess</Link></Nav.Link>}
+              {user.id && props.showForm && <Nav.Link onClick={() => props.setShowForm(false)}>Confess</Nav.Link>}
               {user.id && <Nav.Link href="/chat"><Link to="/chat">Chat</Link></Nav.Link>}
               {user.id && <NavDropdown title={user.email} id="basic-nav-dropdown">
                 <NavDropdown.Item href="/profile">Go to profile</NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4" onClick={() => handleLogout()}>Logout</NavDropdown.Item>
+                <NavDropdown.Item href="/" onClick={() => handleLogout(props.showForm)}>Logout</NavDropdown.Item>
               </NavDropdown>}
               {!user.id &&
                 <Nav.Link

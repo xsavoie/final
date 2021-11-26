@@ -20,7 +20,7 @@ export default function CommentsList(props) {
 
   return (
     <section className="comments__list">
-      {user.id && <CommentForm setConfessions={props.setConfessions} confessionState={props.confessionState} confessionId={props.confessionId} />}
+      {user.id && <CommentForm confessionsToUpdate={props.confessionsToUpdate} setConfessions={props.setConfessions} confessionState={props.confessionState} confessionId={props.confessionId} />}
       {/* have a box that says login to comment */}
       <ul>{parsedComments}</ul>
     </section>
