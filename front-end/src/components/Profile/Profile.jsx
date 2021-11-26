@@ -1,5 +1,3 @@
-
-
 import React, { useRef, useEffect, useState, useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 import './profile.scss';
@@ -13,16 +11,18 @@ import './profile.scss';
 
 export default function Profile(props) {
 
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
-  const [about, setAbout] = useState();
-  const [avatar, setAvatar] = useState();
+  const [about, setAbout] = useState("");
+  const [avatar, setAvatar] = useState("");
 
-  const inputFile = useRef(null)
+  // https://i.imgur.com/O1t7wwB.jpeg
+  // https://i.imgur.com/5KfNDSg.jpeg
 
-  function editAvatar() {
+
+  function editAvatar(avatar) {
   
-    const avatar = '🤬';
+    // const avatar = '🤬';
     const id = user.id 
     const request = {
       avatar,
@@ -30,29 +30,40 @@ export default function Profile(props) {
     }
     // console.log("request", request)
     console.log("edit avatar request object: ", request)
-    axios.put('http://localhost:3000/users', request)
+    axios.put('http://localhost:3000/users/avatar', request)
       .then(res => {
         console.log("res.data.data from editAvatar function :", res.data.data)
-        const newAvatar = res.data.data;
-        setAvatar = newAvatar;
-        alert("Avatar updated in database");
+        // const newAvatar = res.data.data;
+        // setAvatar = newAvatar;
+        setAvatar("");
+        sessionStorage.removeItem("user")
+        return setUser(prev => ({ ...prev, avatar: res.data.data}))
+        // alert("Avatar updated in database");
+      }).then(user => {
+        console.log("*****", user)
+        sessionStorage.setItem("user", JSON.stringify(user))
       })
       .catch(err => {
         console.log(err.message);
       })
   }
 
+  // console.log("random", user)
 
-  function editAbout(event) {
+  function editAbout(about) {
     // const about = event.target.value
     const id = user.id 
+    // const id = 1
     const request = {
       about,
       id
     }
     console.log("edit about", request)
-    axios.put('http://localhost:3000/users', request)
+    axios.put('http://localhost:3000/users/about_me', request)
       .then(res => {
+        console.log(res)
+        setUser(prev => ({ ...prev, about: about}))
+        setAbout("");
         alert("About updated in database");
       })
       .catch(err => {
@@ -68,7 +79,7 @@ export default function Profile(props) {
         <h1>Hi {user.username}!</h1>
         <form className="avatar-block">
           <div className="avatar-pic">
-            <img src = "https://avatars.dicebear.com/api/bottts/your-custom-seed.svg" ></img>
+            <img src ={user.avatar} alt=""></img>
           </div>
           {/* <input type="text" ref={inputFile} placeholder="Enter the link to your pic"></input> */}
           
@@ -77,11 +88,11 @@ export default function Profile(props) {
             className="btn-edit"
             onClick={(event) => {
               event.preventDefault()
-              editAvatar()
+              editAvatar(avatar)
             }} > 
             Add new Emoji! 
           </button> 
-        
+            <input type="text" value={avatar} onChange={(event) => setAvatar(event.target.value)}></input>
           <Form.Group className="about" controlId="aboutForm.ControlTextarea1">
           <Form.Label>About Me: {user.about}</Form.Label>
           <Form.Control
@@ -96,7 +107,7 @@ export default function Profile(props) {
             size="sm"
             onClick={(event) => {
               event.preventDefault()
-              editAbout(user.id, about)
+              editAbout(about)
               // has to hide the form after submission 
             }} >
             Edit

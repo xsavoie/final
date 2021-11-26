@@ -1,12 +1,12 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const route = express.Router();
 const db = require('../db');
 const users = require('../helpers/users_queries')
 const { editAbout, editAvatar } = users(db)
 
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+route.get('/', function(req, res, next) {
   // res.send('respond with a resource');
       db.query(`SELECT * FROM users;`)
       .then(data => {
@@ -22,9 +22,11 @@ router.get('/', function(req, res, next) {
 });
 
 // edit avatar
-router.put("/", (req, res) => {
+route.put("/avatar", (req, res) => {
   const { avatar, id } = req.body
-  
+  // const avatar = "🤬"
+  // const id = 1
+
   editAvatar(avatar, id)
     .then(data => {
 
@@ -39,12 +41,12 @@ router.put("/", (req, res) => {
 
 
 // edit about me section
-router.put("/", (req, res) => {
+route.put("/about_me", (req, res) => {
   const { about, id } = req.body
   
   editAbout(about, id)
     .then(user => {
-
+      res.json(user)
       console.log("user from users.js backend: ",user);
     // if (!user) {
     //    res.send({error: "error no user"});
@@ -58,4 +60,4 @@ router.put("/", (req, res) => {
     })
 });
 
-module.exports = router;
+module.exports = route;
