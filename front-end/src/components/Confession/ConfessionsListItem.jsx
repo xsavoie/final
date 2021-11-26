@@ -8,7 +8,6 @@ import useConfessionItem from "../hooks/useConfessionItem";
 
 
 export default function ConfessionListItem(props) {
-  console.log(props)
 
   const {
     user,
@@ -47,7 +46,6 @@ export default function ConfessionListItem(props) {
 
           {props.selected && <Button variant="primary" size="sm" onClick={() => props.setSelected(null)} >Hide Comments</Button>}
           {!props.selected && <Button variant="primary" size="sm" onClick={() => props.setSelected(props.id)}>View Comments {`(${props.comments.length})`} </Button>}
-          {/* <Button variant="primary">Comment</Button> */}
         </div>
       </footer>
       {props.selected &&
