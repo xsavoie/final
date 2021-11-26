@@ -117,7 +117,7 @@ export default function Profile(props) {
         </Form.Group>
 
         </form>
-        <ConfessionForm />
+        {/* <ConfessionForm /> */}
       </div>
     );
   

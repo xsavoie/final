@@ -1,6 +1,6 @@
 import React, { useContext } from "react"
 import { Navbar, Container, NavDropdown, Nav } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { UserContext } from "../contexts/UserContext";
 
 
@@ -36,9 +36,11 @@ export default function Top(props) {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <NavDropdown title="Category" id="basic-nav-dropdown">
-                <NavDropdown.Item onClick={() => {
+                <NavDropdown.Item href="/" onClick={() => {
                   props.setConfessionFeed(1);
                   props.setPageToDisplay(1)
+                  <Navigate />
+                  // return <Redirect to="/" />
                 }}
                 >Secret
                 </NavDropdown.Item>
@@ -68,12 +70,15 @@ export default function Top(props) {
                 >Most popular
                 </NavDropdown.Item>
               </NavDropdown>
+              {/* confess form for when on / page --> brings down form */}
               {user.id && <Nav.Link onClick={() => props.setShowForm(!props.showForm)}>Confess</Nav.Link>}
+              {/* confess form for when on other page than / --> brings to / and opens form */}
+              {/* {user.id && <Nav.Link onClick={() => props.setShowForm(!props.showForm)}>Confess</Nav.Link>} */}
               {user.id && <Nav.Link href="/chat"><Link to="/chat">Chat</Link></Nav.Link>}
               {user.id && <NavDropdown title={user.email} id="basic-nav-dropdown">
                 <NavDropdown.Item href="/profile">Go to profile</NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4" onClick={() => handleLogout()}>Logout</NavDropdown.Item>
+                <NavDropdown.Item href="/" onClick={() => handleLogout()}>Logout</NavDropdown.Item>
               </NavDropdown>}
               {!user.id &&
                 <Nav.Link
