@@ -13,15 +13,10 @@ export default function Profile(props) {
 
   const { user, setUser } = useContext(UserContext);
   const [showForm, setShowForm] = useState(false)
-
-
   const [about, setAbout] = useState("");
  
-
   // https://i.imgur.com/O1t7wwB.jpeg
   // https://i.imgur.com/5KfNDSg.jpeg
-
-
 
   function editAbout(about) {
     // const about = event.target.value
@@ -45,8 +40,6 @@ export default function Profile(props) {
   }
 
 
-  
-
     return (
       
       <body className="profile-page"> 
@@ -68,20 +61,7 @@ export default function Profile(props) {
               }}
             > 
               Upload a new picture! 
-            </button> { showForm ? <Avatar /> : null }
-            {/* <form>
-            <button
-              type="button"
-              className="btn-edit"
-              onClick={(event) => {
-                event.preventDefault()
-                editAvatar(avatar)
-              }} > 
-              Upload 
-            </button> 
-              <input type="text" value={user.avatar} placeholder="https://" onChange={(event) => setAvatar(event.target.value)}></input>
-              
-            </form> */}
+            </button> { showForm ? <Avatar setShowForm={setShowForm}/> : null }
           
           </form>
           

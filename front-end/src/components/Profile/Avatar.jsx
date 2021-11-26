@@ -6,6 +6,7 @@ export default function Avatar(props){
 
   const { user, setUser } = useContext(UserContext);
  const [avatar, setAvatar] = useState("");
+ const { setShowForm } = props;
 
   function editAvatar(avatar) {
     
@@ -36,16 +37,20 @@ export default function Avatar(props){
 
   return(
     <form>
+      
+      <input type="text" value={avatar} placeholder="https://" onChange={(event) => setAvatar(event.target.value)}></input>
+
       <button
         type="button"
         className="btn-edit"
         onClick={(event) => {
-          event.preventDefault()
-          editAvatar(avatar)
+          event.preventDefault();
+          editAvatar(avatar);
+          setShowForm(false);
         }} > 
         Upload 
       </button> 
-        <input type="text" value={user.avatar} placeholder="https://" onChange={(event) => setAvatar(event.target.value)}></input>
+
     </form>
   );
 }
