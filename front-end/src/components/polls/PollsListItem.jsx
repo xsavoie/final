@@ -8,9 +8,16 @@ import "./PollsListItem.scss"
 export default function PollsListItem(props) {
 
 
-  const {content, createdAt, options, setPolls} = props;
+  const {content, createdAt, options, setPolls, totalVotes, setTotalVotes} = props;
 
     //get request for total an make query 
+    // for(let arr of totalVotes) {
+
+    //   const parsedTotalVotes = arr.map((votes) => (
+    //     votes.count))
+    //     console.log("&&&&&", parsedTotalVotes)
+    //     return parsedTotalVotes
+    // }
    
      return (
      
@@ -22,7 +29,7 @@ export default function PollsListItem(props) {
         <div>{<OptionsList
               options={options} setPolls={setPolls}
               />}</div>
-        <div>Total votes</div>
+        {/* <div>{parsedTotalVotes}</div> */}
        </div>
      );
 }
