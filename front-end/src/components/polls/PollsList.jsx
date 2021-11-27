@@ -19,7 +19,10 @@ export default function PollsList(props) {
       content={poll.content}
       createdAt={dayjs(poll.created_at).fromNow()}
       options={poll.options}
+      totalVotes={props.totalVotes}
+      setTotalVotes={props.totalVotes}
       setPolls={props.setPolls}
+
     />
   ));
 

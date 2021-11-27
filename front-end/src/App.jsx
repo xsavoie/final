@@ -131,7 +131,20 @@ function App() {
     })
   }, []);
 
+
+  const [totalVotes, setTotalVotes] = useState([]);
+
+  useEffect(() => {
+    Promise.all([
+      axios.get("/api/polls/results")
+    ]).then((res) => {
+      // console.log("*******votes", res[0].data)
+      setTotalVotes(res[0].data)
+    })
+  }, []);
+
   console.log(polls)
+
 
   return (
     <BrowserRouter>
@@ -151,7 +164,8 @@ function App() {
           <Route path="/chat" element={<Chat />}></Route>
           <Route path="/Profile" element={<Profile />}></Route>
           <Route path="/" element={!showLogin && !showRegister && <ConfessionDisplay confessions={confessions} setConfessions={setConfessions} pageToDisplay={pageToDisplay} setPageToDisplay={setPageToDisplay} />} ></Route>
-          <Route path="polls" element={<PollsList polls={polls} />} ></Route>
+          <Route path="polls" element={<PollsList polls={polls} totalVotes={totalVotes} setTotalVotes={setTotalVotes}/>} ></Route>
+
         </Routes>
         <LoginForm showLogin={showLogin} setShowLogin={setShowLogin} showRegister={showRegister} setShowRegister={setShowRegister} />
         <RegisterForm showRegister={showRegister} setShowRegister={setShowRegister} showLogin={showLogin} setShowLogin={setShowLogin} />

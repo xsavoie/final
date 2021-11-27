@@ -31,7 +31,7 @@ const getOnePoll = function (id) {
   WHERE polls.id = $1;
   `
   const queryParams = [id];
-
+  console.log(id)
   return db
     .query(queryString, queryParams)
     .then((result) => {
@@ -61,11 +61,31 @@ const getOptionsForPoll = function (pollId) {
       return result.rows;
     })
     .catch((err) => {
-      console.log("get one poll err");
+      console.log("get options for poll err");
       console.log(err.message);
     });
 }
 exports.getOptionsForPoll = getOptionsForPoll;
+
+const getTotalResultsForPoll = function (pollId) {
+  const queryString = `SELECT  COUNT(results.id) 
+  FROM results
+  JOIN options ON options.id = option_id
+  WHERE options.poll_id = $1;
+  `
+  const queryParams = [pollId];
+
+  return db
+    .query(queryString, queryParams)
+    .then((result) => {
+      return result.rows;
+    })
+    .catch((err) => {
+      console.log("get totalResults poll err");
+      console.log(err.message);
+    });
+}
+exports.getTotalResultsForPoll = getTotalResultsForPoll;
 
 const mostRecentPoll = function () {
 
@@ -76,13 +96,13 @@ const mostRecentPoll = function () {
     LIMIT 5;
   `;
  
-
   return db
     .query(queryString)
     .then((result) => {
       return result.rows;
     })
     .catch((err) => {
+
       console.log("get one confession err");
       console.log(err.message);
     });
