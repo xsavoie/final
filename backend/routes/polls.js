@@ -14,6 +14,7 @@ const {getAllPolls, getOnePoll, getOptionsForPoll, getResultsForPoll, addPoll, a
 
 
 polls.get('/polls', function (req, res) {
+
   
   let pollArray = [];
   for (let i=1; i<5; i++) {
@@ -45,17 +46,31 @@ polls.get('/polls', function (req, res) {
 });
 
 
-// polls.get('/:id', (req, res) => {
-//   const poll_id = req.params.id;
-//   console.log('response made', poll_id);
-//   getOnePoll(id)
-//   .then((polls) => {
-    
-//   })
-//   .catch((err) => {
-//     console.log(err.message);
-//   });
-// });
+polls.get(`/:id`, function (req, res) {
+
+    let pollArray = []
+    let array = []
+    let id = Number(req.params.id)
+    getOnePoll(id)
+    .then((polls) => {
+      array.push(polls)
+      return getOptionsForPoll(id);
+    })
+    .then((options) => {
+      array.push(options)
+      return array
+    })
+    .then(array => {
+      pollArray.push(pollsParser(array))
+      res.json(pollArray);
+    })   
+    .catch((err) => {
+      console.log(err.message);
+    });
+  
+
+});
+
 
 
 // post new poll

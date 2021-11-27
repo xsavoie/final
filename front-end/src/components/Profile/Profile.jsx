@@ -2,6 +2,8 @@ import React, { useRef, useEffect, useState, useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 import './profile.scss';
 
+import axios from "axios";
+
 
 import ConfessionForm from "../Confession/ConfessionForm";
 import ConfessionList from '../Confession/ConfessionsList';
@@ -75,6 +77,24 @@ export default function Profile(props) {
       </body>
 
 
+
+
+          <form className="about-block">
+          <div> About Me: {user.about} </div>
+            <button
+              type="button"
+              className="btn-edit"
+              onClick={(event) => {
+                event.preventDefault()
+                setShowAboutMeForm(true);
+              }}
+            > 
+            
+              Edit about me! 
+            </button> { showAboutMeForm ? <AboutMe setShowAboutMeForm={setShowAboutMeForm}/> : null }
+          </form>
+          
+       </body>      
 
 
     );

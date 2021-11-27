@@ -1,4 +1,4 @@
-import OptionsForm from "./OptionsForm"
+
 import OptionsListItem from "./OptionsListItem"
 import "./OptionsList.scss"
 import { useContext } from "react";
@@ -13,6 +13,7 @@ export default function OptionsList(props) {
       key={option.id}
       content={option.content}
       votes={option.count}
+      setPolls={props.setPolls}
     />
   ));
 

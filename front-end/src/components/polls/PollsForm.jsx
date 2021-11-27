@@ -1,7 +1,3 @@
-//will add a content (similar with the confession)
-//has 4 different buttons 
-//this form will cahnge the state of the poll comntent
-
 import React, { useState, useContext } from "react"
 import axios from "axios";
 // import "./PollsForm.scss"
@@ -11,6 +7,7 @@ import { UserContext } from "../contexts/UserContext";
 
 import OptionsForm from "../options/OptionsForm";
 
+
 export default function PollsForm(props) {
 
   const { user } = useContext(UserContext);
@@ -19,6 +16,7 @@ export default function PollsForm(props) {
 
   const [form, setForm] = useState(false)
   const [pollId, setPollId] = useState(null)
+  const [pollContent, setPollContent] = useState("")
 
   const showOptions = () => {
     setForm(true)
@@ -37,6 +35,7 @@ export default function PollsForm(props) {
       .then(res => {
         console.log("respons from frontend", res.data.id);
         setPollId(res.data.id)
+        setPollContent(res.data.content)
       })
     
       .catch(err => {
@@ -64,7 +63,7 @@ export default function PollsForm(props) {
         >
           Add options
         </Button>}
-        {form && <OptionsForm pollId={pollId} />}
+        {form && <OptionsForm pollId={pollId} pollContent={pollContent} setPolls={props.setPolls}/>}
     
 
       </Form>

@@ -1,4 +1,5 @@
 import './OptionsListItem.scss'
+import OptionsForm from "./OptionsForm"
 
 
 export default function OptionsListItem(props) {
@@ -12,6 +13,7 @@ export default function OptionsListItem(props) {
       <div className="options__votes">
       <p>{props.votes}</p>
       </div>
+     
     </article>
   )
 };
