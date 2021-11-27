@@ -15,6 +15,7 @@ export default function OptionsListItem(props) {
       <div className="options__votes">
       <p>{props.votes}</p>
       </div>
+      <button>vote</button>
      
     </article>
   )
