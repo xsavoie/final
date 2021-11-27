@@ -9,7 +9,7 @@ export default function Avatar(props){
   // https://i.imgur.com/5KfNDSg.jpeg
 
   const { user, setUser } = useContext(UserContext);
- const [avatar, setAvatar] = useState("");
+ const [avatar, setAvatar] = useState(user.avatar || "");
  const { setShowAvatarForm } = props;
 
   function editAvatar(avatar) {
