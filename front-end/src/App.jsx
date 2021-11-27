@@ -74,7 +74,7 @@ function App() {
         axios.get("/api/confessions/most_recent")
       ]).then((res) => {
         const idArray = res[0].data;
-        const idToDisplay = idArray
+        const idToDisplay = idArray;
 
         return validateQuery(idToDisplay);
       }).then((res) => {
@@ -104,7 +104,7 @@ function App() {
         axios.get("/api/confessions/most_recent/category", { params: { confessionFeed } })
       ]).then((res) => {
         const idArray = res[0].data;
-        const idToDisplay = idArray
+        const idToDisplay = idArray;
 
         return validateQuery(idToDisplay);
       }).then((res) => {
@@ -116,7 +116,7 @@ function App() {
   }, [confessionFeed]);
 
 
-  const [polls, setPolls] = useState([])
+  const [polls, setPolls] = useState([]);
 
   useEffect(() => {
     Promise.all([
@@ -141,7 +141,7 @@ function App() {
           setPageToDisplay={setPageToDisplay}
         />
         {showForm && <ConfessionForm confessions={confessions} setConfessions={setConfessions} setShowForm={setShowForm} setPageToDisplay={setPageToDisplay}/>}
-        {/* <PollsForm/> */}
+        <PollsForm/>
         <Routes>
           <Route path="/chat" element={<Chat />}></Route>
           <Route path="/Profile" element={<Profile />}></Route>
