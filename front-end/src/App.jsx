@@ -126,7 +126,7 @@ function App() {
       const idToDisplay = res[0].data
       return axios.get("/api/polls/polls", { params: { idToDisplay } })
     }).then(res => {
-      console.log("HERE", res.data)
+      // console.log("HERE", res.data)
       setPolls(res.data)
     })
   }, []);
@@ -143,7 +143,7 @@ function App() {
     })
   }, []);
 
-  console.log(polls)
+  // console.log(polls)
 
 
   return (
@@ -164,7 +164,7 @@ function App() {
           <Route path="/chat" element={<Chat />}></Route>
           <Route path="/Profile" element={<Profile />}></Route>
           <Route path="/" element={!showLogin && !showRegister && <ConfessionDisplay confessions={confessions} setConfessions={setConfessions} pageToDisplay={pageToDisplay} setPageToDisplay={setPageToDisplay} />} ></Route>
-          <Route path="polls" element={<PollsList polls={polls} totalVotes={totalVotes} setTotalVotes={setTotalVotes}/>} ></Route>
+          <Route path="polls" element={<PollsList polls={polls} setPolls={setPolls} totalVotes={totalVotes} setTotalVotes={setTotalVotes}/>} ></Route>
 
         </Routes>
         <LoginForm showLogin={showLogin} setShowLogin={setShowLogin} showRegister={showRegister} setShowRegister={setShowRegister} />

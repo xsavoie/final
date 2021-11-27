@@ -81,9 +81,23 @@ export default function OptionsForm(props) {
 
   const addOption = () => {
     setOptionLists([...optionLists, optionLists.length])
+    console.log(optionLists)
     setOptions([...options, ""])
+    console.log(options)
   }
 
+  // const [options, setOptions] = useState(["", ""])
+  // const [optionLists, setOptionLists] = useState([0, 1])
+
+  const removeOption = (options, optionLists) => {
+    const optionsCopy = [...options]
+    console.log("optionsCopy--->", optionsCopy)
+    const optionListsCopy = [...optionLists]
+    console.log("optionListCopy--->", optionListsCopy)
+    let max = optionListsCopy.length -1
+    setOptionLists(optionListsCopy.slice(0, max))
+    setOptions(optionsCopy.slice(0, max))
+  }
 
 
   return (
@@ -108,7 +122,7 @@ export default function OptionsForm(props) {
         <Button
           variant="primary"
           size="sm"
-          onClick={() => {}}
+          onClick={() => {removeOption(options, optionLists)}}
         >
           {/* it will remove one by one option to the poll if user change his mind */}
           -

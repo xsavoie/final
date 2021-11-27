@@ -1,4 +1,5 @@
 const db = require('../db');
+const { options } = require('../routes');
 
 //  query all polls
 
@@ -68,10 +69,11 @@ const getOptionsForPoll = function (pollId) {
 exports.getOptionsForPoll = getOptionsForPoll;
 
 const getTotalResultsForPoll = function (pollId) {
-  const queryString = `SELECT  COUNT(results.id) 
+  const queryString = `SELECT options.poll_id,  COUNT(results.id) 
   FROM results
   JOIN options ON options.id = option_id
-  WHERE options.poll_id = $1;
+  WHERE options.poll_id = $1
+  GROUP BY options.poll_id;
   `
   const queryParams = [pollId];
 
@@ -95,7 +97,7 @@ const mostRecentPoll = function () {
     ORDER BY created_at DESC
     LIMIT 5;
   `;
- 
+
   return db
     .query(queryString)
     .then((result) => {
@@ -109,25 +111,25 @@ const mostRecentPoll = function () {
 }
 exports.mostRecentPoll = mostRecentPoll;
 
-// const getResultsForPoll = function (pollId) {
-//   const queryString = `SELECT results.votes, option_id
-//   FROM results
-//   JOIN options ON options.id = option_id
-//   WHERE options.poll_id = $1;
-//   `
-//   const queryParams = [pollId];
+const getResultsForPoll = function (pollId) {
+  const queryString = `SELECT results, option_id
+  FROM results
+  JOIN options ON options.id = option_id
+  WHERE options.poll_id = $1;
+  `
+  const queryParams = [pollId];
 
-//   return db
-//     .query(queryString, queryParams)
-//     .then((result) => {
-//       return result.rows;
-//     })
-//     .catch((err) => {
-//       console.log("get one poll err");
-//       console.log(err.message);
-//     });
-// }
-// exports.getResultsForPoll = getResultsForPoll;
+  return db
+    .query(queryString, queryParams)
+    .then((result) => {
+      return result.rows;
+    })
+    .catch((err) => {
+      console.log("get one poll err");
+      console.log(err.message);
+    });
+}
+exports.getResultsForPoll = getResultsForPoll;
 
 
 //  create new poll
@@ -160,7 +162,7 @@ const addOptions = function (poll_id, content) {
 
   const queryString = `INSERT INTO options (poll_id, content)
     VALUES ($1, $2) RETURNING *;`
- 
+
   const queryParams = [poll_id, content];
 
 
@@ -199,7 +201,29 @@ const addResults = function (option_id, user_id) {
 }
 exports.addResults = addResults;
 
+const checkIfVoted = function (poll_id, user_id) {
+  const queryString = `
+  SELECT results.user_id FROM polls
+  JOIN options ON poll_id = polls.id
+  JOIN results ON option_id = options.id
+  WHERE polls.id = $1
+  AND results.user_id = $2;
+  `;
+
+  const queryParams = [poll_id, user_id];
+
+  return db
+    .query(queryString, queryParams)
+    .then((result) => {
+      console.log("Success")
+      return result.rows[0];
+    })
+    .catch((err) => {
+      console.log("check if voted err");
+      console.log(err.message);
+    });
+}
+exports.checkIfVoted = checkIfVoted;
 
 
-
-
+ 
