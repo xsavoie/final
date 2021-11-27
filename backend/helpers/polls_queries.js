@@ -49,8 +49,8 @@ exports.getOnePoll = getOnePoll;
 const getOptionsForPoll = function (pollId) {
   const queryString = `SELECT options.*, count(results)
   FROM options
-  JOIN results ON options.id = option_id
-  WHERE options.poll_id = $1
+  LEFT JOIN results ON options.id = option_id
+  WHERE poll_id = $1
   GROUP BY options.id;
   `
   const queryParams = [pollId];
@@ -66,6 +66,28 @@ const getOptionsForPoll = function (pollId) {
     });
 }
 exports.getOptionsForPoll = getOptionsForPoll;
+
+const mostRecentPoll = function () {
+
+  const queryString = `
+    SELECT id
+    FROM polls
+    ORDER BY created_at DESC
+    LIMIT 5;
+  `;
+ 
+
+  return db
+    .query(queryString)
+    .then((result) => {
+      return result.rows;
+    })
+    .catch((err) => {
+      console.log("get one confession err");
+      console.log(err.message);
+    });
+}
+exports.mostRecentPoll = mostRecentPoll;
 
 // const getResultsForPoll = function (pollId) {
 //   const queryString = `SELECT results.votes, option_id
