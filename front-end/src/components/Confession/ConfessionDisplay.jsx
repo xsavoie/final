@@ -46,25 +46,6 @@ export default function ConfessionDisplay(props) {
 
   return (
     <div>
-      <span className="page-control">
-        <Button
-          disabled={props.pageToDisplay > 1 ? "" : "false"}
-          onClick={() => {
-            props.setPageToDisplay((prevState) => (prevState - 1));
-            window.scrollTo(0, 0);
-          }}>
-          Previous Page
-        </Button>
-        <span><strong>{`page: ${props.pageToDisplay}`}</strong></span>
-        <Button
-          disabled={props.pageToDisplay >= maxPage ? "false" : ""}
-          onClick={() => {
-            props.setPageToDisplay((prevState) => (prevState + 1));
-            window.scrollTo(0, 0);
-          }}>
-          Next Page
-        </Button>
-      </span>
       {/* <span><strong>{`page: ${props.pageToDisplay}`}</strong></span> */}
       {containerToDisplay(parsedLists)}
       <span className="page-control">

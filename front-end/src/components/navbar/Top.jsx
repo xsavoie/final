@@ -50,9 +50,15 @@ export default function Top(props) {
                 <NavDropdown.Item onClick={() => handleRouteChange("popular")}
                 ><Link to="/" >Most popular</Link>
                 </NavDropdown.Item>
+                <NavDropdown.Item
+                ><Link to="/polls" >Polls</Link>
+                </NavDropdown.Item>
               </NavDropdown>
               {user.id && !props.showForm && <Nav.Link onClick={() => props.setShowForm(true)}><Link to="/" >Confess</Link></Nav.Link>}
               {user.id && props.showForm && <Nav.Link onClick={() => props.setShowForm(false)}>Confess</Nav.Link>}
+
+              {user.id && !props.showPollForm && <Nav.Link onClick={() => props.setShowPollForm(true)}><Link to="/polls" >Create a Poll</Link></Nav.Link>}
+              {user.id && props.showPollForm && <Nav.Link onClick={() => props.setShowPollForm(false)}>Create a Poll</Nav.Link>}
               {user.id && <Nav.Link href="/chat"><Link to="/chat">Chat</Link></Nav.Link>}
               {user.id && <NavDropdown title={user.email} id="basic-nav-dropdown">
                 <NavDropdown.Item href="/profile">Go to profile</NavDropdown.Item>
