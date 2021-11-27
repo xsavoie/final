@@ -7,7 +7,7 @@ import './AboutMe.scss'
 export default function AboutMe(props) {
 
   const { user, setUser } = useContext(UserContext);
-  const [about, setAbout] = useState("");
+  const [about, setAbout] = useState(user.about || "");
   const { setShowAboutMeForm } = props;
 
 
