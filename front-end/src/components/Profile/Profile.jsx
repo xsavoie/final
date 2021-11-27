@@ -9,7 +9,7 @@ import ConfessionForm from "../Confession/ConfessionForm";
 import ConfessionList from '../Confession/ConfessionsList';
 import Avatar from "./Avatar";
 import AboutMe from "./AboutMe";
-import MyConfessions from './MyConfessions'
+import MyConfessionsList from './MyConfessionsList' 
 
 
 
@@ -68,7 +68,7 @@ export default function Profile(props) {
 
             <div className="confession-container">
               <ConfessionForm />
-              <MyConfessions />
+              <MyConfessionsList />
        
             </div>
 
