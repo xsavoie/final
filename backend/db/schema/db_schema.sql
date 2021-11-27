@@ -34,6 +34,7 @@ CREATE TABLE "confessions" (
   "id" SERIAL PRIMARY KEY,
   "user_id" INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
   "category_id" INTEGER NOT NULL REFERENCES categories(id) ON DELETE CASCADE,
+  "title" TEXT NOT NULL,
   "content" TEXT NOT NULL,
   "created_at" VARCHAR(255)
 );

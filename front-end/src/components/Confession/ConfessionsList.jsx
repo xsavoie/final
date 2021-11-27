@@ -16,6 +16,7 @@ export default function ConfessionList(props) {
       key={confession.id}
       id={confession.id}
       categoryId={confession.category_id}
+      title={confession.title}
       content={confession.content}
       createdAt={dayjs(confession.created_at).fromNow()}
       likes={confession.likes}

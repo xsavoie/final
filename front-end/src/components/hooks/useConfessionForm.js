@@ -6,6 +6,7 @@ import { UserContext } from "../contexts/UserContext";
 export default function useConfessionForm(props) {
 
   const { user } = useContext(UserContext);
+  const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [category, setCategory] = useState("");
   const [error, setError] = useState("");
@@ -57,6 +58,7 @@ export default function useConfessionForm(props) {
       userId,
       categoryId,
       content,
+      title,
       created_at
     };
 
@@ -70,6 +72,7 @@ export default function useConfessionForm(props) {
           props.setPageToDisplay(1);
           props.setShowForm(false);
           setContent("");
+          setTitle("");
         })
         .catch(err => {
           console.log(err.message);
@@ -79,6 +82,8 @@ export default function useConfessionForm(props) {
 
   return {
     user,
+    title,
+    setTitle,
     content,
     setContent,
     category,
