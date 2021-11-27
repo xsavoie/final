@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
-import { Form, Button } from 'react-bootstrap'
-import "./RegisterForm.scss"
+import { Form, Button } from 'react-bootstrap';
+import "./RegisterForm.scss";
 import { UserContext } from "../contexts/UserContext";
 import { useFormFields } from "../hooks/useFormFields";
 
@@ -12,11 +12,11 @@ export default function RegisterForm(props) {
     email: "",
     password: "",
     confirmPassword: ""
-  })
+  });
 
   const [error, setError] = useState("");
 
-  const { setUser } = useContext(UserContext)
+  const { setUser } = useContext(UserContext);
 
   const validateEmail = (email) => {
     return String(email)
@@ -40,11 +40,11 @@ export default function RegisterForm(props) {
       return false;
     }
     return true;
-  }
+  };
 
   
   function registerCheck(event) {
-    const valid = validateRegister(fields)
+    const valid = validateRegister(fields);
 
     if (valid) {
       const email = fields.email;
@@ -52,29 +52,29 @@ export default function RegisterForm(props) {
       let request = {
         email,
         password
-      }
+      };
 
       // console.log("request", request)
       axios.post('http://localhost:3000/register', request)
         .then(res => {
-          const test = res.data
+          const response = res.data;
 
-          if (typeof test === "string") {
-            setError(test)
+          if (typeof response === "string") {
+            setError(response);
           }
-          if (typeof test === "object") {
-            const user = res.data[0]
-            setUser(user)
-            sessionStorage.setItem("user", JSON.stringify(user))
-            props.setShowRegister(false)
-            console.log("res: ", user)
+          if (typeof response === "object") {
+            const user = res.data[0];
+            setUser(user);
+            sessionStorage.setItem("user", JSON.stringify(user));
+            props.setShowRegister(false);
+            console.log("res: ", user);
           }
         })
         .catch(err => {
           console.log(err);
         })
-    }
-  }
+    };
+  };
 
   return (
     <div className={`${!props.showRegister ? "register-active" : ""} register-show`}>
@@ -119,7 +119,7 @@ export default function RegisterForm(props) {
           variant="primary"
           type="submit"
           onClick={() => {
-            registerCheck()
+            registerCheck();
             // props.setShowRegister(false)
           }}>
           Submit

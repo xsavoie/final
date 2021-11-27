@@ -48,7 +48,6 @@ export default function Profile(props) {
 
         </div>
 
-
         <div className="about-confessions-container">
 
         <form className="about-block">
@@ -74,6 +73,9 @@ export default function Profile(props) {
 
 
       </body>
+
+
+
 
     );
   

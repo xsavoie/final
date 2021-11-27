@@ -1,12 +1,12 @@
-import { useContext, useEffect, useState } from "react"
-import { UserContext } from "../contexts/UserContext"
+import { useContext, useEffect, useState } from "react";
+import { UserContext } from "../contexts/UserContext";
 import axios from "axios";
 import classNames from "classnames";
 
 
 export default function useConfessionItem(props) {
 
-  const { user } = useContext(UserContext)
+  const { user } = useContext(UserContext);
   const [liked, setLiked] = useState(false);
 
 
@@ -16,18 +16,18 @@ export default function useConfessionItem(props) {
       const confessionInfo = {
         userId: user.id,
         confessionId: props.id
-      }
+      };
       // console.log(confessionInfo)
       return axios.get("/api/confessions/likes/verify", { params: { confessionInfo } })
-      .then(res => {
-        // console.log("RES", res.data)
-        if (res.data) {
-          setLiked(true)
-        }
-      }).catch(err => {
-        console.log(err.message)
-      })
-    }
+        .then(res => {
+          // console.log("RES", res.data)
+          if (res.data) {
+            setLiked(true);
+          }
+        }).catch(err => {
+          console.log(err.message);
+        })
+    };
   }, [user.id, props.id])
 
 
@@ -47,32 +47,30 @@ export default function useConfessionItem(props) {
 
 
   const increaseLikeState = (confessionsState, confessionId) => {
-    const confessionsCopy = [ ...confessionsState]
-    
-    let updatedConfession = confessionsCopy.find((confession) => confession.id === confessionId)
+    const confessionsCopy = [...confessionsState];
+
+    let updatedConfession = confessionsCopy.find((confession) => confession.id === confessionId);
     updatedConfession.likes += 1;
-  
+
     const newState = confessionsCopy.map(confession =>
       confession.id === confessionId ? updatedConfession : confession
-      );
-  
-    // return updatedConfession
-    return newState
-  }
+    );
+
+    return newState;
+  };
 
   const decreaseLikeState = (confessionsState, confessionId) => {
-    const confessionsCopy = [ ...confessionsState]
-    
-    let updatedConfession = confessionsCopy.find((confession) => confession.id === confessionId)
+    const confessionsCopy = [...confessionsState];
+
+    let updatedConfession = confessionsCopy.find((confession) => confession.id === confessionId);
     updatedConfession.likes -= 1;
-  
+
     const newState = confessionsCopy.map(confession =>
       confession.id === confessionId ? updatedConfession : confession
-      );
-  
-    // return updatedConfession
-    return newState
-  }
+    );
+
+    return newState;
+  };
 
   // insert like in db and modifies state
   const submitLike = (userId, confessionId, confessionState) => {
@@ -87,8 +85,8 @@ export default function useConfessionItem(props) {
         props.setConfessions(increaseLikeState(confessionState, confessionId));
       }).catch(err => {
         console.log(err.message);
-      })
-  }
+      });
+  };
 
   // delete like in db and modifies state
   const deleteLike = (userId, confessionId, confessionState) => {
@@ -100,7 +98,7 @@ export default function useConfessionItem(props) {
     return axios.delete("/api/confessions/likes", { data: { likeInfo } })
       .then(res => {
         // console.log(res.data);
-        props.setConfessions(decreaseLikeState(confessionState, confessionId))
+        props.setConfessions(decreaseLikeState(confessionState, confessionId));
       }).catch(err => {
         console.log(err.message);
       })
@@ -114,5 +112,15 @@ export default function useConfessionItem(props) {
 
 
 
-  return { user, liked, setLiked, categoryParser, increaseLikeState, decreaseLikeState, submitLike, deleteLike, badgeClass }
+  return {
+    user,
+    liked,
+    setLiked,
+    categoryParser,
+    increaseLikeState,
+    decreaseLikeState,
+    submitLike,
+    deleteLike,
+    badgeClass
+  }
 }
