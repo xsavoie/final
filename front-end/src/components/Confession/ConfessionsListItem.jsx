@@ -3,8 +3,9 @@ import "./ConfessionsListItem.scss";
 import Badge from 'react-bootstrap/Badge';
 import Button from 'react-bootstrap/Button';
 import CommentsList from "../Comments/CommentsList";
-import useConfessionItem from "../hooks/useConfessionItem";
-
+import useConfessionItem from "../../hooks/useConfessionItem";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from '@fortawesome/free-solid-svg-icons'
 
 
 export default function ConfessionListItem(props) {
@@ -25,8 +26,8 @@ export default function ConfessionListItem(props) {
     <article className="confession__article">
       <header className="confession__detail-top">
         <Badge className={badgeClass}>{categoryParser(props.categoryId)}</Badge>
-        <p>{props.title}</p>
-        <p> {props.createdAt}</p>
+        <p className="confession__title">{props.title}</p>
+        <p className="confession__created_at"> {props.createdAt}</p>
       </header>
 
       <div className="confession__content">
@@ -37,11 +38,11 @@ export default function ConfessionListItem(props) {
           {liked && <span onClick={() => {
             deleteLike(user.id, props.id, props.confessionsToUpdate);
             setLiked(false);
-          }}>Liked! {props.likes}</span>}
+          }}><FontAwesomeIcon className="like-icon-liked" size="lg" icon={faStar} /> {props.likes}</span>}
           {!liked && <span onClick={() => {
             submitLike(user.id, props.id, props.confessionsToUpdate);
             setLiked(true);
-          }}>Like {props.likes}</span>}
+          }}><FontAwesomeIcon className="like-icon" size="lg" icon={faStar} /> {props.likes}</span>}
         </span>
         <div>
 

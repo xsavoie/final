@@ -18,6 +18,7 @@ export default function Top(props) {
     props.setShowRegister(false);
     props.setShowLogin(false);
     props.setShowForm(false);
+    props.setShowPollForm(false);
   };
 
   return (
@@ -50,9 +51,43 @@ export default function Top(props) {
                 <NavDropdown.Item onClick={() => handleRouteChange("popular")}
                 ><Link to="/" >Most popular</Link>
                 </NavDropdown.Item>
+                <NavDropdown.Item
+                ><Link to="/polls" >Polls</Link>
+                </NavDropdown.Item>
               </NavDropdown>
-              {user.id && !props.showForm && <Nav.Link onClick={() => props.setShowForm(true)}><Link to="/" >Confess</Link></Nav.Link>}
-              {user.id && props.showForm && <Nav.Link onClick={() => props.setShowForm(false)}>Confess</Nav.Link>}
+              {user.id && !props.showForm &&
+                <Nav.Link
+                  onClick={() => {
+                    props.setShowForm(true);
+                    props.setShowPollForm(false);
+                  }}>
+                  <Link to="/" >Confess</Link>
+                </Nav.Link>}
+
+              {user.id && props.showForm &&
+                <Nav.Link
+                  onClick={() => {
+                    props.setShowForm(false);
+                    props.setShowPollForm(false);
+                  }}>Confess
+                </Nav.Link>}
+
+              {user.id && !props.showPollForm &&
+                <Nav.Link
+                  onClick={() => {
+                    props.setShowPollForm(true);
+                    props.setShowForm(false);
+                  }}>
+                  <Link to="/polls" >Create a Poll</Link>
+                </Nav.Link>}
+
+              {user.id && props.showPollForm && <Nav.Link
+                onClick={() => {
+                  props.setShowPollForm(false);
+                  props.setShowForm(false);
+                }}>Create a Poll
+              </Nav.Link>}
+
               {user.id && <Nav.Link href="/chat"><Link to="/chat">Chat</Link></Nav.Link>}
               {user.id && <NavDropdown title={user.email} id="basic-nav-dropdown">
                 <NavDropdown.Item href="/profile">Go to profile</NavDropdown.Item>
@@ -62,15 +97,15 @@ export default function Top(props) {
               {!user.id &&
                 <Nav.Link
                   onClick={() => {
-                    props.setShowRegister(false)
-                    props.setShowLogin(true)
+                    props.setShowRegister(false);
+                    props.setShowLogin(true);
                   }}>Login
                 </Nav.Link>}
               {!user.id &&
                 <Nav.Link
                   onClick={() => {
-                    props.setShowLogin(false)
-                    props.setShowRegister(true)
+                    props.setShowLogin(false);
+                    props.setShowRegister(true);
                   }}>Register
                 </Nav.Link>}
             </Nav>

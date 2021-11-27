@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { UserContext } from "../contexts/UserContext";
+import { UserContext } from "../components/contexts/UserContext";
 import axios from "axios";
 import classNames from "classnames";
 

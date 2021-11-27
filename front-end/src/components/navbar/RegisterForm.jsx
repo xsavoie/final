@@ -3,7 +3,7 @@ import axios from "axios";
 import { Form, Button } from 'react-bootstrap';
 import "./RegisterForm.scss";
 import { UserContext } from "../contexts/UserContext";
-import { useFormFields } from "../hooks/useFormFields";
+import { useFormFields } from "../../hooks/useFormFields";
 
 
 export default function RegisterForm(props) {
