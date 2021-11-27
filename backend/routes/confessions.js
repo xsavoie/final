@@ -198,9 +198,9 @@ confessions.post('/new_comment', function (req, res) {
 
 // post new confession
 confessions.post('/new', function (req, res) {
-  const { userId, categoryId, content, created_at } = req.body.newConfession;
+  const { userId, categoryId, title, content, created_at } = req.body.newConfession;
 
-  addConfession(userId, categoryId, content, created_at)
+  addConfession(userId, categoryId, title, content, created_at)
     .then(confession => {
       res.json(confession);
       console.log("*********", confession);

@@ -18,12 +18,14 @@ export default function ConfessionListItem(props) {
     deleteLike,
     badgeClass,
   } = useConfessionItem(props);
-
+  
+  // const title = "test test test"
 
   return (
     <article className="confession__article">
       <header className="confession__detail-top">
         <Badge className={badgeClass}>{categoryParser(props.categoryId)}</Badge>
+        <p>{props.title}</p>
         <p> {props.createdAt}</p>
       </header>
 

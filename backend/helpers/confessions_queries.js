@@ -71,13 +71,13 @@ exports.getAllConfessionsForCategory = getAllConfessionsForCategory;
 
 //  create new confession
 
-const addConfession = function (userId, categoryId, content, created_at) {
+const addConfession = function (userId, categoryId, title, content, created_at) {
 
-  const queryString = `INSERT INTO confessions (user_id, category_id, content, created_at)
-    VALUES ($1, $2, $3, $4) RETURNING *;`
+  const queryString = `INSERT INTO confessions (user_id, category_id, title, content, created_at)
+    VALUES ($1, $2, $3, $4, $5) RETURNING *;`
 
 
-  const queryParams = [userId, categoryId, content, created_at];
+  const queryParams = [userId, categoryId, title, content, created_at];
   console.log("query params", queryParams)
 
   return db
