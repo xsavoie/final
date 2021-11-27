@@ -120,12 +120,21 @@ function App() {
 
   useEffect(() => {
     Promise.all([
-      axios.get("/api/polls/polls")
+      axios.get("/api/polls/most_recent")
     ]).then((res) => {
-      // console.log("*******", res[0].data)
-      setPolls(res[0].data)
+      console.log("*******RES", res[0].data)
+      // setPolls(res[0].data)
     })
   }, []);
+  
+  // useEffect(() => {
+  //   Promise.all([
+  //     axios.get("/api/polls/polls")
+  //   ]).then((res) => {
+  //     // console.log("*******", res[0].data)
+  //     setPolls(res[0].data)
+  //   })
+  // }, []);
 
 
   return (

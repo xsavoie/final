@@ -8,9 +8,9 @@ const db = require('../db');
 // moment().format(); 
 const helpers = require('../helpers/dataHelpers')
 
-const { pollsParser } = helpers()
+const { pollsParser, idParser } = helpers()
 
-const {getAllPolls, getOnePoll, getOptionsForPoll, getResultsForPoll, addPoll, addOptions, addResults } = require('../helpers/polls_queries');
+const {getAllPolls, getOnePoll, getOptionsForPoll, getResultsForPoll, addPoll, addOptions, addResults, mostRecentPoll } = require('../helpers/polls_queries');
 
 
 polls.get('/polls', function (req, res) {
@@ -43,6 +43,15 @@ polls.get('/polls', function (req, res) {
     });
   }
 
+});
+
+polls.get('/most_recent', function (req, res) {
+  mostRecentPoll()
+    .then(id => {
+      const idArray = idParser(id);
+      console.log(idArray.length)
+      res.json(idArray)
+    })
 });
 
 
