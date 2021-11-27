@@ -9,7 +9,7 @@ dayjs.extend(relativeTime)
 
 export default function PollsList(props) {
 
-
+    
 
 
   const parsedPolls = props.polls.map((poll) => (
@@ -19,6 +19,11 @@ export default function PollsList(props) {
       content={poll.content}
       createdAt={dayjs(poll.created_at).fromNow()}
       options={poll.options}
+      totalVotes={props.totalVotes}
+      setTotalVotes={props.totalVotes}
+      setPolls={props.setPolls}
+      polls={props.polls}
+
     />
   ));
 

@@ -37,7 +37,7 @@ function App() {
 
   // const providerValue = useMemo(() => ({user, setUser}), [user, setUser])
 
- 
+
 
   const validateQuery = (idToDisplay) => {
     if (idToDisplay.length < 10) {
@@ -120,18 +120,36 @@ function App() {
 
   useEffect(() => {
     Promise.all([
-      axios.get("/api/polls/polls")
+      axios.get("/api/polls/most_recent")
     ]).then((res) => {
-      // console.log("*******", res[0].data)
-      setPolls(res[0].data)
+      // console.log("*******RES", res[0].data)
+      const idToDisplay = res[0].data
+      return axios.get("/api/polls/polls", { params: { idToDisplay } })
+    }).then(res => {
+      // console.log("HERE", res.data)
+      setPolls(res.data)
     })
   }, []);
+
+
+  const [totalVotes, setTotalVotes] = useState([]);
+
+  useEffect(() => {
+    Promise.all([
+      axios.get("/api/polls/results")
+    ]).then((res) => {
+      // console.log("*******votes", res[0].data)
+      setTotalVotes(res[0].data)
+    })
+  }, []);
+
+  // console.log(polls)
 
 
   return (
     <BrowserRouter>
       <div className="App">
-        
+
         <Top
           showForm={showForm}
           setShowForm={setShowForm}
@@ -140,13 +158,14 @@ function App() {
           setShowRegister={setShowRegister}
           setPageToDisplay={setPageToDisplay}
         />
-        {showForm && <ConfessionForm confessions={confessions} setConfessions={setConfessions} setShowForm={setShowForm} setPageToDisplay={setPageToDisplay}/>}
-        <PollsForm/>
+        {showForm && <ConfessionForm confessions={confessions} setConfessions={setConfessions} setShowForm={setShowForm} setPageToDisplay={setPageToDisplay} />}
+        <PollsForm polls={polls} setPolls={setPolls} />
         <Routes>
           <Route path="/chat" element={<Chat />}></Route>
           <Route path="/Profile" element={<Profile />}></Route>
-          <Route path="/" element={!showLogin && !showRegister && <ConfessionDisplay confessions={confessions} setConfessions={setConfessions} pageToDisplay={pageToDisplay} setPageToDisplay={setPageToDisplay}/>} ></Route>
-          <Route path="polls" element={<PollsList polls={polls} />} ></Route>
+          <Route path="/" element={!showLogin && !showRegister && <ConfessionDisplay confessions={confessions} setConfessions={setConfessions} pageToDisplay={pageToDisplay} setPageToDisplay={setPageToDisplay} />} ></Route>
+          <Route path="polls" element={<PollsList polls={polls} setPolls={setPolls} totalVotes={totalVotes} setTotalVotes={setTotalVotes}/>} ></Route>
+
         </Routes>
         <LoginForm showLogin={showLogin} setShowLogin={setShowLogin} showRegister={showRegister} setShowRegister={setShowRegister} />
         <RegisterForm showRegister={showRegister} setShowRegister={setShowRegister} showLogin={showLogin} setShowLogin={setShowLogin} />

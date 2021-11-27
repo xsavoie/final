@@ -1,11 +1,16 @@
 import React, { useRef, useEffect, useState, useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 import './profile.scss';
+
 import axios from "axios";
 
+
 import ConfessionForm from "../Confession/ConfessionForm";
+import ConfessionList from '../Confession/ConfessionsList';
 import Avatar from "./Avatar";
 import AboutMe from "./AboutMe";
+import MyConfessions from './MyConfessions'
+
 
 
 
@@ -23,9 +28,10 @@ export default function Profile(props) {
     return (
       
       <body className="profile-page"> 
+
+      <div className="name-avatar-container">
         
         <h3 className="username-display">Hi {user.username}!</h3>
-
 
         <form className="avatar-block">
             <div>
@@ -41,28 +47,35 @@ export default function Profile(props) {
             > 
               Upload a new picture! 
             </button> { showAvatarForm ? <Avatar setShowAvatarForm={setShowAvatarForm}/> : null }
-          </form>
+        </form>
+
+        </div>
+
+        <div className="about-confessions-container">
+
+        <form className="about-block">
+          <div className="about-me-label"> About Me: <br/>{user.about} </div>
+          <button
+            type="button"
+            className="btn-edit"
+            onClick={(event) => {
+              event.preventDefault()
+              setShowAboutMeForm(true);
+            }} > 
+          Edit about me! 
+          </button> { showAboutMeForm ? <AboutMe setShowAboutMeForm={setShowAboutMeForm}/> : null }
+        </form>
+
+            <div className="confession-container">
+              <ConfessionForm />
+              <MyConfessions />
+       
+            </div>
+
+            </div>
 
 
-          <form className="about-block">
-          <div> About Me: {user.about} </div>
-            <button
-              type="button"
-              className="btn-edit"
-              onClick={(event) => {
-                event.preventDefault()
-                setShowAboutMeForm(true);
-              }}
-            > 
-            
-              Edit about me! 
-            </button> { showAboutMeForm ? <AboutMe setShowAboutMeForm={setShowAboutMeForm}/> : null }
-          </form>
-
-        </body>
-
-
-
+      </body>
 
     );
   

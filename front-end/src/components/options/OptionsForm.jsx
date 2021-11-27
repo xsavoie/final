@@ -14,14 +14,16 @@ export default function OptionsForm(props) {
   const [options, setOptions] = useState(["", ""])
   const [optionLists, setOptionLists] = useState([0, 1])
 
-  const {pollId} = props
 
-  const [form, setForm] = useState(false)
+  const {pollId, setPolls, pollContent} = props
 
-  const showOptions = () => {
-    setForm(true)
+  // const [form, setForm] = useState(false)
+
+  // const showOptions = () => {
+  //   setForm(true)
    
-  };
+
+
   const dataParser = (testData) => {
     let array = []
   
@@ -36,11 +38,16 @@ export default function OptionsForm(props) {
   
   }
 
+  const updatePollState = (state, newPoll) => {
+    const stateCopy = [ ...state];
+    stateCopy.unshift(newPoll)
+    const max = stateCopy.length - 1;
+  
+    return stateCopy.slice(0, max);
+  };
+
   const createOptions = () => {
     
-   console.log("=============>>>>>>>>>>>>>", options, "++++++++++++", pollId)
-
-
     const newOption = {
       poll_id: pollId,
       content: options
@@ -48,11 +55,16 @@ export default function OptionsForm(props) {
 
     const option = dataParser(newOption)
 
-    console.log("new option", newOption)
+    // console.log("new option", newOption)
     return axios.post("http://localhost:3000/api/polls/new_options",  option )
       .then(res => {
-        console.log(res.data);
-  
+        // console.log(res.data);
+        axios.get(`http://localhost:3000/api/polls/${pollId}`)
+        .then(res => {
+          // console.log("*********????????", res.data[0])
+          const newPoll = res.data[0];
+          props.setPolls(updatePollState(props.polls, newPoll))
+        })
       })
       .catch(err => {
         console.log(err.message);
@@ -69,28 +81,27 @@ export default function OptionsForm(props) {
 
   const addOption = () => {
     setOptionLists([...optionLists, optionLists.length])
+    console.log(optionLists)
     setOptions([...options, ""])
+    console.log(options)
   }
 
-    //insted of for loop
+  // const [options, setOptions] = useState(["", ""])
+  // const [optionLists, setOptionLists] = useState([0, 1])
+
+  const removeOption = (options, optionLists) => {
+    const optionsCopy = [...options]
+    console.log("optionsCopy--->", optionsCopy)
+    const optionListsCopy = [...optionLists]
+    console.log("optionListCopy--->", optionListsCopy)
+    let max = optionListsCopy.length -1
+    setOptionLists(optionListsCopy.slice(0, max))
+    setOptions(optionsCopy.slice(0, max))
+  }
 
 
-  // to have state with number of options by default(2)
-  //function for the number of options returns increase number by one, the state is chang, return an array of options and apen. to my form 
-
-
-  // onClick={() => {
-    
-  //   setClicker(clicker + 1)
-    
-  // }}
-
-  // setPageToDisplay((prevState) => (prevState - 1))
-
-  
   return (
-    <Form>
-    
+    <Form onSubmit={(e)=> e.preventDefault()}>
       <div>
         {optionLists.map((option, index) => {
           return (
@@ -98,16 +109,6 @@ export default function OptionsForm(props) {
           )
         })}
       </div>
-      {/* <Button
-          variant="primary"
-          size="sm"
-          onClick={() => {createOptions(poll_id, content)
-            setContent("")}}
-        >  */}
-        {/* it will automatically add two text box for options by default after add it will disappear and we will have + button */}
-          {/* Add options
-        </Button> */}
-          
           <Button
           variant="primary"
           size="sm"
@@ -121,7 +122,7 @@ export default function OptionsForm(props) {
         <Button
           variant="primary"
           size="sm"
-          onClick={() => {}}
+          onClick={() => {removeOption(options, optionLists)}}
         >
           {/* it will remove one by one option to the poll if user change his mind */}
           -
@@ -129,7 +130,12 @@ export default function OptionsForm(props) {
        <Button
           variant="primary"
           size="sm"
-          onClick={() => { createOptions()}}
+          onClick={() => { 
+            createOptions()
+            setOptions(["", ""])
+            setOptionLists([0, 1])
+            props.setPollContent("")
+          }}
         >
           submit
         </Button>

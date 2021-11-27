@@ -1,7 +1,3 @@
-//will add a content (similar with the confession)
-//has 4 different buttons 
-//this form will cahnge the state of the poll comntent
-
 import React, { useState, useContext } from "react"
 import axios from "axios";
 // import "./PollsForm.scss"
@@ -11,6 +7,7 @@ import { UserContext } from "../contexts/UserContext";
 
 import OptionsForm from "../options/OptionsForm";
 
+
 export default function PollsForm(props) {
 
   const { user } = useContext(UserContext);
@@ -19,11 +16,13 @@ export default function PollsForm(props) {
 
   const [form, setForm] = useState(false)
   const [pollId, setPollId] = useState(null)
+  const [pollContent, setPollContent] = useState("")
 
   const showOptions = () => {
     setForm(true)
    
   };
+  
 
   const createPoll = (userId, content) => {
     const created_at = new Date();
@@ -35,12 +34,13 @@ export default function PollsForm(props) {
    
     return axios.post("http://localhost:3000/api/polls/new", newPoll)
       .then(res => {
-        console.log("respons from frontend", res.data.id);
+        // console.log("response from frontend", res.data.id);
         setPollId(res.data.id)
+        setPollContent(res.data.content)
       })
     
       .catch(err => {
-        console.log("error fro frontend", err);
+        console.log("error from frontend", err);
       })
   };
 
@@ -64,7 +64,7 @@ export default function PollsForm(props) {
         >
           Add options
         </Button>}
-        {form && <OptionsForm pollId={pollId} />}
+        {form && <OptionsForm pollId={pollId} pollContent={pollContent} polls={props.polls} setPolls={props.setPolls} setPollContent={setContent}/>}
     
 
       </Form>
