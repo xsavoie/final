@@ -22,6 +22,7 @@ export default function PollsForm(props) {
     setForm(true)
    
   };
+  
 
   const createPoll = (userId, content) => {
     const created_at = new Date();
@@ -33,13 +34,13 @@ export default function PollsForm(props) {
    
     return axios.post("http://localhost:3000/api/polls/new", newPoll)
       .then(res => {
-        console.log("respons from frontend", res.data.id);
+        // console.log("response from frontend", res.data.id);
         setPollId(res.data.id)
         setPollContent(res.data.content)
       })
     
       .catch(err => {
-        console.log("error fro frontend", err);
+        console.log("error from frontend", err);
       })
   };
 
@@ -63,7 +64,7 @@ export default function PollsForm(props) {
         >
           Add options
         </Button>}
-        {form && <OptionsForm pollId={pollId} pollContent={pollContent} setPolls={props.setPolls}/>}
+        {form && <OptionsForm pollId={pollId} pollContent={pollContent} polls={props.polls} setPolls={props.setPolls} setPollContent={setContent}/>}
     
 
       </Form>

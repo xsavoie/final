@@ -38,6 +38,14 @@ export default function OptionsForm(props) {
   
   }
 
+  const updatePollState = (state, newPoll) => {
+    const stateCopy = [ ...state];
+    stateCopy.unshift(newPoll)
+    const max = stateCopy.length - 1;
+  
+    return stateCopy.slice(0, max);
+  };
+
   const createOptions = () => {
     
     const newOption = {
@@ -47,14 +55,15 @@ export default function OptionsForm(props) {
 
     const option = dataParser(newOption)
 
-    console.log("new option", newOption)
+    // console.log("new option", newOption)
     return axios.post("http://localhost:3000/api/polls/new_options",  option )
       .then(res => {
-        console.log(res.data);
+        // console.log(res.data);
         axios.get(`http://localhost:3000/api/polls/${pollId}`)
         .then(res => {
-          console.log("*********????????", res.data)
-          
+          // console.log("*********????????", res.data[0])
+          const newPoll = res.data[0];
+          props.setPolls(updatePollState(props.polls, newPoll))
         })
       })
       .catch(err => {
@@ -107,7 +116,12 @@ export default function OptionsForm(props) {
        <Button
           variant="primary"
           size="sm"
-          onClick={() => { createOptions()}}
+          onClick={() => { 
+            createOptions()
+            setOptions(["", ""])
+            setOptionLists([0, 1])
+            props.setPollContent("")
+          }}
         >
           submit
         </Button>
