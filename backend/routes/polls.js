@@ -11,7 +11,7 @@ const helpers = require('../helpers/dataHelpers')
 const { pollsParser, idParser } = helpers()
 
 
-const { getAllPolls, getOnePoll, getOptionsForPoll, getResultsForPoll, addPoll, addOptions, addResults, mostRecentPoll, getTotalResultsForPoll } = require('../helpers/polls_queries');
+const { getAllPolls, getOnePoll, getOptionsForPoll, getResultsForPoll, addPoll, addOptions, addResults, mostRecentPoll, getTotalResultsForPoll, checkIfVoted } = require('../helpers/polls_queries');
 
 
 
@@ -81,33 +81,6 @@ polls.get('/results', function (req, res) {
 });
 
 
-polls.get(`/:id`, function (req, res) {
-
-  let pollArray = []
-  let array = []
-  let id = Number(req.params.id)
-  getOnePoll(id)
-    .then((polls) => {
-      array.push(polls)
-      return getOptionsForPoll(id);
-    })
-    .then((options) => {
-      array.push(options)
-      return array
-    })
-    .then(array => {
-      pollArray.push(pollsParser(array))
-      res.json(pollArray);
-    })
-    .catch((err) => {
-      console.log(err.message);
-    });
-
-
-});
-
-
-
 // post new poll
 polls.post('/new', function (req, res) {
   const { userId, content, created_at } = req.body
@@ -154,10 +127,10 @@ polls.post('/new_options', function (req, res) {
 polls.post('/new_options_results', function (req, res) {
   const { option_id, user_id } = req.body
 
-  // console.log("req.body", req.body)
+  console.log("req.body", req.body)
   addResults(option_id, user_id)
     .then(result => {
-      // console.log("*********", result);
+      console.log("*********", result);
       res.json(result);
       console.log("entered in db");
     })
@@ -166,7 +139,46 @@ polls.post('/new_options_results', function (req, res) {
     })
 });
 
+polls.get('/verify', function (req, res) {
+  const { poll_id, user_id } = JSON.parse(req.query.pollInfo)
 
+  console.log("!req.body!", JSON.parse(req.query.pollInfo))
+  // console.log("%$%$%$%$", req)
+  checkIfVoted(poll_id, user_id)
+    .then(result => {
+      console.log("*********VOTED???", result);
+      res.json(result);
+      // console.log("entered in db");
+    })
+    .catch(err => {
+      console.log(err.message);
+    })
+});
+
+polls.get(`/:id`, function (req, res) {
+
+  let pollArray = []
+  let array = []
+  let id = Number(req.params.id)
+  getOnePoll(id)
+    .then((polls) => {
+      array.push(polls)
+      return getOptionsForPoll(id);
+    })
+    .then((options) => {
+      array.push(options)
+      return array
+    })
+    .then(array => {
+      pollArray.push(pollsParser(array))
+      res.json(pollArray);
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+
+
+});
 
 
 
