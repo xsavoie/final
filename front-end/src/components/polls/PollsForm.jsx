@@ -16,6 +16,7 @@ export default function PollsForm(props) {
 
   const [form, setForm] = useState(false)
   const [pollId, setPollId] = useState(null)
+  const [pollContent, setPollContent] = useState("")
 
   const showOptions = () => {
     setForm(true)
@@ -34,6 +35,7 @@ export default function PollsForm(props) {
       .then(res => {
         console.log("respons from frontend", res.data.id);
         setPollId(res.data.id)
+        setPollContent(res.data.content)
       })
     
       .catch(err => {
@@ -61,7 +63,7 @@ export default function PollsForm(props) {
         >
           Add options
         </Button>}
-        {form && <OptionsForm pollId={pollId}/>}
+        {form && <OptionsForm pollId={pollId} pollContent={pollContent} setPolls={props.setPolls}/>}
     
 
       </Form>

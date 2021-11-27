@@ -8,7 +8,7 @@ import "./PollsListItem.scss"
 export default function PollsListItem(props) {
 
 
-  const {content, createdAt, options} = props;
+  const {content, createdAt, options, setPolls} = props;
   
    
      return (
@@ -19,7 +19,7 @@ export default function PollsListItem(props) {
         <div>{content}</div>
         {/* when we click on one option we will change the state of that option and user is not able to vote again */}
         <div>{<OptionsList
-              options={options}
+              options={options} setPolls={setPolls}
               />}</div>
         <div>Total votes</div>
        </div>

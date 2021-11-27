@@ -14,14 +14,15 @@ export default function OptionsForm(props) {
   const [options, setOptions] = useState(["", ""])
   const [optionLists, setOptionLists] = useState([0, 1])
 
-  const {pollId} = props
+
+  const {pollId, setPolls, pollContent} = props
 
   // const [form, setForm] = useState(false)
 
   // const showOptions = () => {
   //   setForm(true)
    
-  // };
+
 
   const dataParser = (testData) => {
     let array = []
@@ -50,7 +51,11 @@ export default function OptionsForm(props) {
     return axios.post("http://localhost:3000/api/polls/new_options",  option )
       .then(res => {
         console.log(res.data);
-  
+        axios.get(`http://localhost:3000/api/polls/${pollId}`)
+        .then(res => {
+          console.log("*********????????", res.data)
+          
+        })
       })
       .catch(err => {
         console.log(err.message);
