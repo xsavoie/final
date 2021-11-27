@@ -3,7 +3,7 @@ import { React } from "react";
 import Badge from 'react-bootstrap/Badge';
 import Button from 'react-bootstrap/Button';
 import CommentsList from "../Comments/CommentsList";
-import useConfessionItem from "../hooks/useConfessionItem";
+// import useConfessionItem from "../hooks/useConfessionItem";
 import './MyConfessionsListItem.scss'
 
 
