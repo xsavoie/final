@@ -22,13 +22,8 @@ export default function Avatar(props){
     axios.put('http://localhost:3000/users/avatar', request)
       .then(res => {
         setAvatar("");
-
-
-        // sessionStorage.removeItem("user")
-
         return setUser(prev => ({ ...prev, avatar: res.data.data}))
       }).then(user => {
-
       })
       .catch(err => {
         console.log(err.message);
