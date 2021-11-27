@@ -133,7 +133,7 @@ function App() {
           setPageToDisplay={setPageToDisplay}
         />
         {showForm && <ConfessionForm confessions={confessions} setConfessions={setConfessions} setShowForm={setShowForm} setPageToDisplay={setPageToDisplay}/>}
-        {/* <PollsForm/> */}
+        <PollsForm/>
         <Routes>
           <Route path="/chat" element={<Chat />}></Route>
           <Route path="/Profile" element={<Profile />}></Route>

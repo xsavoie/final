@@ -16,12 +16,13 @@ export default function OptionsForm(props) {
 
   const {pollId} = props
 
-  const [form, setForm] = useState(false)
+  // const [form, setForm] = useState(false)
 
-  const showOptions = () => {
-    setForm(true)
+  // const showOptions = () => {
+  //   setForm(true)
    
-  };
+  // };
+
   const dataParser = (testData) => {
     let array = []
   
@@ -38,9 +39,6 @@ export default function OptionsForm(props) {
 
   const createOptions = () => {
     
-   console.log("=============>>>>>>>>>>>>>", options, "++++++++++++", pollId)
-
-
     const newOption = {
       poll_id: pollId,
       content: options
@@ -72,25 +70,10 @@ export default function OptionsForm(props) {
     setOptions([...options, ""])
   }
 
-    //insted of for loop
 
 
-  // to have state with number of options by default(2)
-  //function for the number of options returns increase number by one, the state is chang, return an array of options and apen. to my form 
-
-
-  // onClick={() => {
-    
-  //   setClicker(clicker + 1)
-    
-  // }}
-
-  // setPageToDisplay((prevState) => (prevState - 1))
-
-  
   return (
-    <Form>
-    
+    <Form onSubmit={(e)=> e.preventDefault()}>
       <div>
         {optionLists.map((option, index) => {
           return (
@@ -98,16 +81,6 @@ export default function OptionsForm(props) {
           )
         })}
       </div>
-      {/* <Button
-          variant="primary"
-          size="sm"
-          onClick={() => {createOptions(poll_id, content)
-            setContent("")}}
-        >  */}
-        {/* it will automatically add two text box for options by default after add it will disappear and we will have + button */}
-          {/* Add options
-        </Button> */}
-          
           <Button
           variant="primary"
           size="sm"
