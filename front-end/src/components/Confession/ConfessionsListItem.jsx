@@ -1,7 +1,7 @@
 import { React } from "react";
-import "./ConfessionsListItem.scss"
-import Badge from 'react-bootstrap/Badge'
-import Button from 'react-bootstrap/Button'
+import "./ConfessionsListItem.scss";
+import Badge from 'react-bootstrap/Badge';
+import Button from 'react-bootstrap/Button';
 import CommentsList from "../Comments/CommentsList";
 import useConfessionItem from "../hooks/useConfessionItem";
 
@@ -17,7 +17,6 @@ export default function ConfessionListItem(props) {
     submitLike,
     deleteLike,
     badgeClass,
-    // confessionsCopy
   } = useConfessionItem(props);
 
 

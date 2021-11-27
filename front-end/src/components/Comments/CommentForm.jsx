@@ -1,68 +1,20 @@
-import { useContext, useState } from 'react'
-import { UserContext } from '../contexts/UserContext'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import axios from 'axios'
 import './CommentForm.scss'
+import useCommentForm from '../hooks/useCommentForm'
 
 export default function CommentForm(props) {
 
-  const { user } = useContext(UserContext);
+  const {
+    user,
+    comment,
+    setComment,
+    rows,
+    setRows,
+    error,
+    submitComment
+  } = useCommentForm(props);
 
-  const [comment, setComment] = useState("");
-  const [rows, setRows] = useState(1);
-  const [error, setError] = useState("");
-
-
-  // let confessionsCopy = [ ...props.confessionState];
-
-  const updateCommentState = (confessionId, newComment, confessionState) => {
-    const parsedComment = {
-      id: newComment.id,
-      user_id: newComment.user_id,
-      content: newComment.content
-    };
-
-    // finds confession that needs to be changed
-    const newConfession = confessionState.find((confession) => confession.id === confessionId);
-    // pushed parsed comment to confession
-    newConfession.comments.push(parsedComment);
-    // map through state and modifies right confession
-    const newState = confessionState.map(confession => confession.id === confessionId ? newConfession : confession);
-
-    return newState;
-  }
-
-  const validateComment = (content) => {
-    if (content.length < 10) {
-      setError("Too Short");
-      return false;
-    };
-    return true;
-  };
-
-  const submitComment = (userId, confessionId, content, confessionsState) => {
-    const created_at = new Date();
-    const newComment = {
-      userId,
-      confessionId,
-      content,
-      created_at
-    };
-
-    const valid = validateComment(content);
-
-    if (valid) {
-      return axios.post("/api/confessions/new_comment", { newComment })
-      .then(res => {
-        props.setConfessions(updateCommentState(confessionId, res.data, confessionsState));
-        setComment("")
-      })
-      .catch(err => {
-        console.log(err.message);
-      })
-    };
-  };
 
   return (
     <Form>
@@ -82,10 +34,7 @@ export default function CommentForm(props) {
           size="sm"
           onClick={() => {
             submitComment(user.id, props.confessionId, comment, props.confessionsToUpdate)
-            // setComment("")
-          }}
-        >
-          Submit
+          }}>Submit
         </Button>
         <span className="comment-form--error">{error}</span>
       </Form.Group>
