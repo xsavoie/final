@@ -10,7 +10,7 @@ const helpers = require('../helpers/dataHelpers')
 
 const { pollsParser } = helpers()
 
-const {getAllPolls, getOnePoll, getOptionsForPoll, getResultsForPoll, addPoll, addOptions, addResults } = require('../helpers/polls_queries');
+const {getAllPolls, getOnePoll, getOptionsForPoll, getResultsForPoll, addPoll, addOptions, addResults, getTotalResultsForPoll } = require('../helpers/polls_queries');
 
 
 polls.get('/polls', function (req, res) {
@@ -132,6 +132,27 @@ polls.post('/new_options_results', function (req, res) {
 });
 
 
+polls.get('/results', function (req, res) {
+
+  
+  // for (let i=1; i<5; i++) {
+    let array = [];
+    let id = 2
+    getTotalResultsForPoll(id)
+    .then((results) => {
+      console.log("results", results)
+      array.push(results)
+      return array
+    })
+    .then((array) => {
+      res.json(array);
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+  // }
+
+});
 
 
 module.exports = polls;

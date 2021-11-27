@@ -67,25 +67,26 @@ const getOptionsForPoll = function (pollId) {
 }
 exports.getOptionsForPoll = getOptionsForPoll;
 
-// const getResultsForPoll = function (pollId) {
-//   const queryString = `SELECT results.votes, option_id
-//   FROM results
-//   JOIN options ON options.id = option_id
-//   WHERE options.poll_id = $1;
-//   `
-//   const queryParams = [pollId];
 
-//   return db
-//     .query(queryString, queryParams)
-//     .then((result) => {
-//       return result.rows;
-//     })
-//     .catch((err) => {
-//       console.log("get one poll err");
-//       console.log(err.message);
-//     });
-// }
-// exports.getResultsForPoll = getResultsForPoll;
+const getTotalResultsForPoll = function (pollId) {
+  const queryString = `SELECT  COUNT(results.id) 
+  FROM results
+  JOIN options ON options.id = option_id
+  WHERE options.poll_id = $1;
+  `
+  const queryParams = [pollId];
+
+  return db
+    .query(queryString, queryParams)
+    .then((result) => {
+      return result.rows;
+    })
+    .catch((err) => {
+      console.log("get totalResults poll err");
+      console.log(err.message);
+    });
+}
+exports.getTotalResultsForPoll = getTotalResultsForPoll;
 
 
 //  create new poll

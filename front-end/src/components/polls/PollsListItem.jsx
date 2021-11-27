@@ -9,7 +9,8 @@ export default function PollsListItem(props) {
 
 
   const {content, createdAt, options, setPolls} = props;
-  
+
+    //get request for total an make query 
    
      return (
      
