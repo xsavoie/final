@@ -1,27 +1,71 @@
 .profile-page{
-  margin: 2em;
-  font-size: 15px;
+  margin: auto;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 20px;
   display: flex;
   flex-direction: row;
-  background-color: black;
+  justify-content: space-evenly;
+  background-color: rgba(40, 15, 82, 0.9);
   color: antiquewhite;
   width: 100%;
+  height: 100%;
 }
 
+.name-avatar-container{
+
+  display: block;
+  align-content: right;
+  
+}
+
+.about-confessions-container{
+  
+  display: block;
+  align-content: left ;
+}
+
+.about-me-label{
+  border:3px solid whitesmoke;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  width: 600px;
+  height: 200px;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: 1em;
+  padding-bottom: 3em;
+  text-align: left;
+  border-radius: 12px;
+  margin-top: 10em;
+}
+
+
 .username-display{
-  margin-left: 3em;
+ 
+  margin-top: 3em;
+  // margin-left: 3em;
 }
 
 .avatar-pic{
-  width: 400px;
-  height: 400px;
-  padding: 50px;
-  border: 3px;
+  width: 350px;
+  height: 350px;
+  vertical-align: middle;
+  border: 3px ;
+  border-radius: 20%;
   object-fit: cover;
+  margin-top: 3em;
+  margin-bottom: 1em;
 }
 
-.edit-button{
-  background-color: #39177d; /* Green */
+.avatar-pic:hover{
+  // box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+  // border-radius: 2em;
+  transform: scale(1.2);
+}
+
+.btn-avatar{
+  // background-color: rgb(121, 94, 121); 
+  background-color: transparent;
   border: none;
   color: white;
   padding: 15px 32px;
@@ -29,10 +73,16 @@
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+  border-radius: 12px;
+  margin-top: 2em;
+  margin-bottom: 3em;
+  
 }
 
 .btn-edit{
-  background-color: #39177d; /* Green */
+  // background-color: rgb(121, 94, 121); 
+  
+  background-color: transparent;
   border: none;
   color: white;
   padding: 15px 32px;
@@ -40,4 +90,13 @@
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+  border-radius: 12px;
+}
+
+.confession-container{
+
+
+
+
+
 }

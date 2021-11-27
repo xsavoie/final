@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 import axios from "axios";
+import  './Avatar.scss'
 
 export default function Avatar(props){
 
@@ -8,7 +9,7 @@ export default function Avatar(props){
   // https://i.imgur.com/5KfNDSg.jpeg
 
   const { user, setUser } = useContext(UserContext);
- const [avatar, setAvatar] = useState("");
+ const [avatar, setAvatar] = useState(user.avatar || "");
  const { setShowAvatarForm } = props;
 
   function editAvatar(avatar) {
@@ -18,20 +19,16 @@ export default function Avatar(props){
       avatar,
       id
     }
-    // console.log("request", request)
-    console.log("edit avatar request object: ", request)
     axios.put('http://localhost:3000/users/avatar', request)
       .then(res => {
-        console.log("res.data.data from editAvatar function :", res.data.data)
-        // const newAvatar = res.data.data;
-        // setAvatar = newAvatar;
         setAvatar("");
-        sessionStorage.removeItem("user")
+
+
+        // sessionStorage.removeItem("user")
+
         return setUser(prev => ({ ...prev, avatar: res.data.data}))
-        // alert("Avatar updated in database");
       }).then(user => {
-        console.log("*****", user)
-        sessionStorage.setItem("user", JSON.stringify(user))
+
       })
       .catch(err => {
         console.log(err.message);
@@ -45,7 +42,7 @@ export default function Avatar(props){
 
       <button
         type="button"
-        className="btn-edit"
+        className="avatar-edit-btn"
         onClick={(event) => {
           event.preventDefault();
           editAvatar(avatar);

@@ -1,5 +1,4 @@
 import { React, useState } from "react";
-import Button from 'react-bootstrap/Button'
 import ConfessionListItem from "./ConfessionsListItem";
 import "./ConfessionsList.scss";
 import dayjs from 'dayjs';

@@ -1,62 +1,61 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
-// import { UserContext } from "../contexts/UserContext";
-import { Form } from 'react-bootstrap'
-import Button from 'react-bootstrap/Button'
-import "./LoginForm.scss"
+import { Form } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
+import "./LoginForm.scss";
 import { UserContext } from "../contexts/UserContext";
 import { useFormFields } from "../hooks/useFormFields";
 
 export default function LoginForm(props) {
 
-
-  // const [email, setEmail] = useState(props.email || "");
-  // const [password, setPassword] = useState(props.password || "");
-
   const [fields, handleFieldChange] = useFormFields({
     loginEmail: "",
     loginPassword: ""
-  })
+  });
 
-  // const [error, setError] = useState("");
+  const [error, setError] = useState("");
 
-  const { setUser } = useContext(UserContext)
+  const { setUser } = useContext(UserContext);
 
 
 
-  // function validate() {
-  //   if (email === "") {
-  //     setError("Enter valid email");
-  //     return;
-  //   }
-  //   if(password === ""){
-  //     setError("Enter password");
-  //     return;
-  //   }
-  //   props.onSave(email, password);
-  // }
+  function validateLogin(fields) {
+    if (fields.loginEmail === "") {
+      setError("Email cannot be blank");
+      return false;
+    };
+    if(fields.loginPassword === ""){
+      setError("Enter password");
+      return false;
+    };
+    return true;
+  };
 
   function loginCheck(event) {
-    // event.preventDefault();
-    const email = fields.loginEmail;
-    const password = fields.loginPassword
-    const request = {
-      email,
-      password
-    }
-    // console.log("request", request)
-    axios.post('http://localhost:3000/login', request)
+    const valid = validateLogin(fields)
+
+    if (valid) {
+      // event.preventDefault();
+      const email = fields.loginEmail;
+      const password = fields.loginPassword;
+      const request = {
+        email,
+        password
+      };
+      // console.log("request", request)
+      axios.post('http://localhost:3000/login', request)
       .then(res => {
         const user = res.data;
-        setUser(user)
-        sessionStorage.setItem("user", JSON.stringify(user))
+        setUser(user);
+        sessionStorage.setItem("user", JSON.stringify(user));
+        props.setShowLogin(false);
         // console.log("res: ", user)
-        // alert("Login successful ");
       })
       .catch(err => {
         console.log(err.message);
       })
-  }
+    }
+  };
 
   return (
     <div className={`${!props.showLogin ? "login-active" : ""} login-show`}>
@@ -86,13 +85,14 @@ export default function LoginForm(props) {
           className="btn"
           onClick={() => {
             // event.preventDefault();
-            loginCheck()
-            props.setShowLogin(false)
+            loginCheck();
+            // props.setShowLogin(false);
           }}
         >
           Submit
         </Button>
       </Form>
+      <span className="login-form--error">{error}</span>
     </div>
   )
 }
