@@ -18,7 +18,7 @@ export default function ConfessionDisplay(props) {
       };
     };
     return finalArray;
-  }
+  };
 
 
   const arrayOfConfessions = arrayParser(props.confessions);

@@ -58,7 +58,7 @@ function App() {
       axios.get(`/users/validate/${user.id}`)
         .then(user => {
           const loggedUser = user.data[0];
-          console.log(user.data[0])
+          // console.log(user.data[0])
           setUser(loggedUser)
         })
       // const currentUser = JSON.parse(loggedInUser);

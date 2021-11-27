@@ -1,24 +1,24 @@
-import React, { useContext } from "react"
+import React, { useContext } from "react";
 import { Navbar, Container, NavDropdown, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { UserContext } from "../contexts/UserContext";
 
 export default function Top(props) {
 
-  const { user, setUser } = useContext(UserContext)
+  const { user, setUser } = useContext(UserContext);
 
   const handleLogout = () => {
     setUser({});
     sessionStorage.clear();
-  }
+  };
 
   const handleRouteChange = (category) => {
     props.setConfessionFeed(category);
     props.setPageToDisplay(1);
     props.setShowRegister(false);
     props.setShowLogin(false);
-    props.setShowForm(false)
-  }
+    props.setShowForm(false);
+  };
 
   return (
     <Navbar bg="light" expand="lg">
