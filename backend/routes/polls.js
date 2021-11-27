@@ -45,6 +45,30 @@ polls.get('/polls', function (req, res) {
 
 });
 
+polls.get('/results', function (req, res) {
+
+  let resultArray = []
+
+  for (let i=1; i<5; i++) {
+    let id = i
+    getTotalResultsForPoll(id)
+    .then((results) => {
+      console.log("results", results)
+      resultArray.push(results)
+      return resultArray
+    })
+    .then(resultArray => {
+      if (resultArray.length >= 4) {
+        res.json(resultArray);
+      }
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+  }
+
+});
+
 
 polls.get(`/:id`, function (req, res) {
 
@@ -132,27 +156,7 @@ polls.post('/new_options_results', function (req, res) {
 });
 
 
-polls.get('/results', function (req, res) {
 
-  
-  // for (let i=1; i<5; i++) {
-    let array = [];
-    let id = 2
-    getTotalResultsForPoll(id)
-    .then((results) => {
-      console.log("results", results)
-      array.push(results)
-      return array
-    })
-    .then((array) => {
-      res.json(array);
-    })
-    .catch((err) => {
-      console.log(err.message);
-    });
-  // }
-
-});
 
 
 module.exports = polls;

@@ -31,7 +31,7 @@ const getOnePoll = function (id) {
   WHERE polls.id = $1;
   `
   const queryParams = [id];
-
+  console.log(id)
   return db
     .query(queryString, queryParams)
     .then((result) => {
@@ -61,7 +61,7 @@ const getOptionsForPoll = function (pollId) {
       return result.rows;
     })
     .catch((err) => {
-      console.log("get one poll err");
+      console.log("get options for poll err");
       console.log(err.message);
     });
 }
