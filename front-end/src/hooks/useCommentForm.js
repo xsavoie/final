@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useContext, useState } from "react";
-import { UserContext } from "../contexts/UserContext";
+import { UserContext } from "../components/contexts/UserContext";
 
 export default function useCommentForm(props) {
   const { user } = useContext(UserContext);

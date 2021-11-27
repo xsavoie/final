@@ -213,35 +213,3 @@ confessions.post('/new', function (req, res) {
 
 
 module.exports = confessions;
-  // confessions.get('/', function (req, res) {
-  //   let confessionsArray = [];
-
-  //   for (let i = 1; i < 6; i++) {
-  //     let array = [];
-  //     let id = i;
-  //     getOneConfession(id)
-  //       .then((confessions) => {
-  //         array.push(confessions);
-  //         return getLikes(id);
-  //       })
-  //       .then(likes => {
-  //         array.push(parseInt(likes[0].count));
-  //         return getComments(id);
-  //       })
-  //       .then(comments => {
-  //         array.push(comments);
-  //         return array;
-  //       })
-  //       .then(array => {
-  //         confessionsArray.push(confessionParser(array));
-  //       })
-  //       .then(test => {
-  //         if (confessionsArray.length >= 5) {
-  //           res.json(confessionsArray);
-  //         }
-  //       })
-  //       .catch((err) => {
-  //         console.log(err.message);
-  //       });
-  //   }
-  // });

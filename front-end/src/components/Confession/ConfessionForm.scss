@@ -1,3 +1,5 @@
+@import "../../styles/variables.scss";
+
 .confession-form {
   width: 50%;
   margin-left: 25%;
@@ -15,18 +17,18 @@
 }
 
 .category--secret {
-  background-color: rgb(224, 59, 59) !important;
-  border-color: rgb(224, 59, 59) !important;
+  background-color: $secret-color !important;
+  border-color: $secret-color !important;
 }
 
 .category--story {
-  background-color: rgb(56, 141, 56) !important;
-  border-color: rgb(56, 141, 56) !important;
+  background-color: $story-color !important;
+  border-color: $story-color !important;
 }
 
 .category--question {
-  background-color: rgb(38, 38, 148) !important;
-  border-color: rgb(38, 38, 148) !important;
+  background-color: $question-color !important;
+  border-color: $question-color !important;
 }
 
 .form--buttons {

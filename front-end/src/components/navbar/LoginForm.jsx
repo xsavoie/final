@@ -4,7 +4,7 @@ import { Form } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import "./LoginForm.scss";
 import { UserContext } from "../contexts/UserContext";
-import { useFormFields } from "../hooks/useFormFields";
+import { useFormFields } from "../../hooks/useFormFields";
 
 export default function LoginForm(props) {
 
