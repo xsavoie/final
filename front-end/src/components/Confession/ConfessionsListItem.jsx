@@ -21,15 +21,20 @@ export default function ConfessionListItem(props) {
   } = useConfessionItem(props);
   
   // const title = "test test test"
+  const totalComments = props.comments.length;
 
   return (
     <article className="confession__article">
       <header className="confession__detail-top">
+        <span className="title-right">
         <Badge className={badgeClass}>{categoryParser(props.categoryId)}</Badge>
-        <p className="confession__title">{props.title}</p>
+        </span>
         <p className="confession__created_at"> {props.createdAt}</p>
       </header>
+      <div className="confession__content">
+        <p className="confession__title">{props.title}</p>
 
+      </div>
       <div className="confession__content">
         <p>{props.content}</p>
       </div>
@@ -47,7 +52,9 @@ export default function ConfessionListItem(props) {
         <div>
 
           {props.selected && <Button variant="primary" size="sm" onClick={() => props.setSelected(null)} >Hide Comments</Button>}
-          {!props.selected && <Button variant="primary" size="sm" onClick={() => props.setSelected(props.id)}>View Comments {`(${props.comments.length})`} </Button>}
+          {user.id && !props.selected && <Button variant="primary" size="sm" onClick={() => props.setSelected(props.id)}>View Comments {`(${totalComments})`} </Button>}
+          {(totalComments > 1) && !user.id && !props.selected && <Button variant="primary" size="sm" onClick={() => props.setSelected(props.id)}>View Comments {`(${props.comments.length})`} </Button>}
+          {!totalComments && !user.id && !props.selected && <Button variant="primary" disabled size="sm" onClick={() => props.setSelected(props.id)}>No Comments </Button>}
         </div>
       </footer>
       {props.selected &&

@@ -1,19 +1,36 @@
 @import "../../styles/variables.scss";
 
+.form-container {
+background-color: $background-container !important;
+border-radius: .50rem; 
+}
+
 .confession-form {
-  width: 50%;
-  margin-left: 25%;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background-color: rgb(128, 126, 126);
-  padding-bottom: 15px;
+  width: 79%;
+  border: 2px outset $confession-border;
+  margin-left: 4%;
+ 
+  background-color: $confession-background;
+
+  border-radius: .50rem;
+
 
   &__input {
     width: 90%;
     margin-left: 5%;
+    
   }
 
+}
+
+.top-header {
+  margin-top: 15px;
+}
+
+.form-input-box {
+  background-color: $confession-text-background !important;
+  border-radius: .50rem;
 }
 
 .category--secret {

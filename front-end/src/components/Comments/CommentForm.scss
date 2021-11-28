@@ -1,14 +1,16 @@
+@import "../../styles/variables.scss";
+
 .comment-form {
   width: 90%;
   margin-left: 5%;
 
   &__label{
     text-align: left;
-    color: white;
+    color: $confession-font;
   }
 
   &__input {
-    background-color: rgb(221, 217, 217) !important;
+    background-color: $confession-text-background !important;
   }
 
   &__submit {
