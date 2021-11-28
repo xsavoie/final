@@ -166,7 +166,7 @@ function App() {
         {showPollForm && <PollsForm polls={polls} setPolls={setPolls} />}
         <Routes>
           <Route path="/chat" element={<Chat />}></Route>
-          <Route path="/Profile" element={<Profile confessions={confessions}/>}></Route>
+          <Route path="/Profile" element={<Profile/>}></Route>
           <Route path="/" element={!showLogin && !showRegister && <ConfessionDisplay confessions={confessions} setConfessions={setConfessions} pageToDisplay={pageToDisplay} setPageToDisplay={setPageToDisplay} />} ></Route>
           <Route path="/polls" element={<PollsList polls={polls} setPolls={setPolls} totalVotes={totalVotes} setTotalVotes={setTotalVotes}/>} ></Route>
 

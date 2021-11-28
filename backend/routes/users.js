@@ -1,8 +1,10 @@
 const express = require('express');
 const route = express.Router();
 const db = require('../db');
-const users = require('../helpers/users_queries')
-const { editAbout, editAvatar, getUserById, getMyConfessions } = users(db)
+const users = require('../helpers/users_queries');
+const helpers = require('../helpers/dataHelpers');
+const { idParser } = helpers();
+const { editAbout, editAvatar, getUserById, getMyConfessions } = users(db);
 
 
 /* GET users listing. */
@@ -69,9 +71,9 @@ route.get('/my_confessions', (req, res) => {
 
   // console.log(typeof id)
   getMyConfessions(id)
-    .then(user => {
-      console.log("user: ", user)
-      res.json(user);
+    .then(idArray => {
+      console.log("user: ", idArray)
+      res.json(idParser(idArray));
       
     })
     .catch(err => {
