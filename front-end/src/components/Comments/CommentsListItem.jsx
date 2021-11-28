@@ -10,8 +10,10 @@ dayjs.extend(relativeTime)
 export default function CommentsListItem(props) {
 
   return (
-    <article>
-      <p className="test" >{dayjs(props.createdAt).fromNow()}</p>
+    <article className="comment-container">
+      <div className="comments--right">
+      <p className="created_at" >{dayjs(props.createdAt).fromNow()}</p>
+      </div>
       <div className="comments__content">
         <p>{props.content}</p>
       </div>

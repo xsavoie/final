@@ -18,6 +18,11 @@
   }
 }
 
+.comment-form__submit {
+  background-color: $button !important;
+  border-color: $button !important;
+}
+
 .comment-form--error {
   color: rgba(253, 0, 0, 0.932);
   margin-left: 35%;

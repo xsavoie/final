@@ -42,7 +42,7 @@ export default function RegisterForm(props) {
     return true;
   };
 
-  
+
   function registerCheck(event) {
     const valid = validateRegister(fields);
 
@@ -78,18 +78,18 @@ export default function RegisterForm(props) {
 
   return (
     <div className={`${!props.showRegister ? "register-active" : ""} register-show`}>
-      <h2>Register</h2>
-      <Form className="registerfrom_style" autoComplete="off" onSubmit={event => event.preventDefault()}>
+      <Form className="registerform_style" autoComplete="off" onSubmit={event => event.preventDefault()}>
+        <h2>Register</h2>
 
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <div >
-            <input id="email" type="text" name="email" placeholder="name@email.com"
+            <input className="register-input" id="email" type="text" name="email" placeholder="name@email.com"
               value={fields.email}
               onChange={handleFieldChange}
             />
           </div>
-          <Form.Text className="text-muted">
+          <Form.Text id="muted" className="text-muted">
             We'll never share your email with anyone else.
           </Form.Text>
         </Form.Group>
@@ -97,7 +97,7 @@ export default function RegisterForm(props) {
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <div >
-            <input id="password" type="password" name="password" placeholder="password"
+            <input className="register-input" id="password" type="password" name="password" placeholder="password"
               autoComplete="off"
               value={fields.password}
               onChange={handleFieldChange}
@@ -107,7 +107,7 @@ export default function RegisterForm(props) {
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Confirm your password</Form.Label>
           <div >
-            <input id="confirmPassword" type="password" name="password" placeholder="password"
+            <input className="register-input" id="confirmPassword" type="password" name="password" placeholder="password"
               autoComplete="off"
               value={fields.confirmPassword}
               onChange={handleFieldChange}
@@ -116,6 +116,7 @@ export default function RegisterForm(props) {
         </Form.Group>
 
         <Button
+          className="register-btn"
           variant="primary"
           type="submit"
           onClick={() => {
@@ -125,7 +126,7 @@ export default function RegisterForm(props) {
           Submit
         </Button>
       </Form>
-      <span>{error}</span>
+      <span className="register-form--error">{error}</span>
     </div>
   )
 }

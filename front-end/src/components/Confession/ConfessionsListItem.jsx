@@ -31,11 +31,11 @@ export default function ConfessionListItem(props) {
         </span>
         <p className="confession__created_at"> {props.createdAt}</p>
       </header>
+      {/* <div className="confession__content">
+      </div> */}
       <div className="confession__content">
         <p className="confession__title">{props.title}</p>
-
-      </div>
-      <div className="confession__content">
+        <hr></hr>
         <p>{props.content}</p>
       </div>
       <footer className="confession__detail-bottom">
@@ -49,12 +49,11 @@ export default function ConfessionListItem(props) {
             setLiked(true);
           }}><FontAwesomeIcon className="like-icon" size="lg" icon={faStar} /> {props.likes}</span>}
         </span>
-        <div>
-
-          {props.selected && <Button variant="primary" size="sm" onClick={() => props.setSelected(null)} >Hide Comments</Button>}
-          {user.id && !props.selected && <Button variant="primary" size="sm" onClick={() => props.setSelected(props.id)}>View Comments {`(${totalComments})`} </Button>}
-          {(totalComments > 1) && !user.id && !props.selected && <Button variant="primary" size="sm" onClick={() => props.setSelected(props.id)}>View Comments {`(${props.comments.length})`} </Button>}
-          {!totalComments && !user.id && !props.selected && <Button variant="primary" disabled size="sm" onClick={() => props.setSelected(props.id)}>No Comments </Button>}
+        <div  >
+          {props.selected && <Button className="comment-btn" variant="primary" size="sm" onClick={() => props.setSelected(null)} >Hide Comments</Button>}
+          {user.id && !props.selected && <Button className="comment-btn" variant="primary" size="sm" onClick={() => props.setSelected(props.id)}>View Comments {`(${totalComments})`} </Button>}
+          {(totalComments > 1) && !user.id && !props.selected && <Button className="comment-btn" variant="primary" size="sm" onClick={() => props.setSelected(props.id)}>View Comments {`(${props.comments.length})`} </Button>}
+          {!totalComments && !user.id && !props.selected && <Button className="comment-btn" variant="primary" disabled size="sm" onClick={() => props.setSelected(props.id)}>No Comments </Button>}
         </div>
       </footer>
       {props.selected &&

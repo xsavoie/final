@@ -24,7 +24,7 @@ export default function LoginForm(props) {
       setError("Email cannot be blank");
       return false;
     };
-    if(fields.loginPassword === ""){
+    if (fields.loginPassword === "") {
       setError("Enter password");
       return false;
     };
@@ -44,27 +44,29 @@ export default function LoginForm(props) {
       };
       // console.log("request", request)
       axios.post('http://localhost:3000/login', request)
-      .then(res => {
-        const user = res.data;
-        setUser(user);
-        sessionStorage.setItem("user", JSON.stringify(user));
-        props.setShowLogin(false);
-        // console.log("res: ", user)
-      })
-      .catch(err => {
-        console.log(err.message);
-      })
+        .then(res => {
+          const user = res.data;
+          setUser(user);
+          sessionStorage.setItem("user", JSON.stringify(user));
+          props.setShowLogin(false);
+          // console.log("res: ", user)
+        })
+        .catch(err => {
+          console.log(err.message);
+        })
     }
   };
 
   return (
     <div className={`${!props.showLogin ? "login-active" : ""} login-show`}>
-      <h2>Login</h2>
-      <Form className="loginfrom_style" autoComplete="off" onSubmit={event => event.preventDefault()}>
+      <Form className="loginform_style" autoComplete="off" onSubmit={event => event.preventDefault()}>
+      {/* <Form className="loginform_style" autoComplete="off" > */}
+        <h2>Login</h2>
+
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <div>
-            <input id="loginEmail" type="text" name="email" placeholder="name@email.com"
+            <input className="login-input" id="loginEmail" type="text" name="email" placeholder="name@email.com" autoComplete="off"
               value={fields.loginEmail}
               onChange={handleFieldChange}
             />
@@ -73,7 +75,7 @@ export default function LoginForm(props) {
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <div>
-            <input id="loginPassword" type="password" name="password" placeholder="password"
+            <input className="login-input" id="loginPassword" type="password" name="password" placeholder="password"
               autoComplete="off"
               value={fields.loginPassword}
               onChange={handleFieldChange}
@@ -81,8 +83,10 @@ export default function LoginForm(props) {
           </div>
         </Form.Group>
         <Button
-          type="button"
-          className="btn"
+          className="login-btn"
+          variant="primary"
+          // type="button"
+          // className="btn"
           onClick={() => {
             // event.preventDefault();
             loginCheck();
