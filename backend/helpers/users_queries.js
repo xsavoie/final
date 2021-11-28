@@ -130,8 +130,9 @@ module.exports = db => {
       console.log("id: ", id);
       const queryString = `
       SELECT id FROM confessions id 
-      WHERE user_id = 1
-      ORDER BY created_at;
+      WHERE user_id = $1
+      ORDER BY created_at DESC
+      LIMIT 5;
       `;
 
       const queryParams = [id];
