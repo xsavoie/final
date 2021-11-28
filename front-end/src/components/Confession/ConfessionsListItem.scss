@@ -51,6 +51,10 @@
 
 }
 
+.confession__article:hover {
+  border: 2px inset $confession-border 
+}
+
 .title-right{
   display: flex;
 

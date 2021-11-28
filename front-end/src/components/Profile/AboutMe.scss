@@ -1,9 +1,11 @@
+@import "../../styles/variables.scss";
 
 
 .about-edit-button{
   background-color: #39177d; /* Green */
   border: none;
-  color: white;
+  // color: white;
+  color: $confession-font;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;

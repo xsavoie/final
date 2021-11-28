@@ -90,14 +90,17 @@ export default function Top(props) {
               </Nav.Link>}
 
               {user.id && <Nav.Link onClick={() => {
-                    props.setShowPollForm(true);
+                    console.log("pizza")
+                    props.setShowPollForm(false);
                     props.setShowForm(false);
                   }}><Link to="/chat" className="nav-font" >Chat</Link></Nav.Link>}
+
               {user.id && <NavDropdown title={user.email} id="basic-nav-dropdown">
                 <NavDropdown.Item href="/profile">Go to profile</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="/" onClick={() => handleLogout(props.showForm)}>Logout</NavDropdown.Item>
               </NavDropdown>}
+
               {!user.id &&
                 <Nav.Link className="nav-font"
                   onClick={() => {
