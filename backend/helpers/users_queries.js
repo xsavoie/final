@@ -129,7 +129,9 @@ module.exports = db => {
     const getMyConfessions = (id) => {
       console.log("id: ", id);
       const queryString = `
-      SELECT * from confessions id WHERE user_id = $1
+      SELECT id FROM confessions id 
+      WHERE user_id = 1
+      ORDER BY created_at;
       `;
 
       const queryParams = [id];
