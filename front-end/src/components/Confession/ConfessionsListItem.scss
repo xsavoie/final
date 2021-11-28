@@ -1,12 +1,16 @@
+@import "../../styles/variables.scss";
+
 .confession {
   
-
   &__article {
-    width: 90%;
+    width: 80%;
     align-self: center;
-    background-color: rgb(71, 71, 75);
+    background-color: $confession-background;
     margin-top: 10px;
-    border-radius: .25rem;
+    // left align -- disable to center
+    margin-right: 15%;
+    border-radius: .50rem;
+    border: 2px outset $confession-border 
   }
 
   &__detail-bottom {
@@ -20,7 +24,15 @@
     justify-content: space-between;
     height: 25px;
     margin: 5px 5px;
-    color: white
+    color: $white
+  }
+
+  &__title {
+    color: $white;
+  }
+
+  &__created_at {
+    color: $white;
   }
 
   &__content {
@@ -29,25 +41,91 @@
   background-color: rgb(221, 217, 217);
   text-align: left;
   padding-left: 3px;
-  border-radius: .25rem;
+  border-radius: .50rem;
   }
 
   &__likes {
-    color: white
+    color: $white
   }
 
+}
+
+
+.like-icon {
+  // color:salmon;
+}
+
+.like-icon:hover {
+  color: rgb(82, 156, 185)
+}
+
+.like-icon-liked {
+  color:rgb(18, 84, 110)
 }
 
 
 .bg-primary.badge--secret {
-  background-color: rgb(224, 59, 59) !important;
+  background-color: $secret-color !important;
 }
 
 .bg-primary.badge--story {
-  background-color: rgb(56, 141, 56) !important;
+  background-color: $story-color !important;
 }
 
 .bg-primary.badge--question {
-  background-color: rgb(38, 38, 148) !important;
+  background-color: $question-color !important;
 }
 
+
+
+// .confession {
+  
+//   &__article {
+//     width: 90%;
+//     align-self: center;
+//     background-color: rgb(71, 71, 75);
+//     margin-top: 10px;
+//     border-radius: .25rem;
+//   }
+
+//   &__detail-bottom {
+//     display: flex;
+//     justify-content: space-between;
+//     margin: 5px 5px;
+//   }
+
+//   &__detail-top {
+//     display: flex;
+//     justify-content: space-between;
+//     height: 25px;
+//     margin: 5px 5px;
+//     color: white
+//   }
+
+//   &__content {
+//   width: 90%;
+//   margin-left: 5%;
+//   background-color: rgb(221, 217, 217);
+//   text-align: left;
+//   padding-left: 3px;
+//   border-radius: .25rem;
+//   }
+
+//   &__likes {
+//     color: white
+//   }
+
+// }
+
+
+// .bg-primary.badge--secret {
+//   background-color: rgb(224, 59, 59) !important;
+// }
+
+// .bg-primary.badge--story {
+//   background-color: rgb(56, 141, 56) !important;
+// }
+
+// .bg-primary.badge--question {
+//   background-color: rgb(38, 38, 148) !important;
+// }

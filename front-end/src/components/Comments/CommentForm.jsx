@@ -1,7 +1,7 @@
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import './CommentForm.scss'
-import useCommentForm from '../hooks/useCommentForm'
+import useCommentForm from '../../hooks/useCommentForm'
 
 export default function CommentForm(props) {
 

@@ -4,7 +4,7 @@ import './Chat.scss'
 import socketClient from "socket.io-client";
 import { UserContext } from "../contexts/UserContext";
 
-const socket = socketClient("http://localhost:3001", {
+const socket = socketClient("http://localhost:3002", {
   
   withCredentials: true,
   extraHeaders: {

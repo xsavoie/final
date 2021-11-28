@@ -130,7 +130,7 @@ polls.post('/new_options_results', function (req, res) {
   console.log("req.body", req.body)
   addResults(option_id, user_id)
     .then(result => {
-      console.log("*********", result);
+      // console.log("*********", result);
       res.json(result);
       console.log("entered in db");
     })
@@ -146,7 +146,7 @@ polls.get('/verify', function (req, res) {
   // console.log("%$%$%$%$", req)
   checkIfVoted(poll_id, user_id)
     .then(result => {
-      console.log("*********VOTED???", result);
+      // console.log("*********VOTED???", result);
       res.json(result);
       // console.log("entered in db");
     })

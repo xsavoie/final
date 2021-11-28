@@ -2,7 +2,7 @@ import "./ConfessionForm.scss"
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Dropdown from "react-bootstrap/Dropdown";
-import useConfessionForm from "../hooks/useConfessionForm";
+import useConfessionForm from "../../hooks/useConfessionForm";
 
 export default function ConfessionForm(props) {
 

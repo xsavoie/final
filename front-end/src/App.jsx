@@ -25,14 +25,16 @@ const SERVER = "http://localhost:3000";
 
 function App() {
 
-  const { setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const [confessions, setConfessions] = useState([]);
   // refactor to use mode instead of multiple state to display component
   const [showForm, setShowForm] = useState(false);
+  const [showPollForm, setShowPollForm] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [confessionFeed, setConfessionFeed] = useState("recent");
   const [pageToDisplay, setPageToDisplay] = useState(1);
+  const [totalVotes, setTotalVotes] = useState([]);
 
 
   // const providerValue = useMemo(() => ({user, setUser}), [user, setUser])
@@ -132,7 +134,7 @@ function App() {
   }, []);
 
 
-  const [totalVotes, setTotalVotes] = useState([]);
+  console.log(user)
 
   useEffect(() => {
     Promise.all([
@@ -157,14 +159,16 @@ function App() {
           setShowLogin={setShowLogin}
           setShowRegister={setShowRegister}
           setPageToDisplay={setPageToDisplay}
+          showPollForm={showPollForm}
+          setShowPollForm={setShowPollForm}
         />
         {showForm && <ConfessionForm confessions={confessions} setConfessions={setConfessions} setShowForm={setShowForm} setPageToDisplay={setPageToDisplay} />}
-        <PollsForm polls={polls} setPolls={setPolls} />
+        {showPollForm && <PollsForm polls={polls} setPolls={setPolls} />}
         <Routes>
           <Route path="/chat" element={<Chat />}></Route>
-          <Route path="/Profile" element={<Profile />}></Route>
+          <Route path="/Profile" element={<Profile confessions={confessions}/>}></Route>
           <Route path="/" element={!showLogin && !showRegister && <ConfessionDisplay confessions={confessions} setConfessions={setConfessions} pageToDisplay={pageToDisplay} setPageToDisplay={setPageToDisplay} />} ></Route>
-          <Route path="polls" element={<PollsList polls={polls} setPolls={setPolls} totalVotes={totalVotes} setTotalVotes={setTotalVotes}/>} ></Route>
+          <Route path="/polls" element={<PollsList polls={polls} setPolls={setPolls} totalVotes={totalVotes} setTotalVotes={setTotalVotes}/>} ></Route>
 
         </Routes>
         <LoginForm showLogin={showLogin} setShowLogin={setShowLogin} showRegister={showRegister} setShowRegister={setShowRegister} />
