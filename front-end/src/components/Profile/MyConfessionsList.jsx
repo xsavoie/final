@@ -10,7 +10,7 @@ dayjs.extend(relativeTime);
 
 
 
-export default function MyConfessions(props) {
+export default function MyConfessionsList(props) {
 
 
   const { user, setUser } = useContext(UserContext);
@@ -19,7 +19,7 @@ export default function MyConfessions(props) {
 
   useEffect(() => { 
     myConfessions(user);
-  }, [user, props.confessions]);
+  }, [user]);
   // props.confessions
   
   let myConfessionsArray = [];
@@ -57,6 +57,8 @@ export default function MyConfessions(props) {
       comments={confession.comments}
       selected={confession.id === selected}
       setSelected={setSelected}
+      myOwnConfessions={myOwnConfessions}
+      setMyOwnConfessions={setMyOwnConfessions}
       // confessionState={props.confessions}
       // setConfessions={props.setConfessions}
       // confessionsToUpdate={props.confessionsToUpdate}

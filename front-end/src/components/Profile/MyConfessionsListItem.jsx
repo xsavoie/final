@@ -2,7 +2,7 @@ import { React } from "react";
 
 import Badge from 'react-bootstrap/Badge';
 import Button from 'react-bootstrap/Button';
-import CommentsList from "../Comments/CommentsList";
+import ProfileCommentsList from "./ProfileCommentsList";
 import useConfessionItem from "../../hooks/useConfessionItem";
 import './MyConfessionsListItem.scss'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -47,12 +47,14 @@ export default function MyConfessionsListItem(props) {
     </footer>
       {
     props.selected &&
-    <CommentsList
+    <ProfileCommentsList
       setConfessions={props.setConfessions}
       confessionState={props.confessionState}
       confessionId={props.id}
       comments={props.comments}
       confessionsToUpdate={props.confessionsToUpdate}
+      myOwnConfessions={props.myOwnConfessions}
+      setMyOwnConfessions={props.setMyOwnConfessions}
     />
   }
     </article >
