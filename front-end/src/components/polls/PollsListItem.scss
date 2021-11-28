@@ -1,11 +1,15 @@
 .pollsitem {
 
   &__items {
+    width: 67%;
     display: flex;
     flex-direction: column;
     margin: 5%;
     border: solid;
+    border-radius: .25rem;
+    margin-left: 15%;
   }
+
 
   &__top {
     display: flex;
@@ -24,7 +28,7 @@
     width: 78%;
     padding: 0.5em;
     margin-top: 2%;
-    margin-left: 2%;
+    margin-left: 5%;
     font-size: 24px;
   }
 
@@ -46,4 +50,8 @@
   }
   
 
+}
+
+.pollsitem__items:hover{
+  box-shadow: 5px 10px rgb(197, 197, 202);
 }
