@@ -25,7 +25,7 @@ const SERVER = "http://localhost:3000";
 
 function App() {
 
-  const { setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const [confessions, setConfessions] = useState([]);
   // refactor to use mode instead of multiple state to display component
   const [showForm, setShowForm] = useState(false);
@@ -134,7 +134,7 @@ function App() {
   }, []);
 
 
-  
+  console.log(user)
 
   useEffect(() => {
     Promise.all([
@@ -166,7 +166,7 @@ function App() {
         {showPollForm && <PollsForm polls={polls} setPolls={setPolls} />}
         <Routes>
           <Route path="/chat" element={<Chat />}></Route>
-          <Route path="/Profile" element={<Profile />}></Route>
+          <Route path="/Profile" element={<Profile confessions={confessions}/>}></Route>
           <Route path="/" element={!showLogin && !showRegister && <ConfessionDisplay confessions={confessions} setConfessions={setConfessions} pageToDisplay={pageToDisplay} setPageToDisplay={setPageToDisplay} />} ></Route>
           <Route path="/polls" element={<PollsList polls={polls} setPolls={setPolls} totalVotes={totalVotes} setTotalVotes={setTotalVotes}/>} ></Route>
 
