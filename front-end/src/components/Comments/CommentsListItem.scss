@@ -1,10 +1,12 @@
+@import "../../styles/variables.scss";
+
 .comments {
   &__content {
     width: 95%;
     margin-top: 10px;
     // margin-left: 10%;
     padding-left: 3px;
-    background-color: rgb(221, 217, 217);
+    background-color: $confession-text-background;
     text-align: left;
     border-radius: .25rem;
   }
@@ -12,5 +14,5 @@
 
 
 .test {
-  color: white;
+  color: $confession-font;
 }

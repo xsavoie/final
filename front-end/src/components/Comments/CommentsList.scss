@@ -1,3 +1,5 @@
+@import "../../styles/variables.scss";
+
 .comments {
   &__list {
     width: 100%;
@@ -5,7 +7,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: rgb(71, 71, 75);
+    background-color: $confession-background;
     margin-bottom: 10px;
   //   flex-flow: row wrap;
   }

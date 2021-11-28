@@ -24,35 +24,44 @@
     justify-content: space-between;
     height: 25px;
     margin: 5px 5px;
-    color: $white
+    color: $confession-font
   }
 
   &__title {
-    color: $white;
+    margin-left: 5px;
+    color: $confession-font;
   }
 
   &__created_at {
-    color: $white;
+    color: $confession-font;
   }
 
   &__content {
   width: 90%;
   margin-left: 5%;
-  background-color: rgb(221, 217, 217);
+  background-color: $confession-text-background;
   text-align: left;
   padding-left: 3px;
   border-radius: .50rem;
   }
 
   &__likes {
-    color: $white
+    color: $confession-font;
   }
 
 }
 
+.confession__article:hover {
+  border: 2px inset $confession-border 
+}
+
+.title-right{
+  display: flex;
+
+}
 
 .like-icon {
-  // color:salmon;
+  color:$white;
 }
 
 .like-icon:hover {
