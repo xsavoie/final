@@ -46,13 +46,15 @@ export default function OptionsListItem(props) {
   return (
     <article>
       <div className="options__container">
+      {props.voted && <div className="options__votes_main">
+         {/* <p className="options__votes">  */}
+         {props.votes}
+         {/* </p> */}
+      </div>}
       {props.voted && <div className="options__content">
       <p>{props.content}</p>
       </div>}
-      {/* {props.voted &&<div>Result</div>} */}
-      {props.voted && <div className="options__votes">
-         <p className="options__votes"> {props.votes}</p>
-      </div>}
+    
       </div>
       <div >
       {!props.voted && <button className="options__test" onClick={() => {
