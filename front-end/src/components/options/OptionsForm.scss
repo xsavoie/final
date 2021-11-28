@@ -1,0 +1,50 @@
+.options {
+  &__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: right;
+    width: 100%;
+    border: 2px outset; 
+   
+   
+    background-color: #bcd1dd;
+  
+    border-radius: .50rem;
+ 
+    
+  }
+
+
+
+  &__buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  &__add_remove{
+    display: flex;
+    justify-items: self-end;
+    align-self: flex-end;
+    padding: 0.5em;
+  }
+
+  &__add{
+    padding: 0.2em;
+  }
+
+  &__remove{
+    padding: 0.2em;
+  }
+
+  &__submit{
+    display: flex;
+    justify-items: self-end;
+    // align-self: flex-end;
+    padding: 0.7em;
+    
+ }
+
+}
+
+

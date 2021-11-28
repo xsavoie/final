@@ -1,7 +1,49 @@
-.polls {
+.pollsitem {
 
-  &__content {
+  &__items {
+    display: flex;
+    flex-direction: column;
+    margin: 5%;
     border: solid;
   }
+
+  &__top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  &__cretated_at {
+    margin-right: 1%;
+    margin-top: 1%;
+  }
+
+
+  &__content {
+    border: none;
+    width: 78%;
+    padding: 0.5em;
+    margin-top: 2%;
+    margin-left: 2%;
+    font-size: 24px;
+  }
+
+  &__options {
+    border: none;
+    width: 78%;
+    padding: 0.5em;
+    margin-left: 2%;
+   
+  }
+
+  &__total_votes {
+    display: flex;
+    align-self: start;
+    padding: 0.5em;
+ 
+    margin-left: 43%;
+    margin-bottom: 1%;
+  }
+  
 
 }

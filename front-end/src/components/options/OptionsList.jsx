@@ -1,4 +1,3 @@
-
 import OptionsListItem from "./OptionsListItem"
 import "./OptionsList.scss"
 import { useContext, useEffect, useState } from "react";
@@ -16,7 +15,7 @@ export default function OptionsList(props) {
         poll_id: props.pollId,
         user_id: user.id
       }
-      // console.log("VERIFY", pollInfo)
+     
       return axios.get("/api/polls/verify", { params: { pollInfo } })
         .then(res => {
           if (res.data) {
