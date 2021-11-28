@@ -15,27 +15,31 @@ export default function MyConfessions(props) {
 
   const { user, setUser } = useContext(UserContext);
   const [myOwnConfessions, setMyOwnConfessions] = useState([]);
+  const [selected, setSelected] = useState(false)
 
   useEffect(() => { 
-    myConfessions();
-  }, []);
+    myConfessions(user);
+  }, [user, props.confessions]);
+  // props.confessions
   
   let myConfessionsArray = [];
   
+  // console.log(user)
 
-  function myConfessions() {
+  function myConfessions(user) {
     const id = user.id 
-    console.log("id from front end myconfessions.js :", id)
+    // console.log("id from front end myconfessions.js :", id)
     const request = id 
-    console.log("request: ", request)
+    // console.log("request: ", request)
     axios.get('http://localhost:3000/users/my_confessions', {params: {request}} )
       .then(res => {
         myConfessionsArray = res.data;
-        // myConfessionsArray = (res.data).map(content => {
-        //   myConfessionsArray.push({content.id =});
-        //   });
-        console.log("myConfessionsArray: ", myConfessionsArray);
-        // setMyOwnConfessions(myConfessionsArray);
+        // console.log("myConfessionsArray: ", myConfessionsArray);
+        return axios.get('/api/confessions/front_page', { params: { idArray: myConfessionsArray } })
+      })
+      .then(res => {
+        console.log("********", res.data)
+        setMyOwnConfessions(res.data)
       })
       .catch(err => {
         console.log(err.message);
@@ -51,8 +55,8 @@ export default function MyConfessions(props) {
       createdAt={dayjs(confession.created_at).fromNow()}
       likes={confession.likes}
       comments={confession.comments}
-      // selected={confession.id === selected}
-      // setSelected={setSelected}
+      selected={confession.id === selected}
+      setSelected={setSelected}
       // confessionState={props.confessions}
       // setConfessions={props.setConfessions}
       // confessionsToUpdate={props.confessionsToUpdate}
@@ -74,26 +78,7 @@ export default function MyConfessions(props) {
   return(
 
     <div className="myConfessions"> 
-    <ul>
-      {parsedConfessions}
-
-    </ul>
-      <button
-            className="my-confessions-button"
-            onClick={(event) => {
-              event.preventDefault();
-              myConfessions();
-            }}>
-            My Confessions
-          </button>
-          <br/>
-           Username: { user.username}<br/>
-            confession id: {myOwnConfessions}<br/>
-            confession content: <br/>
-            confession created_at: <br/>
-          
-            {myOwnConfessions}
-          {/* <MyConfessionsList /> */}
+      <ul>{parsedConfessions}</ul>
     </div>
 
   );

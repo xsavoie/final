@@ -67,8 +67,8 @@ export default function Profile(props) {
         </form>
 
             <div className="confession-container">
-              <ConfessionForm />
-              <MyConfessionsList />
+              {/* <ConfessionForm /> */}
+              <MyConfessionsList confessions={props.confessions}/>
        
             </div>
 
