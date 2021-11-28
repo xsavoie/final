@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react"
 import axios from "axios";
-// import "./PollsForm.scss"
+import "./PollsForm.scss"
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { UserContext } from "../contexts/UserContext";
@@ -34,7 +34,7 @@ export default function PollsForm(props) {
    
     return axios.post("http://localhost:3000/api/polls/new", newPoll)
       .then(res => {
-        // console.log("response from frontend", res.data.id);
+    
         setPollId(res.data.id)
         setPollContent(res.data.content)
       })
@@ -46,10 +46,10 @@ export default function PollsForm(props) {
 
  
   return (
-    <div className="polls_form">
+    <div className="polls__form">
       <Form onSubmit={(e)=> e.preventDefault()} className="polls__input">
         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-          <Form.Label>Create a poll</Form.Label>
+          <Form.Label className="polls__title">Create a poll</Form.Label>
           <Form.Control
             as="textarea"
             rows={3}
@@ -57,6 +57,7 @@ export default function PollsForm(props) {
             onChange={(event) => setContent(event.target.value)}
           />
         </Form.Group>
+        <div className="polls__add_options">
           {!form && <Button
           variant="primary"
           size="sm"
@@ -65,7 +66,7 @@ export default function PollsForm(props) {
           Add options
         </Button>}
         {form && <OptionsForm pollId={pollId} pollContent={pollContent} polls={props.polls} setPolls={props.setPolls} setPollContent={setContent}/>}
-    
+        </div>
 
       </Form>
     </div>

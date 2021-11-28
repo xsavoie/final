@@ -1,14 +1,12 @@
-import { React } from "react";
+import { React, useState } from "react";
 import OptionsList from "../options/OptionsList";
 import "./PollsListItem.scss"
-
-
 
 
 export default function PollsListItem(props) {
 
 
-  const { content, createdAt, options, polls, setPolls, totalVotes, id } = props;
+  const { content, createdAt, options, polls, setPolls, id } = props;
 
 
   const setTotalVotes = (state, pollId) => {
@@ -22,17 +20,20 @@ export default function PollsListItem(props) {
     return total;
   };
 
+
+
   return (
 
-    <div className="pollsitem_item">
-      <h3>Poll item</h3>
-      <div>{createdAt}</div>
-      <div>{content}</div>
-      {/* when we click on one option we will change the state of that option and user is not able to vote again */}
-      <div>{<OptionsList
+    <div className="pollsitem__items">
+      <div className="pollsitem__top">
+        <div> </div>
+        <div className="pollsitem__cretated_at" >{createdAt}</div>
+      </div>
+     <div className="pollsitem__content" >{content}</div>
+      <div className="pollsitem__options">{<OptionsList
         options={options} setPolls={setPolls} pollId={id} polls={props.polls}
       />}</div>
-      <div>{setTotalVotes(polls, id)}</div>
+      <div className="pollsitem__total_votes" >~Total votes~{setTotalVotes(polls, id)}</div>
     </div>
   );
 }

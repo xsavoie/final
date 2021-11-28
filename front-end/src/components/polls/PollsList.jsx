@@ -29,8 +29,7 @@ export default function PollsList(props) {
 
  
   return (
-    <div>
-      <h1>Wellcome to Polls</h1>
+    <div className="polls">
       <div>{parsedPolls}</div>
     </div>
    )

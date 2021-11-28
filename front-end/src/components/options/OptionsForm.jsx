@@ -1,27 +1,17 @@
-//will have only text boxes for the options 
-//
-
-import React, { useState, useContext } from "react"
+import React, { useState } from "react"
 import axios from "axios";
-// import "./OptionsForm.scss"
+import "./OptionsForm.scss"
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
 
 export default function OptionsForm(props) {
 
-  // const [content, setContent] = useState("");
   const [options, setOptions] = useState(["", ""])
   const [optionLists, setOptionLists] = useState([0, 1])
 
 
-  const {pollId, setPolls, pollContent} = props
-
-  // const [form, setForm] = useState(false)
-
-  // const showOptions = () => {
-  //   setForm(true)
-   
+  const {pollId} = props
 
 
   const dataParser = (testData) => {
@@ -55,13 +45,13 @@ export default function OptionsForm(props) {
 
     const option = dataParser(newOption)
 
-    // console.log("new option", newOption)
+  
     return axios.post("http://localhost:3000/api/polls/new_options",  option )
       .then(res => {
-        // console.log(res.data);
+    
         axios.get(`http://localhost:3000/api/polls/${pollId}`)
         .then(res => {
-          // console.log("*********????????", res.data[0])
+        
           const newPoll = res.data[0];
           props.setPolls(updatePollState(props.polls, newPoll))
         })
@@ -86,8 +76,6 @@ export default function OptionsForm(props) {
     console.log(options)
   }
 
-  // const [options, setOptions] = useState(["", ""])
-  // const [optionLists, setOptionLists] = useState([0, 1])
 
   const removeOption = (options, optionLists) => {
     const optionsCopy = [...options]
@@ -101,7 +89,7 @@ export default function OptionsForm(props) {
 
 
   return (
-    <Form onSubmit={(e)=> e.preventDefault()}>
+    <Form className="options__form" onSubmit={(e)=> e.preventDefault()}>
       <div>
         {optionLists.map((option, index) => {
           return (
@@ -109,24 +97,28 @@ export default function OptionsForm(props) {
           )
         })}
       </div>
-          <Button
+      <div className="options__buttons">
+      <div className="options__add_remove">
+        <div className="options__add">
+          <Button 
           variant="primary"
           size="sm"
           onClick={() => {addOption()}}
         >
-          {/* it will add one by one option to the poll */}
           +
         </Button>
-        {/* {form && <Form.Control type="text" placeholder="Option 2" value2={content} onChange={(event) => setContent( event.target.value)}/>} */}
-
+      </div>
+      <div className="options__remove">
         <Button
           variant="primary"
           size="sm"
           onClick={() => {removeOption(options, optionLists)}}
         >
-          {/* it will remove one by one option to the poll if user change his mind */}
           -
         </Button>
+      </div>
+      </div>
+      <div className="options__submit">
        <Button
           variant="primary"
           size="sm"
@@ -139,16 +131,10 @@ export default function OptionsForm(props) {
         >
           submit
         </Button>
+        </div>
+        </div>
         
     </Form>
   )
 
 }
-
-
-  {/* <Form.Label>Option 1</Form.Label>
-      <Form.Control name="Option1" type="text" placeholder="Option 1" value={content} onChange={(event) => setContent(event.target.value)}/>
-      <br />
-      <Form.Label>Option 2</Form.Label>
-      <Form.Control name="Option2" type="text" placeholder="Option 2" value={content} onChange={(event) => setContent(event.target.value)}/>
-      <br /> */}
