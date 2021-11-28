@@ -1,21 +1,85 @@
+@import "../../styles/variables.scss";
+
 .register-show {
-  display: block;
+  display: flex;
+  justify-content: center;
   position: absolute;
-  margin-left: 35%;
+  // margin-left: 35%;
+  // align-self: center;
   transition: 800ms;
   opacity: 1;
+  margin-top: 3%;
+  // margin-bottom: 55%;
+  width: 150%;
 }
 
 .register-show.register-active {
-  transform: translateY(100px) scale(0) rotateY(180deg);
+  // transform: translateY(100px) scale(0) rotateY(180deg);
+  transform: translateY(100px) scale(1);
   opacity: 0;
+  position: absolute;
+  // margin-bottom: 55%;
 }
 
-.registerfrom_style{
-  width: 90%;
-  margin-left: 5%;
-  margin-top: 5%;
+.registerform_style{
+  background-color: $login-register;
   text-align: left;
   padding-left: 3px;
-  border-radius: .25rem;
+  border-radius: .75rem;
+  color: $login-register-font;
+  padding: 20px 20px;
   }
+
+#muted {
+  color: $navbar-font !important;
+  opacity: 0.6;
+}
+
+.register-input {
+  border-radius: .50rem;
+  border: none !important;
+}
+
+.register-btn {
+  background-color: $button !important;
+  border-color: $button !important;
+}
+
+.register-form--error {
+  color: rgba(253, 0, 0, 0.932);
+  margin-left: 35%;
+}
+
+
+// .registerfrom_style{
+//   width: 90%;
+//   margin-left: 5%;
+//   margin-top: 5%;
+//   text-align: left;
+//   padding-left: 3px;
+//   border-radius: .25rem;
+//   }
+
+//   .register-show {
+//     display: block;
+//     position: absolute;
+//     margin-left: 35%;
+//     transition: 800ms;
+//     opacity: 1;
+//   }
+  
+//   .register-show.register-active {
+//     // transform: translateY(100px) scale(0) rotateY(180deg);
+//     transform: translateY(100px) scale(1);
+  
+//     opacity: 0;
+//   }
+  
+//   .registerfrom_style{
+//     width: 90%;
+//     margin-left: 5%;
+//     margin-top: 5%;
+//     text-align: left;
+//     padding-left: 3px;
+//     border-radius: .25rem;
+//     }

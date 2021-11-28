@@ -1,10 +1,25 @@
 @import "../../styles/variables.scss";
 
+.comment-container {
+  display: flex;
+  // justify-content: center;
+  flex-direction: column;
+  
+
+}
+
+// .confession__title {
+//   font-size: larger;
+//   margin-bottom: -1em;
+// }
+
 .comments {
   &__content {
-    width: 95%;
-    margin-top: 10px;
-    // margin-left: 10%;
+    // align-self: center;
+    width: 85%;
+    // width: inherit;
+    margin-left: 5%;
+    // margin-top: 10px;
     padding-left: 3px;
     background-color: $confession-text-background;
     text-align: left;
@@ -13,6 +28,19 @@
 }
 
 
-.test {
+.comments--right{
+  // background-color: yellow;
+  width: 85%;
+  height: 15px;
+  margin-left: 5%;
+  margin-top: 15px;
+}
+
+.created_at {
   color: $confession-font;
+  font-size: 12px;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 5px;
+  // padding-bottom: 5px;
 }

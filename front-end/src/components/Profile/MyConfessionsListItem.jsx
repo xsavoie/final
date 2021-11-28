@@ -41,8 +41,8 @@ export default function MyConfessionsListItem(props) {
         </span>
       <div>
 
-        {props.selected && <Button variant="primary" size="sm" onClick={() => props.setSelected(null)} >Hide Comments</Button>}
-        {!props.selected && <Button variant="primary" size="sm" onClick={() => props.setSelected(props.id)}>View Comments {`(${props.comments.length})`} </Button>}
+        {props.selected && <Button className="comment-btn" variant="primary" size="sm" onClick={() => props.setSelected(null)} >Hide Comments</Button>}
+        {!props.selected && <Button className="comment-btn" variant="primary" size="sm" onClick={() => props.setSelected(props.id)}>View Comments {`(${props.comments.length})`} </Button>}
       </div>
     </footer>
       {

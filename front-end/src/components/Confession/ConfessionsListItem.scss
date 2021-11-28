@@ -3,12 +3,12 @@
 .confession {
   
   &__article {
-    width: 80%;
+    width: 50%;
     align-self: center;
     background-color: $confession-background;
     margin-top: 10px;
     // left align -- disable to center
-    margin-right: 15%;
+    // margin-right: 15%;
     border-radius: .50rem;
     border: 2px outset $confession-border 
   }
@@ -51,6 +51,11 @@
 
 }
 
+.confession__title {
+  font-size: larger;
+  margin-bottom: -1em;
+}
+
 .confession__article:hover {
   border: 2px inset $confession-border 
 }
@@ -60,7 +65,14 @@
 
 }
 
+.comment-btn {
+  background-color: $button !important;
+  border-color: $button !important;
+  margin-right: 2em;
+}
+
 .like-icon {
+  margin-left: 1em;
   color:$white;
 }
 

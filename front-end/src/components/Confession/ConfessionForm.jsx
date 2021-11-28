@@ -46,7 +46,7 @@ export default function ConfessionForm(props) {
           </Form.Group>
           <div className="form--buttons">
             <Dropdown>
-              <Dropdown.Toggle variant="primary" className={confessionClass} id="dropdown-basic" size="sm">
+              <Dropdown.Toggle  variant="primary" className={confessionClass} id="dropdown-basic" size="sm">
                 {category ? categoryParser(category) : "Category"}
               </Dropdown.Toggle>
 
@@ -57,6 +57,7 @@ export default function ConfessionForm(props) {
               </Dropdown.Menu>
             </Dropdown>
             <Button
+              className="confession-btn"
               variant="primary"
               size="sm"
               onClick={() => {

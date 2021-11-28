@@ -1,18 +1,21 @@
 @import "../../styles/variables.scss";
 
 .form-container {
-background-color: $background-container !important;
-border-radius: .50rem; 
+  display: flex;
+  background-color: $background-container !important;
+  justify-content: center;
+  // align-self: center;
+  // width: 80%;
 }
 
 .confession-form {
-  display: flex;
-  width: 79%;
-  border: 2px outset $confession-border;
-  margin-left: 4%;
- 
+  // display: flex;
+  // flex: 1;
+  width: 49%;
+  margin-left: 2em;
+  margin-top: 10px;
   background-color: $confession-background;
-
+  border: 2px outset $confession-border;
   border-radius: .50rem;
 
 
@@ -22,6 +25,16 @@ border-radius: .50rem;
     
   }
 
+}
+
+#dropdown-basic {
+  background-color: $button ;
+  border-color: $button ;
+}
+
+.confession-btn {
+  background-color: $button !important;
+  border-color: $button !important;
 }
 
 .top-header {
