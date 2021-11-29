@@ -18,6 +18,7 @@ import PollsList from './components/polls/PollsList';
 // import ConfessionListItem from './components/Confession/ConfessionsListItem';
 import ConfessionDisplay from './components/Confession/ConfessionDisplay';
 import PollsForm from './components/polls/PollsForm'
+import PublicChatRoom from './components/Chat/PublicChatRoom';
 
 // const io = require("socket.io-client");
 const SERVER = "http://localhost:3000";
@@ -166,6 +167,8 @@ function App() {
         {showPollForm && <PollsForm polls={polls} setPolls={setPolls} />}
         <Routes>
           <Route path="/chat" element={<Chat />}></Route>
+          <Route path="/publicchat" element={<PublicChatRoom />}></Route>
+
           <Route path="/Profile" element={<Profile/>}></Route>
           <Route path="/" element={!showLogin && !showRegister && <ConfessionDisplay confessions={confessions} setConfessions={setConfessions} pageToDisplay={pageToDisplay} setPageToDisplay={setPageToDisplay} />} ></Route>
           <Route path="/polls" element={<PollsList polls={polls} setPolls={setPolls} totalVotes={totalVotes} setTotalVotes={setTotalVotes}/>} ></Route>

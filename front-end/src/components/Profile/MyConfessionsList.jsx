@@ -59,6 +59,7 @@ export default function MyConfessionsList(props) {
       setSelected={setSelected}
       myOwnConfessions={myOwnConfessions}
       setMyOwnConfessions={setMyOwnConfessions}
+
       // confessionState={props.confessions}
       // setConfessions={props.setConfessions}
       // confessionsToUpdate={props.confessionsToUpdate}

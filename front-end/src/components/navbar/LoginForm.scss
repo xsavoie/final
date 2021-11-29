@@ -15,6 +15,7 @@
   margin-top: 3%;
   width: 150%;
   // position: absolute;
+  background-color: $background-container;
 }
 
 .login-show.login-active {
@@ -22,6 +23,7 @@
   transform: translateY(100px) scale(1) ;
   opacity: 0;
   position: absolute;
+  
 }
 
 .login-btn {
@@ -31,7 +33,7 @@
 
 .loginform_style{
   background-color: $login-register;
-  text-align: left;
+  text-align: center;
   padding-left: 3px;
   border-radius: .75rem;
   color: $login-register-font;
@@ -42,3 +44,18 @@
     color: rgba(253, 0, 0, 0.932);
     margin-left: 35%;
   }
+
+
+  .logo-font-confessions{
+    // background-color: #4056a1;
+    font-size: 30px;
+    color: whitesmoke;
+    border-radius: 20px;
+    margin-top: 1em;
+    padding: 14px 25px;
+    font-style: italic;
+    // border: black solid 3px;
+    text-decoration: none;
+  
+  }
+  

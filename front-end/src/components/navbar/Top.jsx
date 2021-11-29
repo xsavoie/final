@@ -29,7 +29,7 @@ export default function Top(props) {
           href="#home"
           onClick={() => handleRouteChange("recent")}
         >
-          <Link className="nav-font" to="/" >classified</Link>
+          <label><a href="/" className="nav-font-confessions" > Confessions🗣 </a></label>
         </Navbar.Brand>
         <div className="">
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -90,6 +90,18 @@ export default function Top(props) {
               </Nav.Link>}
 
               {user.id && <Nav.Link onClick={() => {
+                    console.log("pizza")
+                    props.setShowPollForm(false);
+                    props.setShowForm(false);
+                  }}><Link to="/chat" className="nav-font" > Chat</Link></Nav.Link>}
+
+              {user.id && <Nav.Link onClick={() => {
+                    console.log("pizza")
+                    props.setShowPollForm(false);
+                    props.setShowForm(false);
+                  }}><Link to="/publicchat" className="nav-font" >Public Chat Rooms</Link></Nav.Link>}
+
+                  {user.id && <Nav.Link onClick={() => {
                     console.log("pizza")
                     props.setShowPollForm(false);
                     props.setShowForm(false);
