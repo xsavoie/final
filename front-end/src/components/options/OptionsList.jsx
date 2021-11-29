@@ -20,11 +20,11 @@ export default function OptionsList(props) {
       return axios.get("/api/polls/verify", { params: { pollInfo } })
         .then(res => {
           if (res.data) {
-            console.log("voted", res.data)
+            // console.log("voted", res.data)
             setVoted(true)
             setColour("pink")
           } else {
-            console.log("not voted", res.data);
+            // console.log("not voted", res.data);
           }
         })
         .catch(err => {

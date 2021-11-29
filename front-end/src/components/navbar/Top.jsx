@@ -37,23 +37,23 @@ export default function Top(props) {
             <Nav  className="me-auto">
               <NavDropdown title="Category" id="basic-nav-dropdown">
                 <NavDropdown.Item  href="/" onClick={() => handleRouteChange(1)}
-                ><Link to="/" >Secret</Link>
+                ><Link className="category-dropdown" to="/" >Secret</Link>
                 </NavDropdown.Item>
                 <NavDropdown.Item onClick={() => handleRouteChange(2)}
-                ><Link to="/" >Story</Link>
+                ><Link className="category-dropdown" to="/" >Story</Link>
                 </NavDropdown.Item>
                 <NavDropdown.Item onClick={() => handleRouteChange(3)}
-                ><Link to="/" >Question</Link>
+                ><Link className="category-dropdown" to="/" >Question</Link>
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item onClick={() => handleRouteChange("recent")}
-                ><Link to="/" >Most recent</Link>
+                ><Link className="category-dropdown" to="/" >Most recent</Link>
                 </NavDropdown.Item>
                 <NavDropdown.Item onClick={() => handleRouteChange("popular")}
-                ><Link to="/" >Most popular</Link>
+                ><Link className="category-dropdown" to="/" >Most popular</Link>
                 </NavDropdown.Item>
                 <NavDropdown.Item
-                ><Link to="/polls" >Polls</Link>
+                ><Link className="category-dropdown" to="/polls" >Polls</Link>
                 </NavDropdown.Item>
               </NavDropdown>
               {user.id && !props.showForm &&
