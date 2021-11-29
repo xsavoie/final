@@ -1,14 +1,29 @@
 @import "../../styles/variables.scss";
 
 
+.about-edit-button-possition{
+  text-align: right;
+}
 .about-edit-button{
-  background-color: #39177d; /* Green */
-  border: none;
-  // color: white;
-  color: $confession-font;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
+ 
+  // border: splid;
+ 
   font-size: 16px;
+  border-radius: 0.25em;
+  margin-top: 0.5em;
+  margin-right: 0.5em;
+  margin-bottom: 0.5em;
+
+  background-color: $button !important;
+  border-color: $button !important;
+}
+
+.text_box{
+  margin-top: 1em;
+  border: solid transparent;
+  width: 350px;
+  height: 135px;
+  text-align: left;
+  border-radius: 0.25em;
+  margin-bottom: 0.5em;
 }

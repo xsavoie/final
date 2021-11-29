@@ -18,6 +18,8 @@ export default function PublicChatRoom(props) {
     if (username !== "" && room !== "") {
       socket.emit("join_room", room);
       setShowChat(true);
+      socket.emit(`${username} is here`, room);
+      
     }
   };
   
@@ -25,15 +27,15 @@ export default function PublicChatRoom(props) {
     <div className="Chat">
      {!showChat ? (
       <div className="joinChatContainer">
-        <h3>Meet new people</h3>
+        <h3>Meet new people</h3><br/>
         <input
           type="text"
           placeholder="Nickname"
           onChange={(event) => {
             setUsername(event.target.value);
           }}
-        />
-        <button onClick={joinRoom}>Join Chat</button>
+        /><br/>
+        <button onClick={joinRoom}>Join Chat</button><br/>
 
       </div>
     ) : (
