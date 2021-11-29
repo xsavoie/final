@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 import axios from "axios";
 import MyConfessionsListItem from './MyConfessionsListItem';
+import './MyConfessionList.scss'
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 

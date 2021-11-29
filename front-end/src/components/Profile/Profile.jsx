@@ -27,48 +27,47 @@ export default function Profile(props) {
 
     <div className="profile__page">
       <div className="profile__top">
-      <div className="name-avatar-container">
-        <h3 className="username-display">Hello {user.username}!</h3>
-       
-        <img src={user.avatar} className="avatar-pic" alt=""></img>
-       
-          <button
-            type="button"
-            className="btn-avatar"
-            onClick={(event) => {
-              event.preventDefault()
-              setShowAvatarForm(!showAvatarForm);
-            }}
-          >
-            Upload a new picture!
-          </button> 
-          {showAvatarForm ? <Avatar setShowAvatarForm={setShowAvatarForm} /> : null}
+        <div className="name-avatar-container">
+          <h3 className="username-display">Hello {user.username}!</h3>
+          <img src={user.avatar} className="avatar-pic" alt=""></img>
+          <div className="btn-avatar-position">
+            {!showAvatarForm &&<button
+              type="button"
+              className="btn-avatar"
+              onClick={(event) => {
+                event.preventDefault()
+                setShowAvatarForm(!showAvatarForm);
+              }}
+            >
+              Upload a new picture!
+            </button> }
           </div>
+          {showAvatarForm ? <Avatar setShowAvatarForm={setShowAvatarForm} /> : null}
+        </div>
         <div className="about-confessions-container">
           <form className="about-block">
             <div>About me</div>
             <div className="about-me-label">{user.about} </div>
-            {!showAboutMeForm && <button
-              type="button"
-              className="btn-edit"
-              onClick={(event) => {
-                event.preventDefault()
-                setShowAboutMeForm(!showAboutMeForm);
-              }} >
-              Edit about me!
-            </button> }
+            <div className="edit_button_position">
+              {!showAboutMeForm && <button
+                type="button"
+                className="btn-edit"
+                onClick={(event) => {
+                  event.preventDefault()
+                  setShowAboutMeForm(!showAboutMeForm);
+                }} >
+                Edit about me!
+              </button> }
+            </div>
             {showAboutMeForm ? <AboutMe setShowAboutMeForm={setShowAboutMeForm} /> : null}
           </form>
-          </div>
-          </div>
-
-          <div className="confession-container">
+        </div>
+      </div>
+      <div className="confession-container">
             {/* <ConfessionForm /> */}
             <MyConfessionsList confessions={props.confessions} />
-          </div>
-        
-      
       </div>
+    </div>
 
 
   );

@@ -4,10 +4,10 @@ import Badge from 'react-bootstrap/Badge';
 import Button from 'react-bootstrap/Button';
 import ProfileCommentsList from "./ProfileCommentsList";
 import useConfessionItem from "../../hooks/useConfessionItem";
-import './MyConfessionsListItem.scss'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 import './MyConfessionsListItem.scss';
+// import './MyConfessionsListItem.scss';
 
 
 export default function MyConfessionsListItem(props) {
