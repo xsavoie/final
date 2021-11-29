@@ -43,6 +43,15 @@ export default function OptionsListItem(props) {
       })
   };
 
+
+  const [style, setStyle] = useState("options__content");
+  
+  const changeStyle = () => {
+    console.log("you just clicked");
+  
+    setStyle("options__content2");
+  }
+
   return (
     <article>
       <div className="options__container">
@@ -59,7 +68,8 @@ export default function OptionsListItem(props) {
       <div >
       {!props.voted && <button className="options__test" onClick={() => {
           giveVote(props.id, user.id);
-          props.setVoted(true)
+          props.setVoted(true);
+          
       }
       } >{props.content}
       </button>}

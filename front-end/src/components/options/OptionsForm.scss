@@ -7,14 +7,12 @@
     border: 2px outset; 
    
    
-    background-color: #bcd1dd;
+    // background-color: #bcd1dd;
   
-    border-radius: .50rem;
+    border-radius: .25rem;
  
     
   }
-
-
 
   &__buttons{
     display: flex;
@@ -47,4 +45,7 @@
 
 }
 
-
+.options__form:hover{
+  // border-color:royalblue;
+  box-shadow: 5px 5px rgb(197, 197, 202);
+}

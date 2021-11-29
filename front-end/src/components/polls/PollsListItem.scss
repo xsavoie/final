@@ -20,6 +20,7 @@
   &__cretated_at {
     margin-right: 1%;
     margin-top: 1%;
+    font-family: 'Ruda', sans-serif;
   }
 
 
@@ -30,6 +31,7 @@
     margin-top: 2%;
     margin-left: 5%;
     font-size: 24px;
+    font-family: 'Roboto Slab', serif;
   }
 
   &__options {
@@ -40,16 +42,30 @@
    
   }
 
-  &__total_votes {
+  &__total_votes_myDIV {
     display: flex;
     align-self: start;
     padding: 0.5em;
- 
-    margin-left: 43%;
-    margin-bottom: 1%;
+    margin: auto;
+    font-family: 'Roboto Slab', serif;
   }
-  
 
+  &__total_votes_hide {
+    margin: auto;
+    margin-bottom: 1%;
+    font-family: 'Roboto Slab', serif;
+  }
+
+}
+
+.pollsitem__total_votes_hide{
+  display: none;
+}
+
+.pollsitem__total_votes_myDIV:hover + .pollsitem__total_votes_hide{
+  display: block;
+  font-size: 20px;
+  color:red;
 }
 
 .pollsitem__items:hover{

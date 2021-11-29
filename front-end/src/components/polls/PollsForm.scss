@@ -4,13 +4,13 @@
     display: flex;
     flex-direction: column;
     justify-content: right;
-    width: 79%;
+    width: 50%;
     border: 2px outset; 
-    margin-left: 10%;
+    margin-left: 23%;
    
-    background-color: #bcd1dd;
+
   
-    border-radius: .50rem;
+    border-radius: .25rem;
  
     
   }
@@ -18,9 +18,17 @@
   &__title{
     padding: 0.2em;
     margin-left: 0.2em;
+    font-family: 'Ruda', sans-serif;
   }
 
   &__add_options{
     padding: 0.5em;
+    font-family: 'Ruda', sans-serif;
+    // background-color: transparent;
   }
+}
+
+.polls__form:hover{
+  // border-color:royalblue;
+  box-shadow: 5px 10px rgb(197, 197, 202);
 }
