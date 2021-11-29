@@ -172,8 +172,8 @@ function App() {
         {showForm && <ConfessionForm confessions={confessions} setConfessions={setConfessions} setShowForm={setShowForm} setPageToDisplay={setPageToDisplay} />}
         {showPollForm && <PollsForm polls={polls} setPolls={setPolls} />}
         <Routes>
-          <Route path="/privatechat" element={<PrivateChatRoom />}></Route>
-          <Route path="/publicchat" element={<PublicChatRoom />}></Route>
+          <Route path="/privatechat" element={!showLogin && !showRegister && <PrivateChatRoom />}></Route>
+          <Route path="/publicchat" element={!showLogin && !showRegister && <PublicChatRoom />}></Route>
 
           <Route path="/Profile" element={<Profile/>}></Route>
           <Route path="/" element={!showLogin && !showRegister && <ConfessionDisplay confessions={confessions} setConfessions={setConfessions} pageToDisplay={pageToDisplay} setPageToDisplay={setPageToDisplay} />} ></Route>
