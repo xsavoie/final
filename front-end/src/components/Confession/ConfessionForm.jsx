@@ -54,7 +54,7 @@ export default function ConfessionForm(props) {
               <Dropdown.Menu >
                 <Dropdown.Item onClick={() => setCategory(1)}>Secret</Dropdown.Item>
                 <Dropdown.Item onClick={() => setCategory(2)}>Story</Dropdown.Item>
-                <Dropdown.Item onClick={() => setCategory(3)}>Question</Dropdown.Item>
+                {/* <Dropdown.Item onClick={() => setCategory(3)}>Question</Dropdown.Item> */}
               </Dropdown.Menu>
             </Dropdown>
             <Button

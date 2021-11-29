@@ -1,4 +1,11 @@
-// .polls {
+@import "../../styles/variables.scss";
+
+.polls {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: $background-container;
+
 //   &__list {
 //     width: 50%;
 //     margin-top: 10%;
@@ -11,4 +18,4 @@
 //     margin-bottom: 25px;
   
 //   }
-// }
+}
