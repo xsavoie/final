@@ -25,14 +25,13 @@ export default function Profile(props) {
 
   return (
 
-    // <body className="profile-page">
-    <div className="profile-page">
+    <div className="profile__page">
+      <div className="profile__top">
       <div className="name-avatar-container">
-        <h3 className="username-display">Hi {user.username}!</h3>
-        {/* <div> */}
+        <h3 className="username-display">Hello {user.username}!</h3>
+       
         <img src={user.avatar} className="avatar-pic" alt=""></img>
-        {/* </div> */}
-        {/* <form className="avatar-block"> */}
+       
           <button
             type="button"
             className="btn-avatar"
@@ -44,11 +43,12 @@ export default function Profile(props) {
             Upload a new picture!
           </button> 
           {showAvatarForm ? <Avatar setShowAvatarForm={setShowAvatarForm} /> : null}
-        {/* </form> */}
+          </div>
         <div className="about-confessions-container">
           <form className="about-block">
-            <div className="about-me-label"> About Me: <br />{user.about} </div>
-            <button
+            <div>About me</div>
+            <div className="about-me-label">{user.about} </div>
+            {!showAboutMeForm && <button
               type="button"
               className="btn-edit"
               onClick={(event) => {
@@ -56,19 +56,72 @@ export default function Profile(props) {
                 setShowAboutMeForm(!showAboutMeForm);
               }} >
               Edit about me!
-            </button> {showAboutMeForm ? <AboutMe setShowAboutMeForm={setShowAboutMeForm} /> : null}
+            </button> }
+            {showAboutMeForm ? <AboutMe setShowAboutMeForm={setShowAboutMeForm} /> : null}
           </form>
+          </div>
+          </div>
 
           <div className="confession-container">
             {/* <ConfessionForm /> */}
             <MyConfessionsList confessions={props.confessions} />
           </div>
-        </div>
-      </div>
+        
+      
       </div>
 
 
   );
 
 }
-{/* </body> */ }
+
+
+
+
+// return (
+
+//   // <body className="profile-page">
+//   <div className="profile-page">
+//     <div className="name-avatar-container">
+//       <h3 className="username-display">Hello {user.username}!</h3>
+//       {/* <div> */}
+//       <img src={user.avatar} className="avatar-pic" alt=""></img>
+//       {/* </div> */}
+//       {/* <form className="avatar-block"> */}
+//         <button
+//           type="button"
+//           className="btn-avatar"
+//           onClick={(event) => {
+//             event.preventDefault()
+//             setShowAvatarForm(!showAvatarForm);
+//           }}
+//         >
+//           Upload a new picture!
+//         </button> 
+//         {showAvatarForm ? <Avatar setShowAvatarForm={setShowAvatarForm} /> : null}
+//       {/* </form> */}
+//       <div className="about-confessions-container">
+//         <form className="about-block">
+//           <div className="about-me-label"> About Me: <br />{user.about} </div>
+//           <button
+//             type="button"
+//             className="btn-edit"
+//             onClick={(event) => {
+//               event.preventDefault()
+//               setShowAboutMeForm(!showAboutMeForm);
+//             }} >
+//             Edit about me!
+//           </button> {showAboutMeForm ? <AboutMe setShowAboutMeForm={setShowAboutMeForm} /> : null}
+//         </form>
+
+//         <div className="confession-container">
+//           {/* <ConfessionForm /> */}
+//           <MyConfessionsList confessions={props.confessions} />
+//         </div>
+//       </div>
+//     </div>
+//     </div>
+
+
+// );
+

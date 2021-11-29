@@ -1,59 +1,59 @@
 @import "../../styles/variables.scss";
 
+.profile{
 
-.profile-page{
-  // margin: auto;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  // font-size: 20px;
+  &__page {
   display: flex;
-  align-content: center;
-  justify-content: center;
-  // flex-direction: column;
-  // justify-content: space-evenly;
-  // background-color: rgba(40, 15, 82, 0.9);
+  flex-direction: row;
+  font-family: 'Roboto Slab', serif;
+  // font-family: 'Ruda', sans-serif;
   background-color: $background-container;
-  // color: antiquewhite;
   color: $confession-font;
-  // margin-right: 10%;
   width: 100%;
   height: 100%;
+  }
+
+  &__top {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-left: 5em;
+  }
+
+
 }
 
-.name-avatar-container{
-  // width: 80%;
-  display: grid;
-  // display: block;
-  align-content: center;
+
+.username-display{
+//  margin-left: 1em;
+ margin-bottom: 1rem;
+ margin-top: 2rem;
+ font-size: 30px;
+ 
   
 }
 
 .about-confessions-container{
   
   display: block;
-  align-content: left ;
+  margin-top: 2em;
+  margin-bottom: 1em;
 }
 
 .about-me-label{
-  // border:3px solid whitesmoke;
   border:3px solid $confession-border;
-  margin-top: 1em;
-  margin-bottom: 1em;
-  width: 600px;
-  height: 200px;
-  padding-left: 1em;
-  padding-right: 1em;
-  padding-top: 1em;
+  // margin-top: 1em;
+  // margin-bottom: 1em;
+  width: 350px;
+  height: 150px;
+  // padding-left: 1em;
+  // padding-right: 1em;
+  // padding-top: 1em;
   // padding-bottom: 3em;
   text-align: left;
-  border-radius: 12px;
-  margin-top: 10em;
-}
-
-
-.username-display{
- 
-  margin-top: 3em;
-  // margin-left: 3em;
+  border-radius: 0.25em;
+  margin-top: 0.5em;
+  margin-bottom: 1em;
 }
 
 .avatar-pic{
@@ -61,55 +61,56 @@
   height: 350px;
   vertical-align: middle;
   border: 3px ;
-  border-radius: 20%;
+  border-radius: 0.25em;
   object-fit: cover;
+  border: solid;
+
   // margin-top: 3em;
-  // margin-bottom: 1em;
+  margin-bottom: 1em;
 }
 
-.avatar-pic:hover{
-  // box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
-  // border-radius: 2em;
-  transform: scale(1.2);
-}
+// .avatar-pic:hover{
+//   // box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+//   // border-radius: 2em;
+//   transform: scale(1.2);
+// }
 
 .btn-avatar{
-  // background-color: rgb(121, 94, 121); 
-  background-color: $secondary-color;
-  border: none;
-  // color: white;
-  color: $confession-font;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
+  border: splid;
+  text-align: right;
   // display: inline-block;
-  // font-size: 16px;
-  width: 40%;
-  border-radius: 12px;
-  margin-top: 1em;
-  // margin-bottom: 3em;
-  
+  font-size: 16px;
+  border-radius: 0.25em;
+ 
 }
 
 .btn-edit{
-  // background-color: rgb(121, 94, 121); 
-  
-  background-color: $secondary-color;
-  border: none;
-  // color: white;
-  color: $confession-font;
-  padding: 15px 32px;
+
+  border: splid;
   text-align: center;
-  text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  border-radius: 12px;
+  border-radius: 0.25em;
 }
 
 .confession-container{
+  margin-top: 5%;
+  margin-left: 5em;
+  border: solid;
+  margin-right: 5em;
 
-
-
-
-
+  
 }
+
+
+
+
+
+// .btn-avatar{
+// display: none;
+// }
+
+// .avatar-pic:hover + .btn-avatar{
+// display: block;
+
+// }
