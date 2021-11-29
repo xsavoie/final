@@ -78,13 +78,23 @@ export default function RegisterForm(props) {
 
   return (
     <div className={`${!props.showRegister ? "register-active" : ""} register-show`}>
+
       <Form className="registerform_style" autoComplete="off" onSubmit={event => event.preventDefault()}>
+
+        {/* <p><label><a href="/" className="logo-font-confessions" > Confessions🗣 </a></label></p> */}
+        <p className="logo-font-confessions-2"><label>Confessions🗣</label></p>
+
         <h2>Register</h2>
 
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <div >
-            <input className="register-input" id="email" type="text" name="email" placeholder="name@email.com"
+            <input className="register-input"
+              disabled={!props.showRegister ? true : false}
+              id="email"
+              type="text"
+              name="email"
+              placeholder="name@email.com"
               value={fields.email}
               onChange={handleFieldChange}
             />
@@ -97,7 +107,12 @@ export default function RegisterForm(props) {
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <div >
-            <input className="register-input" id="password" type="password" name="password" placeholder="password"
+            <input className="register-input"
+              disabled={!props.showRegister ? true : false}
+              id="password"
+              type="password"
+              name="password"
+              placeholder="password"
               autoComplete="off"
               value={fields.password}
               onChange={handleFieldChange}
@@ -107,7 +122,12 @@ export default function RegisterForm(props) {
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Confirm your password</Form.Label>
           <div >
-            <input className="register-input" id="confirmPassword" type="password" name="password" placeholder="password"
+            <input className="register-input"
+              disabled={!props.showRegister ? true : false}
+              id="confirmPassword"
+              type="password"
+              name="password"
+              placeholder="password"
               autoComplete="off"
               value={fields.confirmPassword}
               onChange={handleFieldChange}
@@ -122,10 +142,11 @@ export default function RegisterForm(props) {
           onClick={() => {
             registerCheck();
             // props.setShowRegister(false)
-          }}>
+          }}
+        >
           Submit
         </Button>
-            <div className="register-form--error">{error}</div>
+        <div className="register-form--error">{error}</div>
       </Form>
     </div>
   )

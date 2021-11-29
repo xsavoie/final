@@ -45,7 +45,7 @@ export default function Top(props) {
                 ><Link className="category-dropdown" to="/" >Stories</Link>
                 </NavDropdown.Item>
 
-                <NavDropdown.Item href="/polls"
+                <NavDropdown.Item href="/polls" onClick={() => handleRouteChange("recent")}
                 ><Link className="category-dropdown" to="/polls" >Questions</Link>
                 </NavDropdown.Item>
 
