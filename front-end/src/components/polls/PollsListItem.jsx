@@ -1,12 +1,14 @@
 import { React } from "react";
 import OptionsList from "../options/OptionsList";
 import "./PollsListItem.scss"
+import Badge from 'react-bootstrap/Badge'
 
 
 export default function PollsListItem(props) {
 
 
   const { content, createdAt, options, polls, setPolls, id } = props;
+
 
 
   const setTotalVotes = (state, pollId) => {
@@ -24,18 +26,19 @@ export default function PollsListItem(props) {
   return (
 
     <div className="pollsitem__items">
-      <div className="pollsitem__top">
+      <header className="pollsitem__top">
+      <Badge className="badge--question">Question</Badge>
         <div> </div>
-        <div className="pollsitem__cretated_at" >{createdAt}</div>
-      </div>
+        <div className="pollsitem__created_at" >{createdAt}</div>
+      </header>
      <div className="pollsitem__content" >{content}</div>
       <div className="pollsitem__options">{<OptionsList
         options={options} setPolls={setPolls} pollId={id} polls={props.polls}
       />}</div>
-      <div className="pollsitem__votes">
+      <footer className="pollsitem__votes">
       <div className="pollsitem__total_votes_myDIV" >Total votes</div>
       <div className="pollsitem__total_votes_hide" >{setTotalVotes(polls, id)}</div>
-      </div>
+      </footer>
     </div>
   );
 }

@@ -92,7 +92,7 @@ export default function Top(props) {
                 onClick={() => {
                   props.setShowPollForm(false);
                   props.setShowForm(false);
-                }}>Create a Poll
+                }}>Ask a question
               </Nav.Link>}
 
               {user.id && <NavDropdown title="Chat" id="basic-nav-dropdown">

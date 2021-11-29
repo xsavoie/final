@@ -116,7 +116,7 @@ export default function OptionsForm(props) {
       <div>
         {optionLists.map((option, index) => {
           return (
-          <Form.Control name={`Option${option}`} type="text" placeholder={`Option ${option + 1}`} value={options[index]} onChange={(event) => updateOptionByIndex(event.target.value, index)}/>
+          <Form.Control className="options--input" name={`Option${option}`} type="text" placeholder={`Option ${option + 1}`} value={options[index]} onChange={(event) => updateOptionByIndex(event.target.value, index)}/>
           )
         })}
       </div>
@@ -124,6 +124,7 @@ export default function OptionsForm(props) {
       <div className="options__add_remove">
         <div className="options__add">
           <Button 
+          className="option--btn"
           disabled={options.length >= 5 ? true : false}
           variant="primary"
           size="sm"
@@ -134,6 +135,7 @@ export default function OptionsForm(props) {
       </div>
       <div className="options__remove">
         <Button
+          className="option--btn"
           disabled={options.length > 2 ? false : true}
           variant="primary"
           size="sm"
@@ -145,6 +147,7 @@ export default function OptionsForm(props) {
       </div>
       <div className="options__submit">
        <Button 
+          className="option--btn"
           variant="primary"
           size="sm"
           onClick={() => { 

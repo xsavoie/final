@@ -17,12 +17,12 @@
   position: absolute;
   z-index: 1;
   background-color: $background-container;
-  margin-left: 40%;
+  margin-left: 41%;
 }
 
 .login-show.login-active {
   // transform: translateY(100px) scale(0) rotateY(180deg);
-  transform: translateY(450px) scale(1) ;
+  transform: translateY(-300px) scale(1) ;
   opacity: 0;
   position: absolute;  
 }

@@ -95,7 +95,7 @@ const mostRecentPoll = function () {
     SELECT id
     FROM polls
     ORDER BY created_at DESC
-    LIMIT 5;
+    LIMIT 10;
   `;
 
   return db

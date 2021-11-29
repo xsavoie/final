@@ -1,16 +1,27 @@
-.polls {
-  &__form {
-    margin-top: 5%;
-    display: flex;
-    flex-direction: column;
-    justify-content: right;
-    width: 50%;
-    border: 2px outset; 
-    margin-left: 23%;
-   
+@import "../../styles/variables.scss";
 
-  
-    border-radius: .25rem;
+.polls {
+
+  &__container {
+    display: flex;
+  background-color: $background-container !important;
+  justify-content: center;
+  }
+
+  &__form {
+    // margin-top: 5%;
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: right;
+    // margin-left: 23%;
+    width: 49%;
+    margin-left: 1em;
+    margin-top: 10px;
+    border: 2px outset $confession-border; 
+    background-color: $confession-background;
+
+    border-color: $confession-border;
+    border-radius: .50rem;
  
     
   }
@@ -31,4 +42,15 @@
 .polls__form:hover{
   // border-color:royalblue;
   box-shadow: 5px 10px rgb(197, 197, 202);
+}
+
+#input-form {
+  width: 90%;
+  margin-left: 5%;
+  background-color: $confession-text-background;
+}
+
+.poll-button {
+  background-color: $button !important;
+  border-color: $button !important;
 }

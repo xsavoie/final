@@ -1,13 +1,21 @@
+@import "../../styles/variables.scss";
+
 .pollsitem {
+  
 
   &__items {
-    width: 67%;
+    // width: 67%;
     display: flex;
+    width: 49%;
+    margin-left: 26%;
     flex-direction: column;
-    margin: 5%;
-    border: solid;
-    border-radius: .25rem;
-    margin-left: 15%;
+    margin-top: 12px;
+    border: solid $confession-border;
+    border-radius: .50rem;
+    background-color: $confession-background;
+    // margin: 5%;
+    // margin-left: 15%;
+    
   }
 
 
@@ -15,11 +23,13 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin: 1% 1%;
+    margin-bottom: -2%;
   }
 
-  &__cretated_at {
-    margin-right: 1%;
-    margin-top: 1%;
+  &__created_at {
+    // margin-right: 1%;
+    // margin-top: 1%;
     font-family: 'Ruda', sans-serif;
   }
 
@@ -30,7 +40,8 @@
     padding: 0.5em;
     margin-top: 2%;
     margin-left: 5%;
-    font-size: 24px;
+    // font-size: 24px;
+    font-size: larger;
     font-family: 'Roboto Slab', serif;
   }
 
@@ -74,4 +85,8 @@
 
 .pollsitem__items:hover{
   box-shadow: 5px 10px rgb(197, 197, 202);
+}
+
+.bg-primary.badge--question {
+  background-color: $question-color !important;
 }
