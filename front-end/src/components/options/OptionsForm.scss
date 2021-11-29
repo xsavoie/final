@@ -7,19 +7,18 @@
     border: 2px outset; 
    
    
-    background-color: #bcd1dd;
+    // background-color: #bcd1dd;
   
-    border-radius: .50rem;
+    border-radius: .25rem;
  
     
   }
-
-
 
   &__buttons{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    
   }
 
   &__add_remove{
@@ -31,7 +30,10 @@
 
   &__add{
     padding: 0.2em;
+    
   }
+
+
 
   &__remove{
     padding: 0.2em;
@@ -43,8 +45,17 @@
     // align-self: flex-end;
     padding: 0.7em;
     
+    
  }
 
+
+
 }
+
+.options__form:hover{
+  // border-color:royalblue;
+  box-shadow: 5px 5px rgb(197, 197, 202);
+}
+
 
 
