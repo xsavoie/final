@@ -89,23 +89,10 @@ export default function Top(props) {
                 }}>Create a Poll
               </Nav.Link>}
 
-              {user.id && <Nav.Link onClick={() => {
-                    console.log("pizza")
-                    props.setShowPollForm(false);
-                    props.setShowForm(false);
-                  }}><Link to="/chat" className="nav-font" > Chat</Link></Nav.Link>}
-
-              {user.id && <Nav.Link onClick={() => {
-                    console.log("pizza")
-                    props.setShowPollForm(false);
-                    props.setShowForm(false);
-                  }}><Link to="/publicchat" className="nav-font" >Public Chat Rooms</Link></Nav.Link>}
-
-                  {user.id && <Nav.Link onClick={() => {
-                    console.log("pizza")
-                    props.setShowPollForm(false);
-                    props.setShowForm(false);
-                  }}><Link to="/chat" className="nav-font" >Chat</Link></Nav.Link>}
+              {user.id && <NavDropdown title="Chat" id="basic-nav-dropdown">
+                <NavDropdown.Item href="/privatechat">Private Chat</NavDropdown.Item>
+                <NavDropdown.Item href="/publicchat">Public Chat</NavDropdown.Item>
+              </NavDropdown>}
 
               {user.id && <NavDropdown title={user.email} id="basic-nav-dropdown">
                 <NavDropdown.Item href="/profile">Go to profile</NavDropdown.Item>

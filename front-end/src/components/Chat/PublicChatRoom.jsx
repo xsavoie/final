@@ -9,7 +9,7 @@ const socket = io.connect("http://localhost:3001");
 export default function PublicChatRoom(props) {
 
   const [username, setUsername] = useState("");
-  // const [room, setRoom] = useState("");
+
   const [showChat, setShowChat] = useState(false);
   const room = Math.floor(Math.random() * 1) + 1;
 
@@ -25,22 +25,15 @@ export default function PublicChatRoom(props) {
     <div className="Chat">
      {!showChat ? (
       <div className="joinChatContainer">
-        <h3>Join A Chat</h3>
+        <h3>Meet new people</h3>
         <input
           type="text"
-          placeholder="John..."
+          placeholder="Nickname"
           onChange={(event) => {
             setUsername(event.target.value);
           }}
         />
-        {/* <input
-          type="text"
-          placeholder="Room ID..."
-          onChange={(event) => {
-            setRoom(event.target.value);
-          }}
-        /> */}
-        <button onClick={joinRoom}>Join A Room</button>
+        <button onClick={joinRoom}>Join Chat</button>
 
       </div>
     ) : (

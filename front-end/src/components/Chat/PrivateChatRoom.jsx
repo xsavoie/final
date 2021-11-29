@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import './Chat.scss'
+import './PrivateChatRoom.scss'
 import io from "socket.io-client";
 import { UserContext } from "../contexts/UserContext";
 import ChatRoom from './ChatRoom'
@@ -23,22 +23,26 @@ export default function Chat(props) {
     <div className="Chat">
      {!showChat ? (
       <div className="joinChatContainer">
-        <h3>Join A Chat</h3>
+
+        <h3>Create a private chat room and invite your friends to join.</h3>
+        
+        
         <input
           type="text"
-          placeholder="John..."
+          placeholder="Enter a Nickname"
           onChange={(event) => {
             setUsername(event.target.value);
           }}
         />
         <input
           type="text"
-          placeholder="Room ID..."
+          placeholder="Enter a name for the room"
           onChange={(event) => {
             setRoom(event.target.value);
           }}
-        />
-        <button onClick={joinRoom}>Join A Room</button>
+        /> 
+        <button onClick={joinRoom}>Create Room</button>
+        {/* <h1> Share the name of your room with your friends.</h1> */}
       </div>
     ) : (
       <ChatRoom socket={socket} username={username} room={room} />
