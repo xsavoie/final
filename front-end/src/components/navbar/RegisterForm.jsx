@@ -125,8 +125,8 @@ export default function RegisterForm(props) {
           }}>
           Submit
         </Button>
+            <div className="register-form--error">{error}</div>
       </Form>
-      <span className="register-form--error">{error}</span>
     </div>
   )
 }
