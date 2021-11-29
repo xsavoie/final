@@ -20,12 +20,12 @@ import ConfessionDisplay from './components/Confession/ConfessionDisplay';
 import PollsForm from './components/polls/PollsForm'
 
 // const io = require("socket.io-client");
-const SERVER = "http://localhost:3000";
+// const SERVER = "http://localhost:3000";
 
 
 function App() {
 
-  const { user, setUser } = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
   const [confessions, setConfessions] = useState([]);
   // refactor to use mode instead of multiple state to display component
   const [showForm, setShowForm] = useState(false);
@@ -134,7 +134,7 @@ function App() {
   }, []);
 
 
-  console.log(user)
+  // console.log(user)
 
   useEffect(() => {
     Promise.all([

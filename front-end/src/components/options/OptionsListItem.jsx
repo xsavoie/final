@@ -1,4 +1,4 @@
-import React, { useState, useContext} from 'react';
+import React, { useContext } from 'react';
 import axios from 'axios';
 import './OptionsListItem.scss'
 import { UserContext } from "../contexts/UserContext";
@@ -7,9 +7,9 @@ import { UserContext } from "../contexts/UserContext";
 export default function OptionsListItem(props) {
 
   const { user } = useContext(UserContext);
-  const [voted, setVoted] = useState(false);
+  // const [voted, setVoted] = useState(false);
 
-  
+
 
   const increaseVoteForOption = (pollState, pollId, optionId) => {
     const pollCopy = [...pollState];
@@ -44,35 +44,35 @@ export default function OptionsListItem(props) {
   };
 
 
-  const [style, setStyle] = useState("options__content");
-  
-  const changeStyle = () => {
-    console.log("you just clicked");
-  
-    setStyle("options__content2");
-  }
+  // const [style, setStyle] = useState("options__content");
+
+  // const changeStyle = () => {
+  //   console.log("you just clicked");
+
+  //   setStyle("options__content2");
+  // }
 
   return (
     <article>
       <div className="options__container">
-      {props.voted && <div className="options__votes_main">
-         {/* <p className="options__votes">  */}
-         {props.votes}
-         {/* </p> */}
-      </div>}
-      {props.voted && <div className="options__content">
-      <p>{props.content}</p>
-      </div>}
-    
+        {props.voted && <div className="options__votes_main">
+          {/* <p className="options__votes">  */}
+          {props.votes}
+          {/* </p> */}
+        </div>}
+        {props.voted && <div className="options__content">
+          <p>{props.content}</p>
+        </div>}
+
       </div>
       <div >
-      {!props.voted && <button className="options__test" onClick={() => {
+        {!props.voted && <button className="options__test" onClick={() => {
           giveVote(props.id, user.id);
           props.setVoted(true);
-          
-      }
-      } >{props.content}
-      </button>}
+
+        }
+        } >{props.content}
+        </button>}
       </div>
 
     </article>

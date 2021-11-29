@@ -50,7 +50,7 @@ export default function ConfessionDisplay(props) {
       {containerToDisplay(parsedLists)}
       <span className="page-control">
         <Button
-          disabled={props.pageToDisplay > 1 ? "" : "false"}
+          disabled={props.pageToDisplay > 1 ? false : true}
           onClick={() => {
             props.setPageToDisplay((prevState) => (prevState - 1));
             window.scrollTo(0, 0);
@@ -59,7 +59,7 @@ export default function ConfessionDisplay(props) {
         </Button>
         <span><strong>{`page: ${props.pageToDisplay}`}</strong></span>
         <Button
-          disabled={props.pageToDisplay >= maxPage ? "false" : ""}
+          disabled={props.pageToDisplay >= maxPage ? true : false}
           onClick={() => {
             props.setPageToDisplay((prevState) => (prevState + 1));
             window.scrollTo(0, 0);

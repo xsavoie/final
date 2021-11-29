@@ -1,12 +1,7 @@
-import React, { useRef, useEffect, useState, useContext, Fragment } from "react";
+import React, { useState, useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 import './profile.scss';
 
-import axios from "axios";
-
-
-import ConfessionForm from "../Confession/ConfessionForm";
-import ConfessionList from '../Confession/ConfessionsList';
 import Avatar from "./Avatar";
 import AboutMe from "./AboutMe";
 import MyConfessionsList from './MyConfessionsList'
@@ -16,7 +11,7 @@ import MyConfessionsList from './MyConfessionsList'
 
 export default function Profile(props) {
 
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const [showAvatarForm, setShowAvatarForm] = useState(false)
   const [showAboutMeForm, setShowAboutMeForm] = useState(false)
 
@@ -27,7 +22,6 @@ export default function Profile(props) {
 
   return (
 
-    // <body className="profile-page">
     <div className="profile-page">
       <div className="name-avatar-container">
         <h3 className="username-display">Hi {user.username}!</h3>
@@ -35,17 +29,17 @@ export default function Profile(props) {
         <img src={user.avatar} className="avatar-pic" alt=""></img>
         {/* </div> */}
         {/* <form className="avatar-block"> */}
-          <button
-            type="button"
-            className="btn-avatar"
-            onClick={(event) => {
-              event.preventDefault()
-              setShowAvatarForm(!showAvatarForm);
-            }}
-          >
-            Upload a new picture!
-          </button> 
-          {showAvatarForm ? <Avatar setShowAvatarForm={setShowAvatarForm} /> : null}
+        <button
+          type="button"
+          className="btn-avatar"
+          onClick={(event) => {
+            event.preventDefault()
+            setShowAvatarForm(!showAvatarForm);
+          }}
+        >
+          Upload a new picture!
+        </button>
+        {showAvatarForm ? <Avatar setShowAvatarForm={setShowAvatarForm} /> : null}
         {/* </form> */}
         <div className="about-confessions-container">
           <form className="about-block">
@@ -67,10 +61,9 @@ export default function Profile(props) {
           </div>
         </div>
       </div>
-      </div>
+    </div>
 
 
   );
 
 }
-{/* </body> */ }

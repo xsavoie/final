@@ -14,12 +14,7 @@ export default function MyConfessionsListItem(props) {
 
   console.log("props:", props)
   const {
-    user,
-    liked,
-    setLiked,
     categoryParser,
-    submitLike,
-    deleteLike,
     badgeClass,
   } = useConfessionItem(props);
 
