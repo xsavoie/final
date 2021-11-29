@@ -79,9 +79,8 @@ export default function OptionsForm(props) {
 
   const removeOption = (options, optionLists) => {
     const optionsCopy = [...options]
-    console.log("optionsCopy--->", optionsCopy)
     const optionListsCopy = [...optionLists]
-    console.log("optionListCopy--->", optionListsCopy)
+  
     let max = optionListsCopy.length -1
     setOptionLists(optionListsCopy.slice(0, max))
     setOptions(optionsCopy.slice(0, max))
@@ -119,7 +118,7 @@ export default function OptionsForm(props) {
       </div>
       </div>
       <div className="options__submit">
-       <Button
+       <Button 
           variant="primary"
           size="sm"
           onClick={() => { 
