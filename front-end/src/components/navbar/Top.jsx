@@ -29,7 +29,7 @@ export default function Top(props) {
           href="#home"
           onClick={() => handleRouteChange("recent")}
         >
-          <Link className="nav-font" to="/" >classified</Link>
+          <label><a href="/" className="nav-font-confessions" > Confessions🗣 </a></label>
         </Navbar.Brand>
         <div className="">
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -89,10 +89,10 @@ export default function Top(props) {
                 }}>Create a Poll
               </Nav.Link>}
 
-              {user.id && <Nav.Link onClick={() => {
-                    props.setShowPollForm(false);
-                    props.setShowForm(false);
-                  }}><Link to="/chat" className="nav-font" >Chat</Link></Nav.Link>}
+              {user.id && <NavDropdown title="Chat" id="basic-nav-dropdown">
+                <NavDropdown.Item href="/privatechat">Private Chat</NavDropdown.Item>
+                <NavDropdown.Item href="/publicchat">Public Chat</NavDropdown.Item>
+              </NavDropdown>}
 
               {user.id && <NavDropdown title={user.email} id="basic-nav-dropdown">
                 <NavDropdown.Item href="/profile">Go to profile</NavDropdown.Item>

@@ -7,6 +7,7 @@ import useConfessionItem from "../../hooks/useConfessionItem";
 import './MyConfessionsListItem.scss'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from '@fortawesome/free-solid-svg-icons'
+import './MyConfessionsListItem.scss';
 
 
 export default function MyConfessionsListItem(props) {
@@ -20,11 +21,14 @@ export default function MyConfessionsListItem(props) {
 
 
   return (
+
     <article className="confession__article">
       <header className="confession__detail-top">
         <Badge className={badgeClass}>{categoryParser(props.categoryId)}</Badge>
+
         <p className="confession__title">{props.title}</p>
         <p className="confession__created_at"> {props.createdAt}</p>
+        
       </header>
 
       <div className="confession__content">

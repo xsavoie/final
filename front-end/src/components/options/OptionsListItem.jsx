@@ -14,9 +14,12 @@ export default function OptionsListItem(props) {
   const increaseVoteForOption = (pollState, pollId, optionId) => {
     const pollCopy = [...pollState];
 
+    
+
     let pollToUpdate = pollCopy.find((poll) => poll.id === pollId)
     let optionToUpdate = pollToUpdate.options.find((option) => option.id === optionId)
     optionToUpdate.count++
+    
 
     const newState = pollCopy.map((poll) =>
       poll.id === pollId ? pollToUpdate : poll
@@ -44,13 +47,6 @@ export default function OptionsListItem(props) {
   };
 
 
-  // const [style, setStyle] = useState("options__content");
-
-  // const changeStyle = () => {
-  //   console.log("you just clicked");
-
-  //   setStyle("options__content2");
-  // }
 
   return (
     <article>

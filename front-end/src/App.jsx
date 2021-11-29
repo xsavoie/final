@@ -12,12 +12,13 @@ import LoginForm from './components/navbar/LoginForm';
 import RegisterForm from './components/navbar/RegisterForm';
 import ConfessionForm from './components/Confession/ConfessionForm';
 // import Button from 'react-bootstrap/Button'
-import Chat from './components/Chat/Chat';
+import PrivateChatRoom from './components/Chat/PrivateChatRoom';
 import Profile from './components/Profile/Profile';
 import PollsList from './components/polls/PollsList';
 // import ConfessionListItem from './components/Confession/ConfessionsListItem';
 import ConfessionDisplay from './components/Confession/ConfessionDisplay';
 import PollsForm from './components/polls/PollsForm'
+import PublicChatRoom from './components/Chat/PublicChatRoom';
 
 // const io = require("socket.io-client");
 // const SERVER = "http://localhost:3000";
@@ -165,7 +166,9 @@ function App() {
         {showForm && <ConfessionForm confessions={confessions} setConfessions={setConfessions} setShowForm={setShowForm} setPageToDisplay={setPageToDisplay} />}
         {showPollForm && <PollsForm polls={polls} setPolls={setPolls} />}
         <Routes>
-          <Route path="/chat" element={<Chat />}></Route>
+          <Route path="/privatechat" element={<PrivateChatRoom />}></Route>
+          <Route path="/publicchat" element={<PublicChatRoom />}></Route>
+
           <Route path="/Profile" element={<Profile/>}></Route>
           <Route path="/" element={!showLogin && !showRegister && <ConfessionDisplay confessions={confessions} setConfessions={setConfessions} pageToDisplay={pageToDisplay} setPageToDisplay={setPageToDisplay} />} ></Route>
           <Route path="/polls" element={<PollsList polls={polls} setPolls={setPolls} totalVotes={totalVotes} setTotalVotes={setTotalVotes}/>} ></Route>

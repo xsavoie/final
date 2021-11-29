@@ -144,7 +144,7 @@ export default function OptionsForm(props) {
       </div>
       </div>
       <div className="options__submit">
-       <Button
+       <Button 
           variant="primary"
           size="sm"
           onClick={() => { 

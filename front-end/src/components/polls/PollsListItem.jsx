@@ -21,17 +21,6 @@ export default function PollsListItem(props) {
   };
 
 
-  // const [hover, setHover] = useState("~Total votes~")
-
-
-  // function MouseOver(event) {
-  //   setHover(setTotalVotes(polls, id))
-  // }
-  // function MouseOut(event){
-  //   setHover("~Total votes~")
-  // }
-  // console.log(hover)
-
   return (
 
     <div className="pollsitem__items">
@@ -43,8 +32,10 @@ export default function PollsListItem(props) {
       <div className="pollsitem__options">{<OptionsList
         options={options} setPolls={setPolls} pollId={id} polls={props.polls}
       />}</div>
+      <div className="pollsitem__votes">
       <div className="pollsitem__total_votes_myDIV" >Total votes</div>
       <div className="pollsitem__total_votes_hide" >{setTotalVotes(polls, id)}</div>
+      </div>
     </div>
   );
 }

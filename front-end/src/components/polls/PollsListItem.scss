@@ -42,18 +42,23 @@
    
   }
 
-  &__total_votes_myDIV {
+  &__votes{
     display: flex;
-    align-self: start;
-    padding: 0.5em;
+    flex-direction: row;
     margin: auto;
+    margin-bottom: 1%;
+  }
+
+  &__total_votes_myDIV {
+    padding-right: 0.5em;
     font-family: 'Roboto Slab', serif;
   }
 
   &__total_votes_hide {
-    margin: auto;
-    margin-bottom: 1%;
+    padding-left: 0.5em;
+    font-size: 16px;
     font-family: 'Roboto Slab', serif;
+  
   }
 
 }
@@ -64,7 +69,6 @@
 
 .pollsitem__total_votes_myDIV:hover + .pollsitem__total_votes_hide{
   display: block;
-  font-size: 20px;
   color:red;
 }
 
