@@ -1,7 +1,9 @@
+@import "../../styles/variables.scss";
+
 .Chat {
   width: 100vw;
   height: 100vh;
-  background: #fff;
+  background: $background-container;
   color: #212121;
   font-family: "Open Sans", sans-serif;
   display: grid;
@@ -10,6 +12,7 @@
 body {
   margin: 0%;
   padding: 0%;
+
 }
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,700");
 
@@ -17,37 +20,39 @@ body {
   display: flex;
   flex-direction: column;
   text-align: center;
+  align-items: center;
 }
 
 .joinChatContainer h3 {
   font-size: 2.5rem;
-  margin-bottom: 1rem;
+  margin: auto
+  // margin-bottom: 1rem;
 }
 .joinChatContainer input {
-  width: 210px;
-  height: 40px;
+  width: 50%;
+  height: 50%;
   margin: 7px;
-  border: 2px solid #43a047;
+  border: 2px solid #2a3e7e;
   border-radius: 5px;
   padding: 5px;
-  font-size: 16px;
+  font-size: 20px;
 }
 
 .joinChatContainer button {
-  width: 225px;
-  height: 50px;
+  width: 50%;
+  height: 50%;
   margin: 7px;
   border: none;
   border-radius: 5px;
   padding: 5px;
-  font-size: 16px;
-  background: #43a047;
+  font-size: 20px;
+  background: #2a3e7e;
   color: #fff;
   cursor: pointer;
 }
 
 .joinChatContainer button:hover {
-  background: #2e7d32;
+  background: #1c5619;
 }
 
 .chat-window {
@@ -192,33 +197,3 @@ body {
 
 
 
-
-  // .chat-form{
-  //   width: 90%;
-  //   margin-left: 5%;
-  //   margin-top: 5%;
-  //   text-align: left;
-  //   padding-left: 3px;
-  //   color: rgb(57, 29, 74);
-  //   font-family: Arial, sans-serif;
-  // }
-
-
-  // .chat_message_container{
-  //   width: 90%;
-  //   margin-left: 5%;
-  //   margin-top: 5%;
-  //   text-align: left;
-  //   padding-left: 3px;
-  //   color: rgb(57, 29, 74);
-  //   font-family: Arial, sans-serif;
-   
-  // }
-
-  // .footer__btn{
-  //   background-color: rgb(57, 29, 74);
-  //   color: white;
-  //   padding: 15px;
-  //   border-color: whitesmoke;
-  //   font-family: Arial, sans-serif;
-  // }
