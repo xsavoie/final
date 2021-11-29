@@ -39,7 +39,8 @@ export default function ConfessionForm(props) {
             <Form.Control className="form-input-box"
               placeholder="Write here..."
               as="textarea"
-              rows={3}
+              // rows={3}
+              rows={(content.length / 65)}
               value={content}
               onChange={(event) => setContent(event.target.value)}
             />

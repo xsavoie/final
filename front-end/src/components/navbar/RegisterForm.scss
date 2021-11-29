@@ -4,18 +4,22 @@
   display: flex;
   justify-content: center;
   position: absolute;
-  // margin-left: 35%;
+  // margin-right: 35%;
   // align-self: center;
-  transition: 800ms;
+  transition: 1000ms;
   opacity: 1;
   margin-top: 3%;
+  // width: 150%;
+  z-index: 1;
+  // transform: translateY(100px) scale(1);
   // margin-bottom: 55%;
-  width: 150%;
+  margin-left: 40%;
 }
 
 .register-show.register-active {
   // transform: translateY(100px) scale(0) rotateY(180deg);
-  transform: translateY(100px) scale(1);
+  
+  transform: translateY(450px) scale(1);
   opacity: 0;
   position: absolute;
   // margin-bottom: 55%;
@@ -28,6 +32,7 @@
   border-radius: .75rem;
   color: $login-register-font;
   padding: 20px 20px;
+  z-index: 1;
   }
 
 #muted {
@@ -47,7 +52,7 @@
 
 .register-form--error {
   color: rgba(253, 0, 0, 0.932);
-  margin-left: 35%;
+  // margin-left: 35%;
 }
 
 

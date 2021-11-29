@@ -18,6 +18,12 @@
   }
 }
 
+.submit-div {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: -2em;
+}
+
 .comment-form__submit {
   background-color: $button !important;
   border-color: $button !important;
