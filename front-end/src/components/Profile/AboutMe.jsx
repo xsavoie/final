@@ -29,19 +29,22 @@ export default function AboutMe(props) {
 
   return(
 
-    <form>
+    <form className="text_box">
       <Form.Group className="about" controlId="aboutForm.ControlTextarea1">
-      
+      <div>
         <Form.Control
+          // className="text_box"
           as="textarea"
           placeholder="Tell us something about yourself!"
           rows={3}
           value={about}
           onChange={(e) => setAbout(e.target.value)}
         />
-          <button
+        </div>
+        <div className="about-edit-button-possition">
+        <button
+            // variant="primary"
             className="about-edit-button"
-            variant="primary"
             size="sm"
             onClick={(event) => {
               event.preventDefault();
@@ -50,9 +53,12 @@ export default function AboutMe(props) {
             }} >
             Edit
           </button>
+          </div>
         </Form.Group>
     </form>
 
   );
 
 }
+
+
