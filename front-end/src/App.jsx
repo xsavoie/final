@@ -21,12 +21,12 @@ import PollsForm from './components/polls/PollsForm'
 import PublicChatRoom from './components/Chat/PublicChatRoom';
 
 // const io = require("socket.io-client");
-const SERVER = "http://localhost:3000";
+// const SERVER = "http://localhost:3000";
 
 
 function App() {
 
-  const { user, setUser } = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
   const [confessions, setConfessions] = useState([]);
   // refactor to use mode instead of multiple state to display component
   const [showForm, setShowForm] = useState(false);
@@ -135,7 +135,7 @@ function App() {
   }, []);
 
 
-  console.log(user)
+  // console.log(user)
 
   useEffect(() => {
     Promise.all([
@@ -163,21 +163,23 @@ function App() {
           showPollForm={showPollForm}
           setShowPollForm={setShowPollForm}
         />
+        <div className="user-login" >
+        {/* {showRegister &&  <RegisterForm showRegister={showRegister} setShowRegister={setShowRegister} showLogin={showLogin} setShowLogin={setShowLogin} />}
+        {showLogin && <LoginForm showLogin={showLogin} setShowLogin={setShowLogin} showRegister={showRegister} setShowRegister={setShowRegister} />} */}
+        <RegisterForm showRegister={showRegister} setShowRegister={setShowRegister} showLogin={showLogin} setShowLogin={setShowLogin} />
+        <LoginForm showLogin={showLogin} setShowLogin={setShowLogin} showRegister={showRegister} setShowRegister={setShowRegister} />
+        </div>
         {showForm && <ConfessionForm confessions={confessions} setConfessions={setConfessions} setShowForm={setShowForm} setPageToDisplay={setPageToDisplay} />}
         {showPollForm && <PollsForm polls={polls} setPolls={setPolls} />}
         <Routes>
-          <Route path="/privatechat" element={<PrivateChatRoom />}></Route>
-          <Route path="/publicchat" element={<PublicChatRoom />}></Route>
+          <Route path="/privatechat" element={!showLogin && !showRegister && <PrivateChatRoom />}></Route>
+          <Route path="/publicchat" element={!showLogin && !showRegister && <PublicChatRoom />}></Route>
 
           <Route path="/Profile" element={<Profile/>}></Route>
           <Route path="/" element={!showLogin && !showRegister && <ConfessionDisplay confessions={confessions} setConfessions={setConfessions} pageToDisplay={pageToDisplay} setPageToDisplay={setPageToDisplay} />} ></Route>
-          <Route path="/polls" element={<PollsList polls={polls} setPolls={setPolls} totalVotes={totalVotes} setTotalVotes={setTotalVotes}/>} ></Route>
+          <Route path="/polls" element={!showLogin && !showRegister && <PollsList polls={polls} setPolls={setPolls} totalVotes={totalVotes} setTotalVotes={setTotalVotes}/>} ></Route>
 
         </Routes>
-        <div className="user-login" >
-        <LoginForm showLogin={showLogin} setShowLogin={setShowLogin} showRegister={showRegister} setShowRegister={setShowRegister} />
-        <RegisterForm showRegister={showRegister} setShowRegister={setShowRegister} showLogin={showLogin} setShowLogin={setShowLogin} />
-        </div>
       </div>
     </BrowserRouter>
 

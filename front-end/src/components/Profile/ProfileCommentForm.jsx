@@ -14,7 +14,6 @@ export default function ProfileCommentForm(props) {
     setRows,
     error,
     validateComment,
-    submitComment,
     updateCommentState
   } = useCommentForm(props);
 

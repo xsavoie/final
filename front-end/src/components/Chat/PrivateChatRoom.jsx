@@ -4,7 +4,7 @@ import io from "socket.io-client";
 import { UserContext } from "../contexts/UserContext";
 import ChatRoom from './ChatRoom'
 
-const socket = io.connect("http://localhost:3001");
+const socket = io.connect("http://localhost:3002");
 
 export default function Chat(props) {
 
