@@ -1,3 +1,23 @@
+@import "../../styles/variables.scss";
+
+.page-container {
+  background-color: $background-container;
+  
+}
+
 .page-control {
-  margin-left: 39%;
+  width: 80%;
+  margin-left: 11%;
+  // align-self: center;
+  display: flex;
+  // flex-direction: column;
+  // justify-content: center;
+  justify-content: space-evenly;
+  padding-bottom: 3em;
+  // margin-left: 39%;
+}
+
+.page-button {
+  background-color: $button !important;
+  border-color: $button !important;
 }

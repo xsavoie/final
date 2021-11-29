@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React } from "react";
 import PollsListItem from "./PollsListItem";
 import "./PollsList.scss";
 import dayjs from 'dayjs';

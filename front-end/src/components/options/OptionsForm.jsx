@@ -9,6 +9,7 @@ export default function OptionsForm(props) {
 
   const [options, setOptions] = useState(["", ""])
   const [optionLists, setOptionLists] = useState([0, 1])
+  // const [error, setError] = useState("")
 
 
   const {pollId} = props
@@ -36,6 +37,21 @@ export default function OptionsForm(props) {
     return stateCopy.slice(0, max);
   };
 
+  // const validateOption = (content) => {
+  //   console.log("validate content", content)
+  //   for (const element of content) {
+  //     if (element === "") {
+  //       return false;
+  //     };
+  //   };
+  //   // if (content.length === 0) {
+  //   //   setError("Cannot be empty");
+  //   //   return false;
+  //   // };
+  //   return true;
+  // };
+
+
   const createOptions = () => {
     
     const newOption = {
@@ -45,13 +61,18 @@ export default function OptionsForm(props) {
 
     const option = dataParser(newOption)
 
-  
-    return axios.post("http://localhost:3000/api/polls/new_options",  option )
+    // const valid = validateOption(newOption.content) 
+
+    // if (valid) {
+    //   console.log("&&&&&&&&&&&&&&", newOption.content)
+    //   console.log("valid????", valid)
+      
+      return axios.post("http://localhost:3000/api/polls/new_options",  option )
       .then(res => {
-    
+        
         axios.get(`http://localhost:3000/api/polls/${pollId}`)
         .then(res => {
-        
+          
           const newPoll = res.data[0];
           props.setPolls(updatePollState(props.polls, newPoll))
         })
@@ -59,6 +80,7 @@ export default function OptionsForm(props) {
       .catch(err => {
         console.log(err.message);
       })
+    // }
   };
 
 
@@ -71,16 +93,17 @@ export default function OptionsForm(props) {
 
   const addOption = () => {
     setOptionLists([...optionLists, optionLists.length])
-    console.log(optionLists)
+    // console.log(optionLists)
     setOptions([...options, ""])
-    console.log(options)
+    // console.log(options)
   }
 
 
   const removeOption = (options, optionLists) => {
     const optionsCopy = [...options]
     const optionListsCopy = [...optionLists]
-  
+    // console.log("optionsCopy--->", optionsCopy)
+    // console.log("optionListCopy--->", optionListsCopy)
     let max = optionListsCopy.length -1
     setOptionLists(optionListsCopy.slice(0, max))
     setOptions(optionsCopy.slice(0, max))
@@ -88,6 +111,7 @@ export default function OptionsForm(props) {
 
 
   return (
+    <div>
     <Form className="options__form" onSubmit={(e)=> e.preventDefault()}>
       <div>
         {optionLists.map((option, index) => {
@@ -100,6 +124,7 @@ export default function OptionsForm(props) {
       <div className="options__add_remove">
         <div className="options__add">
           <Button 
+          disabled={options.length >= 5 ? true : false}
           variant="primary"
           size="sm"
           onClick={() => {addOption()}}
@@ -109,6 +134,7 @@ export default function OptionsForm(props) {
       </div>
       <div className="options__remove">
         <Button
+          disabled={options.length > 2 ? false : true}
           variant="primary"
           size="sm"
           onClick={() => {removeOption(options, optionLists)}}
@@ -134,6 +160,7 @@ export default function OptionsForm(props) {
         </div>
         
     </Form>
+    </div>
   )
 
 }

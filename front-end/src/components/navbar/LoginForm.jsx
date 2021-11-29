@@ -58,19 +58,26 @@ export default function LoginForm(props) {
   };
 
   return (
-    <div className={`${!props.showLogin ? "login-active" : ""} login-show`}>
+    <span className={`${!props.showLogin ? "login-active" : ""} login-show`}>
 
       <Form className="loginform_style" autoComplete="off" onSubmit={event => event.preventDefault()}>
 
-      <p><label><a href="/" className="logo-font-confessions" > Confessions🗣 </a></label></p>
+        {/* <p><label><a href="/" className="logo-font-confessions"  > Confessions🗣 </a></label></p> */}
+        <p className="logo-font-confessions-2"><label>Confessions🗣</label></p>
 
-      {/* <Form className="loginform_style" autoComplete="off" > */}
+        {/* <Form className="loginform_style" autoComplete="off" > */}
         <h2>Login</h2>
 
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <div>
-            <input className="login-input" id="loginEmail" type="text" name="email" placeholder="name@email.com" autoComplete="off"
+            <input className="login-input"
+              disabled={!props.showLogin ? true : false}
+              id="loginEmail"
+              type="text"
+              name="email"
+              placeholder="name@email.com"
+              autoComplete="off"
               value={fields.loginEmail}
               onChange={handleFieldChange}
             />
@@ -79,13 +86,19 @@ export default function LoginForm(props) {
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <div>
-            <input className="login-input" id="loginPassword" type="password" name="password" placeholder="password"
+            <input className="login-input"
+              disabled={!props.showLogin ? true : false}
+              id="loginPassword"
+              type="password"
+              name="password"
+              placeholder="password"
               autoComplete="off"
               value={fields.loginPassword}
               onChange={handleFieldChange}
             />
           </div>
         </Form.Group>
+
         <Button
           className="login-btn"
           variant="primary"
@@ -99,8 +112,8 @@ export default function LoginForm(props) {
         >
           Submit
         </Button>
+        <div className="login-form--error">{error}</div>
       </Form>
-      <span className="login-form--error">{error}</span>
-    </div>
+    </span>
   )
 }

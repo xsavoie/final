@@ -14,7 +14,7 @@ dayjs.extend(relativeTime);
 export default function MyConfessionsList(props) {
 
 
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const [myOwnConfessions, setMyOwnConfessions] = useState([]);
   const [selected, setSelected] = useState(false)
 
