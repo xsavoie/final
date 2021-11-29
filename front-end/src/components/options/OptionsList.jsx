@@ -8,6 +8,7 @@ export default function OptionsList(props) {
 
   const { user } = useContext(UserContext)
   const [voted, setVoted] = useState(false)
+  const [colour, setColour] = useState("red")
 
   useEffect(() => {
     if (user.id) {
@@ -21,6 +22,7 @@ export default function OptionsList(props) {
           if (res.data) {
             console.log("voted", res.data)
             setVoted(true)
+            setColour("pink")
           } else {
             console.log("not voted", res.data);
           }
@@ -31,7 +33,10 @@ export default function OptionsList(props) {
     } 
   }, [voted]);
 
+ 
+
   const parsedOptions = props.options.map((option) => (
+   
     <OptionsListItem
       key={option.id}
       id={option.id}
@@ -42,6 +47,8 @@ export default function OptionsList(props) {
       pollId={props.pollId}
       voted={voted}
       setVoted={setVoted}
+      colour={colour}
+      setColour={setColour}
     />
   ));
 
