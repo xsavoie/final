@@ -12,8 +12,6 @@ import AboutMe from "./AboutMe";
 import MyConfessionsList from './MyConfessionsList'
 
 
-
-
 export default function Profile(props) {
 
   const { user, setUser } = useContext(UserContext);
