@@ -2,9 +2,10 @@
 
 
 .avatar-edit-btn{
-  border: splid;
   text-align: right;
   font-size: 16px;
   border-radius: 0.25em;
   margin-left: 0.5em;
+  background-color: $button !important;
+  border-color: $button !important;
 }

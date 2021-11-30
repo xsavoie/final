@@ -46,7 +46,7 @@ export default function Profile(props) {
         </div>
         <div className="about-confessions-container">
           <form className="about-block">
-            <div>About me</div>
+            <div className="about_me">About me</div>
             <div className="about-me-label">{user.about} </div>
             <div className="edit_button_position">
               {!showAboutMeForm && <button
@@ -64,8 +64,9 @@ export default function Profile(props) {
         </div>
       </div>
       <div className="confession-container">
-            {/* <ConfessionForm /> */}
-            <MyConfessionsList confessions={props.confessions} />
+            
+           <MyConfessionsList confessions={props.confessions} />
+            
       </div>
     </div>
 

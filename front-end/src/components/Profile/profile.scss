@@ -5,7 +5,7 @@
   &__page {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-evenly;
   font-family: 'Roboto Slab', serif;
   // font-family: 'Ruda', sans-serif;
   background-color: $background-container;
@@ -25,6 +25,8 @@
 }
 
 
+
+
 .username-display{
 //  margin-left: 1em;
  margin-bottom: 1rem;
@@ -41,40 +43,33 @@
   margin-bottom: 1em;
 }
 
+.about_me{
+  font-size: 20px;
+
+}
+
 .about-me-label{
-  border:3px solid $confession-border;
-  // margin-top: 1em;
-  // margin-bottom: 1em;
+  border:3px solid 
+  $confession-border;
   width: 350px;
   height: 150px;
-  // padding-left: 1em;
-  // padding-right: 1em;
-  // padding-top: 1em;
-  // padding-bottom: 3em;
   text-align: left;
   border-radius: 0.25em;
   margin-top: 0.5em;
   margin-bottom: 1em;
+  background-color: $confession-text-background;
 }
 
 .avatar-pic{
   width: 350px;
   height: 350px;
   vertical-align: middle;
-  border: 3px ;
   border-radius: 0.25em;
   object-fit: cover;
-  border: solid;
-
-  // margin-top: 3em;
   margin-bottom: 1em;
+
 }
 
-// .avatar-pic:hover{
-//   // box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
-//   // border-radius: 2em;
-//   transform: scale(1.2);
-// }
 
 .btn-avatar-position{
   text-align: right;
@@ -84,10 +79,10 @@
 .btn-avatar{
   border: splid;
   text-align: right;
-  // display: inline-block;
   font-size: 16px;
   border-radius: 0.25em;
- 
+  background-color: $button !important;
+  border-color: $button !important;
 }
 
 .edit_button_position{
@@ -96,30 +91,21 @@
 }
 
 .btn-edit{
-
-  border: splid;
   text-align: center;
   display: inline-block;
   font-size: 16px;
   border-radius: 0.25em;
+  background-color: $button !important;
+  border-color: $button !important;
 }
 
 .confession-container{
   margin-top: 5%;
-  margin-left: 5em;
-  border: solid;
+  margin-left: 10em;
   margin-right: 5em;
-
-  
+  width: 100%;
+  align-content: center;
 }
-// .btn-avatar{
-// display: none;
-// }
-
-// .avatar-pic:hover + .btn-avatar{
-// display: block;
-
-// }
 
 
 
