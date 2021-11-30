@@ -13,8 +13,7 @@
     border: solid $confession-border;
     border-radius: .50rem;
     background-color: $confession-background;
-    // margin: 5%;
-    // margin-left: 15%;
+    border: 2px outset $confession-border 
     
   }
 
@@ -84,7 +83,7 @@
 }
 
 .pollsitem__items:hover{
-  box-shadow: 5px 10px rgb(197, 197, 202);
+  border: 2px inset $confession-border 
 }
 
 .bg-primary.badge--question {
