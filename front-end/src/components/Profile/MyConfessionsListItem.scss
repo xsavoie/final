@@ -1,25 +1,112 @@
 @import "../../styles/variables.scss";
 
-.comment-container {
-  display: flex;
-  // justify-content: center;
-  flex-direction: column;
+.confession_profile{
+  width: 80%;
+  margin-right: 20%;
+  align-self: center;
+  background-color: $confession-background;
+  margin-top: 10px;
+  border-radius: .50rem;
+  border: 2px outset $confession-border 
+}
+
+
+.confession {
   
+  &__detail-bottom {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 5px;
+  }
+
+  &__detail-top {
+    display: flex;
+    justify-content: space-between;
+    height: 25px;
+    margin: 5px 5px;
+    color: $confession-font
+  }
+
+  &__title {
+    margin-left: 5px;
+    color: $confession-font;
+  }
+
+  &__created_at {
+    color: $confession-font;
+  }
+
+  &__content {
+  width: 90%;
+  margin-left: 5%;
+  background-color: $confession-text-background;
+  text-align: left;
+  padding-left: 3px;
+  border-radius: .50rem;
+  }
+
+  &__likes {
+    color: $confession-font;
+  }
+
 
 }
 
-// .confession__title {
-//   font-size: larger;
-//   margin-bottom: -1em;
-// }
+.confession__title {
+  font-size: larger;
+  margin-bottom: -1em;
+}
+
+.confession__article:hover {
+  border: 2px inset $confession-border 
+}
+
+.title-right{
+  display: flex;
+
+}
+
+.comment-btn {
+  background-color: $button !important;
+  border-color: $button !important;
+  margin-right: 2em;
+}
+
+.like-icon {
+  margin-left: 1em;
+  color:$white;
+}
+
+.like-icon:hover {
+  color: rgb(82, 156, 185)
+}
+
+.like-icon-liked {
+  margin-left: 1em;
+  color:rgb(18, 84, 110)
+}
+
+
+.bg-primary.badge--secret {
+  background-color: $secret-color !important;
+}
+
+.bg-primary.badge--story {
+  background-color: $story-color !important;
+}
+
+.bg-primary.badge--question {
+  background-color: $question-color !important;
+}
+
+
+
 
 .comments {
   &__content {
-    // align-self: center;
+  
     width: 85%;
-    // width: inherit;
     margin-left: 5%;
-    // margin-top: 10px;
     padding-left: 3px;
     background-color: $confession-text-background;
     text-align: left;
@@ -29,7 +116,7 @@
 
 
 .comments--right{
-  // background-color: yellow;
+  
   width: 85%;
   height: 15px;
   margin-left: 5%;
@@ -42,5 +129,5 @@
   display: flex;
   justify-content: flex-end;
   margin-right: 5px;
-  // padding-bottom: 5px;
+  
 }
