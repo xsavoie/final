@@ -5,7 +5,7 @@
   height: 100vh;
   background: $background-container;
   color: #212121;
-  font-family: "Open Sans", sans-serif;
+  font-family: $font_title;
   display: grid;
   place-items: center;
 }
@@ -191,7 +191,7 @@ body {
   border-right: 1px dotted #607d8b;
   background-color: $navbar;
   outline: none;
-  font-family: "Open Sans", sans-serif;
+  font-family: $font_text;
   color: #fff;
 }
 
