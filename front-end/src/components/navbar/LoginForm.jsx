@@ -63,7 +63,7 @@ export default function LoginForm(props) {
       <Form className="loginform_style" autoComplete="off" onSubmit={event => event.preventDefault()}>
 
         {/* <p><label><a href="/" className="logo-font-confessions"  > Confessions🗣 </a></label></p> */}
-        <p className="logo-font-confessions-2"><label>Confessions🗣</label></p>
+        <p className="logo-font-confessions-2"><label>Classified</label></p>
 
         {/* <Form className="loginform_style" autoComplete="off" > */}
         <h2>Login</h2>

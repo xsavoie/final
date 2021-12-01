@@ -8,6 +8,8 @@
 .navbar-top {
   background-color: $navbar !important;
   color: $white !important;
+  font-weight: bolder;
+  font-size: 16px;
   // background-color: #000 !important;
 }
 
@@ -15,8 +17,12 @@
   color: $white !important;
 }
 
+.nav-font-create {
+  color: $navbar-font !important;
+}
+
 #basic-nav-dropdown {
-  color: $white !important;
+  color: $navbar-font-secondary !important;
 }
 
 .category-dropdown {

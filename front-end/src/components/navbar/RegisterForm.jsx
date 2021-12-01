@@ -82,7 +82,7 @@ export default function RegisterForm(props) {
       <Form className="registerform_style" autoComplete="off" onSubmit={event => event.preventDefault()}>
 
         {/* <p><label><a href="/" className="logo-font-confessions" > Confessions🗣 </a></label></p> */}
-        <p className="logo-font-confessions-2"><label>Confessions🗣</label></p>
+        <p className="logo-font-confessions-2"><label>Classified</label></p>
 
         <h2>Register</h2>
 

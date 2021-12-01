@@ -22,7 +22,6 @@
   &__input {
     width: 90%;
     margin-left: 5%;
-    
   }
 
 }
@@ -45,6 +44,7 @@
   background-color: $confession-text-background !important;
   border-radius: .50rem;
   // resize: none;
+  color: $confession-font !important;
 }
 
 .category--secret {
