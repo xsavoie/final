@@ -21,6 +21,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    font-family: $font_buttons;
   }
 
   &__add_remove{
@@ -28,13 +29,13 @@
     justify-items: self-end;
     align-self: flex-end;
     padding: 0.5em;
+    font-family: $font_buttons;
   }
 
   &__add{
     padding: 0.2em;
-    
+   
   }
-
 
 
   &__remove{
@@ -50,8 +51,6 @@
     
  }
 
-
-
 }
 
 .options--input {
@@ -60,6 +59,7 @@
   background-color: $confession-text-background !important;
   margin-top: 8px;
   color: $confession-font !important;
+  font-family: $font_title;
 }
 
 .option--btn {

@@ -27,9 +27,7 @@
   }
 
   &__created_at {
-    // margin-right: 1%;
-    // margin-top: 1%;
-    font-family: 'Ruda', sans-serif;
+    font-family: $font_created_at;
     color: $confession-font !important;
   }
 
@@ -40,9 +38,8 @@
     padding: 0.5em;
     margin-top: 2%;
     margin-left: 5%;
-    // font-size: 24px;
     font-size: larger;
-    font-family: 'Roboto Slab', serif;
+    font-family: $font_buttons;
   }
 
   &__options {
@@ -59,17 +56,19 @@
     margin: auto;
     margin-bottom: 1%;
     color: $confession-font !important;
+    font-family: $font_buttons;
+    
   }
 
   &__total_votes_myDIV {
     padding-right: 0.5em;
-    font-family: 'Roboto Slab', serif;
+    font-family: $font_buttons;
   }
 
   &__total_votes_hide {
     padding-left: 0.5em;
     font-size: 16px;
-    font-family: 'Roboto Slab', serif;
+    font-family: $font_buttons;
   
   }
 
@@ -81,7 +80,7 @@
 
 .pollsitem__total_votes_myDIV:hover + .pollsitem__total_votes_hide{
   display: block;
-  color:red;
+  color: #F64C72;
 }
 
 .pollsitem__items:hover{

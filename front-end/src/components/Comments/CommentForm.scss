@@ -1,5 +1,8 @@
 @import "../../styles/variables.scss";
 
+// font-family: 'Oswald', sans-serif;
+// font-family: 'Quattrocento Sans', sans-serif;
+
 .comment-form {
   width: 90%;
   margin-left: 5%;
@@ -7,15 +10,19 @@
   &__label{
     text-align: left;
     color: $confession-font;
+    font-family: $font_buttons;
   }
 
   &__input {
     background-color: $confession-text-background !important;
     color: $confession-font !important;
+    font-family: $font_text;
+    
   }
 
   &__submit {
     margin-top: 5px;
+    font-family: $font_text;
   }
 }
 
@@ -23,11 +30,14 @@
   display: flex;
   justify-content: flex-end;
   margin-bottom: -2em;
+
 }
 
 .comment-form__submit {
   background-color: $button !important;
   border-color: $button !important;
+  font-family: $font_buttons;
+  
 }
 
 .comment-form--error {
