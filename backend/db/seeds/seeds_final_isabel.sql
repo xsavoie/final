@@ -49,15 +49,78 @@ VALUES
 INSERT INTO polls (user_id, content, created_at)
 VALUES 
 (1,'Do you like your ex more than your spouse?', '2021-09-12T08:00:00.000Z' ),
-(4, 'Who is your favourite celebrity crush', '2021-08-12T08:00:00.000Z' ),
-(14, 'What is a good outdoor activity on a bright sunny day?', '2021-11-12T08:00:00.000Z' ),
-(7, 'Coffe, tea or wine person?', '2021-11-09T08:00:00.000Z'),
-(3,'Do you like to cook or eat out?', '2021-09-12T08:00:00.000Z' ),
-(4, 'What is your favourite book?', '2021-08-12T08:00:00.000Z' ),
-(14, 'Vacation or staycation?', '2021-11-12T08:00:00.000Z' ),
-(7, 'Virtual or in-person class?', '2021-11-09T08:00:00.000Z'),
-(3,'Vaccinate or no?', '2021-09-12T08:00:00.000Z' ),
-(4, 'Is the illuminati a real thing?', '2021-08-12T08:00:00.000Z' ),
+(2, 'Who is your favourite celebrity crush', '2021-08-12T08:00:00.000Z' ),
+(3, 'What is a good outdoor activity on a bright sunny day?', '2021-11-12T08:00:00.000Z' ),
+(4, 'Coffe, tea or wine person?', '2021-11-09T08:00:00.000Z'),
+(5,'Do you like to cook or eat out?', '2021-09-12T08:00:00.000Z' ),
+(7, 'Vacation or staycation?', '2021-11-12T08:00:00.000Z' ),
+(8, 'Virtual or in-person class?', '2021-11-09T08:00:00.000Z'),
+(9,'Vaccinate or no?', '2021-09-12T08:00:00.000Z' ),
+(10, 'Is the illuminati a real thing?', '2021-08-12T08:00:00.000Z' ),
 (14, 'Have you seen a UFO?', '2021-11-12T08:00:00.000Z' ),
 (7, 'What is your favourite ride?', '2021-11-09T08:00:00.000Z');
 
+-- seeds for options
+
+INSERT INTO options (poll_id, content)
+VALUES 
+(1, 'yes'),
+(1, 'maybe'),
+(1, 'no'),
+(2, 'Tom Holland'),
+(2, 'Chris Hemsworth'),
+(2, 'Ryan Reynolds'),
+(3, 'Beach'),
+(3, 'Trekking'),
+(3, 'Biking'),
+(3, 'Go for a walk'),
+(4, 'Coffee'),
+(3, 'Tea'),
+(4, 'Wine'),
+(4, 'tea'),
+(4, 'something else'),
+(5, 'Cook'),
+(5, 'take-out'),
+(5, 'eat-out'),
+(5, 'eat-frozen'),
+(7, 'vacation'),
+(7, 'staycation'),
+(8, 'virtual'),
+(8, 'in-person'),
+(9, 'yes'),
+(9, 'no'),
+(10, 'yes'),
+(10, 'no');
+
+
+-- seeds for results
+
+INSERT INTO results (option_id, user_id)
+VALUES 
+(1, 10),
+(1, 9),
+(1, 8),
+(2, 7),
+(2, 6),
+(2, 5),
+(3, 4),
+(3, 3),
+(3, 2),
+(3, 1),
+(4, 2),
+(3, 4),
+(4, 3),
+(4, 5),
+(4, 6),
+(5, 7),
+(5, 8),
+(5, 9),
+(5, 10),
+(7, 1),
+(7, 2),
+(8, 3),
+(8, 4),
+(9, 5),
+(9, 6),
+(10, 7),
+(10, 8);
