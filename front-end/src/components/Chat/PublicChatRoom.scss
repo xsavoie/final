@@ -22,6 +22,12 @@ body {
   flex-direction: column;
   text-align: center;
   align-items: center;
+  border: 3px solid;
+  margin: 3em;
+  padding: 3em;
+  border-radius: 10px;
+  color: $navbar-font-secondary;
+  background-color: $navbar;
 }
 
 .joinChatContainer h3 {
@@ -46,13 +52,13 @@ body {
   // border-radius: 5px;
   padding: 5px;
   font-size: 20px;
-  background: #2a3e7e;
+  background: $button;
   color: #fff;
   cursor: pointer;
 }
 
 .joinChatContainer button:hover {
-  background: #1c5619;
+  background: $navbar;
 }
 
 .chat-window {
@@ -63,6 +69,7 @@ body {
 
 .chat-window p {
   margin: 0;
+  
 }
 .chat-window .chat-header {
   height: 45px;
@@ -72,12 +79,14 @@ body {
   cursor: pointer;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  background-color: $navbar;
+
 }
 
 .chat-window .chat-header p {
   display: block;
   padding: 0 1em 0 2em;
-  color: #fff;
+  color: rgb(185, 199, 201);
   font-weight: 700;
   line-height: 45px;
 
@@ -88,6 +97,7 @@ body {
   border: 1px solid #2a3e7e;
   background: #fff;
   position: relative;
+  background-color: $confession-text-background;
 
 }
 .chat-window .chat-body .message-container {
@@ -110,8 +120,8 @@ body {
   width: auto;
   height: auto;
   min-height: 40px;
-  max-width: 120px;
-  background-color: #2a3e7e;
+  max-width: 700px;
+  background-color: #33bc85;
   // border-radius: 5px;
   color: white;
   display: flex;
@@ -121,7 +131,7 @@ body {
   padding-right: 5px;
   padding-left: 5px;
   // overflow-wrap: break-word;
-  word-break: break-word;
+  // word-break: break-word;
 }
 
 #you {
@@ -134,7 +144,7 @@ body {
 
 #you .message-meta {
   justify-content: flex-start;
-  margin-left: 5px;
+  margin-left: 10px;
 }
 
 #other {
@@ -142,14 +152,14 @@ body {
 }
 
 #other .message-content {
-  justify-content: flex-end;
-  background-color: rgb(151, 176, 223);
+  justify-content: flex-start;
+  background-color: #d38d74;
   color: black
 }
 
 #other .message-meta {
   justify-content: flex-end;
-  margin-right: 5px;
+  margin-right: 10px;
 }
 
 .message-meta #author {
@@ -179,9 +189,10 @@ body {
   padding: 0 0.7em;
   font-size: 1em;
   border-right: 1px dotted #607d8b;
-
+  background-color: $navbar;
   outline: none;
   font-family: "Open Sans", sans-serif;
+  color: #fff;
 }
 
 .chat-window .chat-footer button {
@@ -191,14 +202,14 @@ body {
   cursor: pointer;
   flex: 15%;
   height: 100%;
-  background: transparent;
+  background: $navbar;
   outline: none;
   font-size: 25px;
-  color: rgb(136, 137, 157);
+  color: $button;
 }
 
 .chat-window .chat-footer button:hover {
-  color: #02175d;
+  color: $confession-text-background;
 }
 .hide {
   opacity: 0 !important;
