@@ -34,6 +34,7 @@
 
   &__created_at {
     color: $confession-font;
+    font-family: $font_created_at;
   }
 
   &__content {
@@ -56,12 +57,14 @@
   font-size: larger;
   margin-bottom: -1em;
   padding-bottom: 4px;
+  font-family: $font_buttons;
 }
 
 .confession-post {
   color: $confession-font;
   padding-left: 5px;
   padding-bottom: 5px;
+  font-family: $font_title;
 }
 
 .confession__article:hover {
@@ -77,6 +80,7 @@
   background-color: $button !important;
   border-color: $button !important;
   margin-right: 2em;
+  font-family: $font_buttons;
 }
 
 .like-icon {
@@ -96,14 +100,17 @@
 
 .bg-primary.badge--secret {
   background-color: $secret-color !important;
+  font-family: $font_buttons;
 }
 
 .bg-primary.badge--story {
   background-color: $story-color !important;
+  font-family: $font_buttons;
 }
 
 .bg-primary.badge--question {
   background-color: $question-color !important;
+  font-family: $font_buttons;
 }
 
 

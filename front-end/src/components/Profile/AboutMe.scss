@@ -16,6 +16,8 @@
 
   background-color: $button !important;
   border-color: $button !important;
+  color: $white;
+  font-family: $font_buttons;
 }
 
 .text_box{
@@ -26,5 +28,6 @@
   text-align: left;
   border-radius: 0.25em;
   margin-bottom: 0.5em;
+  font-family: $font_title;
  
 }

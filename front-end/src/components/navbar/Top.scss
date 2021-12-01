@@ -1,5 +1,6 @@
 @import "../../styles/variables.scss";
 
+
 .link, a:hover, a:focus, a:active {
   text-decoration: none;
   color: inherit;
@@ -9,25 +10,30 @@
   background-color: $navbar !important;
   color: $white !important;
   font-weight: bolder;
-  font-size: 16px;
-  // background-color: #000 !important;
+  font-size: 17px;
+  font-family: $font_navbar;
+  
 }
 
 .nav-font {
   color: $white !important;
+  font-family:  $font_navbar;
 }
 
 .nav-font-create {
   color: $navbar-font !important;
+  font-family:  $font_navbar;
 }
 
 #basic-nav-dropdown {
   color: $navbar-font-secondary !important;
+  font-family:  $font_navbar;
 }
 
 .category-dropdown {
   text-decoration: none !important;
   color: rgb(75, 73, 73);
+  font-family:  $font_navbar;
 }
 .nav-font-confessions{
   // background-color: #4056a1;
@@ -38,5 +44,6 @@
   padding: 14px 25px;
   font-style: italic;
   text-decoration: none;
+  font-family: $font_classified;
   
 }

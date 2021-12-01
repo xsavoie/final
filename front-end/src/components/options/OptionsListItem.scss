@@ -21,7 +21,7 @@
     outline: none;  
     width: 80%;
     box-sizing: border-box;
-    color: rgb(20, 13, 13);
+    color: rgb(185, 199, 201);
     font-size: 1rem;
     font-weight: bold;
     text-align: center;
@@ -29,7 +29,7 @@
     padding-top: 0.5em;
     padding-bottom: none;
     margin: 1%;
-    font-family: 'Ruda', sans-serif;
+    font-family: $font_title;
     background-color: $confession-text-background;
   
 
@@ -43,12 +43,13 @@
     border-radius: .50rem;
     outline: none;  
     text-align: center;
-    // height: 100%;
-    color: rgb(20, 13, 13);
+    color: rgb(185, 199, 201);
     font-size: 1rem;
     font-weight: bold;
+    font-family: $font_title;
     padding: 0.5em;
     margin: 1%;
+    background-color: $confession-text-background;
   
   }
 
@@ -64,15 +65,15 @@
       color: rgb(20, 13, 13);
       font-size: 1rem;
       font-weight: bold;
+      font-family: $font_title;
       padding: 0.5em;
       margin: 1%;
       font-family: 'Ruda', sans-serif;
     }
 
     &__test__user {
-      border:rgb(20, 13, 13);
-      border-style: solid;
-      border-width: 1px 1px;
+      border-color:rgb(20, 13, 13);
+      border: 1px outset rgb(20, 13, 13);
       border-radius: .25rem;
       outline: none;  
       height: 100%;
@@ -80,16 +81,19 @@
       color: rgb(20, 13, 13);
       font-size: 1rem;
       font-weight: bold;
+      font-family: $font_title;
       padding: 0.5em;
       margin: 1%;
       font-family: 'Ruda', sans-serif;
+      background-color: #5da2d5;
+      // 
     }
 
 }
 
 .options__test__user:hover{
-  border-color:royalblue;
-  box-shadow: 5px 5px rgb(197, 197, 202);
+  border: 2px inset;
+  border-color:#FF652F; 
 }
 
 

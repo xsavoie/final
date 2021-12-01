@@ -25,12 +25,13 @@
   &__title{
     padding: 0.2em;
     margin-left: 0.2em;
-    font-family: 'Ruda', sans-serif;
+    color: $white;
+    font-family: $font_buttons;
   }
 
   &__add_options{
     padding: 0.5em;
-    font-family: 'Ruda', sans-serif;
+    font-family: $font_buttons;
     // background-color: transparent;
   }
 }
@@ -44,6 +45,7 @@
   margin-left: 5%;
   background-color: $confession-text-background;
   color: $confession-font !important;
+  font-family: $font_buttons;
 }
 
 .poll-button {

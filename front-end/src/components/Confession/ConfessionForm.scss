@@ -17,27 +17,34 @@
   background-color: $confession-background;
   border: 2px outset $confession-border;
   border-radius: .50rem;
+  font-family: $font_title;
 
 
   &__input {
     width: 90%;
     margin-left: 5%;
+    font-family: $font_title;
   }
 
 }
 
+
 #dropdown-basic {
   background-color: $button ;
   border-color: $button ;
+  font-family: $font_buttons;
+
 }
 
 .confession-btn {
   background-color: $button !important;
   border-color: $button !important;
+  font-family: $font_buttons;
 }
 
 .top-header {
   margin-top: 15px;
+  font-family: $font_buttons;
 }
 
 .form-input-box {
@@ -45,26 +52,31 @@
   border-radius: .50rem;
   // resize: none;
   color: $confession-font !important;
+  font-family: $font_title;
 }
 
 .category--secret {
   background-color: $secret-color !important;
   border-color: $secret-color !important;
+  font-family: $font_buttons;
 }
 
 .category--story {
   background-color: $story-color !important;
   border-color: $story-color !important;
+  font-family: $font_buttons;
 }
 
 .category--question {
   background-color: $question-color !important;
   border-color: $question-color !important;
+  font-family: $font_buttons;
 }
 
 .form--buttons {
   display: flex;
   justify-content: space-between;
+  font-family: $font_buttons;
 }
 
 .form--error {
