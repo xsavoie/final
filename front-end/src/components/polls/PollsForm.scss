@@ -18,8 +18,7 @@
 
     border-color: $confession-border;
     border-radius: .50rem;
-    border: 2px outset $confession-border 
- 
+    border: 2px outset $confession-border; 
     
   }
 
@@ -44,6 +43,7 @@
   width: 90%;
   margin-left: 5%;
   background-color: $confession-text-background;
+  color: $confession-font !important;
 }
 
 .poll-button {

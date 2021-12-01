@@ -13,8 +13,8 @@
     border: solid $confession-border;
     border-radius: .50rem;
     background-color: $confession-background;
-    border: 2px outset $confession-border 
-    
+    border: 2px outset $confession-border; 
+    color: $confession-font !important;
   }
 
 
@@ -30,6 +30,7 @@
     // margin-right: 1%;
     // margin-top: 1%;
     font-family: 'Ruda', sans-serif;
+    color: $confession-font !important;
   }
 
 
@@ -57,6 +58,7 @@
     flex-direction: row;
     margin: auto;
     margin-bottom: 1%;
+    color: $confession-font !important;
   }
 
   &__total_votes_myDIV {

@@ -6,24 +6,56 @@ $black: #000;
 $primary-color: #222f3e;
 $secondary-color: #54a0ff;
 
-$confession-background: #c5cbe3;
-$confession-border: rgb(180, 172, 172);
+$confession-background: #022140;
+$confession-border: #022140;
 // $confession-text-background: transparent;
-$confession-text-background: #ced4e9;
-$confession-font: #000;
+$confession-text-background: #34597e;
+$confession-font: rgb(228, 218, 218);
 
 
-$navbar: #2a3e7e;
-$navbar-font: #fff;
+$navbar: #022140;
+$navbar-font: #F64C72;
+$navbar-font-secondary: rgb(185, 199, 201);
 
 $login-register: #2a3e7e;
 $login-register-font: #fff;
 
-$background-container: #f6f2e8;
+$background-container: #0b4579;
 
-$button: #4056A1;
+$button: #F64C72;
 
 // category colors for badge
-$secret-color: #ee5253;
-$story-color: #10ac84;
-$question-color: #ff9f43;
+$secret-color: #F64C72;
+// $secret-color: #C38D9E;
+$story-color: #14A76C;
+$question-color: #FF652F;
+
+// $font-family: "Source Sans Pro", sans-serif;
+
+// $white: #fff;
+// $black: #000;
+
+// $primary-color: #222f3e;
+// $secondary-color: #54a0ff;
+
+// $confession-background: #c5cbe3;
+// $confession-border: rgb(180, 172, 172);
+// // $confession-text-background: transparent;
+// $confession-text-background: #ced4e9;
+// $confession-font: #000;
+
+
+// $navbar: #2a3e7e;
+// $navbar-font: #fff;
+
+// $login-register: #2a3e7e;
+// $login-register-font: #fff;
+
+// $background-container: #f6f2e8;
+
+// $button: #4056A1;
+
+// // category colors for badge
+// $secret-color: #ee5253;
+// $story-color: #10ac84;
+// $question-color: #ff9f43;

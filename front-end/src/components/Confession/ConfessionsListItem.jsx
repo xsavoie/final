@@ -36,7 +36,7 @@ export default function ConfessionListItem(props) {
       <div className="confession__content">
         <p className="confession__title">{props.title}</p>
         <hr></hr>
-        <p>{props.content}</p>
+        <p className="confession-post" >{props.content}</p>
       </div>
       <footer className="confession__detail-bottom">
         <span className="confession__likes">

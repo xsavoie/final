@@ -29,7 +29,7 @@ export default function Top(props) {
           href="#home"
           onClick={() => handleRouteChange("recent")}
         >
-          <label><a href="/" className="nav-font-confessions" > Confessions🗣 </a></label>
+          <label><a href="/" className="nav-font-confessions" > Classified </a></label>
         </Navbar.Brand>
         <div className="">
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -52,11 +52,11 @@ export default function Top(props) {
                 <NavDropdown.Divider />
 
                 <NavDropdown.Item href="/" onClick={() => handleRouteChange("recent")}
-                ><Link className="category-dropdown" to="/" >Most recent</Link>
+                ><Link className="category-dropdown" to="/" >Most Recent</Link>
                 </NavDropdown.Item>
 
                 <NavDropdown.Item href="/" onClick={() => handleRouteChange("popular")}
-                ><Link className="category-dropdown" to="/" >Most popular</Link>
+                ><Link className="category-dropdown" to="/" >Most Popular</Link>
                 </NavDropdown.Item>
 
                 
@@ -68,15 +68,15 @@ export default function Top(props) {
                     props.setShowForm(true);
                     props.setShowPollForm(false);
                   }}>
-                  <Link to="/" className="nav-font" >Confess</Link>
+                  <Link to="/" className="nav-font-create" >Write a Story</Link>
                 </Nav.Link>}
 
               {user.id && props.showForm &&
-                <Nav.Link className="nav-font"
+                <Nav.Link className="nav-font-create"
                   onClick={() => {
                     props.setShowForm(false);
                     props.setShowPollForm(false);
-                  }}>Confess
+                  }}>Write a Story
                 </Nav.Link>}
 
               {user.id && !props.showPollForm &&
@@ -85,14 +85,14 @@ export default function Top(props) {
                     props.setShowPollForm(true);
                     props.setShowForm(false);
                   }}>
-                  <Link to="/polls" className="nav-font">Ask a question</Link>
+                  <Link to="/polls" className="nav-font-create">Ask a Question</Link>
                 </Nav.Link>}
 
-              {user.id && props.showPollForm && <Nav.Link className="nav-font"
+              {user.id && props.showPollForm && <Nav.Link className="nav-font-create"
                 onClick={() => {
                   props.setShowPollForm(false);
                   props.setShowForm(false);
-                }}>Ask a question
+                }}>Ask a Question
               </Nav.Link>}
 
               {user.id && <NavDropdown title="Chat" id="basic-nav-dropdown">
