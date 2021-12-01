@@ -15,6 +15,6 @@ VALUES
 (7, 'Vacation or staycation?', '2021-11-12T08:00:00.000Z' ),
 (8, 'Virtual or in-person class?', '2021-11-09T08:00:00.000Z'),
 (9,'Vaccinate or no?', '2021-09-12T08:00:00.000Z' ),
-(10, 'Is the illuminati a real thing?', '2021-08-12T08:00:00.000Z' ),
-(14, 'Have you seen a UFO?', '2021-11-12T08:00:00.000Z' ),
-(7, 'What is your favourite ride?', '2021-11-09T08:00:00.000Z');
+(10, 'Is the illuminati a real thing?', '2021-08-12T08:00:00.000Z' );
+-- (14, 'Have you seen a UFO?', '2021-11-12T08:00:00.000Z' ),
+-- (7, 'What is your favourite ride?', '2021-11-09T08:00:00.000Z');

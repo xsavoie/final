@@ -23,7 +23,7 @@ VALUES
 (9, 10, 'no chance.', '2021-02-12T08:00:00.000Z' ),
 (7, 10, 'That’s a hot take.', '2021-02-12T08:00:00.000Z' ),
 (6, 11, 'That sounds crazy', '2021-11-18T08:00:00.000Z' ),
-(10, 12, "I’ll take your silence as a yes.", '2020-02-12T08:00:00.000Z'),
+(10, 12, 'I’ll take your silence as a yes.', '2020-02-12T08:00:00.000Z'),
 (7, 13, 'I started reading your comment and was confused for a moment but as I kept reading the voice in my head changed to a familiar one...', '2021-11-12T08:00:00.000Z' ),
 (10, 14, 'That is so stupid.', '2020-02-12T08:00:00.000Z'),
 (7, 15, 'I totally agree with you', '2021-11-12T08:00:00.000Z' ),
