@@ -35,7 +35,7 @@ export default function Chat(props) {
       <div className="joinChatContainer">
 
         <h3>Create a private chat room</h3>
-        <p> Share the name of the room to invite your friends.</p>
+        <p> Share the name of the room and invite your friends to join.</p>
         
         <input
           type="text"
@@ -46,7 +46,7 @@ export default function Chat(props) {
         />
         <input
           type="text"
-          placeholder="Room Name"
+          placeholder="Room name"
           value={text}
           onChange={(event) => {
             setRoom(event.target.value);

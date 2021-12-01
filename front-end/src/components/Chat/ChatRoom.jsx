@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from "react";
 import ScrollToBottom from "react-scroll-to-bottom";
 
-
 export default function ChatRoom(props){
   const {room, username, socket } = props
   const [currentMessage, setCurrentMessage] = useState("")
@@ -31,7 +30,6 @@ export default function ChatRoom(props){
       setMessageList((list) => [...list, data]);
     });
   }, [socket]);
-
 
   return (
     <div className="chat-window">
@@ -65,7 +63,7 @@ export default function ChatRoom(props){
         <input
           type="text"
           value={currentMessage}
-          placeholder="Hey..."
+          placeholder="Type something.."
           onChange={(event) => {
             setCurrentMessage(event.target.value);
           }}
