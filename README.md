@@ -1,10 +1,11 @@
 # Classified
 
-Classified is a multi-page social app built using React, Express, Postgres and Axios. The project was build as a final project for Lighthouse Labs.
+Classified is a multi-page social app built using React, Express, Postgres and Axios. The project was built as a final project for Lighthouse Labs.
 
-Classified allows users to share stories anonymously, as well as interect with other posts through likes and comments. Users can filter content by different categories without the need to reload the page. The story information is retreaved from and express REST API using axios.  
+Classified allows users to share stories anonymously, as well as interact with other posts through likes and comments. Users can filter content by different categories without the need to reload the page. The story information is retrieved from an express REST API server using axios.
 
-The app also features a custom poll feature, where users can create polls with a dynamic ammount of custom fields. Other users can then browse and vote on these polls. We also implemented a chat component to allow our users to interact and chat in real-time. 
+The app also features a custom poll feature, where users can create polls with a dynamic amount of custom fields. Other users can then browse and vote on these polls. We also implemented a chat component to allow our users to interact and chat in real-time.
+
 
 
 ## Story Feed
